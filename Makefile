@@ -25,18 +25,27 @@ FLAGS := $(EXTRAFLAGS) $(WARNINGS) $(LDFLAGS)
 all: bin/$(EXEC) bin/$(TEST)
 
 # Examples
-bin/$(EXEC):
-	g++ print/examples.cpp $(FLAGS) -o $(EXEC)
-	@ mkdir -p bin obj
-	@ mv examples bin
+bin/$(EXEC): examples.o
+	g++ examples.o -o $(EXEC) $(LDFLAGS)
+	@ mkdir -p obj bin
+	@ mv *.o obj
 	@ mv *.d obj
+	@ mv examples bin
+
+examples.o: ptc/examples.cpp
+	g++ -c ptc/examples.cpp $(EXTRAFLAGS) $(WARNINGS) 
 
 # Tests
-bin/$(TEST):
-	g++ print/tests.cpp $(FLAGS) -o $(TEST)
-	@ mkdir -p bin obj
-	@ mv tests bin
+bin/$(TEST): tests.o
+	g++ tests.o -o $(TEST) $(LDFLAGS)
+	@ mkdir -p obj bin
+	@ mv *.o obj
 	@ mv *.d obj
+	@ mv tests bin
 
+tests.o: ptc/tests.cpp
+	g++ -c ptc/tests.cpp $(EXTRAFLAGS) $(WARNINGS) 
+
+# Clean
 clean:
 	rm -rf obj bin

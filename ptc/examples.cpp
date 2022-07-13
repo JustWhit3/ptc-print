@@ -5,10 +5,13 @@
 // My headers
 #include "print.hpp"
 
+// STD headers
+#include <iostream>
+
 //====================================================
 //     main
 //====================================================
 int main()
  {
-
+  ptc::print( std::cout, "Test", "if", "it works." );
  }
