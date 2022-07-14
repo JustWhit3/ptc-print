@@ -4,7 +4,6 @@
 
 // My headers
 #include "print.hpp"
-#include <osmanip/manipulators/colsty.hpp>
 
 // STD headers
 #include <iostream>
