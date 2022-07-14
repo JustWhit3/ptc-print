@@ -8,14 +8,11 @@
 //     Headers
 //====================================================
 
-// Extra headers
-#include <boost/iostreams/stream.hpp>
-#include <boost/iostreams/device/null.hpp>
-
 // STD headers
 #include <iostream>
 #include <string>
 #include <type_traits>
+#include <sstream>
 
 namespace ptc
  {
@@ -26,22 +23,21 @@ namespace ptc
    * @brief Class used to construct the print function.
    * 
    */
-  class PtcPrint
+  class __print__
    {
     public:
 
      //====================================================
      //     Constructors / Destructors declaration
      //====================================================
-     PtcPrint();
-     ~PtcPrint();
+     __print__();
+     ~__print__();
 
      //====================================================
      //     Operators declaration
      //====================================================
-     template <typename... Args>
-     const std::ostream& operator () ( std::ostream& os = null_stream, const Args&... args );
-     // Another overload for the standard stream case and 0 arguments case
+     template <typename... Args> const std::ostream& operator () ( std::ostream& os, const Args&... args );
+     template <typename... Args> const std::ostream& operator () ( const Args&... args );
 
     private:
 
@@ -50,26 +46,16 @@ namespace ptc
      //====================================================
      std::string end;
      std::ostream* current_os;
-
-     //====================================================
-     //     Constants declaration
-     //====================================================
-     static const boost::iostreams::stream<boost::iostreams::null_sink> null_stream;
    };
-
-  //====================================================
-  //     Constants definition
-  //====================================================
-  const boost::iostreams::stream<boost::iostreams::null_sink> PtcPrint::null_stream = boost::iostreams::null_sink{} ;
 
   //====================================================
   //     Default constructor definition
   //====================================================
   /**
-   * @brief Default constructor of the PtcPrint class.
+   * @brief Default constructor of the __print__ class.
    * 
    */
-  PtcPrint::PtcPrint(): 
+  __print__::__print__(): 
    end( "\n" ) 
    {}
 
@@ -77,20 +63,22 @@ namespace ptc
   //     Destructor definition
   //====================================================
   /**
-   * @brief Destructor of the PtcPrint class.
+   * @brief Destructor of the __print__ class.
    * 
    */
-  PtcPrint::~PtcPrint()
+  __print__::~__print__()
    {
-    // Destructor which resets all
-    // std::is_same_v<std::ostream, decltype(obj)>
+    bool is_ostream = std::is_same_v <std::ostream, decltype( current_os ) >;
+    bool is_ostringstream = std::is_same_v <std::ostringstream, decltype( current_os ) >;
+    
+    if ( is_ostream || is_ostringstream ) *current_os << "\033[0m";
    }
 
   //====================================================
-  //     Operator () first overload definition
+  //     Operator ()
   //====================================================
   /**
-   * @brief Template operator redefinition used to print the content of the args argument on the screen.
+   * @brief Template operator redefinition used to print the content of the args argument on the screen, using the os ostream.
    * 
    * @tparam Args Generic type of objects to be printed.
    * @param os The stream in which you want to print the output.
@@ -98,20 +86,35 @@ namespace ptc
    * @return const std::ostream& The stream within the objects you choose to print.
    */
   template <typename... Args>
-  inline const std::ostream& PtcPrint::operator () ( std::ostream& os, const Args&... args )
+  inline const std::ostream& __print__::operator () ( std::ostream& os, const Args&... args )
    {
-    if( &os == &null_stream ) std::cout << end;
     ( os << ... << args ) << end;
-    current_os = os;
-
+    current_os = &os;
     return os;
    }
-  // TODO: mancano gli spazi tra ogni cosa printata
+
+  //====================================================
+  //     Operator () (standard stdout case)
+  //====================================================
+  /**
+   * @brief Template operator redefinition used to print the content of the args argument on the screen, using the stdout stream.
+   * 
+   * @tparam Args Generic type of objects to be printed.
+   * @param args The list of objects to be printed on the screen.
+   * @return const std::ostream& The stream within the objects you choose to print.
+   */
+  template <typename... Args>
+  inline const std::ostream& __print__::operator () ( const Args&... args )
+   {
+    ( std::cout << ... << args ) << end;
+    current_os = &std::cout;
+    return std::cout;
+   }
 
   //====================================================
   //     print function initialization
   //====================================================
-  PtcPrint print;
+  __print__ print;
  }
 
 #endif

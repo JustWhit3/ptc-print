@@ -4,6 +4,7 @@
 
 // My headers
 #include "print.hpp"
+#include <osmanip/manipulators/colsty.hpp>
 
 // STD headers
 #include <iostream>
@@ -13,5 +14,11 @@
 //====================================================
 int main()
  {
-  ptc::print( std::cout, "Test", "if", "it works." );
+  ptc::print( "Print", "with", "std::cout." );
+
+  ptc::print();
+
+  ptc::print( std::cerr, "Print", "with", "std::cerr." );
+
+  ptc::print( std::cerr );
  }
