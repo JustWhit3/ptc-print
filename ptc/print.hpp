@@ -88,6 +88,34 @@ namespace ptc
    }
 
   //====================================================
+  //     setEnd initialization
+  //====================================================
+  /**
+   * @brief Setter used to set the value of the "end" variable.
+   * 
+   * @tparam T The type of the expression inserted to set the value of "end" variable.
+   * @param end_val The inserted expression used to set the value of "end" variable.
+   */
+  template <typename T>
+  inline void __print__::setEnd( const T& end_val )
+   {
+    end = end_val;
+   }
+
+  //====================================================
+  //     getEnd initialization
+  //====================================================
+  /**
+   * @brief Getter used to get the value of the "end" variable.
+   * 
+   * @return auto The value of the end variable.
+   */
+  inline auto __print__::getEnd() const
+   {
+    return end;
+   }
+
+  //====================================================
   //     Operator ()
   //====================================================
   /**
@@ -141,34 +169,6 @@ namespace ptc
    {
     os << end;
     return os;
-   }
-
-  //====================================================
-  //     setEnd initialization
-  //====================================================
-  /**
-   * @brief Setter used to set the value of the "end" variable.
-   * 
-   * @tparam T The type of the expression inserted to set the value of "end" variable.
-   * @param end_val The inserted expression used to set the value of "end" variable.
-   */
-  template <typename T>
-  inline void __print__::setEnd( const T& end_val )
-   {
-    end = end_val;
-   }
-
-  //====================================================
-  //     getEnd initialization
-  //====================================================
-  /**
-   * @brief Getter used to get the value of the "end" variable.
-   * 
-   * @return auto The value of the end variable.
-   */
-  inline auto __print__::getEnd() const
-   {
-    return end;
    }
 
   //====================================================
