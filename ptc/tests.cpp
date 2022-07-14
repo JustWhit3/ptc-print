@@ -14,7 +14,10 @@
 // Extra headers
 #include <doctest/doctest.h>
 
-TEST_CASE( "" )
+//====================================================
+//     __print__ default constructor
+//====================================================
+TEST_CASE( "Testing the __print__ default constructor." )
  {
   
  }

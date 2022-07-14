@@ -34,10 +34,23 @@ namespace ptc
      ~__print__();
 
      //====================================================
+     //     Setters declaration
+     //====================================================
+     template <typename T> void setEnd( const T& end_val );
+
+     //====================================================
+     //     Getters declaration
+     //====================================================
+     auto getEnd() const;
+
+     //====================================================
      //     Operators declaration
      //====================================================
-     template <typename... Args> const std::ostream& operator () ( std::ostream& os, const Args&... args );
-     template <typename... Args> const std::ostream& operator () ( const Args&... args );
+     template <typename T, typename... Args> 
+     const std::ostream& operator () ( std::ostream& os, const T& first, const Args&... args );
+     template <typename T, typename... Args> 
+     const std::ostream& operator () ( const T& first, const Args&... args );
+     const std::ostream& operator () ( std::ostream& os = std::cout );
 
     private:
 
@@ -55,8 +68,8 @@ namespace ptc
    * @brief Default constructor of the __print__ class.
    * 
    */
-  __print__::__print__(): 
-   end( "\n" ) 
+  __print__::__print__():
+   end( "\n" )
    {}
 
   //====================================================
@@ -85,11 +98,13 @@ namespace ptc
    * @param args The list of objects to be printed on the screen.
    * @return const std::ostream& The stream within the objects you choose to print.
    */
-  template <typename... Args>
-  inline const std::ostream& __print__::operator () ( std::ostream& os, const Args&... args )
-   {
-    ( os << ... << args ) << end;
+  template <typename T, typename... Args>
+  inline const std::ostream& __print__::operator () ( std::ostream& os, const T& first, const Args&... args )
+   {    
+    os << first;
+    if constexpr( sizeof...( args ) > 0 ) ( ( os << " " << args ), ...);
     current_os = &os;
+    os << getEnd();
     return os;
    }
 
@@ -103,12 +118,57 @@ namespace ptc
    * @param args The list of objects to be printed on the screen.
    * @return const std::ostream& The stream within the objects you choose to print.
    */
-  template <typename... Args>
-  inline const std::ostream& __print__::operator () ( const Args&... args )
+  template <typename T, typename... Args>
+  inline const std::ostream& __print__::operator () ( const T& first, const Args&... args )
    {
-    ( std::cout << ... << args ) << end;
+    std::cout << first;
+    if constexpr( sizeof...( args ) > 0 ) ( ( std::cout << " " << args ), ...);
     current_os = &std::cout;
+    std::cout << getEnd();
     return std::cout;
+   }
+
+  //====================================================
+  //     Operator () (no arguments case)
+  //====================================================
+  /**
+   * @brief Template operator redefinition used to print the content of the args argument on the screen. This is the no argument case overload. Can be used with "ptc::print()" or "ptc::print( ostream_name )".
+   * 
+   * @param os The stream in which you want to print the output.
+   * @return const std::ostream& The stream within the objects you choose to print.
+   */
+  inline const std::ostream& __print__::operator () ( std::ostream& os )
+   {
+    os << end;
+    return os;
+   }
+
+  //====================================================
+  //     setEnd initialization
+  //====================================================
+  /**
+   * @brief Setter used to set the value of the "end" variable.
+   * 
+   * @tparam T The type of the expression inserted to set the value of "end" variable.
+   * @param end_val The inserted expression used to set the value of "end" variable.
+   */
+  template <typename T>
+  inline void __print__::setEnd( const T& end_val )
+   {
+    end = end_val;
+   }
+
+  //====================================================
+  //     getEnd initialization
+  //====================================================
+  /**
+   * @brief Getter used to get the value of the "end" variable.
+   * 
+   * @return auto The value of the end variable.
+   */
+  inline auto __print__::getEnd() const
+   {
+    return end;
    }
 
   //====================================================

@@ -13,11 +13,16 @@
 //====================================================
 int main()
  {
-  ptc::print( "Print", "with", "std::cout." );
-
+  // Print with stdout
+  ptc::print( "Print", "with", "stdout." );
   ptc::print();
 
-  ptc::print( std::cerr, "Print", "with", "std::cerr." );
-
+  // Print with stderr (or other streams)
+  ptc::print( std::cerr, "Print", "with", "stderr." );
   ptc::print( std::cerr );
+
+  // Print changing the "end" variable value (and/or type)
+  ptc::print.setEnd( "." );
+  ptc::print( "Test" );
+  ptc::print();
  }
