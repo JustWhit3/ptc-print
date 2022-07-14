@@ -50,8 +50,11 @@ jobs:
        choco install unzip wget
        wget https://github.com/doctest/doctest/archive/refs/heads/master.zip
        unzip master.zip
-       mkdir C:/ProgramData/Chocolatey/lib/mingw/tools/install/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/doctest
-       cp doctest-master/doctest/doctest.h C:/ProgramData/Chocolatey/lib/mingw/tools/install/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/doctest
+       mkdir c:\programdata\chocolatey\lib\mingw\tools\install\mingw64\bin\../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/doctest
+       cp doctest-master/doctest/doctest.h c:\programdata\chocolatey\lib\mingw\tools\install\mingw64\bin\../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/doctest
        make
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
+
+
+      
