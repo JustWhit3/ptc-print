@@ -2,9 +2,9 @@
 #     Variables
 #====================================================
 ifeq ($(OS),Windows_NT)
-	EXEC := print.exe
+	EXEC := benchmarking.exe
 else
-	EXEC := print
+	EXEC := benchmarking
 endif
 
 #====================================================
@@ -17,14 +17,14 @@ LDFLAGS := -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthrea
 #====================================================
 #     Compilation
 #====================================================
-bin/$(EXEC): print.o
-	g++ print.o -o $(EXEC) $(LDFLAGS)
+bin/$(EXEC): benchmarking.o
+	g++ benchmarking.o -o $(EXEC) $(LDFLAGS)
 	@ mkdir -p obj bin
 	@ mv *.o obj
-	@ mv print bin
+	@ mv benchmarking bin
 
-print.o: print.cpp
-	g++ -c print.cpp $(EXTRAFLAGS) $(WARNINGS) 
+benchmarking.o: benchmarking.cpp
+	g++ -c benchmarking.cpp $(EXTRAFLAGS) $(WARNINGS) 
 
 clean:
 	rm -rf obj bin

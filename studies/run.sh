@@ -2,7 +2,7 @@
 
 mkdir -p data
 
-./bin/"$1" \
+./bin/benchmarking \
 --benchmark_out=data/print.json \
 --benchmark_repetitions=1 \
 --benchmark_display_aggregates_only=false \

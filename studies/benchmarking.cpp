@@ -3,7 +3,7 @@
 //====================================================
 
 // My headers
-#include "../../ptc/print.hpp"
+#include "../ptc/print.hpp"
 
 // Headers for comparison
 

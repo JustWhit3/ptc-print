@@ -32,8 +32,8 @@ bin/$(EXEC): examples.o
 	@ mv *.d obj
 	@ mv examples bin
 
-examples.o: ptc/examples.cpp
-	g++ -c ptc/examples.cpp $(EXTRAFLAGS) $(WARNINGS) 
+examples.o: examples.cpp
+	g++ -c examples.cpp $(EXTRAFLAGS) $(WARNINGS) 
 
 # Tests
 bin/$(TEST): tests.o
@@ -43,8 +43,8 @@ bin/$(TEST): tests.o
 	@ mv *.d obj
 	@ mv tests bin
 
-tests.o: ptc/tests.cpp
-	g++ -c ptc/tests.cpp $(EXTRAFLAGS) $(WARNINGS) 
+tests.o: test/tests.cpp
+	g++ -c test/tests.cpp $(EXTRAFLAGS) $(WARNINGS) 
 
 # Clean
 clean:
