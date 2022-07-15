@@ -10,58 +10,16 @@
 
 // My headers
 #include "../ptc/print.hpp"
+#include "tests_utils.hpp"
 
 // Extra headers
 #include <doctest/doctest.h>
 
 // STD headers
 #include <iostream>
-#include <streambuf>
-
-//====================================================
-//     savebuf (helper class)
-//====================================================
-  class savebuf: public std::streambuf 
-   {
-    public:
-     savebuf( std::streambuf* sbuf );
-     std::string str() const;
-
-    private:
-
-     int overflow( int c );
-     int sync();
-     
-     std::streambuf* sbuf;
-     std::string     save;
-   };
-
-  savebuf::savebuf( std::streambuf* sbuf ): 
-   sbuf( sbuf ) 
-   {}
-
-  std::string savebuf::str() const 
-   { 
-    return save; 
-   }
-
-  int savebuf::overflow( int c ) 
-   {
-    if ( ! traits_type::eq_int_type( c, traits_type::eof() ) ) 
-     {
-      save.push_back( traits_type::to_char_type( c ) );
-      return sbuf -> sputc( c );
-     }
-    else 
-     {
-      return traits_type::not_eof( c );
-     }
-   } 
-
-  int savebuf::sync() 
-   { 
-    return sbuf -> pubsync(); 
-   }
+#include <sstream>
+#include <fstream>
+#include <string>
 
 //====================================================
 //     __print__ default constructor
@@ -76,26 +34,75 @@ TEST_CASE( "Testing the __print__ default constructor." )
 //     __print__ operator () overload
 //====================================================
 TEST_CASE( "Testing the operator () overload." )
- {
+ {  
+  // General case
   SUBCASE( "General case." )
    {
-    std::streambuf* cerrbuf = std::cerr.rdbuf();
-    savebuf sbuf( cerrbuf );
-    std::cerr.rdbuf( &sbuf );
-    ptc::print( std::cerr << "Test this." );
-    std::cerr.rdbuf( cerrbuf );
-    CHECK_EQ( sbuf.str(), "Test this.\n" );
+    const std::string test = ptc::osout( std::cerr, "Test passes", "(ignore this)." );
+    CHECK_EQ( test, "Test passes (ignore this). \n" );
+    CHECK( test != "Test thisssa.\n" );
+   }
+
+  // General case with different types
+  SUBCASE( "General case." )
+   {
+    const std::string test = ptc::osout( std::cerr, "Test passes", 123, "(ignore this)", '.' );
+    CHECK_EQ( test, "Test passes 123 (ignore this) . \n" );
+    CHECK( test != "Test thisssa.\n" );
+   }
+
+  // General case with no args
+  SUBCASE( "General case with no args." )
+   {
+    const std::string test = ptc::osout( std::clog );
+    CHECK_EQ( test, "\n" );
+    CHECK( test != "Test thisssa.\n" );
+   }
+
+  // stdout case
+  SUBCASE( "Stdout case." )
+   {
+    const std::string test = ptc::osout( "Test passes", "(ignore this)." );
+    CHECK_EQ( test, "Test passes (ignore this). \n" );
+    CHECK( test != "Test thisssa.\n" );
+   }
+
+  // No arguments case
+  SUBCASE( "No arguments case." )
+   {
+    std::streambuf* coutbuf = std::cout.rdbuf();
+    ptc::savebuf sbuf( coutbuf );
+    std::cout.rdbuf( &sbuf );
+    ptc::print();
+    std::cout.rdbuf( coutbuf );
+    CHECK_EQ( sbuf.str(), "\n" );
     CHECK( sbuf.str() != "Test thisssa.\n" );
    }
 
-  SUBCASE( "Stdout case." )
+  // std::ostringstream case
+  SUBCASE( "std::ostringstream case." )
    {
-    
+    std::ostringstream ostr;
+    ptc::print( ostr, "Test", "this." );
+    CHECK_EQ( ostr.str(), "Test this.\n" );
+    CHECK( ostr.str() != "Test thisssa.\n" );
    }
-
-  SUBCASE( "No arguments case." )
+   
+  // std::ofstream case
+  SUBCASE( "std::ofstream case." )
    {
-    
+    std::ofstream file_stream_o;
+    file_stream_o.open( "test.txt", std::ios::trunc );
+    ptc::print( file_stream_o, "Test", "passes (ignore this)." );
+    file_stream_o.close();
+
+    char str[26];
+    std::ifstream file_stream_i;
+    file_stream_i.open( "test.txt" );
+    file_stream_i.read( str, 26 );
+    file_stream_i.close();
+
+    CHECK_EQ( static_cast<std::string> ( str ), "Test passes (ignore this)." );
    }
  }
 
@@ -106,7 +113,17 @@ TEST_CASE( "Testing the __print__ setEnd and getEnd methods." )
  {
   ptc::print.setEnd( '.' );
   CHECK_EQ( ptc::print.getEnd(), "." );
+  
+  std::streambuf* cerrbuf = std::cerr.rdbuf();
+  ptc::savebuf sbuf( cerrbuf );
+  std::cerr.rdbuf( &sbuf );
+  ptc::print( std::cerr, "Test passes (ignore this)." );
+  std::cerr.rdbuf( cerrbuf );
+  CHECK_EQ( sbuf.str(), "Test passes (ignore this).." );
+  CHECK( sbuf.str() != "Test thisssa.\n" );
+
   ptc::print.setEnd( "\n" );
+  ptc::print( "\n" );
  }
 
 //====================================================
@@ -114,7 +131,16 @@ TEST_CASE( "Testing the __print__ setEnd and getEnd methods." )
 //====================================================
 TEST_CASE( "Testing the __print__ setSep and getSep methods." )
  {
-  ptc::print.setSep( "\"" );
-  CHECK_EQ( ptc::print.getSep(), "\"" );
+  ptc::print.setSep( "*" );
+  CHECK_EQ( ptc::print.getSep(), "*" );
+
+  std::streambuf* coutbuf = std::cout.rdbuf();
+  ptc::savebuf sbuf( coutbuf );
+  std::cout.rdbuf( &sbuf );
+  ptc::print( "Test", "passes", "(ignore this)." );
+  std::cout.rdbuf( coutbuf );
+  CHECK_EQ( sbuf.str(), "Test*passes*(ignore this).\n" );
+  CHECK( sbuf.str() != "Test thisssa.\n" );
+
   ptc::print.setSep( " " );
  }
