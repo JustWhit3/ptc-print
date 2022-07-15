@@ -1,5 +1,3 @@
-# Work-in-progress
-
 <p align="center"><img src="https://github.com/JustWhit3/ptc-print/blob/main/img/logo.svg" height=220></p>
 
 <h3 align="center">A C++17 header-only implementation of the Python print function (with new features and personal improvements). </h3>
@@ -15,5 +13,7 @@
 </p>
 
 ***
+
+## Work in progress...
 
 ## Table of contents
