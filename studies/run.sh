@@ -3,7 +3,7 @@
 mkdir -p data
 
 ./bin/benchmarking \
---benchmark_out=data/print.json \
---benchmark_repetitions=1 \
---benchmark_display_aggregates_only=false \
---benchmark_report_aggregates_only=false
+--benchmark_out=data/benchmarking.json \
+--benchmark_repetitions=5 \
+--benchmark_display_aggregates_only=true \
+--benchmark_report_aggregates_only=true

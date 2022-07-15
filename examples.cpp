@@ -17,20 +17,22 @@ int main()
  {
   // Print with stdout
   ptc::print( "Print", "with", "stdout." );
+
+  // Print a new line
   ptc::print();
 
-  // Print with stderr (or other streams)
+  // Print with stderr (or other ostream objects)
   ptc::print( std::cerr, "Print", "with", "stderr." );
   ptc::print( std::cerr );
 
-  // Print changing the "end" variable value (and/or type)
+  // Print by changing the "end" variable value (and/or type)
   ptc::print.setEnd( '.' );
   ptc::print( "Test" );
   ptc::print();
   ptc::print.setEnd( "\n" );
   ptc::print( "\n" );
 
-  // Print changing the "sep" variable value (and/or type)
+  // Print by changing the "sep" variable value (and/or type)
   ptc::print.setSep( '*' );
   ptc::print( "Test", "the", "new", "sep." );
   ptc::print();

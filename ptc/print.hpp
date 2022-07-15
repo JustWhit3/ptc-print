@@ -37,23 +37,23 @@ namespace ptc
      //====================================================
      //     Public setters declaration
      //====================================================
-     template <class T> void setEnd( const T& end_val );
-     template <class T> void setSep( const T& sep_val );
+     template <class T> const __print__& setEnd( const T& end_val );
+     template <class T> const __print__& setSep( const T& sep_val );
 
      //====================================================
      //     Public getters declaration
      //====================================================
-     auto getEnd() const;
-     auto getSep() const;
+     const auto& getEnd() const;
+     const auto& getSep() const;
 
      //====================================================
      //     Public operators overload declaration
      //====================================================
-     template <class T, class... Args> std::ostream& operator () ( std::ostream& os, const T& first, const Args&... args );
-     template <class T, class... Args> std::ostream& operator () ( const T& first, const Args&... args );
-     std::ostream& operator () ( std::ostream& os = std::cout );
-     template <class T, class... Args> std::ostringstream& operator () ( std::ostringstream& os, const T& first, const Args&... args );
-     template <class T, class... Args> std::ofstream& operator () ( std::ofstream& os, const T& first, const Args&... args );
+     template <class T, class... Args> std::ostream& operator () ( std::ostream& os, const T& first, const Args&... args ) const;
+     template <class T, class... Args> std::ostream& operator () ( const T& first, const Args&... args ) const;
+     std::ostream& operator () ( std::ostream& os = std::cout ) const;
+     template <class T, class... Args> std::ostringstream& operator () ( std::ostringstream& os, const T& first, const Args&... args ) const;
+     template <class T, class... Args> std::ofstream& operator () ( std::ofstream& os, const T& first, const Args&... args ) const;
 
     private:
 
@@ -99,9 +99,10 @@ namespace ptc
    * @param end_val The inserted expression used to set the value of "end" variable.
    */
   template <class T>
-  inline void __print__::setEnd( const T& end_val )
+  inline const __print__& __print__::setEnd( const T& end_val )
    {
     end = end_val;
+    return *this;
    }
 
   //====================================================
@@ -114,9 +115,10 @@ namespace ptc
    * @param end_val The inserted expression used to set the value of "sep" variable.
    */
   template <class T>
-  inline void __print__::setSep( const T& sep_val )
+  inline const __print__& __print__::setSep( const T& sep_val )
    {
     sep = sep_val;
+    return *this;
    }
 
   //====================================================
@@ -127,7 +129,7 @@ namespace ptc
    * 
    * @return auto The value of the "end" variable.
    */
-  inline auto __print__::getEnd() const
+  inline const auto& __print__::getEnd() const
    {
     return end;
    }
@@ -140,7 +142,7 @@ namespace ptc
    * 
    * @return auto The value of the "sep" variable.
    */
-  inline auto __print__::getSep() const
+  inline const auto& __print__::getSep() const
    {
     return sep;
    }
@@ -158,7 +160,7 @@ namespace ptc
    * @return const std::ostream& The stream within the objects you choose to print.
    */
   template <class T, class... Args>
-  inline std::ostream& __print__::operator () ( std::ostream& os, const T& first, const Args&... args )
+  inline std::ostream& __print__::operator () ( std::ostream& os, const T& first, const Args&... args ) const
    {    
     // Output
     os << first;
@@ -181,7 +183,7 @@ namespace ptc
    * @return const std::ostream& The stream within the objects you choose to print.
    */
   template <class T, class... Args>
-  inline std::ostream& __print__::operator () ( const T& first, const Args&... args )
+  inline std::ostream& __print__::operator () ( const T& first, const Args&... args ) const
    {
     // Output
     std::cout << first;
@@ -201,7 +203,7 @@ namespace ptc
    * @param os The stream in which you want to print the output.
    * @return const std::ostream& The stream within the objects you choose to print.
    */
-  inline std::ostream& __print__::operator () ( std::ostream& os )
+  inline std::ostream& __print__::operator () ( std::ostream& os ) const
    {
     os << end;
     return os;
@@ -220,7 +222,7 @@ namespace ptc
    * @return const std::ostringstream& The stream within the objects you choose to print.
    */
   template <class T, class... Args> 
-  inline std::ostringstream& __print__::operator () ( std::ostringstream& os, const T& first, const Args&... args )
+  inline std::ostringstream& __print__::operator () ( std::ostringstream& os, const T& first, const Args&... args ) const
    {
     // Output
     os << first;
@@ -244,7 +246,7 @@ namespace ptc
    * @return const std::ofstream& The stream within the objects you choose to print.
    */
   template <class T, class... Args> 
-  inline std::ofstream& __print__::operator () ( std::ofstream& os, const T& first, const Args&... args )
+  inline std::ofstream& __print__::operator () ( std::ofstream& os, const T& first, const Args&... args ) const
    {
     // Output
     os << first;

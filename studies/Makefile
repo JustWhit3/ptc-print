@@ -12,7 +12,7 @@ endif
 #====================================================
 WARNINGS := -Wall -Wextra -Wno-unused-but-set-variable
 EXTRAFLAGS := -std=c++17 -g -O3 -O1 -falign-functions=32 
-LDFLAGS := -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -L../../lib -o $(EXEC)
+LDFLAGS := -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lpthread -Ldeps/fmt/build -lfmt -o $(EXEC)
 
 #====================================================
 #     Compilation
