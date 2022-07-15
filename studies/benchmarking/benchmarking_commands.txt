@@ -1,3 +1,0 @@
---benchmark_out=manipulators.json
---benchmark_repetitions=3
---benchmark_display_aggregates_only=true
