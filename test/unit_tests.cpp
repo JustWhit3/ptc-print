@@ -10,7 +10,7 @@
 
 // My headers
 #include "../ptc/print.hpp"
-#include "tests_utils.hpp"
+#include "utils.hpp"
 
 // Extra headers
 #include <doctest/doctest.h>

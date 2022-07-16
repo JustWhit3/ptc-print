@@ -2,11 +2,11 @@
 #     Variables
 #====================================================
 ifeq ($(OS),Windows_NT)
-	EXEC := examples.exe
-	TEST := tests.exe
+	SYSTEM := system_tests.exe
+	UNIT := unit_tests.exe
 else
-	EXEC := examples
-	TEST := tests
+	SYSTEM := system_tests
+	UNIT := unit_tests
 endif
 
 #====================================================
@@ -14,37 +14,36 @@ endif
 #====================================================
 WARNINGS := -Wall -Wextra -Wno-unused-but-set-variable
 EXTRAFLAGS := -std=c++17 -g -MMD -MP
-LDFLAGS := 
-FLAGS := $(EXTRAFLAGS) $(WARNINGS) $(LDFLAGS)
+LDFLAGS := -pthread
 
 #====================================================
 #     Compilation
 #====================================================
 .PHONY: clean all
 
-all: bin/$(EXEC) bin/$(TEST)
+all: bin/$(SYSTEM) bin/$(UNIT)
 
-# Examples
-bin/$(EXEC): examples.o
-	g++ examples.o -o $(EXEC) $(LDFLAGS)
+# System tests
+bin/$(SYSTEM): system_tests.o
+	g++ system_tests.o -o $(SYSTEM) $(LDFLAGS)
 	@ mkdir -p obj bin
 	@ mv *.o obj
 	@ mv *.d obj
-	@ mv examples bin
+	@ mv system_tests bin
 
-examples.o: examples.cpp
-	g++ -c examples.cpp $(EXTRAFLAGS) $(WARNINGS) 
+system_tests.o: system_tests.cpp
+	g++ -c system_tests.cpp $(EXTRAFLAGS) $(WARNINGS) 
 
-# Tests
-bin/$(TEST): tests.o
-	g++ tests.o -o $(TEST) $(LDFLAGS)
+# Unit tests
+bin/$(UNIT): unit_tests.o
+	g++ unit_tests.o -o $(UNIT)
 	@ mkdir -p obj bin
 	@ mv *.o obj
 	@ mv *.d obj
-	@ mv tests bin
+	@ mv unit_tests bin
 
-tests.o: test/tests.cpp
-	g++ -c test/tests.cpp $(EXTRAFLAGS) $(WARNINGS) 
+unit_tests.o: unit_tests.cpp
+	g++ -c unit_tests.cpp $(EXTRAFLAGS) $(WARNINGS) 
 
 # Clean
 clean:

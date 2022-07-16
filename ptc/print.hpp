@@ -14,6 +14,7 @@
 #include <type_traits>
 #include <sstream>
 #include <fstream>
+#include <mutex>
 
 namespace ptc
  {
@@ -61,7 +62,13 @@ namespace ptc
      //     Private variables declaration
      //====================================================
      std::string end, sep;
+     static std::mutex mutex_;
    };
+
+  //====================================================
+  //     Attributes definition
+  //====================================================
+  std::mutex __print__::mutex_;
 
   //====================================================
   //     Default constructor definition
@@ -162,12 +169,12 @@ namespace ptc
   template <class T, class... Args>
   inline std::ostream& __print__::operator () ( std::ostream& os, const T& first, const Args&... args ) const
    {    
-    // Output
+    std::lock_guard <std::mutex> lock{ mutex_ };
+    
     os << first;
     if constexpr( sizeof...( args ) > 0 ) ( ( os << getSep() << args ), ...);
     os << getEnd();
 
-    // Return
     return os;
    }
 
@@ -185,12 +192,12 @@ namespace ptc
   template <class T, class... Args>
   inline std::ostream& __print__::operator () ( const T& first, const Args&... args ) const
    {
-    // Output
+    std::lock_guard <std::mutex> lock{ mutex_ };
+
     std::cout << first;
     if constexpr( sizeof...( args ) > 0 ) ( ( std::cout << getSep() << args ), ...);
     std::cout << getEnd();
 
-    // Return
     return std::cout;
    }
 
@@ -205,6 +212,8 @@ namespace ptc
    */
   inline std::ostream& __print__::operator () ( std::ostream& os ) const
    {
+    std::lock_guard <std::mutex> lock{ mutex_ };
+
     os << end;
     return os;
    }
@@ -224,12 +233,12 @@ namespace ptc
   template <class T, class... Args> 
   inline std::ostringstream& __print__::operator () ( std::ostringstream& os, const T& first, const Args&... args ) const
    {
-    // Output
+    std::lock_guard <std::mutex> lock{ mutex_ };
+
     os << first;
     if constexpr( sizeof...( args ) > 0 ) ( ( os << getSep() << args ), ...);
     os << getEnd();
 
-    // Return
     return os;
    }
 
@@ -248,12 +257,12 @@ namespace ptc
   template <class T, class... Args> 
   inline std::ofstream& __print__::operator () ( std::ofstream& os, const T& first, const Args&... args ) const
    {
-    // Output
+    std::lock_guard <std::mutex> lock{ mutex_ };
+    
     os << first;
     if constexpr( sizeof...( args ) > 0 ) ( ( os << getSep() << args ), ...);
     os << getEnd();
 
-    // Return
     return os;
    }
 
