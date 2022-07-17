@@ -6,6 +6,7 @@
 **/data
 **/deps
 **.out**
+test/include_tests.cpp
 
 #====================================================
 #     Binary files
