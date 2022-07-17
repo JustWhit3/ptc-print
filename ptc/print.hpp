@@ -15,6 +15,7 @@
 #include <sstream>
 #include <fstream>
 #include <mutex>
+#include <utility>
 
 namespace ptc
  {
@@ -40,12 +41,14 @@ namespace ptc
      //====================================================
      template <class T> const __print__& setEnd( const T& end_val );
      template <class T> const __print__& setSep( const T& sep_val );
+     const __print__& setFlush( const bool& flush_val );
 
      //====================================================
      //     Public getters declaration
      //====================================================
      const auto& getEnd() const;
      const auto& getSep() const;
+     const bool& getFlush() const;
 
      //====================================================
      //     Public operators overload declaration
@@ -63,6 +66,7 @@ namespace ptc
      //====================================================
      std::string end, sep;
      static std::mutex mutex_;
+     bool flush;
    };
 
   //====================================================
@@ -79,7 +83,8 @@ namespace ptc
    */
   __print__::__print__():
    end( "\n" ),
-   sep( " " )
+   sep( " " ),
+   flush( false )
    {}
 
   //====================================================
@@ -104,6 +109,7 @@ namespace ptc
    * 
    * @tparam T The type of the expression inserted to set the value of "end" variable.
    * @param end_val The inserted expression used to set the value of "end" variable.
+   * @return const __print__& The this pointer to the class.
    */
   template <class T>
   inline const __print__& __print__::setEnd( const T& end_val )
@@ -120,11 +126,27 @@ namespace ptc
    * 
    * @tparam T The type of the expression inserted to set the value of "sep" variable.
    * @param end_val The inserted expression used to set the value of "sep" variable.
+   * @return const __print__& The this pointer to the class.
    */
   template <class T>
   inline const __print__& __print__::setSep( const T& sep_val )
    {
     sep = sep_val;
+    return *this;
+   }
+
+  //====================================================
+  //     setFlush initialization
+  //====================================================
+  /**
+   * @brief Setter used to set the value of the "flush" variable.
+   * 
+   * @param flush_val The inserted expression used to set the value of the "flush" variable.
+   * @return const __print__& The this pointer to the class.
+   */
+  inline const __print__& __print__::setFlush( const bool& flush_val )
+   {
+    flush = flush_val;
     return *this;
    }
 
@@ -155,6 +177,19 @@ namespace ptc
    }
 
   //====================================================
+  //     getFlush initialization
+  //====================================================
+  /**
+   * @brief Getter used to get the value of the "flush" variable.
+   * 
+   * @return bool The value of the "flush" variable.
+   */
+  inline const bool& __print__::getFlush() const
+   {
+    return flush;
+   }
+
+  //====================================================
   //     Operator ()
   //====================================================
   /**
@@ -174,6 +209,7 @@ namespace ptc
     os << first;
     if constexpr( sizeof...( args ) > 0 ) ( ( os << getSep() << args ), ...);
     os << getEnd();
+    switch( flush ) case true: os << std::flush;
 
     return os;
    }
@@ -197,6 +233,7 @@ namespace ptc
     std::cout << first;
     if constexpr( sizeof...( args ) > 0 ) ( ( std::cout << getSep() << args ), ...);
     std::cout << getEnd();
+    switch( flush ) case true: std::cout << std::flush;
 
     return std::cout;
    }
@@ -214,7 +251,8 @@ namespace ptc
    {
     std::lock_guard <std::mutex> lock{ mutex_ };
 
-    os << end;
+    os << getEnd();
+    switch( flush ) case true: os << std::flush;
     return os;
    }
 
@@ -262,6 +300,7 @@ namespace ptc
     os << first;
     if constexpr( sizeof...( args ) > 0 ) ( ( os << getSep() << args ), ...);
     os << getEnd();
+    switch( flush ) case true: os << std::flush;
 
     return os;
    }

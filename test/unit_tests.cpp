@@ -104,6 +104,15 @@ TEST_CASE( "Testing the operator () overload." )
 
     CHECK_EQ( static_cast<std::string> ( str ), "Test passes (ignore this)." );
    }
+
+  // Passing variables inside ptc::print
+  SUBCASE( "Passing variables inside ptc::print." )
+   {
+    std::string str = "Test passes";
+    const std::string test = ptc::osout( str, "(ignore this)." );
+    CHECK_EQ( test, "Test passes (ignore this). \n" );
+    CHECK( test != "Test thisssa.\n" );
+   }
  }
 
 //====================================================
@@ -143,4 +152,23 @@ TEST_CASE( "Testing the __print__ setSep and getSep methods." )
   CHECK( sbuf.str() != "Test thisssa.\n" );
 
   ptc::print.setSep( " " );
+ }
+
+//====================================================
+//     __print__ setFlush and getFlush
+//====================================================
+TEST_CASE( "Testing the __print__ setFlush and getFlush methods." )
+ {
+  ptc::print.setFlush( true );
+  CHECK_EQ( ptc::print.getFlush(), true );
+
+  std::streambuf* coutbuf = std::cout.rdbuf();
+  ptc::savebuf sbuf( coutbuf );
+  std::cout.rdbuf( &sbuf );
+  ptc::print( "Test", "passes", "(ignore this)." );
+  std::cout.rdbuf( coutbuf );
+  CHECK_EQ( sbuf.str(), "Test passes (ignore this).\n" );
+  CHECK( sbuf.str() != "Test thisssa.\n" );
+
+  ptc::print.setFlush( false );
  }

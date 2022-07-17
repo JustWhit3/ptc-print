@@ -23,7 +23,7 @@
 namespace bm = benchmark;
 
 //====================================================
-//     ptc::print proper methods
+//     ptc::print setters
 //====================================================
 
 // ptc_print_setSep
@@ -32,22 +32,38 @@ static void ptc_print_setSep( bm::State& state )
   for ( auto _ : state ) bm::DoNotOptimize( ptc::print.setSep( "*" ) );
  }
 
-// ptc_print_getSep
-static void ptc_print_getSep( bm::State& state ) 
- {
-  for ( auto _ : state ) bm::DoNotOptimize( ptc::print.getSep() );
- }
-
 // ptc_print_setEnd
 static void ptc_print_setEnd( bm::State& state ) 
  {
   for ( auto _ : state ) bm::DoNotOptimize( ptc::print.setEnd( "." ) );
  }
 
+// ptc_print_setFlush
+static void ptc_print_setFlush( bm::State& state ) 
+ {
+  for ( auto _ : state ) bm::DoNotOptimize( ptc::print.setFlush( true ) );
+ }
+
+//====================================================
+//     ptc::print getters
+//====================================================
+
 // ptc_print_getEnd
 static void ptc_print_getEnd( bm::State& state ) 
  {
   for ( auto _ : state ) bm::DoNotOptimize( ptc::print.getEnd() );
+ }
+
+// ptc_print_getSep
+static void ptc_print_getSep( bm::State& state ) 
+ {
+  for ( auto _ : state ) bm::DoNotOptimize( ptc::print.getSep() );
+ }
+
+// ptc_print_getFlush
+static void ptc_print_getFlush( bm::State& state ) 
+ {
+  for ( auto _ : state ) bm::DoNotOptimize( ptc::print.getFlush() );
  }
 
 //====================================================
@@ -163,32 +179,36 @@ static void fmt_print_file( bm::State& state )
 //     Benchmarking settings
 //====================================================
 
-// ptc::print proper methods
-BENCHMARK( ptc_print_setEnd );
-BENCHMARK( ptc_print_setSep );
-BENCHMARK( ptc_print_getEnd );
-BENCHMARK( ptc_print_getSep );
+// ptc::print setters
+//BENCHMARK( ptc_print_setEnd );
+//BENCHMARK( ptc_print_setSep );
+//BENCHMARK( ptc_print_setFlush );
+
+// ptc::print getters
+//BENCHMARK( ptc_print_getEnd );
+//BENCHMARK( ptc_print_getSep );
+//BENCHMARK( ptc_print_getFlush );
 
 // ptc::print
-BENCHMARK( ptc_print );
-BENCHMARK( ptc_print_newline );
-BENCHMARK( ptc_print_stdout );
-BENCHMARK( ptc_print_ostringstream );
-BENCHMARK( ptc_print_file );
+// BENCHMARK( ptc_print );
+//BENCHMARK( ptc_print_newline );
+//BENCHMARK( ptc_print_stdout );
+//BENCHMARK( ptc_print_ostringstream );
+//BENCHMARK( ptc_print_file );
 
 // std::cout
-BENCHMARK( std_cout );
-BENCHMARK( std_cout_newline );
-BENCHMARK( std_ostringstream );
-BENCHMARK( std_file );
+//BENCHMARK( std_cout );
+//BENCHMARK( std_cout_newline );
+//BENCHMARK( std_ostringstream );
+//BENCHMARK( std_file );
 
 // printf
-BENCHMARK( printf );
-BENCHMARK( printf_newline );
+//BENCHMARK( printf );
+//BENCHMARK( printf_newline );
 
 // fmt::print
-BENCHMARK( fmt_print );
-BENCHMARK( fmt_print_newline );
-BENCHMARK( fmt_print_file );
+//BENCHMARK( fmt_print );
+//BENCHMARK( fmt_print_newline );
+//BENCHMARK( fmt_print_file );
 
 BENCHMARK_MAIN();
