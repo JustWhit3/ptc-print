@@ -19,7 +19,7 @@
 - [Introduction](#introduction)
 - [Examples](#examples)
 - [Install and use](#install-and-use)
-- [Compile and run tests](#compile-and-run-tests)
+- [Tests](#compile-and-run-tests)
 - [Comparison with other libraries](#comparison-with-other-libraries)
 - [Todo](#todo)
 - [Credits](#credits)
@@ -191,7 +191,7 @@ g++ -std=c++17 program.cpp
 ./a.out
 ```
 
-## Compile and run tests
+## Tests
 
 Different tests are performed. To check them you need some prerequisites:
 
