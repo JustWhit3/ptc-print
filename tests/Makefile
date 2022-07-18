@@ -12,7 +12,7 @@ endif
 #====================================================
 #     FLAGS
 #====================================================
-WARNINGS := -Wall -Wextra -Wno-unused-but-set-variable
+WARNINGS := -Wall -Wextra
 EXTRAFLAGS := -std=c++17 -g -MMD -MP
 LDFLAGS := -pthread
 

@@ -209,7 +209,7 @@ namespace ptc
     os << first;
     if constexpr( sizeof...( args ) > 0 ) ( ( os << getSep() << args ), ...);
     os << getEnd();
-    switch( flush ) case true: os << std::flush;
+    if ( flush == true ) std::cout << std::flush;
 
     return os;
    }
@@ -233,7 +233,7 @@ namespace ptc
     std::cout << first;
     if constexpr( sizeof...( args ) > 0 ) ( ( std::cout << getSep() << args ), ...);
     std::cout << getEnd();
-    switch( flush ) case true: std::cout << std::flush;
+    if ( flush == true ) std::cout << std::flush;
 
     return std::cout;
    }
@@ -252,7 +252,8 @@ namespace ptc
     std::lock_guard <std::mutex> lock{ mutex_ };
 
     os << getEnd();
-    switch( flush ) case true: os << std::flush;
+    if ( flush == true ) std::cout << std::flush;
+
     return os;
    }
 
@@ -300,7 +301,7 @@ namespace ptc
     os << first;
     if constexpr( sizeof...( args ) > 0 ) ( ( os << getSep() << args ), ...);
     os << getEnd();
-    switch( flush ) case true: os << std::flush;
+    if ( flush == true ) std::cout << std::flush;
 
     return os;
    }
