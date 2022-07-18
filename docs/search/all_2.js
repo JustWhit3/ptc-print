@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['operator_28_29_4',['operator()',['../classptc_1_1____print____.html#afe0987177a00b21b012647241550d4d7',1,'ptc::__print__::operator()(std::ostream &amp;os, const T &amp;first, const Args &amp;... args) const'],['../classptc_1_1____print____.html#a05782a1c1f6c3112475bc9cc9bfc51bd',1,'ptc::__print__::operator()(const T &amp;first, const Args &amp;... args) const'],['../classptc_1_1____print____.html#a2abfe0cff3adc09f923e6cebcb79e38d',1,'ptc::__print__::operator()(std::ostream &amp;os=std::cout) const'],['../classptc_1_1____print____.html#a156f53b704e2494a954c300145af2540',1,'ptc::__print__::operator()(std::ostringstream &amp;os, const T &amp;first, const Args &amp;... args) const'],['../classptc_1_1____print____.html#a66dd7957c039ae0c3164a82e3e94e6ef',1,'ptc::__print__::operator()(std::ofstream &amp;os, const T &amp;first, const Args &amp;... args) const']]]
+];
