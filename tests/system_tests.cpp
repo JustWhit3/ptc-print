@@ -45,15 +45,14 @@ void print_out()
 
   // Print ostringstream
   std::ostringstream strout;
-  ptc::print( strout, "Printing", "with an std::ostringstream object." );
-  std::cout << strout.str();
+  ptc::print( strout, "I am an", "std::ostringstream object!" );
+  ptc::print( strout.str() );
 
   // Printing on a file
-  std::ofstream file_stream;
-  file_stream.open( "test.txt", std::ios::trunc );
+  std::ofstream file_stream( "test.txt", std::ios::trunc );
   ptc::print( file_stream, "You can also write in a file! ", 1, 2, 3, 4.5, 7 );
   file_stream.close();
-  ptc::print( "Text has been wrote to ", "test.txt ", "file!" );
+  ptc::print( "Text has been wrote to", "test.txt", "file!" );
 
   // Printing with std::flush
   ptc::print.setFlush( true );

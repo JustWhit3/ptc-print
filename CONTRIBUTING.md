@@ -8,9 +8,7 @@
 
 ## Introduction
 
-Thank you very much for being here! First of all, I want to let you know that contributions are more than welcome and really appreciated.
-
-In case you want to contribute, even with a small bug fix, you will be featured into the credits list.
+Thank you very much for being here! First of all, I want to let you know that contributions are more than welcome and really appreciated. In case you want to contribute, even with a small bug fix, you will be featured into the [credits list].
 
 ## How to contribute
 
