@@ -83,7 +83,10 @@ void threading()
   // First job
   auto job1 = [ &strout, &file_stream ]() 
    {
-    //ptc::__print__ first;
+    // Testing constructor
+    ptc::__print__ first;
+ 
+    // Testing methods
     ptc::print( std::cerr, "Printing the", "1st", "message with std::cerr" ); 
     ptc::print.setEnd( "\n" );
     ptc::print.setSep( " " );
@@ -103,7 +106,10 @@ void threading()
   // Second job
   auto job2 = [ &strout, &file_stream ]()
    {
-    //ptc::__print__ second;
+    // Testing constructor
+    ptc::__print__ second;
+
+    // Testing methods
     ptc::print( std::cerr, "Printing the", "2nd", "message with std::cerr" ); 
     ptc::print.setEnd( "\n" );
     ptc::print.setSep( " " );

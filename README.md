@@ -205,6 +205,12 @@ cd tests
 make
 ```
 
+To launch all tests simultaneously:
+
+```bash
+.all_tests.sh
+```
+
 To run **unit tests**:
 
 ```bash
@@ -226,13 +232,13 @@ To run **include_tests**:
 To check the automatic memory management through *Memcheck*:
 
 ```bash
-./valgrind.sh memcheck ./bin/system_tests
+./profiling.sh memcheck ./bin/system_tests
 ```
 
 To check thread safety through *Helgrind*:
 
 ```bash
-./valgrind.sh helgrind ./bin/system_tests
+./profiling.sh helgrind ./bin/system_tests
 ```
 
 ## Comparison with other libraries

@@ -180,35 +180,35 @@ static void fmt_print_file( bm::State& state )
 //====================================================
 
 // ptc::print setters
-BENCHMARK( ptc_print_setEnd );
-BENCHMARK( ptc_print_setSep );
-BENCHMARK( ptc_print_setFlush );
+//BENCHMARK( ptc_print_setEnd );
+//BENCHMARK( ptc_print_setSep );
+//BENCHMARK( ptc_print_setFlush );
 
 // ptc::print getters
-BENCHMARK( ptc_print_getEnd );
-BENCHMARK( ptc_print_getSep );
-BENCHMARK( ptc_print_getFlush );
+//BENCHMARK( ptc_print_getEnd );
+//BENCHMARK( ptc_print_getSep );
+//BENCHMARK( ptc_print_getFlush );
 
 // ptc::print
-BENCHMARK( ptc_print );
-BENCHMARK( ptc_print_newline );
-BENCHMARK( ptc_print_stdout );
+//BENCHMARK( ptc_print );
+//BENCHMARK( ptc_print_newline );
+//BENCHMARK( ptc_print_stdout );
 BENCHMARK( ptc_print_ostringstream );
 BENCHMARK( ptc_print_file );
 
 // std::cout
-BENCHMARK( std_cout );
-BENCHMARK( std_cout_newline );
-BENCHMARK( std_ostringstream );
-BENCHMARK( std_file );
+//BENCHMARK( std_cout );
+//BENCHMARK( std_cout_newline );
+//BENCHMARK( std_ostringstream );
+//BENCHMARK( std_file );
 
 // printf
-BENCHMARK( printf );
-BENCHMARK( printf_newline );
+//BENCHMARK( printf );
+//BENCHMARK( printf_newline );
 
 // fmt::print
-BENCHMARK( fmt_print );
-BENCHMARK( fmt_print_newline );
-BENCHMARK( fmt_print_file );
+//BENCHMARK( fmt_print );
+//BENCHMARK( fmt_print_newline );
+//BENCHMARK( fmt_print_file );
 
 BENCHMARK_MAIN();
