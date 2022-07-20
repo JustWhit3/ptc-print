@@ -130,6 +130,13 @@ TEST_CASE( "Testing the operator () overload." )
     CHECK_EQ( test, "Test passes (ignore this). \n" );
     CHECK( test != "Test thisssa.\n" );
    }
+
+  // Testing usage of ANSI as first argument
+  /*SUBCASE( "Testing ANSI escape sequence inside ptc::print." )
+   {
+    const std::string test = ptc::osout( "\033[31m", "Test passes (ignore this)." );
+    CHECK_EQ( test, "\033[31mTest passes\033[39m (ignore this). \n" );
+   }*/
  }
 
 //====================================================

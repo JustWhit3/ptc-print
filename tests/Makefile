@@ -47,4 +47,4 @@ unit_tests.o: unit_tests.cpp
 
 # Clean
 clean:
-	rm -rf obj bin
+	rm -rf obj bin *.o *d
