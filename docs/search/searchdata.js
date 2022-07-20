@@ -1,11 +1,11 @@
 var indexSectionsWithContent =
 {
-  0: "_gnops~",
-  1: "_",
+  0: "_gnopsv~",
+  1: "_n",
   2: "p",
   3: "p",
   4: "_gos~",
-  5: "np"
+  5: "npv"
 };
 
 var indexSectionNames =
