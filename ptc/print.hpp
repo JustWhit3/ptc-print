@@ -32,7 +32,16 @@ namespace ptc
   //====================================================
   //     Global constants
   //====================================================
-  template <typename T> inline const T null_str = "";
+  //template <typename T> inline const T null_str = "";
+
+template<class T>
+struct null_str_{
+    static const std::string value;
+};
+template<class T>
+const std::string null_str_<T>::value = "";
+
+template<typename T> std::string const null_str = null_str_<T>::value;
 
   //====================================================
   //     ptc_print class
@@ -188,7 +197,7 @@ namespace ptc
       {    
        std::lock_guard <std::mutex> lock{ mutex_ };
       
-       if ( first != null_str<T> ) os << first;
+       os << first;
        if constexpr( sizeof...( args ) > 0 ) 
         {
          if ( first == null_str<T> ) ( ( os << args << getSep() ), ...); 
