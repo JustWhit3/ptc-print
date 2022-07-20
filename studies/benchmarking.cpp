@@ -190,11 +190,11 @@ static void fmt_print_file( bm::State& state )
 //BENCHMARK( ptc_print_getFlush );
 
 // ptc::print
-//BENCHMARK( ptc_print );
+BENCHMARK( ptc_print );
 //BENCHMARK( ptc_print_newline );
 //BENCHMARK( ptc_print_stdout );
-BENCHMARK( ptc_print_ostringstream );
-BENCHMARK( ptc_print_file );
+//BENCHMARK( ptc_print_ostringstream );
+//BENCHMARK( ptc_print_file );
 
 // std::cout
 //BENCHMARK( std_cout );

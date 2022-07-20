@@ -1,20 +1,30 @@
 //====================================================
+//     Metadata
+//====================================================
+/**
+ * @file print.hpp
+ * @author Gianluca Bianco (biancogianluca9@gmail.com)
+ * @date 2022-07-14
+ * @copyright Copyright (c) 2022 Gianluca Bianco under the MIT license.
+ */
+
+//====================================================
 //     Preprocessor directives
 //====================================================
 #ifndef PRINT_HPP
 #define PRINT_HPP
+#pragma once
 
 //====================================================
 //     Headers
 //====================================================
-
-// STD headers
 #include <iostream>
 #include <string>
 #include <type_traits>
 #include <sstream>
 #include <fstream>
 #include <mutex>
+#include <string_view>
 
 namespace ptc
  {
@@ -27,12 +37,39 @@ namespace ptc
    */
   class __print__
    {
+     //====================================================
+     //     Private structs
+     //====================================================
+
+     // is_any
+     /**
+      * @brief Template struct used to check if a type is in a certain list.
+      * 
+      * @tparam T The type which check is needed.
+      * @tparam Ts The list of types to compare with T.
+      */
+     template <class T, class... Ts>
+     struct is_any: std::disjunction <std::is_same <T, Ts>... >{};
+
+     //====================================================
+     //     Private methods
+     //====================================================
+
+
+     //====================================================
+     //     Private attributes declaration
+     //====================================================
+     std::string end, sep;
+     static std::mutex mutex_;
+     bool flush;
+
     public:
 
      //====================================================
-     //     Constructors / Destructors declaration
+     //     Constructors / destructor declaration
      //====================================================
      __print__();
+     ~__print__();
 
      //====================================================
      //     Public setters declaration
@@ -49,22 +86,20 @@ namespace ptc
      const bool& getFlush() const;
 
      //====================================================
-     //     Public operators overload declaration
+     //     Operator () overloads declaration
      //====================================================
-     template <class T, class... Args> const __print__& operator () ( std::ostream& os, const T& first, const Args&... args ) const;
-     template <class T, class... Args> const __print__& operator () ( const T& first, const Args&... args ) const;
+
+     // General case
+     template <class T_os, class T, class... Args, typename = std::enable_if_t<is_any
+     <T_os, std::ostream, std::ofstream, std::fstream, std::ostringstream>::value>>
+     const __print__& operator () ( T_os& os, const T& first, const Args&... args ) const;
+
+     // Default stdout case
+     template <class T, class... Args> 
+     const __print__& operator () ( const T& first, const Args&... args ) const;
+
+     // No arguments case
      const __print__& operator () ( std::ostream& os = std::cout ) const;
-     template <class T, class... Args> const __print__& operator () ( std::ostringstream& os, const T& first, const Args&... args ) const;
-     template <class T, class... Args> const __print__& operator () ( std::ofstream& os, const T& first, const Args&... args ) const;
-
-    private:
-
-     //====================================================
-     //     Private attributes declaration
-     //====================================================
-     std::string end, sep;
-     static std::mutex mutex_;
-     bool flush;
    };
    
   //====================================================
@@ -73,8 +108,10 @@ namespace ptc
   std::mutex __print__::mutex_;
 
   //====================================================
-  //     Default constructor definition
+  //     Constructors / destructor definition
   //====================================================
+
+  // Default constructor
   /**
    * @brief Default constructor of the __print__ class.
    * 
@@ -85,9 +122,25 @@ namespace ptc
    flush( false )
    {}
 
+  // Destructor
+  /**
+   * @brief Destructor of the __print__ class. It resets the output stream from ANSI escape sequences (such as color and styles) manipulations.
+   * 
+   */
+  __print__::~__print__()
+   { 
+    std::lock_guard <std::mutex> lock{ mutex_ };
+    
+    std::cout << "\033[0m";
+    std::cout << "\033[0m";
+    std::cout << "\033[0m";
+   }
+
   //====================================================
-  //     setEnd initialization
+  //     Setters definition
   //====================================================
+
+  // setEnd
   /**
    * @brief Setter used to set the value of the "end" variable.
    * 
@@ -102,9 +155,7 @@ namespace ptc
     return *this;
    }
 
-  //====================================================
-  //     setSep initialization
-  //====================================================
+  // setSep
   /**
    * @brief Setter used to set the value of the "sep" variable.
    * 
@@ -119,9 +170,7 @@ namespace ptc
     return *this;
    }
 
-  //====================================================
-  //     setFlush initialization
-  //====================================================
+  // setFlush
   /**
    * @brief Setter used to set the value of the "flush" variable.
    * 
@@ -135,8 +184,10 @@ namespace ptc
    }
 
   //====================================================
-  //     getEnd initialization
+  //     Getters definition
   //====================================================
+
+  // getEnd
   /**
    * @brief Getter used to get the value of the "end" variable.
    * 
@@ -147,9 +198,7 @@ namespace ptc
     return end;
    }
 
-  //====================================================
-  //     getSep initialization
-  //====================================================
+  // getSep
   /**
    * @brief Getter used to get the value of the "sep" variable.
    * 
@@ -160,9 +209,7 @@ namespace ptc
     return sep;
    }
 
-  //====================================================
-  //     getFlush initialization
-  //====================================================
+  // getFlush
   /**
    * @brief Getter used to get the value of the "flush" variable.
    * 
@@ -174,38 +221,42 @@ namespace ptc
    }
 
   //====================================================
-  //     Operator ()
+  //     Operator () overloads definition
   //====================================================
+
+  // General case
   /**
    * @brief Template operator redefinition used to print the content of the args argument on the screen, using the os ostream.
    * 
+   * @tparam T_os The type of the output stream object. Can be std::ofstream, std::fstream, std::ostringstream or std::ostream.
    * @tparam T Generic type of first object to be printed.
    * @tparam Args Generic type of objects to be printed.
    * @param os The stream in which you want to print the output.
+   * @param first First printed object.
    * @param args The list of objects to be printed on the screen.
    * @return const __print__& The this pointer to the class.
    */
-  template <class T, class... Args>
-  inline const __print__& __print__::operator () ( std::ostream& os, const T& first, const Args&... args ) const
+  template <class T_os, class T, class... Args, typename>
+  inline const __print__& __print__::operator () ( T_os& os, const T& first, const Args&... args ) const
    {    
     std::lock_guard <std::mutex> lock{ mutex_ };
     
     os << first;
     if constexpr( sizeof...( args ) > 0 ) ( ( os << getSep() << args ), ...);
     os << getEnd();
-    if ( getFlush() == true ) os << std::flush;
+
+    if ( getFlush() == true && !std::is_same <T_os, std::ostringstream>::value ) os << std::flush;
 
     return *this;
    }
 
-  //====================================================
-  //     Operator () (standard stdout case)
-  //====================================================
+  // Standard stdout case
   /**
    * @brief Template operator redefinition used to print the content of the args argument on the screen, using the stdout stream.
    * 
    * @tparam T Generic type of first object to be printed.
    * @tparam Args Generic type of objects to be printed.
+   * @param first First printed object.
    * @param args The list of objects to be printed on the screen.
    * @return const __print__& The this pointer to the class.
    */
@@ -222,9 +273,7 @@ namespace ptc
     return *this;
    }
 
-  //====================================================
-  //     Operator () (no arguments case)
-  //====================================================
+  // No arguments case
   /**
    * @brief Template operator redefinition used to print the content of the args argument on the screen. This is the no argument case overload. Can be used with "ptc::print()" or "ptc::print( ostream_name )".
    * 
@@ -242,58 +291,9 @@ namespace ptc
    }
 
   //====================================================
-  //     Operator () (std::ostringstream case)
-  //====================================================
-  /**
-   * @brief Template operator redefinition used to print the content of the args argument on the screen, using the os ostringstream.
-   * 
-   * @tparam T Generic type of first object to be printed.
-   * @tparam Args Generic type of objects to be printed.
-   * @param os The stream in which you want to print the output.
-   * @param args The list of objects to be printed on the screen.
-   * @return const __print__& The this pointer to the class.
-   */
-  template <class T, class... Args> 
-  inline const __print__& __print__::operator () ( std::ostringstream& os, const T& first, const Args&... args ) const
-   {
-    std::lock_guard <std::mutex> lock{ mutex_ };
-
-    os << first;
-    if constexpr( sizeof...( args ) > 0 ) ( ( os << getSep() << args ), ...);
-    os << getEnd();
-
-    return *this;
-   }
-
-  //====================================================
-  //     Operator () (std::ofstream case)
-  //====================================================
-  /**
-   * @brief Template operator redefinition used to print the content of the args argument on the screen, using the os ofstream.
-   * 
-   * @tparam T Generic type of first object to be printed.
-   * @tparam Args Generic type of objects to be printed.
-   * @param os The stream in which you want to print the output.
-   * @param args The list of objects to be printed on the screen.
-   * @return const __print__& The this pointer to the class.
-   */
-  template <class T, class... Args> 
-  inline const __print__& __print__::operator () ( std::ofstream& os, const T& first, const Args&... args ) const
-   {
-    std::lock_guard <std::mutex> lock{ mutex_ };
-    
-    os << first;
-    if constexpr( sizeof...( args ) > 0 ) ( ( os << getSep() << args ), ...);
-    os << getEnd();
-    if ( getFlush() == true ) os << std::flush;
-
-    return *this;
-   }
-
-  //====================================================
   //     print function initialization
   //====================================================
   __print__ print;
- }
+ } // namespace ptc
 
 #endif

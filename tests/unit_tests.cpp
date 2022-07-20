@@ -105,6 +105,23 @@ TEST_CASE( "Testing the operator () overload." )
     CHECK_EQ( static_cast<std::string> ( str ), "Test passes (ignore this)." );
    }
 
+  // std::fstream case
+  SUBCASE( "std::fstream case." )
+   {
+    std::ofstream file_stream_f;
+    file_stream_f.open( "test.txt", std::ios::out | std::ios::trunc );
+    ptc::print( file_stream_f, "Test", "passes (ignore this)." );
+    file_stream_f.close();
+
+    char str[26];
+    std::ifstream file_stream_i;
+    file_stream_i.open( "test.txt" );
+    file_stream_i.read( str, 26 );
+    file_stream_i.close();
+
+    CHECK_EQ( static_cast<std::string> ( str ), "Test passes (ignore this)." );
+   }
+
   // Passing variables inside ptc::print
   SUBCASE( "Passing variables inside ptc::print." )
    {
