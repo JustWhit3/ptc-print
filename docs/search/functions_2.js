@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['operator_28_29_19',['operator()',['../classptc_1_1____print____.html#a5ab04c366651aec9bb803e4d0ff76783',1,'ptc::__print__::operator()(T_os &amp;os, const T &amp;first, const Args &amp;... args) const'],['../classptc_1_1____print____.html#aa95c8afaac0eaca332d1c8c9386c6557',1,'ptc::__print__::operator()(const T &amp;first, const Args &amp;... args) const'],['../classptc_1_1____print____.html#aa152cf1972bbeea7dd958dba38954a1f',1,'ptc::__print__::operator()(std::ostream &amp;os=std::cout) const']]]
+  ['operator_28_29_20',['operator()',['../classptc_1_1____print____.html#a642637f48b4eb8ddf3f8b5e860751fc4',1,'ptc::__print__::operator()(T_os &amp;os, const T &amp;first, const Args &amp;... args) const'],['../classptc_1_1____print____.html#ac71c1eda7463a35fcf4bc74e0577ed47',1,'ptc::__print__::operator()(const T &amp;first=&quot;&quot;, const Args &amp;... args) const'],['../classptc_1_1____print____.html#a902858d51792caa7278bf2df7a269a92',1,'ptc::__print__::operator()(std::ostream &amp;os=std::cout) const']]]
 ];
