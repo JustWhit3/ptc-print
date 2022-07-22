@@ -1,9 +1,11 @@
 <map id="ptc/print.hpp" name="ptc/print.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="225,5,319,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="321,5,415,32"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,80,77,107"/>
 <area shape="rect" id="node3" title=" " alt="" coords="102,80,157,107"/>
 <area shape="rect" id="node4" title=" " alt="" coords="181,80,264,107"/>
 <area shape="rect" id="node5" title=" " alt="" coords="288,80,357,107"/>
 <area shape="rect" id="node6" title=" " alt="" coords="381,80,448,107"/>
 <area shape="rect" id="node7" title=" " alt="" coords="473,80,530,107"/>
+<area shape="rect" id="node8" title=" " alt="" coords="555,80,643,107"/>
+<area shape="rect" id="node9" title=" " alt="" coords="667,80,720,107"/>
 </map>

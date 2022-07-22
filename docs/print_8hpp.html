@@ -81,18 +81,22 @@ $(function() {
 <code>#include &lt;sstream&gt;</code><br />
 <code>#include &lt;fstream&gt;</code><br />
 <code>#include &lt;mutex&gt;</code><br />
+<code>#include &lt;string_view&gt;</code><br />
+<code>#include &lt;regex&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for print.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="print_8hpp__incl.png" border="0" usemap="#aptc_2print_8hpp" alt=""/></div>
 <map name="aptc_2print_8hpp" id="aptc_2print_8hpp">
-<area shape="rect" title=" " alt="" coords="225,5,319,32"/>
+<area shape="rect" title=" " alt="" coords="321,5,415,32"/>
 <area shape="rect" title=" " alt="" coords="5,80,77,107"/>
 <area shape="rect" title=" " alt="" coords="102,80,157,107"/>
 <area shape="rect" title=" " alt="" coords="181,80,264,107"/>
 <area shape="rect" title=" " alt="" coords="288,80,357,107"/>
 <area shape="rect" title=" " alt="" coords="381,80,448,107"/>
 <area shape="rect" title=" " alt="" coords="473,80,530,107"/>
+<area shape="rect" title=" " alt="" coords="555,80,643,107"/>
+<area shape="rect" title=" " alt="" coords="667,80,720,107"/>
 </map>
 </div>
 </div>
@@ -100,7 +104,8 @@ Include dependency graph for print.hpp:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1null__str__.html">ptc::null_str_&lt; T &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1null__string.html">ptc::null_string&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct used to define the "null_str" constant. This workaround is needed for correct compilation in both gcc and clang.  <a href="structptc_1_1null__string.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classptc_1_1____print____.html">ptc::__print__</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class used to construct the print function.  <a href="classptc_1_1____print____.html#details">More...</a><br /></td></tr>
@@ -113,8 +118,8 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a935b9cf15d0984e4db9e5064e3772cb6"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a935b9cf15d0984e4db9e5064e3772cb6"><td class="memTemplItemLeft" align="right" valign="top">std::string const&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a935b9cf15d0984e4db9e5064e3772cb6">ptc::null_str</a> = null_str_&lt;T&gt;::value</td></tr>
+<tr class="memitem:a935b9cf15d0984e4db9e5064e3772cb6"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a935b9cf15d0984e4db9e5064e3772cb6"><td class="memTemplItemLeft" align="right" valign="top">std::string const&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a935b9cf15d0984e4db9e5064e3772cb6">ptc::null_str</a> = null_string&lt;T&gt;::value</td></tr>
 <tr class="separator:a935b9cf15d0984e4db9e5064e3772cb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2583f22648f1844d27b5d8107d65ea65"><td class="memItemLeft" align="right" valign="top">__print__&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a2583f22648f1844d27b5d8107d65ea65">ptc::print</a></td></tr>
 <tr class="separator:a2583f22648f1844d27b5d8107d65ea65"><td class="memSeparator" colspan="2">&#160;</td></tr>

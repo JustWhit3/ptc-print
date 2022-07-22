@@ -84,10 +84,10 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aca1411e9e8418533f4ac1e9dc8509fb2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classptc_1_1____print____.html#aca1411e9e8418533f4ac1e9dc8509fb2">__print__</a> ()</td></tr>
-<tr class="memdesc:aca1411e9e8418533f4ac1e9dc8509fb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor of the <b>print</b> class.  <a href="classptc_1_1____print____.html#aca1411e9e8418533f4ac1e9dc8509fb2">More...</a><br /></td></tr>
+<tr class="memdesc:aca1411e9e8418533f4ac1e9dc8509fb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor of the <b>print</b> class. It initializes the basic class members.  <a href="classptc_1_1____print____.html#aca1411e9e8418533f4ac1e9dc8509fb2">More...</a><br /></td></tr>
 <tr class="separator:aca1411e9e8418533f4ac1e9dc8509fb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a563dbcebb12dcf529c54e6b93831bcf5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classptc_1_1____print____.html#a563dbcebb12dcf529c54e6b93831bcf5">~__print__</a> ()</td></tr>
-<tr class="memdesc:a563dbcebb12dcf529c54e6b93831bcf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor of the <b>print</b> class. It resets the output stream from ANSI escape sequences (such as color and styles) manipulations.  <a href="classptc_1_1____print____.html#a563dbcebb12dcf529c54e6b93831bcf5">More...</a><br /></td></tr>
+<tr class="memdesc:a563dbcebb12dcf529c54e6b93831bcf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor of the <b>print</b> class. It resets the output stream from ANSI escape sequences, in case of std::ostream usage within the () operator.  <a href="classptc_1_1____print____.html#a563dbcebb12dcf529c54e6b93831bcf5">More...</a><br /></td></tr>
 <tr class="separator:a563dbcebb12dcf529c54e6b93831bcf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9944aad7ac42e800bc76f089c31aa3a"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
 <tr class="memitem:ab9944aad7ac42e800bc76f089c31aa3a"><td class="memTemplItemLeft" align="right" valign="top">const <a class="el" href="classptc_1_1____print____.html">__print__</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classptc_1_1____print____.html#ab9944aad7ac42e800bc76f089c31aa3a">setEnd</a> (const T &amp;end_val)</td></tr>
@@ -111,14 +111,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:abe0bca0c566493afb81b2c8c829d5f43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a642637f48b4eb8ddf3f8b5e860751fc4"><td class="memTemplParams" colspan="2">template&lt;class T_os , class T , class... Args, typename  = std::enable_if_t&lt;is_any      &lt;T_os, std::ostream, std::ofstream, std::fstream, std::ostringstream&gt;::value&gt;&gt; </td></tr>
 <tr class="memitem:a642637f48b4eb8ddf3f8b5e860751fc4"><td class="memTemplItemLeft" align="right" valign="top">const <a class="el" href="classptc_1_1____print____.html">__print__</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classptc_1_1____print____.html#a642637f48b4eb8ddf3f8b5e860751fc4">operator()</a> (T_os &amp;os, const T &amp;first, const Args &amp;... args) const</td></tr>
-<tr class="memdesc:a642637f48b4eb8ddf3f8b5e860751fc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template operator redefinition used to print the content of the args argument on the screen, using the os ostream.  <a href="classptc_1_1____print____.html#a642637f48b4eb8ddf3f8b5e860751fc4">More...</a><br /></td></tr>
+<tr class="memdesc:a642637f48b4eb8ddf3f8b5e860751fc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template operator redefinition used to print its arguments in a specific output stream.  <a href="classptc_1_1____print____.html#a642637f48b4eb8ddf3f8b5e860751fc4">More...</a><br /></td></tr>
 <tr class="separator:a642637f48b4eb8ddf3f8b5e860751fc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac71c1eda7463a35fcf4bc74e0577ed47"><td class="memTemplParams" colspan="2">template&lt;class T , class... Args&gt; </td></tr>
 <tr class="memitem:ac71c1eda7463a35fcf4bc74e0577ed47"><td class="memTemplItemLeft" align="right" valign="top">const <a class="el" href="classptc_1_1____print____.html">__print__</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classptc_1_1____print____.html#ac71c1eda7463a35fcf4bc74e0577ed47">operator()</a> (const T &amp;first=&quot;&quot;, const Args &amp;... args) const</td></tr>
 <tr class="memdesc:ac71c1eda7463a35fcf4bc74e0577ed47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template operator redefinition used to print the content of the args argument on the screen, using the stdout stream.  <a href="classptc_1_1____print____.html#ac71c1eda7463a35fcf4bc74e0577ed47">More...</a><br /></td></tr>
 <tr class="separator:ac71c1eda7463a35fcf4bc74e0577ed47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a902858d51792caa7278bf2df7a269a92"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classptc_1_1____print____.html">__print__</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classptc_1_1____print____.html#a902858d51792caa7278bf2df7a269a92">operator()</a> (std::ostream &amp;os=std::cout) const</td></tr>
-<tr class="memdesc:a902858d51792caa7278bf2df7a269a92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template operator redefinition used to print the content of the args argument on the screen. This is the no argument case overload. Can be used with "ptc::print()" or "ptc::print( ostream_name )".  <a href="classptc_1_1____print____.html#a902858d51792caa7278bf2df7a269a92">More...</a><br /></td></tr>
+<tr class="memdesc:a902858d51792caa7278bf2df7a269a92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template operator redefinition used to print an empty line on the screen. This is the no argument case overload. Can be used with "ptc::print()" or "ptc::print( ostream_name )".  <a href="classptc_1_1____print____.html#a902858d51792caa7278bf2df7a269a92">More...</a><br /></td></tr>
 <tr class="separator:a902858d51792caa7278bf2df7a269a92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -147,7 +147,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Default constructor of the <b>print</b> class. </p>
+<p>Default constructor of the <b>print</b> class. It initializes the basic class members. </p>
 
 </div>
 </div>
@@ -174,7 +174,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Destructor of the <b>print</b> class. It resets the output stream from ANSI escape sequences (such as color and styles) manipulations. </p>
+<p>Destructor of the <b>print</b> class. It resets the output stream from ANSI escape sequences, in case of std::ostream usage within the () operator. </p>
 
 </div>
 </div>
@@ -314,7 +314,7 @@ template&lt;class T , class... Args&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>const <b>print</b>&amp; The this pointer to the class. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>const <b>print</b>&amp; The "this" pointer to the class. </dd></dl>
 
 </div>
 </div>
@@ -342,7 +342,7 @@ template&lt;class T , class... Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Template operator redefinition used to print the content of the args argument on the screen. This is the no argument case overload. Can be used with "ptc::print()" or "ptc::print( ostream_name )". </p>
+<p>Template operator redefinition used to print an empty line on the screen. This is the no argument case overload. Can be used with "ptc::print()" or "ptc::print( ostream_name )". </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">os</td><td>The stream in which you want to print the output. </td></tr>
@@ -395,12 +395,12 @@ template&lt;class T_os , class T , class... Args, typename  = std::enable_if_t&l
 </table>
 </div><div class="memdoc">
 
-<p>Template operator redefinition used to print the content of the args argument on the screen, using the os ostream. </p>
+<p>Template operator redefinition used to print its arguments in a specific output stream. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T_os</td><td>The type of the output stream object. Can be std::ofstream, std::fstream, std::ostringstream or std::ostream. </td></tr>
     <tr><td class="paramname">T</td><td>Generic type of first object to be printed. </td></tr>
-    <tr><td class="paramname">Args</td><td>Generic type of objects to be printed. </td></tr>
+    <tr><td class="paramname">Args</td><td>Generic type of all the other objects to be printed. </td></tr>
   </table>
   </dd>
 </dl>
@@ -412,7 +412,7 @@ template&lt;class T_os , class T , class... Args, typename  = std::enable_if_t&l
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>const <b>print</b>&amp; The this pointer to the class. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>const <b>print</b>&amp; The "this" pointer to the class. </dd></dl>
 
 </div>
 </div>
@@ -455,7 +455,7 @@ template&lt;class T &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>const <b>print</b>&amp; The this pointer to the class. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>const <b>print</b>&amp; The "this" pointer to the class. </dd></dl>
 
 </div>
 </div>
@@ -490,7 +490,7 @@ template&lt;class T &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>const <b>print</b>&amp; The this pointer to the class. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>const <b>print</b>&amp; The "this" pointer to the class. </dd></dl>
 
 </div>
 </div>
@@ -533,7 +533,7 @@ template&lt;class T &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>const <b>print</b>&amp; The this pointer to the class. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>const <b>print</b>&amp; The "this" pointer to the class. </dd></dl>
 
 </div>
 </div>
