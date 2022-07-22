@@ -181,7 +181,7 @@ int main()
  }
 ```
 
-<img src="https://github.com/JustWhit3/ptc-print/blob/main/img/red_string.png" width="400">
+<img src="https://github.com/JustWhit3/ptc-print/blob/main/img/red_string.png" width="200">
 
 this holds also for all the other [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code). To better manage ANSI escape sequences you can use external libraries like [`osmanip`](https://github.com/JustWhit3/osmanip).
 
