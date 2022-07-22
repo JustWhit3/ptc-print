@@ -24,24 +24,31 @@
 #include <sstream>
 #include <fstream>
 #include <mutex>
+#include <string_view>
 
-using namespace std::string_literals;
+#include <regex>
 
 namespace ptc
  {
   //====================================================
+  //     Global structs
+  //====================================================
+  /**
+   * @brief Struct used to define the "null_str" constant. This workaround is needed for correct compilation in both gcc and clang.
+   * 
+   * @tparam T The template parameter of the future "null_string" constant.
+   */
+  template<class T>
+  struct null_string{ static const std::string value; };
+
+  //====================================================
   //     Global constants
   //====================================================
-  //template <typename T> inline const T null_str = "";
+  template<class T>
+  const std::string null_string<T>::value = "";
 
-template<class T>
-struct null_str_{
-    static const std::string value;
-};
-template<class T>
-const std::string null_str_<T>::value = "";
-
-template<typename T> std::string const null_str = null_str_<T>::value;
+  template<class T> 
+  std::string const null_str = null_string<T>::value;
 
   //====================================================
   //     ptc_print class
@@ -67,6 +74,20 @@ template<typename T> std::string const null_str = null_str_<T>::value;
      struct is_any: std::disjunction <std::is_same <T, Ts>... >{};
 
      //====================================================
+     //     Private methods
+     //====================================================
+
+     // is_escape
+     /**
+      * @brief This method is used to check if an input variable is an ANSI escape sequency or not.
+      * 
+      * @param str The input variable.
+      * @return true If the input variable is an ANSI escape sequency.
+      * @return false Otherwise.
+      */
+     inline bool is_escape( const std::string_view& str ) const { return ! str.rfind( "\033", 0 ); }
+
+     //====================================================
      //     Private attributes
      //====================================================
      std::string end, sep;
@@ -81,14 +102,14 @@ template<typename T> std::string const null_str = null_str_<T>::value;
 
      // Default constructor
      /**
-      * @brief Default constructor of the __print__ class.
+      * @brief Default constructor of the __print__ class. It initializes the basic class members.
       * 
       */
      __print__(): end( "\n" ), sep( " " ), flush( false ) {}
 
      // Destructor
      /**
-      * @brief Destructor of the __print__ class. It resets the output stream from ANSI escape sequences (such as color and styles) manipulations.
+      * @brief Destructor of the __print__ class. It resets the output stream from ANSI escape sequences, in case of std::ostream usage within the () operator.
       * 
       */
      ~__print__()
@@ -96,8 +117,8 @@ template<typename T> std::string const null_str = null_str_<T>::value;
        std::lock_guard <std::mutex> lock{ mutex_ };
        
        std::cout << "\033[0m";
-       std::cout << "\033[0m";
-       std::cout << "\033[0m";
+       std::cerr << "\033[0m";
+       std::clog << "\033[0m";
       }
 
      //====================================================
@@ -110,7 +131,7 @@ template<typename T> std::string const null_str = null_str_<T>::value;
       * 
       * @tparam T The type of the expression inserted to set the value of "end" variable.
       * @param end_val The inserted expression used to set the value of "end" variable.
-      * @return const __print__& The this pointer to the class.
+      * @return const __print__& The "this" pointer to the class.
       */
      template <class T> 
      inline const __print__& setEnd( const T& end_val )
@@ -125,7 +146,7 @@ template<typename T> std::string const null_str = null_str_<T>::value;
       * 
       * @tparam T The type of the expression inserted to set the value of "sep" variable.
       * @param end_val The inserted expression used to set the value of "sep" variable.
-      * @return const __print__& The this pointer to the class.
+      * @return const __print__& The "this" pointer to the class.
       */
      template <class T>
      inline const __print__& setSep( const T& sep_val )
@@ -139,7 +160,7 @@ template<typename T> std::string const null_str = null_str_<T>::value;
       * @brief Setter used to set the value of the "flush" variable.
       * 
       * @param flush_val The inserted expression used to set the value of the "flush" variable.
-      * @return const __print__& The this pointer to the class.
+      * @return const __print__& The "this" pointer to the class.
       */
      inline const __print__& setFlush( const bool& flush_val )
       {
@@ -181,33 +202,33 @@ template<typename T> std::string const null_str = null_str_<T>::value;
 
      // General case
      /**
-      * @brief Template operator redefinition used to print the content of the args argument on the screen, using the os ostream.
+      * @brief Template operator redefinition used to print its arguments in a specific output stream.
       * 
       * @tparam T_os The type of the output stream object. Can be std::ofstream, std::fstream, std::ostringstream or std::ostream.
       * @tparam T Generic type of first object to be printed.
-      * @tparam Args Generic type of objects to be printed.
+      * @tparam Args Generic type of all the other objects to be printed.
       * @param os The stream in which you want to print the output.
       * @param first First printed object.
       * @param args The list of objects to be printed on the screen.
-      * @return const __print__& The this pointer to the class.
+      * @return const __print__& The "this" pointer to the class.
       */
       template <class T_os, class T, class... Args, typename = std::enable_if_t<is_any
       <T_os, std::ostream, std::ofstream, std::fstream, std::ostringstream>::value>>
       const __print__& operator () ( T_os& os, const T& first, const Args&... args ) const
-      {    
-       std::lock_guard <std::mutex> lock{ mutex_ };
-      
-       os << first;
-       if constexpr( sizeof...( args ) > 0 ) 
-        {
-         if ( first == null_str<T> ) ( ( os << args << getSep() ), ...); 
-         else ( ( os << getSep() << args ), ...);
-        }
-       os << getEnd();
-       if ( getFlush() == true && ! std::is_same <T_os, std::ostringstream>::value ) os << std::flush;
-   
-       return *this;
-      }
+       {    
+        std::lock_guard <std::mutex> lock{ mutex_ };
+       
+        os << first;
+        if constexpr( sizeof...( args ) > 0 ) 
+         {
+          if ( first == null_str<T> || is_escape( first ) ) ( ( os << args << getSep() ), ...); 
+          else ( ( os << getSep() << args ), ...);
+         }
+        os << getEnd();
+        if ( getFlush() == true && ! std::is_same <T_os, std::ostringstream>::value ) os << std::flush;
+    
+        return *this;
+       }
 
      // Standard stdout case
      /**
@@ -217,7 +238,7 @@ template<typename T> std::string const null_str = null_str_<T>::value;
       * @tparam Args Generic type of objects to be printed.
       * @param first First printed object.
       * @param args The list of objects to be printed on the screen.
-      * @return const __print__& The this pointer to the class.
+      * @return const __print__& The "this" pointer to the class.
       */
       template <class T, class... Args> 
       const __print__& operator () ( const T& first = "", const Args&... args ) const
@@ -225,16 +246,20 @@ template<typename T> std::string const null_str = null_str_<T>::value;
         std::lock_guard <std::mutex> lock{ mutex_ };
     
         std::cout << first;
-        if constexpr( sizeof...( args ) > 0 ) ( ( std::cout << getSep() << args ), ...);
+        if constexpr( sizeof...( args ) > 0 ) 
+         {
+          if ( first == null_str<T> || is_escape( first ) ) ( ( std::cout << args << getSep() ), ...); 
+          else ( ( std::cout << getSep() << args ), ...);
+         }
         std::cout << getEnd();
-        if ( getFlush() == true ) std::cout << std::flush;
+        if ( getFlush() ) std::cout << std::flush;
     
         return *this;
        }
 
      // No arguments case
      /**
-      * @brief Template operator redefinition used to print the content of the args argument on the screen. This is the no argument case overload. Can be used with "ptc::print()" or "ptc::print( ostream_name )".
+      * @brief Template operator redefinition used to print an empty line on the screen. This is the no argument case overload. Can be used with "ptc::print()" or "ptc::print( ostream_name )".
       * 
       * @param os The stream in which you want to print the output.
       * @return const __print__& The this pointer to the class.
@@ -244,17 +269,17 @@ template<typename T> std::string const null_str = null_str_<T>::value;
        std::lock_guard <std::mutex> lock{ mutex_ };
    
        os << getEnd();
-       if ( getFlush() == true ) os << std::flush;
+       if ( getFlush() ) os << std::flush;
    
        return *this;
       }
-   };
+   }; // end of __print__ class
    
   //====================================================
   //     Other steps
   //====================================================
 
-  // __print__ std::mutex definiton
+  // __print__::mutex_ definiton
   std::mutex __print__::mutex_;
 
   // print function initialization

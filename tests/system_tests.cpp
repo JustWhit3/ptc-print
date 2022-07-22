@@ -68,6 +68,9 @@ void print_out()
   // Passing variables into print
   std::string var = "This var";
   ptc::print( var, "is printed." );
+
+  // Printing colored output
+  ptc::print( "\033[31m", "Red string!", "\033[0m" );
  }
 
 //====================================================

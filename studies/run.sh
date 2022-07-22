@@ -2,6 +2,8 @@
 
 mkdir -p data
 
+sudo cpupower frequency-set --governor performance > /dev/null 2>&1
+
 ./bin/benchmarking \
 --benchmark_out=data/benchmarking.json \
 --benchmark_repetitions=15 \

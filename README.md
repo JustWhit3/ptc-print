@@ -254,10 +254,19 @@ std::vector<int> v{1, 10, 100};
 ptc::print(v);
 ```
 
-Output:
-
 ```shell
 [1,10,100]
+```
+
+- Add support to complex numbers printing:
+
+```C++
+std::complex<int> no = (1,2)
+ptc::print(no);
+```
+
+```shell
+1 + 2j
 ```
 
 - Enable string concatenation within the `ptc::print` object:
@@ -266,22 +275,8 @@ Output:
 ptc::print("Supporting" + "this.");
 ```
 
-Output:
-
 ```shell
 Supporting this.
-```
-
-- Create a method to format the output given from the print function:
-
-```C++
-ptc::print("I would {}", "to print {} {}").format( "like", "this", 123 );
-```
-
-Output:
-
-```shell
-I would like to print this 123
 ```
 
 ## Credits
