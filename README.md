@@ -1,6 +1,6 @@
 <p align="center"><img src="https://github.com/JustWhit3/ptc-print/blob/main/img/logo.svg" height=220></p>
 
-<h3 align="center">A C++17 header-only implementation of the Python print function (with new features and personal improvements) </h3>
+<h3 align="center">A C++17 header-only library for custom printing to the output stream (inspired by the Python print function) </h3>
 <p align="center">
   <img title="v0.0" alt="v0.0" src="https://img.shields.io/badge/version-v0.0-informational?style=flat-square">
   <img title="MIT License" alt="license" src="https://img.shields.io/badge/license-MIT-informational?style=flat-square">
@@ -28,9 +28,9 @@
 
 ## Introduction
 
-`ptc::print` (*py-to-cpp print*) is a C++17 printing object inspired by the Python [`print`](https://realpython.com/python-print/) function, providing you a most comfortable way to print messages and logs in the output stream.
+`ptc::print` (*py-to-cpp print*) is a C++17 printing object inspired by the Python [`print`](https://realpython.com/python-print/) function, which provides you a most comfortable way to print messages and logs to the output stream.
 
-It is constructed through the [`__print__`](https://justwhit3.github.io/ptc-print/classptc_1_1____print____.html) functor which is a fully *type-* and *thread-safe* class with *automatic memory management*, implemented through an [header-only](https://github.com/JustWhit3/ptc-print/blob/main/ptc/print.hpp) library, with minimal and indispensable [dependencies](#install-and-use).
+It is constructed through the [`__print__`](https://justwhit3.github.io/ptc-print/classptc_1_1____print____.html) functor, which is a fully *type-* and *thread-safe* class with *automatic memory management*, implemented through an [header-only](https://github.com/JustWhit3/ptc-print/blob/main/ptc/print.hpp) library, with minimal and indispensable [dependencies](#install-and-use).
 
 If you want to contribute to the repository, please read [this](https://github.com/JustWhit3/ptc-print/blob/main/CONTRIBUTING.md) file before.
 
@@ -195,7 +195,7 @@ g++ -std=c++17 program.cpp
 
 Different tests are performed. To check them you need some prerequisites:
 
-- [Valgrind](https://valgrind.org/).
+- [Valgrind](https://valgrind.org/) for profiling.
 - [doctest](https://github.com/onqtam/doctest) for testing.
 
 They are installed in the second step of the installation through the `install.sh` script. Before running test codes you need to compile them:
@@ -208,7 +208,7 @@ make
 To launch all tests simultaneously:
 
 ```bash
-.all_tests.sh
+./all_tests.sh
 ```
 
 To run **unit tests**:
@@ -247,7 +247,7 @@ Empty for the moment (work in progress).
 
 ## Todo
 
-- Add support to the containers printing:
+- Add support to all the containers printing (not only `std:.vector`):
 
 ```C++
 std::vector<int> v{1, 10, 100};
@@ -278,6 +278,8 @@ ptc::print("Supporting" + "this.");
 ```shell
 Supporting this.
 ```
+
+- Add support to date printing.
 
 ## Credits
 

@@ -37,16 +37,6 @@ make
 ./run.sh
 ```
 
-```bash
-cd tests
-make
-./bin/unit_tests
-./bin/system_tests
-./include_tests.sh
-./valgrind.sh memcheck ./bin/system_tests
-./valgrind.sh helgrind ./bin/system_tests
-```
-
 5) Before submitting the code, reformat it using the [`.clang-format`](https://github.com/JustWhit3/ptc-print/blob/main/.clang-format.md) file:
 
 ```bash
