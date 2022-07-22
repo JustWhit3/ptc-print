@@ -18,6 +18,9 @@
 
 - [Introduction](#introduction)
 - [Examples](#examples)
+  - [Standard cases](#standard-cases)
+  - [Printing with ANSI escape sequences](#printing-with-ansi-escape-sequences)
+  - [Printing non-standard types](#printing-non-standard-types)
 - [Install and use](#install-and-use)
 - [Tests](#compile-and-run-tests)
 - [Comparison with other libraries](#comparison-with-other-libraries)
@@ -31,6 +34,8 @@
 `ptc::print` (*py-to-cpp print*) is a C++17 printing object inspired by the Python [`print`](https://realpython.com/python-print/) function, which provides you a most comfortable way to print messages and logs to the output stream.
 
 It is constructed through the [`__print__`](https://justwhit3.github.io/ptc-print/classptc_1_1____print____.html) functor, which is a fully *type-* and *thread-safe* class with *automatic memory management*, implemented through an [header-only](https://github.com/JustWhit3/ptc-print/blob/main/ptc/print.hpp) library, with minimal and indispensable [dependencies](#install-and-use).
+
+`ptc::print` supports the printing of all the standard types and some non-standard ones (list [here](#printing-non-standard-types)).
 
 If you want to contribute to the repository, please read [this](https://github.com/JustWhit3/ptc-print/blob/main/CONTRIBUTING.md) file before.
 
@@ -52,6 +57,8 @@ Supported operating systems are:
 - **MacOS**
 
 ## Examples
+
+### Standard cases
 
 To normally print messages to stdout:
 
@@ -160,6 +167,27 @@ To allow output stream flush (false by default) use:
 ```C++
 ptc::print.setFlush( true );
 ```
+
+### Printing with ANSI escape sequences
+
+To color the output stream of a program:
+
+```C++
+#include <ptc/print.hpp>
+
+int main()
+ {
+  ptc::print( "\033[31m\033[1m", "This is a red bold string", "\033[0m" );
+ }
+```
+
+<img src="https://github.com/JustWhit3/ptc-print/blob/main/img/red_string.png" width="400">
+
+this holds also for all the other [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code). To better manage ANSI escape sequences you can use external libraries like [`osmanip`](https://github.com/JustWhit3/osmanip).
+
+### Printing non-standard types
+
+Empty for the moment.
 
 ## Install and use
 

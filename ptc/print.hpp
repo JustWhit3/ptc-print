@@ -33,6 +33,8 @@ namespace ptc
   //====================================================
   //     Global structs
   //====================================================
+
+  // null_string
   /**
    * @brief Struct used to define the "null_str" constant. This workaround is needed for correct compilation in both gcc and clang.
    * 
@@ -44,11 +46,8 @@ namespace ptc
   //====================================================
   //     Global constants
   //====================================================
-  template<class T>
-  const std::string null_string<T>::value = "";
-
-  template<class T> 
-  std::string const null_str = null_string<T>::value;
+  template<class T> const std::string null_string<T>::value = "";
+  template<class T> std::string const null_str = null_string<T>::value;
 
   //====================================================
   //     ptc_print class
@@ -221,7 +220,7 @@ namespace ptc
         os << first;
         if constexpr( sizeof...( args ) > 0 ) 
          {
-          if ( first == null_str<T> || is_escape( first ) ) ( ( os << args << getSep() ), ...); 
+          if ( first == null_str<T&> || is_escape( first ) ) ( ( os << args << getSep() ), ...); 
           else ( ( os << getSep() << args ), ...);
          }
         os << getEnd();
@@ -248,7 +247,7 @@ namespace ptc
         std::cout << first;
         if constexpr( sizeof...( args ) > 0 ) 
          {
-          if ( first == null_str<T> || is_escape( first ) ) ( ( std::cout << args << getSep() ), ...); 
+          if ( first == null_str<T&> || is_escape( first ) ) ( ( std::cout << args << getSep() ), ...); 
           else ( ( std::cout << getSep() << args ), ...);
          }
         std::cout << getEnd();
