@@ -2,7 +2,7 @@
 
 <h3 align="center">A C++17 header-only library for custom printing to the output stream (inspired by the Python print function) </h3>
 <p align="center">
-  <img title="v0.0" alt="v0.0" src="https://img.shields.io/badge/version-v0.0-informational?style=flat-square">
+  <img title="v0.1" alt="v0.1" src="https://img.shields.io/badge/version-v0.1-informational?style=flat-square">
   <img title="MIT License" alt="license" src="https://img.shields.io/badge/license-MIT-informational?style=flat-square">
 	<img title="C++17" alt="C++17" src="https://img.shields.io/badge/c++-17-informational?style=flat-square"><br/>
 	<img title="Code size" alt="code size" src="https://img.shields.io/github/languages/code-size/JustWhit3/ptc-print?color=red">
@@ -33,7 +33,7 @@
 
 `ptc::print` (*py-to-cpp print*) is a C++17 printing object inspired by the Python [`print`](https://realpython.com/python-print/) function, which provides you a most comfortable way to print messages and logs to the output stream.
 
-It is constructed through the [`__print__`](https://justwhit3.github.io/ptc-print/classptc_1_1____print____.html) functor, which is a fully *type-* and *thread-safe* class with *automatic memory management*, implemented through an [header-only](https://github.com/JustWhit3/ptc-print/blob/main/ptc/print.hpp) library, with minimal and indispensable [dependencies](#install-and-use).
+It is constructed through the [`__print__`](https://justwhit3.github.io/ptc-print/classptc_1_1____print____.html) functor, which is a fully *type-* and *thread-safe* class with *automatic memory management*, implemented through an [header-only](https://github.com/JustWhit3/ptc-print/blob/main/ptc/print.hpp) library, with minimal and indispensable [dependencies](#install-and-use). It supports also the usage of [ANSI escape sequences](#printing-with-ansi-escape-sequences).
 
 `ptc::print` supports the printing of all the standard types and some non-standard ones (list [here](#printing-non-standard-types)).
 
@@ -183,7 +183,7 @@ int main()
 
 <img src="https://github.com/JustWhit3/ptc-print/blob/main/img/red_string.png" width="200">
 
-this holds also for all the other [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code). To better manage ANSI escape sequences you can use external libraries like [`osmanip`](https://github.com/JustWhit3/osmanip).
+this holds also for all the other [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code). To better manage ANSI escape sequences you can use external libraries like [`osmanip`](https://github.com/JustWhit3/osmanip). The stream is automatically reset when the `__print__` [destructor](https://justwhit3.github.io/ptc-print/classptc_1_1____print____.html#a563dbcebb12dcf529c54e6b93831bcf5) is met.
 
 ### Printing non-standard types
 
