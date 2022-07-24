@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Compilation
+make clean
+make clang
+make clean
+make
+
 # System tests
 ./bin/system_tests
 

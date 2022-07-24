@@ -224,7 +224,7 @@ namespace ptc
           else ( ( os << getSep() << args ), ...);
          }
         os << getEnd();
-        if ( getFlush() == true && ! std::is_same <T_os, std::ostringstream>::value ) os << std::flush;
+        if ( getFlush() && ! std::is_same <T_os, std::ostringstream>::value ) os << std::flush;
     
         return *this;
        }
@@ -240,7 +240,7 @@ namespace ptc
       * @return const __print__& The "this" pointer to the class.
       */
       template <class T, class... Args> 
-      const __print__& operator () ( const T& first = "", const Args&... args ) const
+      const __print__& operator () ( const T& first, const Args&... args ) const
        {
         std::lock_guard <std::mutex> lock{ mutex_ };
     

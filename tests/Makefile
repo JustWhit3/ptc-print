@@ -21,7 +21,7 @@ LDFLAGS := -pthread
 #====================================================
 .PHONY: clean all
 
-all: bin/$(SYSTEM) bin/$(UNIT)
+all: bin/$(SYSTEM) bin/$(UNIT) clang
 
 # System tests
 bin/$(SYSTEM): system_tests.o
@@ -44,6 +44,12 @@ bin/$(UNIT): unit_tests.o
 
 unit_tests.o: unit_tests.cpp
 	g++ -c unit_tests.cpp $(EXTRAFLAGS) $(WARNINGS) 
+
+# Clang tests
+clang:
+	clang++ -c system_tests.cpp $(EXTRAFLAGS) $(WARNINGS) 
+	@ mv *.o obj
+	@ mv *.d obj
 
 # Clean
 clean:

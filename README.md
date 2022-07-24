@@ -24,6 +24,7 @@
 - [Install and use](#install-and-use)
 - [Tests](#compile-and-run-tests)
 - [Comparison with other libraries](#comparison-with-other-libraries)
+  - [Benchmarking](#benchmarking)
 - [Todo](#todo)
 - [Credits](#credits)
   - [Project leaders](#project-leaders)
@@ -177,15 +178,19 @@ To color the output stream of a program:
 
 int main()
  {
-  ptc::print( "\033[31m\033[1m", "This is a red bold string", "\033[0m" );
+  ptc::print( "\033[31m", "This is a red bold string", "\033[0m" );
  }
 ```
 
 <img src="https://github.com/JustWhit3/ptc-print/blob/main/img/red_string.png" width="200">
 
-this holds also for all the other [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code). To better manage ANSI escape sequences you can use external libraries like [`osmanip`](https://github.com/JustWhit3/osmanip). The stream is automatically reset when the `__print__` [destructor](https://justwhit3.github.io/ptc-print/classptc_1_1____print____.html#a563dbcebb12dcf529c54e6b93831bcf5) is met.
+this holds also for all the other [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code). To better manage them you can use external libraries like [`osmanip`](https://github.com/JustWhit3/osmanip). The stream is automatically reset when the `__print__` [destructor](https://justwhit3.github.io/ptc-print/classptc_1_1____print____.html#a563dbcebb12dcf529c54e6b93831bcf5) is met.
 
 ### Printing non-standard types
+
+List of enabled types for printing:
+
+- empty
 
 Empty for the moment.
 
@@ -270,6 +275,10 @@ To check thread safety through *Helgrind*:
 ```
 
 ## Comparison with other libraries
+
+### Benchmarking
+
+Benchmarking is performed using the [Google Benchmark](https://github.com/google/benchmark) framework. The script [studies/run.sh](https://github.com/JustWhit3/ptc-print/blob/main/studies/run.sh) is used to generate benchmark data.
 
 Empty for the moment (work in progress).
 
