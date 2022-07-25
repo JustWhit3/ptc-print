@@ -26,6 +26,7 @@
 #include <mutex>
 #include <string_view>
 #include <utility>
+#include <vector>
 
 namespace ptc
  {
@@ -172,16 +173,6 @@ namespace ptc
      template <class T> 
      struct null_string { inline static const std::string value = ""; };
 
-     // is_any
-     /**
-      * @brief Template struct used to check if a type is in a certain list.
-      * 
-      * @tparam T The type which check is needed.
-      * @tparam Ts The list of types to compare with T.
-      */
-     template <class T, class... Ts>
-     struct is_any: std::disjunction <std::is_same <T, Ts>... > {};
-
      //====================================================
      //     Private methods
      //====================================================
@@ -219,7 +210,7 @@ namespace ptc
          else ( ( os << getSep() << args ), ...);
         }
        os << getEnd();
-       if ( getFlush() && ! std::is_same <T_os, std::ostringstream>::value ) os << std::flush;
+       if ( getFlush() && ! std::is_base_of_v <std::ostringstream, T_os> ) os << std::flush;
       }
 
      //====================================================

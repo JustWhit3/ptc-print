@@ -281,11 +281,11 @@ To check thread safety through *Helgrind*:
 
 ## Comparison with other libraries
 
+To install extra libraries used for comparison you can use the [`install_deps.sh`]((https://github.com/JustWhit3/ptc-print/blob/main/studies/install_deps.sh)) script.
+
 ### Benchmarking
 
 Benchmarking is performed using the [Google Benchmark](https://github.com/google/benchmark) framework. The script [run.sh](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking/run.sh) is used to generate benchmark data: it makes use also of the [cpupower](https://linux.die.net/man/1/cpupower) tool to run correctly.
-
-To install extra libraries used for comparison you can use the [`install_deps.sh`]((https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking/install_deps.sh)) script
 
 Work in progress...
 
