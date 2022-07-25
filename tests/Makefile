@@ -13,7 +13,7 @@ endif
 #     FLAGS
 #====================================================
 WARNINGS := -Wall -Wextra
-EXTRAFLAGS := -std=c++17 -g -MMD -MP
+EXTRAFLAGS := -std=c++17 -MMD -MP
 LDFLAGS := -pthread
 
 #====================================================

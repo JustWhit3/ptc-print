@@ -3,11 +3,11 @@
 //====================================================
 
 // My headers
-#include "../include/ptc/print.hpp"
+#include "../../include/ptc/print.hpp"
 
 // Headers for comparison
-#include "deps/fmt/include/fmt/core.h"
-#include "deps/fmt/include/fmt/os.h"
+#include <fmt/core.h>
+#include <fmt/os.h>
 
 // Extra headers
 #include <benchmark/benchmark.h>
@@ -74,19 +74,19 @@ static void ptc_print_getFlush( bm::State& state )
 // ptc_print_newline
 static void ptc_print_newline( bm::State& state ) 
  {
-  for ( auto _ : state ) ptc::print( std::cout );
+  for ( auto _ : state ) ptc::print();
  }
 
 // ptc_print
 static void ptc_print( bm::State& state ) 
  {
-  for ( auto _ : state ) ptc::print( std::cout, "Testing", "print", "\u001b[1A" );
+  for ( auto _ : state ) ptc::print( std::cout, "Testing", "print", "function" );
  }
 
 // ptc_print_stdout
 static void ptc_print_stdout( bm::State& state ) 
  {
-  for ( auto _ : state ) ptc::print( "Testing", "print", "\u001b[1A" );
+  for ( auto _ : state ) ptc::print( "Testing", "print", "function" );
  }
 
 // ptc_print_file
@@ -94,7 +94,7 @@ static void ptc_print_file( bm::State& state )
  {
   std::ofstream file_stream;
   file_stream.open( "test.txt", std::ios::trunc );
-  for ( auto _ : state ) ptc::print( file_stream, "Testing", "print", "\u001b[1A" );
+  for ( auto _ : state ) ptc::print( file_stream, "Testing", "print", "function" );
   file_stream.close();
  }
 
@@ -105,7 +105,7 @@ static void ptc_print_file( bm::State& state )
 // std_cout
 static void std_cout( bm::State& state ) 
  {
-  for ( auto _ : state ) std::cout << "Testing" << " " << "print" << " " << "\u001b[1A" << "\n";
+  for ( auto _ : state ) std::cout << "Testing" << " " << "print" << " " << "function" << "\n";
  }
 
 // std_cout_newline
@@ -118,7 +118,7 @@ static void std_cout_newline( bm::State& state )
 static void std_ostringstream( bm::State& state ) 
  {
   std::ostringstream ostr;
-  for ( auto _ : state ) ostr << "Testing" << " " << "print" << " " << "\u001b[1A" << "\n";
+  for ( auto _ : state ) ostr << "Testing" << " " << "print" << " " << "function" << "\n";
  }
 
 // std_file
@@ -126,7 +126,7 @@ static void std_file( bm::State& state )
  {
   std::ofstream file_stream;
   file_stream.open( "test.txt", std::ios::trunc );
-  for ( auto _ : state ) file_stream << "Testing" << "print" << "\u001b[1A" << "\n";
+  for ( auto _ : state ) file_stream << "Testing" << " " << "print" << " " << "function" << "\n";
   file_stream.close();
  }
 
@@ -137,7 +137,7 @@ static void std_file( bm::State& state )
 // printf
 static void printf( bm::State& state ) 
  {
-  for ( auto _ : state ) printf( "Testing print \u001b[1A\n" );
+  for ( auto _ : state ) printf( "Testing print function\n" );
  }
 
 // printf_newline
@@ -153,7 +153,7 @@ static void printf_newline( bm::State& state )
 // fmt_print
 static void fmt_print( bm::State& state ) 
  {
-  for ( auto _ : state ) fmt::print( "Testing print \u001b[1A\n" );
+  for ( auto _ : state ) fmt::print( stdout, "Testing {} {}{}", "print", "function", "\n" );
  }
 
 // fmt_print_newline
@@ -162,11 +162,17 @@ static void fmt_print_newline( bm::State& state )
   for ( auto _ : state ) fmt::print( "\n" );
  }
 
+// fmt_print_stdout
+static void fmt_print_stdout( bm::State& state ) 
+ {
+  for ( auto _ : state ) fmt::print( "Testing {} {}{}", "print", "function", "\n" );
+ }
+
 // fmt_print_file
 static void fmt_print_file( bm::State& state ) 
  {
   auto out = fmt::output_file( "test.txt", std::ios::trunc );
-  for ( auto _ : state ) out.print( "Testing print \u001b[1A\n" );
+  for ( auto _ : state ) out.print( "Testing {} {}{}", "print", "function", "\n" );
  }
 
 //====================================================
@@ -189,6 +195,12 @@ BENCHMARK( ptc_print );
 //BENCHMARK( ptc_print_stdout );
 //BENCHMARK( ptc_print_file );
 
+// fmt::print
+//BENCHMARK( fmt_print );
+//BENCHMARK( fmt_print_newline );
+//BENCHMARK( fmt_print_stdout );
+//BENCHMARK( fmt_print_file );
+
 // std::cout
 //BENCHMARK( std_cout );
 //BENCHMARK( std_cout_newline );
@@ -198,10 +210,5 @@ BENCHMARK( ptc_print );
 // printf
 //BENCHMARK( printf );
 //BENCHMARK( printf_newline );
-
-// fmt::print
-//BENCHMARK( fmt_print );
-//BENCHMARK( fmt_print_newline );
-//BENCHMARK( fmt_print_file );
 
 BENCHMARK_MAIN();

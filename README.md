@@ -46,7 +46,7 @@ The software is and will stay **free**, but if you want to support me with a don
 
 <a href="https://www.buymeacoffee.com/JustWhit33" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
-Supported operating systems are:
+Supported operating systems:
 
 - **Linux**
   - *Ubuntu* (tested)
@@ -56,6 +56,11 @@ Supported operating systems are:
   - *MinGW* (tested)
   - *WSL* (tested)
 - **MacOS**
+
+Supported compilers:
+
+- **gcc** (tested)
+- **clang** (tested)
 
 ## Examples
 
@@ -278,9 +283,11 @@ To check thread safety through *Helgrind*:
 
 ### Benchmarking
 
-Benchmarking is performed using the [Google Benchmark](https://github.com/google/benchmark) framework. The script [studies/run.sh](https://github.com/JustWhit3/ptc-print/blob/main/studies/run.sh) is used to generate benchmark data.
+Benchmarking is performed using the [Google Benchmark](https://github.com/google/benchmark) framework. The script [run.sh](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking/run.sh) is used to generate benchmark data: it makes use also of the [cpupower](https://linux.die.net/man/1/cpupower) tool to run correctly.
 
-Empty for the moment (work in progress).
+To install extra libraries used for comparison you can use the [`install_deps.sh`]((https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking/install_deps.sh)) script
+
+Work in progress...
 
 ## Todo
 

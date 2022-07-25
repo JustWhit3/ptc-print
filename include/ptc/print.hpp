@@ -30,24 +30,6 @@
 namespace ptc
  {
   //====================================================
-  //     Global structs
-  //====================================================
-
-  // null_string
-  /**
-   * @brief Struct used to define the "null_str" constant. This workaround is needed for correct compilation in both gcc and clang.
-   * 
-   * @tparam T The template parameter of the future "null_string" constant.
-   */
-  template <class T> struct null_string { static const std::string value; };
-
-  //====================================================
-  //     Global constants
-  //====================================================
-  template<class T> const std::string null_string<T>::value = "";
-  template<class T> std::string const null_str = null_string<const T&>::value;
-
-  //====================================================
   //     ptc_print class
   //====================================================
   /**
@@ -181,6 +163,15 @@ namespace ptc
      //     Private structs
      //====================================================
 
+     // null_string
+     /**
+      * @brief Struct used to define the "null_str" constant. This workaround is needed for correct compilation in both gcc and clang.
+      * 
+      * @tparam T The template parameter of the future "null_string" constant.
+      */
+     template <class T> 
+     struct null_string { inline static const std::string value = ""; };
+
      // is_any
      /**
       * @brief Template struct used to check if a type is in a certain list.
@@ -237,6 +228,11 @@ namespace ptc
      std::string end, sep;
      static std::mutex mutex_;
      bool flush;
+
+     //====================================================
+     //     Private constants
+     //====================================================
+     template <class T> inline static const std::string null_str = __print__::null_string<const T&>::value;
    }; // end of __print__ class
    
   //====================================================
