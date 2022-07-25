@@ -60,12 +60,12 @@ echo ""
 #====================================================
 if [[ "$UNAME" == Darwin* || "$UNAME" == Linux* ]] ; then
     sudo echo "Installing ptc::print header into ${INCL} folder..."
-    if ! ( sudo cp -r ptc "${INCL}") ; then
+    if ! ( sudo cp -r include/ptc "${INCL}") ; then
         echo "Cannot install the header file into ${INCL} position of the system!"
     fi
 else
     echo "Installing ptc::print header files into ${INCL}..."
-    if ! ( cp -r ptc "${INCL}" ) ; then
+    if ! ( cp -r include/ptc "${INCL}" ) ; then
         echo "Cannot install the header file into ${INCL} position of the system!"
     fi
 fi

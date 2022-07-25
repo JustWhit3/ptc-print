@@ -25,8 +25,7 @@
 #include <fstream>
 #include <mutex>
 #include <string_view>
-
-#include <regex>
+#include <utility>
 
 namespace ptc
  {
@@ -40,14 +39,13 @@ namespace ptc
    * 
    * @tparam T The template parameter of the future "null_string" constant.
    */
-  template<class T>
-  struct null_string{ static const std::string value; };
+  template <class T> struct null_string { static const std::string value; };
 
   //====================================================
   //     Global constants
   //====================================================
   template<class T> const std::string null_string<T>::value = "";
-  template<class T> std::string const null_str = null_string<T>::value;
+  template<class T> std::string const null_str = null_string<const T&>::value;
 
   //====================================================
   //     ptc_print class
@@ -56,47 +54,10 @@ namespace ptc
    * @brief Class used to construct the print function.
    * 
    */
-  class __print__
+  struct __print__
    {
      //====================================================
-     //     Private structs
-     //====================================================
-
-     // is_any
-     /**
-      * @brief Template struct used to check if a type is in a certain list.
-      * 
-      * @tparam T The type which check is needed.
-      * @tparam Ts The list of types to compare with T.
-      */
-     template <class T, class... Ts>
-     struct is_any: std::disjunction <std::is_same <T, Ts>... >{};
-
-     //====================================================
-     //     Private methods
-     //====================================================
-
-     // is_escape
-     /**
-      * @brief This method is used to check if an input variable is an ANSI escape sequency or not.
-      * 
-      * @param str The input variable.
-      * @return true If the input variable is an ANSI escape sequency.
-      * @return false Otherwise.
-      */
-     inline bool is_escape( const std::string_view& str ) const { return ! str.rfind( "\033", 0 ); }
-
-     //====================================================
-     //     Private attributes
-     //====================================================
-     std::string end, sep;
-     static std::mutex mutex_;
-     bool flush;
-
-    public:
-
-     //====================================================
-     //     Constructors / destructor
+     //     Public constructors and destructor
      //====================================================
 
      // Default constructor
@@ -130,14 +91,9 @@ namespace ptc
       * 
       * @tparam T The type of the expression inserted to set the value of "end" variable.
       * @param end_val The inserted expression used to set the value of "end" variable.
-      * @return const __print__& The "this" pointer to the class.
       */
      template <class T> 
-     inline const __print__& setEnd( const T& end_val )
-      {
-       end = end_val;
-       return *this;
-      }
+     inline void setEnd( const T& end_val ) { end = end_val; }
 
      // setSep
      /**
@@ -145,27 +101,17 @@ namespace ptc
       * 
       * @tparam T The type of the expression inserted to set the value of "sep" variable.
       * @param end_val The inserted expression used to set the value of "sep" variable.
-      * @return const __print__& The "this" pointer to the class.
       */
      template <class T>
-     inline const __print__& setSep( const T& sep_val )
-      {
-       sep = sep_val;
-       return *this;
-      }
+     inline void setSep( const T& sep_val ) { sep = sep_val; }
 
      // setFlush
      /**
       * @brief Setter used to set the value of the "flush" variable.
       * 
       * @param flush_val The inserted expression used to set the value of the "flush" variable.
-      * @return const __print__& The "this" pointer to the class.
       */
-     inline const __print__& setFlush( const bool& flush_val )
-      {
-       flush = flush_val;
-       return *this;
-      }
+     inline void setFlush( const bool& flush_val ) { flush = flush_val; }
 
      //====================================================
      //     Public getters
@@ -201,77 +147,96 @@ namespace ptc
 
      // General case
      /**
-      * @brief Template operator redefinition used to print its arguments in a specific output stream.
+      * @brief Frontend implementation of the () operator overload to print to the output stream. The backend implementation is called in the required variation.
       * 
-      * @tparam T_os The type of the output stream object. Can be std::ofstream, std::fstream, std::ostringstream or std::ostream.
-      * @tparam T Generic type of first object to be printed.
-      * @tparam Args Generic type of all the other objects to be printed.
-      * @param os The stream in which you want to print the output.
-      * @param first First printed object.
-      * @param args The list of objects to be printed on the screen.
-      * @return const __print__& The "this" pointer to the class.
+      * @tparam T Generic type of first object to be passed as argument to the backend implementation.
+      * @tparam Args Generic type of all the other objects to be passed to the backend implementation.
+      * @param first First object to be passed to the backend implementation.
+      * @param args The list of all the other objects to be passed to the backend implementation.
       */
-      template <class T_os, class T, class... Args, typename = std::enable_if_t<is_any
-      <T_os, std::ostream, std::ofstream, std::fstream, std::ostringstream>::value>>
-      const __print__& operator () ( T_os& os, const T& first, const Args&... args ) const
-       {    
-        std::lock_guard <std::mutex> lock{ mutex_ };
-       
-        os << first;
-        if constexpr( sizeof...( args ) > 0 ) 
-         {
-          if ( first == null_str<T&> || is_escape( first ) ) ( ( os << args << getSep() ), ...); 
-          else ( ( os << getSep() << args ), ...);
-         }
-        os << getEnd();
-        if ( getFlush() && ! std::is_same <T_os, std::ostringstream>::value ) os << std::flush;
-    
-        return *this;
-       }
-
-     // Standard stdout case
-     /**
-      * @brief Template operator redefinition used to print the content of the args argument on the screen, using the stdout stream.
-      * 
-      * @tparam T Generic type of first object to be printed.
-      * @tparam Args Generic type of objects to be printed.
-      * @param first First printed object.
-      * @param args The list of objects to be printed on the screen.
-      * @return const __print__& The "this" pointer to the class.
-      */
-      template <class T, class... Args> 
-      const __print__& operator () ( const T& first, const Args&... args ) const
-       {
-        std::lock_guard <std::mutex> lock{ mutex_ };
-    
-        std::cout << first;
-        if constexpr( sizeof...( args ) > 0 ) 
-         {
-          if ( first == null_str<T&> || is_escape( first ) ) ( ( std::cout << args << getSep() ), ...); 
-          else ( ( std::cout << getSep() << args ), ...);
-         }
-        std::cout << getEnd();
-        if ( getFlush() ) std::cout << std::flush;
-    
-        return *this;
-       }
+     template <class T, class... Args>
+     void operator()( T&& first, Args&&... args ) const 
+      {
+       if constexpr ( std::is_base_of_v <std::ostream, std::remove_reference_t<T>> ) 
+         print_backend( std::forward<T>( first ), std::forward<Args>( args )... );
+       else 
+         print_backend( std::cout, std::forward<T>( first ), std::forward<Args>( args )... );
+      }
 
      // No arguments case
      /**
       * @brief Template operator redefinition used to print an empty line on the screen. This is the no argument case overload. Can be used with "ptc::print()" or "ptc::print( ostream_name )".
       * 
       * @param os The stream in which you want to print the output.
-      * @return const __print__& The this pointer to the class.
       */
-     const __print__& operator () ( std::ostream& os = std::cout ) const
+     void operator () ( std::ostream& os = std::cout ) const
       {
-       std::lock_guard <std::mutex> lock{ mutex_ };
-   
        os << getEnd();
        if ( getFlush() ) os << std::flush;
-   
-       return *this;
       }
+     
+    private:
+
+     //====================================================
+     //     Private structs
+     //====================================================
+
+     // is_any
+     /**
+      * @brief Template struct used to check if a type is in a certain list.
+      * 
+      * @tparam T The type which check is needed.
+      * @tparam Ts The list of types to compare with T.
+      */
+     template <class T, class... Ts>
+     struct is_any: std::disjunction <std::is_same <T, Ts>... > {};
+
+     //====================================================
+     //     Private methods
+     //====================================================
+
+     // is_escape
+     /**
+      * @brief This method is used to check if an input variable is an ANSI escape sequency or not.
+      * 
+      * @param str The input variable.
+      * @return true If the input variable is an ANSI escape sequency.
+      * @return false Otherwise.
+      */
+     inline bool is_escape( const std::string_view& str ) const { return ! str.rfind( "\033", 0 ); }
+
+     // print_backend
+     /**
+      * @brief Backend implementation of the () operator overloads to print to the output stream.
+      * 
+      * @tparam T_os The type of the output stream object.
+      * @tparam T Generic type of first object to be printed.
+      * @tparam Args Generic type of all the other objects to be printed.
+      * @param os The stream in which you want to print the output.
+      * @param first First printed object.
+      * @param args The list of objects to be printed on the screen.
+      */
+     template <class T_os, class T, class... Args>
+     void print_backend( T_os&& os, T&& first, Args&&... args ) const 
+      {
+       std::lock_guard <std::mutex> lock{ mutex_ };
+ 
+       os << first;
+       if constexpr( sizeof...( args ) > 0 ) 
+        {
+         if ( first == null_str <decltype( first )> || is_escape( first ) ) ( ( os << args << getSep() ), ...); 
+         else ( ( os << getSep() << args ), ...);
+        }
+       os << getEnd();
+       if ( getFlush() && ! std::is_same <T_os, std::ostringstream>::value ) os << std::flush;
+      }
+
+     //====================================================
+     //     Private attributes
+     //====================================================
+     std::string end, sep;
+     static std::mutex mutex_;
+     bool flush;
    }; // end of __print__ class
    
   //====================================================
@@ -283,6 +248,6 @@ namespace ptc
 
   // print function initialization
   __print__ print;
- }
+ } // end of namespace ptc
 
 #endif
