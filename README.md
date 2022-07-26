@@ -183,11 +183,11 @@ To color the output stream of a program:
 
 int main()
  {
-  ptc::print( "\033[31m", "This is a red bold string", "\033[0m" );
+  ptc::print( "\033[31m", "This is a red string", "\033[0m" );
  }
 ```
 
-<img src="https://github.com/JustWhit3/ptc-print/blob/main/img/red_string.png" width="200">
+<img src="https://github.com/JustWhit3/ptc-print/blob/main/img/red_string.png" width="170">
 
 this holds also for all the other [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code). To better manage them you can use external libraries like [`osmanip`](https://github.com/JustWhit3/osmanip). The stream is automatically reset when the `__print__` [destructor](https://justwhit3.github.io/ptc-print/classptc_1_1____print____.html#a563dbcebb12dcf529c54e6b93831bcf5) is met.
 
@@ -291,7 +291,7 @@ Work in progress...
 
 ## Todo
 
-- Add support to all the containers printing (not only `std:.vector`):
+- Add support to all the containers printing (not only `std::vector`):
 
 ```C++
 std::vector<int> v{1, 10, 100};
