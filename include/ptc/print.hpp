@@ -51,17 +51,10 @@ namespace ptc
 
      // Destructor
      /**
-      * @brief Destructor of the __print__ class. It resets the output stream from ANSI escape sequences, in case of std::ostream usage within the () operator.
+      * @brief Destructor of the __print__ class.
       * 
       */
-     ~__print__()
-      { 
-       std::lock_guard <std::mutex> lock{ mutex_ };
-       
-       std::cout << "\033[0m";
-       std::cerr << "\033[0m";
-       std::clog << "\033[0m";
-      }
+     ~__print__(){}
 
      //====================================================
      //     Public setters
@@ -75,7 +68,10 @@ namespace ptc
       * @param end_val The inserted expression used to set the value of "end" variable.
       */
      template <class T> 
-     inline void setEnd( const T& end_val ) { end = end_val; }
+     inline void setEnd( const T& end_val )
+      {
+       end = end_val;
+      }
 
      // setSep
      /**
@@ -85,7 +81,10 @@ namespace ptc
       * @param end_val The inserted expression used to set the value of "sep" variable.
       */
      template <class T>
-     inline void setSep( const T& sep_val ) { sep = sep_val; }
+     inline void setSep( const T& sep_val )
+      {
+       sep = sep_val;
+      }
 
      // setFlush
      /**
@@ -93,7 +92,10 @@ namespace ptc
       * 
       * @param flush_val The inserted expression used to set the value of the "flush" variable.
       */
-     inline void setFlush( const bool& flush_val ) { flush = flush_val; }
+     inline void setFlush( const bool& flush_val )
+      {
+       flush = flush_val;
+      }
 
      //====================================================
      //     Public getters
@@ -105,7 +107,10 @@ namespace ptc
       * 
       * @return auto The value of the "end" variable.
       */
-     inline const auto& getEnd() const { return end; }
+     inline const auto& getEnd() const 
+      {
+       return end;
+      }
 
      // getSep
      /**
@@ -113,7 +118,10 @@ namespace ptc
       * 
       * @return auto The value of the "sep" variable.
       */
-     inline const auto& getSep() const { return sep; }
+     inline const auto& getSep() const
+      {
+       return sep;
+      }
 
      // getFlush
      /**
@@ -121,10 +129,13 @@ namespace ptc
       * 
       * @return bool The value of the "flush" variable.
       */
-     inline const bool& getFlush() const { return flush; }
+     inline const bool& getFlush() const
+      {
+       return flush;
+      }
 
      //====================================================
-     //     Operator () overloads
+     //     Public operator () overloads
      //====================================================
 
      // General case
@@ -139,10 +150,14 @@ namespace ptc
      template <class T, class... Args>
      void operator()( T&& first, Args&&... args ) const 
       {
-       if constexpr ( std::is_base_of_v <std::ostream, std::remove_reference_t<T>> ) 
+       if constexpr ( std::is_base_of_v <std::ostream, std::remove_reference_t<T>> )
+        {
          print_backend( std::forward<T>( first ), std::forward<Args>( args )... );
-       else 
+        }
+       else
+        {
          print_backend( std::cout, std::forward<T>( first ), std::forward<Args>( args )... );
+        }
       }
 
      // No arguments case
@@ -170,7 +185,10 @@ namespace ptc
       * @tparam T The template parameter of the future "null_string" constant.
       */
      template <class T> 
-     struct null_string { inline static const std::string value = ""; };
+     struct null_string
+      {
+       inline static const std::string value = "";
+      };
 
      //====================================================
      //     Private methods
@@ -180,15 +198,54 @@ namespace ptc
      /**
       * @brief This method is used to check if an input variable is an ANSI escape sequency or not.
       * 
+      * @tparam T Template type of the input variable.
       * @param str The input variable.
+      * @param flag A flag which let to return different things with respect to its value. If flag = 0 the ANSI is searched as the first substring of the str argument, otherwise, if flag = 1 the ANSI is searched as a substring inside the str argument.
       * @return true If the input variable is an ANSI escape sequency.
       * @return false Otherwise.
       */
-     inline bool is_escape( const std::string_view& str ) const { return ! str.rfind( "\033", 0 ); }
+     template <typename T>
+     static constexpr bool is_escape( const T& str, const unsigned short& flag = 1 )
+      {
+       if constexpr( std::is_convertible_v <T, std::string_view> )
+        {
+         switch( flag )
+          {
+           case( 0 ): 
+            {
+             return ( ! std::string_view( str ).rfind( "\033", 0 ) ) && ( std::string_view( str ).length() == 5 );
+            }
+           case( 1 ):
+            {
+             return ( std::string_view( str ).find( "\033" ) != std::string_view::npos );
+            }
+          }
+        }
+       return false;
+      }
 
+     // is_null_str
+     /**
+      * @brief This method is used to check if an input variable is a null string or not.
+      * 
+      * @tparam T The templated type of the input variable.
+      * @param str The input variable.
+      * @return true If the variable is a null string.
+      * @return false Otherwise.
+      */
+     template <typename T>
+     static constexpr bool is_null_str( const T& str )
+      {
+       if constexpr( std::is_convertible_v <T, std::string_view> )
+        {
+         return str == null_str <T>;
+        }
+       return false;
+      }
+      
      // print_backend
      /**
-      * @brief Backend implementation of the () operator overloads to print to the output stream.
+      * @brief Backend implementation of the () operator overloads to print to the output stream. The stream is automatically reset in case of an ANSI escape sequence is sent to output.
       * 
       * @tparam T_os The type of the output stream object.
       * @tparam T Generic type of first object to be printed.
@@ -202,13 +259,24 @@ namespace ptc
       {
        std::lock_guard <std::mutex> lock{ mutex_ };
  
+       // Printing all the arguments
        os << first;
        if constexpr( sizeof...( args ) > 0 ) 
         {
-         if ( first == null_str <decltype( first )> || is_escape( first ) ) ( ( os << args << getSep() ), ...); 
+         if ( is_null_str( first ) || is_escape( first, 0 ) ) ( ( os << args << getSep() ), ...); 
          else ( ( os << getSep() << args ), ...);
         }
        os << getEnd();
+
+       // Resetting the stream from ANSI escape sequences
+       if constexpr( sizeof...( args ) > 0 )
+        {
+         if ( is_escape( first ) || ( ( is_escape( args ) ) || ...) ) os << "\033[0m";
+        }
+       else 
+        {
+        if ( is_escape( first ) ) os << "\033[0m";
+        }
        if ( getFlush() && ! std::is_base_of_v <std::ostringstream, T_os> ) os << std::flush;
       }
 

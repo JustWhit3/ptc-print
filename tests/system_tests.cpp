@@ -40,7 +40,7 @@ void print_out()
 
   // Print by changing the "sep" variable value (and/or type)
   ptc::print.setSep( '*' );
-  ptc::print( "Test", "the", "new", "sep." );
+  ptc::print( "", "Test", "the", "new", "sep." );
   ptc::print();
   ptc::print.setSep( " " );
 
@@ -70,7 +70,12 @@ void print_out()
   ptc::print( var, "is printed." );
 
   // Printing colored output
-  ptc::print( "\033[31m", "Red string!", "\033[0m" );
+  ptc::print( "\033[31m", "Red string!");
+  ptc::print( "\033[31mAnother", "red string!");
+  ptc::print( "This is", "a \033[34mblue string!", "yeah!");
+
+  // Printing with a number as first argument
+  ptc::print( 1, 2, "numbers as first arguments." );
  }
 
 //====================================================

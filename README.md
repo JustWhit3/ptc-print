@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/JustWhit3/ptc-print/blob/main/img/logo.svg" height=220></p>
+<p align="center"><img src="https://github.com/JustWhit3/ptc-print/blob/main/img/images/logo.svg" height=220></p>
 
 <h3 align="center">A C++17 header-only library for custom printing to the output stream (inspired by the Python print function) </h3>
 <p align="center">
@@ -187,9 +187,9 @@ int main()
  }
 ```
 
-<img src="https://github.com/JustWhit3/ptc-print/blob/main/img/red_string.png" width="170">
+<img src="https://github.com/JustWhit3/ptc-print/blob/main/img/images/red_string.png" width="150">
 
-this holds also for all the other [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code). To better manage them you can use external libraries like [`osmanip`](https://github.com/JustWhit3/osmanip). The stream is automatically reset when the `__print__` [destructor](https://justwhit3.github.io/ptc-print/classptc_1_1____print____.html#a563dbcebb12dcf529c54e6b93831bcf5) is met.
+this holds also for all the other [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code). To better manage them you can use external libraries like [`osmanip`](https://github.com/JustWhit3/osmanip). The stream is automatically reset when the end of the `ptc::print` object is met, only if an ANSI escape sequence appears among its arguments.
 
 ### Printing non-standard types
 

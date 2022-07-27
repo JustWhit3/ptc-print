@@ -9,3 +9,5 @@ cmake ..
 make
 make tests
 sudo make install
+cd ../..
+rm -rf fmt

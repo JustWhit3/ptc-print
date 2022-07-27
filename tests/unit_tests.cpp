@@ -131,12 +131,21 @@ TEST_CASE( "Testing the operator () overload." )
     CHECK( test != "Test thisssa.\n" );
    }
 
-  // Testing usage of ANSI as first argument
-  /*SUBCASE( "Testing ANSI escape sequence inside ptc::print." )
+  // Testing usage of ANSI escape sequence and final reset
+  SUBCASE( "Testing usage of ANSI escape sequence and final reset." )
    {
-    const std::string test = ptc::osout( "\033[31m", "Test passes (ignore this)." );
-    CHECK_EQ( test, "\033[31mTest passes\033[39m (ignore this). \n" );
-   }*/
+    const std::string test_a = ptc::osout( "\033[31mTesting colors", "(ignore this)." );
+    CHECK_EQ( test_a, "\033[31mTesting colors (ignore this). \n\033[0m" );
+
+    //const std::string test_b = ptc::osout( "Testing", "\033[31mcolors", "(ignore this)." ); ERRORE
+    //CHECK_EQ( test_b, "Testing \033[31mcolors (ignore this). \n\033[0m" );
+   }
+
+  // Testing usage of ANSI or empty character as first argument
+  SUBCASE( "Testing ANSI escape sequence inside ptc::print." )
+   {
+
+   }
  }
 
 //====================================================

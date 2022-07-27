@@ -12,7 +12,7 @@ endif
 #====================================================
 #     FLAGS
 #====================================================
-WARNINGS := -Wall -Wextra
+WARNINGS := -Wall -Wextra -pedantic
 EXTRAFLAGS := -std=c++17 -MMD -MP
 LDFLAGS := -pthread
 

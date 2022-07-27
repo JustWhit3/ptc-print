@@ -67,7 +67,6 @@ namespace ptc
 
     savebuf sbuf( buf );
     os.rdbuf( &sbuf );
-
     
     ( ( str << args << print.getSep() ), ... );
 
