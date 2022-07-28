@@ -98,6 +98,12 @@ static void ptc_print_file( bm::State& state )
   file_stream.close();
  }
 
+// ptc_print_str
+static void ptc_print_str( bm::State& state ) 
+ {
+  for ( auto _ : state ) bm::DoNotOptimize( ptc::print( ptc::mode::str, "Testing", "print", "function" ) );
+ }
+
 //====================================================
 //     std::cout
 //====================================================
@@ -190,22 +196,25 @@ static void fmt_print_file( bm::State& state )
 //BENCHMARK( ptc_print_getFlush );
 
 // ptc::print
-BENCHMARK( ptc_print );
+//BENCHMARK( ptc_print );
 //BENCHMARK( ptc_print_newline );
 //BENCHMARK( ptc_print_stdout );
 //BENCHMARK( ptc_print_file );
+BENCHMARK( ptc_print_str );
 
 // fmt::print
 //BENCHMARK( fmt_print );
 //BENCHMARK( fmt_print_newline );
 //BENCHMARK( fmt_print_stdout );
 //BENCHMARK( fmt_print_file );
+// fmt str
 
 // std::cout
 //BENCHMARK( std_cout );
 //BENCHMARK( std_cout_newline );
 //BENCHMARK( std_ostringstream );
 //BENCHMARK( std_file );
+// std str
 
 // printf
 //BENCHMARK( printf );

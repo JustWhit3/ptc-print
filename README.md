@@ -2,7 +2,7 @@
 
 <h3 align="center">A C++17 header-only library for custom printing to the output stream (inspired by the Python print function) </h3>
 <p align="center">
-  <img title="v0.1" alt="v0.1" src="https://img.shields.io/badge/version-v0.1-informational?style=flat-square">
+  <img title="v0.2" alt="v0.2" src="https://img.shields.io/badge/version-v0.2-informational?style=flat-square">
   <img title="MIT License" alt="license" src="https://img.shields.io/badge/license-MIT-informational?style=flat-square">
 	<img title="C++17" alt="C++17" src="https://img.shields.io/badge/c++-17-informational?style=flat-square"><br/>
 	<img title="Code size" alt="code size" src="https://img.shields.io/github/languages/code-size/JustWhit3/ptc-print?color=red">
@@ -22,9 +22,10 @@
   - [Printing with ANSI escape sequences](#printing-with-ansi-escape-sequences)
   - [Printing non-standard types](#printing-non-standard-types)
 - [Install and use](#install-and-use)
-- [Tests](#compile-and-run-tests)
+- [Tests](#tests)
 - [Comparison with other libraries](#comparison-with-other-libraries)
   - [Benchmarking](#benchmarking)
+  - [Advantages](#advantages)
 - [Todo](#todo)
 - [Credits](#credits)
   - [Project leaders](#project-leaders)
@@ -112,7 +113,7 @@ I am the stderr!
 Printing with in an std::ostringstream.
 ```
 
-Or directly write into a file:
+To write into a file:
 
 ```C++
 #include <ptc/print.hpp>
@@ -174,6 +175,24 @@ To allow output stream flush (false by default) use:
 ptc::print.setFlush( true );
 ```
 
+To initialize a string:
+
+```C++
+#include <ptc/print.hpp>
+#include <string>
+
+int main()
+ {
+  ptc::print.setEnd( "" ); // Avoid "\n" in the string initialization
+  std::string msg = ptc::print( ptc::mode::str "I am a", "string." );
+  ptc::print( msg );
+ }
+```
+
+```txt
+I am a string.
+```
+
 ### Printing with ANSI escape sequences
 
 To color the output stream of a program:
@@ -183,13 +202,25 @@ To color the output stream of a program:
 
 int main()
  {
-  ptc::print( "\033[31m", "This is a red string", "\033[0m" );
+  ptc::print( "\033[31m", "This is a red string" );
  }
 ```
 
 <img src="https://github.com/JustWhit3/ptc-print/blob/main/img/images/red_string.png" width="150">
 
 this holds also for all the other [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code). To better manage them you can use external libraries like [`osmanip`](https://github.com/JustWhit3/osmanip). The stream is automatically reset when the end of the `ptc::print` object is met, only if an ANSI escape sequence appears among its arguments.
+
+With [`osmanip`](https://github.com/JustWhit3/osmanip):
+
+```C++
+#include <ptc/print.hpp>
+#include <osmanip/manipulators/colsty>
+
+int main()
+ {
+  ptc::print( osm::feat( osm::col, "red" ), "This is a red string" );
+ }
+```
 
 ### Printing non-standard types
 
@@ -231,10 +262,11 @@ g++ -std=c++17 program.cpp
 
 ## Tests
 
-Different tests are performed. To check them you need some prerequisites:
+Tests are produced using `-Wall -Wextra -pedantic` flags. To check them you need some prerequisites:
 
 - [Valgrind](https://valgrind.org/) for profiling.
 - [doctest](https://github.com/onqtam/doctest) for testing.
+- [cppcheck](https://cppcheck.sourceforge.io/) for testing.
 
 They are installed in the second step of the installation through the `install.sh` script. Before running test codes you need to compile them:
 
@@ -249,21 +281,12 @@ To launch all tests simultaneously:
 ./all_tests.sh
 ```
 
-To run **unit tests**:
+Or separately:
 
 ```bash
 ./bin/unit_tests
-```
-
-To run **system tests**:
-
-```bash
 ./bin/system_tests
-```
-
-To run **include_tests**:
-
-```bash
+./bin/threading_tests
 ./include_tests.sh
 ```
 
@@ -286,6 +309,42 @@ To install extra libraries used for comparison you can use the [`install_deps.sh
 ### Benchmarking
 
 Benchmarking is performed using the [Google Benchmark](https://github.com/google/benchmark) framework. The script [run.sh](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking/run.sh) is used to generate benchmark data: it makes use also of the [cpupower](https://linux.die.net/man/1/cpupower) tool to run correctly.
+
+Work in progress...
+
+### Advantages
+
+- Very simple signature and more similar to the `print` Python function than any other know implementation:
+
+`ptc::print`:
+
+```c++
+ptc::print( "I am", "very similar to Python", 123 );
+```
+
+`fmt::print`:
+
+```c++
+fmt::print( "{} {} {}", "I am", "similar to Python", 123, "\n" );
+```
+
+- Speed / executable size etc work in progress...
+
+- Possibility to change end and separator characters, like in Python:
+
+`ptc::print`:
+
+```c++
+ptc::print.setSep( "*" );
+ptc::print.endSep( "" );
+ptc::print( "I am", "very similar to Python", 123 );
+```
+
+Python `print`:
+
+```Python
+print( "I am", "Python", 123, sep = "*", end = "" );
+```
 
 Work in progress...
 

@@ -26,9 +26,19 @@
 #include <mutex>
 #include <string_view>
 #include <utility>
+#include <cassert>
 
 namespace ptc
  {
+  //====================================================
+  //     ptc_print class
+  //====================================================
+  /**
+   * @brief Enum class used to set up the "str" mode to pass a string with the content of the print function.
+   * 
+   */
+   enum class mode { str };
+
   //====================================================
   //     ptc_print class
   //====================================================
@@ -148,7 +158,7 @@ namespace ptc
       * @param args The list of all the other objects to be passed to the backend implementation.
       */
      template <class T, class... Args>
-     void operator()( T&& first, Args&&... args ) const 
+     const __print__& operator()( T&& first, Args&&... args ) const
       {
        if constexpr ( std::is_base_of_v <std::ostream, std::remove_reference_t<T>> )
         {
@@ -158,6 +168,34 @@ namespace ptc
         {
          print_backend( std::cout, std::forward<T>( first ), std::forward<Args>( args )... );
         }
+       return *this;
+      }
+
+     // String initialization case
+     /**
+      * @brief Frontend implementation of the () operator overload to initialize its content with an std::string object. The backend implementation is called in the required variation. This overload is required in order to hide the output of the "print_backend" function during the initialization.
+      * 
+      * @tparam Args Generic type of all the other objects to be passed to the backend implementation.
+      * @param first First object to be passed to the backend implementation.
+      * @param args The list of all the other objects to be passed to the backend implementation.
+      * @return const std::string The whole print content in std::string format.
+      */
+     template <class... Args>
+     const std::string operator()( mode&& first, Args&&... args ) const
+      {    
+       if constexpr( sizeof...( args ) > 0 )
+        {
+         switch( first )
+          {
+           case mode::str:
+            {
+             std::ostringstream oss;
+             print_backend( oss, std::forward<Args>( args )... );
+             return oss.str();
+            }
+          }
+        }
+       return "";
       }
 
      // No arguments case
@@ -213,7 +251,7 @@ namespace ptc
           {
            case( 0 ): 
             {
-             return ( ! std::string_view( str ).rfind( "\033", 0 ) ) && ( std::string_view( str ).length() == 5 );
+             return ( ! std::string_view( str ).rfind( "\033", 0 ) ) && ( std::string_view( str ).length() < 7 );
             }
            case( 1 ):
             {
@@ -255,7 +293,7 @@ namespace ptc
       * @param args The list of objects to be printed on the screen.
       */
      template <class T_os, class T, class... Args>
-     void print_backend( T_os&& os, T&& first, Args&&... args ) const 
+     void print_backend( T_os&& os, T&& first, Args&&... args ) const
       {
        std::lock_guard <std::mutex> lock{ mutex_ };
  

@@ -4,7 +4,7 @@ authors:
 - family-names: "Gianluca"
   given-names: "Bianco"
 title: "ptc-print"
-version: 0.1.0
+version: 0.2.0
 doi: https://zenodo.org/badge/latestdoi/513470638
 date-released: 2022-07-13
 url: "https://github.com/JustWhit3/ptc-print"

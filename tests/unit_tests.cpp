@@ -131,20 +131,44 @@ TEST_CASE( "Testing the operator () overload." )
     CHECK( test != "Test thisssa.\n" );
    }
 
+  // Testing the string return overload
+  SUBCASE( "String return overload" )
+   {
+    ptc::print.setEnd( "" );
+
+    CHECK_EQ( ptc::print( ptc::mode::str, "Test", "this!" ), "Test this!" );
+    const std::string test_string = ptc::print( ptc::mode::str, "Test", "this!" );
+    CHECK_EQ( test_string, "Test this!" );
+    CHECK_EQ( ptc::print( ptc::mode::str ), "" );
+    CHECK_EQ( ptc::print( ptc::mode::str, "" ), "" );
+
+    ptc::print.setEnd( "\n" );
+   }
+
   // Testing usage of ANSI escape sequence and final reset
   SUBCASE( "Testing usage of ANSI escape sequence and final reset." )
    {
     const std::string test_a = ptc::osout( "\033[31mTesting colors", "(ignore this)." );
     CHECK_EQ( test_a, "\033[31mTesting colors (ignore this). \n\033[0m" );
 
-    //const std::string test_b = ptc::osout( "Testing", "\033[31mcolors", "(ignore this)." ); ERRORE
-    //CHECK_EQ( test_b, "Testing \033[31mcolors (ignore this). \n\033[0m" );
+    ptc::print.setEnd( "" );
+    const std::string test_b = ptc::print( ptc::mode::str, "Testing", "\033[31mcolors", "(ignore this)." );
+    CHECK_EQ( test_b, "Testing \033[31mcolors (ignore this).\033[0m" );
+    const std::string test_c = ptc::print( ptc::mode::str, "Testing", "the \033[31mcolors", "(ignore this)." );
+    CHECK_EQ( test_c, "Testing the \033[31mcolors (ignore this).\033[0m" );
+    CHECK_EQ( ptc::print( ptc::mode::str, 1, "Number" ), "1 Number" );
+    ptc::print.setEnd( "\n" );
    }
 
   // Testing usage of ANSI or empty character as first argument
-  SUBCASE( "Testing ANSI escape sequence inside ptc::print." )
+  SUBCASE( "Testing ANSI escape sequence inside ptc::print." ) // TODO: This should be improved (delete last empty space)
    {
-
+    ptc::print.setEnd( "" );
+    const std::string test_a = ptc::print( ptc::mode::str, "", "Testing empty char (ignore this)." );
+    CHECK_EQ( test_a, "Testing empty char (ignore this). " ); 
+    const std::string test_b = ptc::print( ptc::mode::str, "\033[31m", "Testing empty char (ignore this)." );
+    CHECK_EQ( test_b, "\033[31mTesting empty char (ignore this). \033[0m" ); 
+    ptc::print.setEnd( "\n" );
    }
  }
 
