@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ptc-print: ptc/print.hpp File Reference</title>
+<title>ptc-print: include/ptc/print.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,13 +63,14 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_4b3027e9f68e5f1997bc7770e6659b7d.html">ptc</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_06703c8dd52cabbbaa30028253cf00ca.html">ptc</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">print.hpp File Reference</div>  </div>
@@ -82,13 +83,14 @@ $(function() {
 <code>#include &lt;fstream&gt;</code><br />
 <code>#include &lt;mutex&gt;</code><br />
 <code>#include &lt;string_view&gt;</code><br />
-<code>#include &lt;regex&gt;</code><br />
+<code>#include &lt;utility&gt;</code><br />
+<code>#include &lt;cassert&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for print.hpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="print_8hpp__incl.png" border="0" usemap="#aptc_2print_8hpp" alt=""/></div>
-<map name="aptc_2print_8hpp" id="aptc_2print_8hpp">
-<area shape="rect" title=" " alt="" coords="321,5,415,32"/>
+<div class="center"><img src="print_8hpp__incl.png" border="0" usemap="#ainclude_2ptc_2print_8hpp" alt=""/></div>
+<map name="ainclude_2ptc_2print_8hpp" id="ainclude_2ptc_2print_8hpp">
+<area shape="rect" title=" " alt="" coords="345,5,484,32"/>
 <area shape="rect" title=" " alt="" coords="5,80,77,107"/>
 <area shape="rect" title=" " alt="" coords="102,80,157,107"/>
 <area shape="rect" title=" " alt="" coords="181,80,264,107"/>
@@ -96,7 +98,8 @@ Include dependency graph for print.hpp:</div>
 <area shape="rect" title=" " alt="" coords="381,80,448,107"/>
 <area shape="rect" title=" " alt="" coords="473,80,530,107"/>
 <area shape="rect" title=" " alt="" coords="555,80,643,107"/>
-<area shape="rect" title=" " alt="" coords="667,80,720,107"/>
+<area shape="rect" title=" " alt="" coords="667,80,719,107"/>
+<area shape="rect" title=" " alt="" coords="743,80,809,107"/>
 </map>
 </div>
 </div>
@@ -104,11 +107,8 @@ Include dependency graph for print.hpp:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1null__string.html">ptc::null_string&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct used to define the "null_str" constant. This workaround is needed for correct compilation in both gcc and clang.  <a href="structptc_1_1null__string.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classptc_1_1____print____.html">ptc::__print__</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class used to construct the print function.  <a href="classptc_1_1____print____.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1____print____.html">ptc::__print__</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class used to construct the print function.  <a href="structptc_1_1____print____.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
@@ -116,11 +116,15 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespaceptc"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceptc.html">ptc</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:aa730094183bf13993032c00ee196eafb"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceptc.html#aa730094183bf13993032c00ee196eafb">ptc::mode</a> { <a class="el" href="namespaceptc.html#aa730094183bf13993032c00ee196eafba341be97d9aff90c9978347f66f945b77">ptc::str</a>
+ }</td></tr>
+<tr class="memdesc:aa730094183bf13993032c00ee196eafb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum class used to set up the "str" mode to pass a string with the content of the print function.  <a href="namespaceptc.html#aa730094183bf13993032c00ee196eafb">More...</a><br /></td></tr>
+<tr class="separator:aa730094183bf13993032c00ee196eafb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a935b9cf15d0984e4db9e5064e3772cb6"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a935b9cf15d0984e4db9e5064e3772cb6"><td class="memTemplItemLeft" align="right" valign="top">std::string const&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a935b9cf15d0984e4db9e5064e3772cb6">ptc::null_str</a> = null_string&lt;T&gt;::value</td></tr>
-<tr class="separator:a935b9cf15d0984e4db9e5064e3772cb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2583f22648f1844d27b5d8107d65ea65"><td class="memItemLeft" align="right" valign="top">__print__&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a2583f22648f1844d27b5d8107d65ea65">ptc::print</a></td></tr>
 <tr class="separator:a2583f22648f1844d27b5d8107d65ea65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
