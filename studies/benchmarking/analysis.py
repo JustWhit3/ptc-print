@@ -60,16 +60,16 @@ def set_x_ticks_label( x_tick ):
         'ptc::print'
         >>> set_x_ticks_label( "fmt_print_stdout_mean" )
         'fmt::print'
-        >>> set_x_ticks_label( "stdout_str_mean" )
-        'stdout'
-        >>> set_x_ticks_label( "printf_str_mean" )
+        >>> set_x_ticks_label( "std_cout_str_mean" )
+        'std::cout'
+        >>> set_x_ticks_label( "printf_stdout" )
         'printf'
     """
     
-    if "fmt" in x_tick or "ptc" in x_tick:
+    if "fmt_" in x_tick or "ptc_" in x_tick or "std_" in x_tick:
         x_tick = x_tick.split( "_" )[0:2]
         x_tick = "::".join( x_tick )
-    elif "stdout" in x_tick or "printf" in x_tick:
+    elif "printf_" in x_tick:
         x_tick = x_tick.split( "_" )[0:1]
         x_tick = " ".join( x_tick )
     
