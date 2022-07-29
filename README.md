@@ -325,7 +325,7 @@ ptc::print( "I am", "very similar to Python", 123 );
 `fmt::print`:
 
 ```c++
-fmt::print( "{} {} {}", "I am", "similar to Python", 123, "\n" );
+fmt::print( "{} {} {}\n", "I am", "very similar to Python", 123 );
 ```
 
 - Speed / executable size etc work in progress...

@@ -77,8 +77,8 @@ static void ptc_print_newline( bm::State& state )
   for ( auto _ : state ) ptc::print();
  }
 
-// ptc_print
-static void ptc_print( bm::State& state ) 
+// ptc_print_standard
+static void ptc_print_standard( bm::State& state ) 
  {
   for ( auto _ : state ) ptc::print( std::cout, "Testing", "print", "function" );
  }
@@ -108,8 +108,8 @@ static void ptc_print_str( bm::State& state )
 //     std::cout
 //====================================================
 
-// std_cout
-static void std_cout( bm::State& state ) 
+// std_cout_stdout
+static void std_cout_stdout( bm::State& state ) 
  {
   for ( auto _ : state ) std::cout << "Testing" << " " << "print" << " " << "function" << "\n";
  }
@@ -118,13 +118,6 @@ static void std_cout( bm::State& state )
 static void std_cout_newline( bm::State& state ) 
  {
   for ( auto _ : state ) std::cout << "\n";
- }
-
-// std_ostringstream
-static void std_ostringstream( bm::State& state ) 
- {
-  std::ostringstream ostr;
-  for ( auto _ : state ) ostr << "Testing" << " " << "print" << " " << "function" << "\n";
  }
 
 // std_file
@@ -140,8 +133,8 @@ static void std_file( bm::State& state )
 //     printf
 //====================================================
 
-// printf
-static void printf( bm::State& state ) 
+// printf_stdout
+static void printf_stdout( bm::State& state ) 
  {
   for ( auto _ : state ) printf( "Testing print function\n" );
  }
@@ -156,8 +149,8 @@ static void printf_newline( bm::State& state )
 //     fmt::print
 //====================================================
 
-// fmt_print
-static void fmt_print( bm::State& state ) 
+// fmt_print_standard
+static void fmt_print_standard( bm::State& state ) 
  {
   for ( auto _ : state ) fmt::print( stdout, "Testing {} {}{}", "print", "function", "\n" );
  }
@@ -196,28 +189,27 @@ static void fmt_print_file( bm::State& state )
 //BENCHMARK( ptc_print_getFlush );
 
 // ptc::print
-//BENCHMARK( ptc_print );
-//BENCHMARK( ptc_print_newline );
+//BENCHMARK( ptc_print_standard );
+BENCHMARK( ptc_print_newline );
 //BENCHMARK( ptc_print_stdout );
 //BENCHMARK( ptc_print_file );
-BENCHMARK( ptc_print_str );
+//BENCHMARK( ptc_print_str );
 
 // fmt::print
-//BENCHMARK( fmt_print );
-//BENCHMARK( fmt_print_newline );
+//BENCHMARK( fmt_print_standard );
+BENCHMARK( fmt_print_newline );
 //BENCHMARK( fmt_print_stdout );
 //BENCHMARK( fmt_print_file );
 // fmt str
 
 // std::cout
-//BENCHMARK( std_cout );
+//BENCHMARK( std_cout_stdout );
 //BENCHMARK( std_cout_newline );
-//BENCHMARK( std_ostringstream );
 //BENCHMARK( std_file );
 // std str
 
 // printf
-//BENCHMARK( printf );
+//BENCHMARK( printf_stdout );
 //BENCHMARK( printf_newline );
 
 BENCHMARK_MAIN();
