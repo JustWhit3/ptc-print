@@ -336,10 +336,10 @@ namespace ptc
   //====================================================
 
   // __print__::mutex_ definiton
-  std::mutex __print__::mutex_;
+  inline std::mutex __print__::mutex_;
 
   // print function initialization
-  __print__ print;
+  inline __print__ print;
  } // end of namespace ptc
 
 #endif
