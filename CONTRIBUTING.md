@@ -21,12 +21,7 @@ To add your contribution, please follow these guidelines:
 
 ```bash
 cd tests
-make
-./bin/unit_tests
-./bin/system_tests
-./include_tests.sh
-./valgrind.sh memcheck ./bin/system_tests
-./valgrind.sh helgrind ./bin/system_tests
+./all-tests.sh
 ```
 
 4) Run [benchmarks](https://github.com/JustWhit3/ptc-print#install-and-use:~:text=helgrind%20./bin/system_tests-,Comparison%20with%20other%20libraries,-Empty%20for%20the) in order to be sure performance is not lost:

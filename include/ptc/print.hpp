@@ -45,7 +45,7 @@ namespace ptc
    * @brief Class used to construct the print function.
    * 
    */
-  struct __print__
+  struct Print
    {
      //====================================================
      //     Public constructors and destructor
@@ -53,17 +53,17 @@ namespace ptc
 
      // Default constructor
      /**
-      * @brief Default constructor of the __print__ class. It initializes the basic class members.
+      * @brief Default constructor of the Print class. It initializes the basic class members.
       * 
       */
-     __print__(): end( "\n" ), sep( " " ), flush( false ) {}
+     Print(): end( "\n" ), sep( " " ), flush( false ) {}
 
      // Destructor
      /**
-      * @brief Destructor of the __print__ class.
+      * @brief Destructor of the Print class.
       * 
       */
-     ~__print__(){}
+     ~Print(){}
 
      //====================================================
      //     Public setters
@@ -157,7 +157,7 @@ namespace ptc
       * @param args The list of all the other objects to be passed to the backend implementation.
       */
      template <class T, class... Args>
-     const __print__& operator()( T&& first, Args&&... args ) const
+     const Print& operator()( T&& first, Args&&... args ) const
       {
        if constexpr ( std::is_base_of_v <std::ostream, std::remove_reference_t<T>> )
         {
@@ -327,18 +327,18 @@ namespace ptc
      //====================================================
      //     Private constants
      //====================================================
-     template <class T> inline static const std::string null_str = __print__::null_string<const T&>::value;
-   }; // end of __print__ class
+     template <class T> inline static const std::string null_str = Print::null_string<const T&>::value;
+   }; // end of Print class
    
   //====================================================
   //     Other steps
   //====================================================
 
-  // __print__::mutex_ definiton
-  inline std::mutex __print__::mutex_;
+  // Print::mutex_ definiton
+  inline std::mutex Print::mutex_;
 
   // print function initialization
-  inline __print__ print;
+  inline Print print;
  } // end of namespace ptc
 
 #endif

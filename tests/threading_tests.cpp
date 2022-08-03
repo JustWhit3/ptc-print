@@ -26,7 +26,7 @@ int main()
   auto job1 = [ &strout, &file_stream ]() 
    {
     // Testing constructor
-    ptc::__print__ first;
+    ptc::Print first;
  
     // Testing methods
     ptc::print( std::cerr, "Printing the", "1st", "message with std::cerr" ); 
@@ -51,7 +51,7 @@ int main()
   auto job2 = [ &strout, &file_stream ]()
    {
     // Testing constructor
-    ptc::__print__ second;
+    ptc::Print second;
 
     // Testing methods
     ptc::print( std::cerr, "Printing the", "2nd", "message with std::cerr" ); 

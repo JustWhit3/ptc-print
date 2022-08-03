@@ -28,14 +28,14 @@
   - [Advantages](#advantages)
 - [Todo](#todo)
 - [Credits](#credits)
-  - [Project leaders](#project-leaders)
+  - [Main maintainers](#main-maintainers)
   - [Other contributors](#other-contributors)
 
 ## Introduction
 
 `ptc::print` (*py-to-cpp print*) is a C++17 printing object inspired by the Python [`print`](https://realpython.com/python-print/) function, which provides you a most comfortable way to print messages and logs to the output stream.
 
-It is constructed through the [`__print__`](https://justwhit3.github.io/ptc-print/classptc_1_1____print____.html) functor, which is a fully *type-* and *thread-safe* class with *automatic memory management*, implemented through an [header-only](https://github.com/JustWhit3/ptc-print/blob/main/ptc/print.hpp) library, with minimal and indispensable [dependencies](#install-and-use). It supports also the usage of [ANSI escape sequences](#printing-with-ansi-escape-sequences).
+It is constructed through the [`Print`](https://justwhit3.github.io/ptc-print/classptc_1_1Print.html) functor, which is a fully *type-* and *thread-safe* class with *automatic memory management*, implemented through an [header-only](https://github.com/JustWhit3/ptc-print/blob/main/ptc/print.hpp) library, with minimal and indispensable [dependencies](#install-and-use). It supports also the usage of [ANSI escape sequences](#printing-with-ansi-escape-sequences).
 
 `ptc::print` supports the printing of all the standard types and some non-standard ones (list [here](#printing-non-standard-types)).
 
@@ -330,7 +330,7 @@ fmt::print( "{} {} {}\n", "I am", "very similar to Python", 123 );
 
 - Speed / executable size etc work in progress...
 
-- Possibility to change end and separator characters, like in Python:
+- Possibility to change *end* and *separator* characters, like in Python:
 
 `ptc::print`:
 
@@ -372,21 +372,12 @@ ptc::print(no);
 1 + 2j
 ```
 
-- Enable string concatenation within the `ptc::print` object:
-
-```C++
-ptc::print("Supporting" + "this.");
-```
-
-```shell
-Supporting this.
-```
-
 - Add support to date printing.
+- Add support to other types printing.
 
 ## Credits
 
-### Project leaders
+### Main maintainers
 
 <table>
   <tr>
