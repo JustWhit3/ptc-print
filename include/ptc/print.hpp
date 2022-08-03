@@ -26,7 +26,6 @@
 #include <mutex>
 #include <string_view>
 #include <utility>
-#include <cassert>
 
 namespace ptc
  {
