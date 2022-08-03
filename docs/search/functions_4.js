@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7e_5f_5fprint_5f_5f_25',['~__print__',['../structptc_1_1____print____.html#a563dbcebb12dcf529c54e6b93831bcf5',1,'ptc::__print__']]]
+  ['_7eprint_26',['~Print',['../structptc_1_1Print.html#ae6bf9d3a0cc52c0976bd0e2b9e32d54e',1,'ptc::Print']]]
 ];

@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['getend_18',['getEnd',['../structptc_1_1____print____.html#a2b3bb36e5d3aec7197a48fa639faf600',1,'ptc::__print__']]],
-  ['getflush_19',['getFlush',['../structptc_1_1____print____.html#abe0bca0c566493afb81b2c8c829d5f43',1,'ptc::__print__']]],
-  ['getsep_20',['getSep',['../structptc_1_1____print____.html#a8007f08c1f947310c2f49c182530697e',1,'ptc::__print__']]]
+  ['operator_28_29_21',['operator()',['../structptc_1_1Print.html#a42d1c836d75c4d53bb06f73dbb0be457',1,'ptc::Print::operator()(T &amp;&amp;first, Args &amp;&amp;... args) const'],['../structptc_1_1Print.html#a5bd94beb0d274d8181c40c6bea0c85fa',1,'ptc::Print::operator()(mode &amp;&amp;first, Args &amp;&amp;... args) const'],['../structptc_1_1Print.html#acf8b739f183ea4ef3883bc9b33896a02',1,'ptc::Print::operator()(std::ostream &amp;os=std::cout) const']]]
 ];
