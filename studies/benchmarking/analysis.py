@@ -138,11 +138,11 @@ def plotter( data, time_type ):
             mean.append( d[ time_type ] )
         elif "stddev" in d[ "name" ]:
             std.append( d[ time_type ] )   
-    plt.bar( names.keys(), mean, yerr = std, color = colors, alpha = 0.7, capsize = 5 )
+    plt.bar( names.keys(), mean, yerr = std, color = colors, capsize = 5 )
 
     # Adding mean value inside each chart
-    for key, value in names.items():
-        ax.text( value - 0.08, 90, round( mean[value] ), color = "black", fontweight = "bold" )
+    for i in range( 0, 4, 1 ):
+        ax.text( -0.15 + i , 70, round( mean[ i ] ), color = "black", fontweight = "bold" )
         
     # Plot settings
     ax.set_xlabel( "Object / function" )
@@ -152,7 +152,9 @@ def plotter( data, time_type ):
     elif "CPU" in ax.get_ylabel():
         ax.set_title( r'''$\bf{CPU \ time \ benchmarks}$ (%(feature)s)'''% { "feature": feature_name } )
     ax.yaxis.grid( True )
+    ax.set_axisbelow( True )
         
+    # Save plots
     if args.save == "no":
         plt.show()
     elif args.save == "yes":
@@ -175,7 +177,7 @@ if __name__ == "__main__":
     # Parser settings
     parser = ap.ArgumentParser( description = "Parsing input file names." ) 
     parser.add_argument( "--tests", default = "on", help = "Enable/disable tests (yes / no)." )
-    parser.add_argument( "--data", default = "data/benchmarking", help = "The input dataset." )
+    parser.add_argument( "--data", default = "data/benchmarking.json", help = "The input dataset." )
     parser.add_argument( "--save", default = "no", help = "Save the produced plots or not (yes / no)." )
     args = parser.parse_args()
     

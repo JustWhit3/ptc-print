@@ -16,7 +16,6 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
-#include <string_view>
 
 //====================================================
 //     Namespace directives
@@ -26,7 +25,6 @@ namespace bm = benchmark;
 //====================================================
 //     ptc::print setters
 //====================================================
-inline const std::string test = "hey";
 
 // ptc_print_setSep
 static void ptc_print_setSep( bm::State& state ) 
@@ -69,56 +67,60 @@ static void ptc_print_getFlush( bm::State& state )
  }
 
 //====================================================
-//     ptc::print
+//      ptc::print other 
 //====================================================
 
 // ptc_print_standard
 static void ptc_print_standard( bm::State& state ) 
  {
-  for ( auto _ : state ) ptc::print( std::cout, "Testing", 123, "print", test );
+  for ( auto _ : state ) ptc::print( std::cout, "Testing", 123, "print", '!' );
  }
+
+// ptc_print_str
+static void ptc_print_str( bm::State& state ) 
+ {
+  for ( auto _ : state ) bm::DoNotOptimize( ptc::print( ptc::mode::str, "Testing", 123, "print", '!' ) );
+ }
+
+//====================================================
+//      stdout
+//====================================================
 
 // ptc_print_stdout
 static void ptc_print_stdout( bm::State& state ) 
  {
-  for ( auto _ : state ) ptc::print( "Testing", 123, "print", test );
+  for ( auto _ : state ) ptc::print( "Testing", 123, "print", '!' );
  }
 
-// ptc_print_newline
-static void ptc_print_newline( bm::State& state ) 
+// fmt_print_stdout
+static void fmt_print_stdout( bm::State& state ) 
  {
-  for ( auto _ : state ) ptc::print();
+  for ( auto _ : state ) fmt::print( "Testing {} {} {}\n", 123, "print", '!' );
  }
+
+// std_cout_stdout
+static void std_cout_stdout( bm::State& state ) 
+ {
+  for ( auto _ : state ) std::cout << "Testing " << 123 << " print " << '!' << "\n";
+ }
+
+// printf_stdout
+static void printf_stdout( bm::State& state ) 
+ {
+  for ( auto _ : state ) printf( "Testing %d %s %c\n", 123, "print", '!' );
+ }
+
+//====================================================
+//      file writing
+//====================================================
 
 // ptc_print_file
 static void ptc_print_file( bm::State& state ) 
  {
   std::ofstream file_stream;
   file_stream.open( "test.txt", std::ios::trunc );
-  for ( auto _ : state ) ptc::print( file_stream, "Testing", 123, "print", test );
+  for ( auto _ : state ) ptc::print( file_stream, "Testing", 123, "print", '!' );
   file_stream.close();
- }
-
-// ptc_print_str
-static void ptc_print_str( bm::State& state ) 
- {
-  for ( auto _ : state ) bm::DoNotOptimize( ptc::print( ptc::mode::str, "Testing", 123, "print", test ) );
- }
-
-//====================================================
-//     std::cout
-//====================================================
-
-// std_cout_stdout
-static void std_cout_stdout( bm::State& state ) 
- {
-  for ( auto _ : state ) std::cout << "Testing " << 123 << " print " << test << "\n";
- }
-
-// std_cout_newline
-static void std_cout_newline( bm::State& state ) 
- {
-  for ( auto _ : state ) std::cout << "\n";
  }
 
 // std_file
@@ -126,53 +128,15 @@ static void std_file( bm::State& state )
  {
   std::ofstream file_stream;
   file_stream.open( "test.txt", std::ios::trunc );
-  for ( auto _ : state ) file_stream << "Testing " << 123 << " print " << test << "\n";
+  for ( auto _ : state ) file_stream << "Testing " << 123 << " print " << '!' << "\n";
   file_stream.close();
- }
-
-//====================================================
-//     printf
-//====================================================
-
-// printf_stdout
-static void printf_stdout( bm::State& state ) 
- {
-  for ( auto _ : state ) printf( "Testing 123 print hey\n" );
- }
-
-// printf_newline
-static void printf_newline( bm::State& state ) 
- {
-  for ( auto _ : state ) printf( "\n" );
- }
-
-//====================================================
-//     fmt::print
-//====================================================
-
-// fmt_print_standard
-static void fmt_print_standard( bm::State& state ) 
- {
-  for ( auto _ : state ) fmt::print( stdout, "Testing {} {} {}\n", 123, "print", test );
- }
-
-// fmt_print_newline
-static void fmt_print_newline( bm::State& state ) 
- {
-  for ( auto _ : state ) fmt::print( "\n" );
- }
-
-// fmt_print_stdout
-static void fmt_print_stdout( bm::State& state ) 
- {
-  for ( auto _ : state ) fmt::print( "Testing {} {} {}\n", 123, "print", test );
  }
 
 // fmt_print_file
 static void fmt_print_file( bm::State& state ) 
  {
   auto out = fmt::output_file( "test.txt", std::ios::trunc );
-  for ( auto _ : state ) out.print( "Testing {} {} {}\n", 123, "print", test );
+  for ( auto _ : state ) out.print( "Testing {} {} {}\n", 123, "print", '!' );
  }
 
 //====================================================
@@ -189,28 +153,19 @@ static void fmt_print_file( bm::State& state )
 //BENCHMARK( ptc_print_getSep );
 //BENCHMARK( ptc_print_getFlush );
 
-// ptc::print
+// ptc::print other 
 //BENCHMARK( ptc_print_standard );
-//BENCHMARK( ptc_print_newline );
-BENCHMARK( ptc_print_stdout );
-//BENCHMARK( ptc_print_file );
 //BENCHMARK( ptc_print_str );
 
-// fmt::print
-//BENCHMARK( fmt_print_standard );
-//BENCHMARK( fmt_print_newline );
-BENCHMARK( fmt_print_stdout );
-//BENCHMARK( fmt_print_file );
-// fmt str
-
-// std::cout
-BENCHMARK( std_cout_stdout );
-//BENCHMARK( std_cout_newline );
-//BENCHMARK( std_file );
-// std str
-
-// printf
+// stdout
+BENCHMARK( ptc_print_stdout );
+BENCHMARK( fmt_print_stdout ) ;
+BENCHMARK( std_cout_stdout ) ;
 BENCHMARK( printf_stdout );
-//BENCHMARK( printf_newline );
+
+// file writing
+//BENCHMARK( ptc_print_file );
+//BENCHMARK( fmt_print_file );
+//BENCHMARK( std_file );
 
 BENCHMARK_MAIN();

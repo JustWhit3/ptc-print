@@ -308,7 +308,25 @@ To install extra libraries used for comparison you can use the [`install_deps.sh
 
 ### Benchmarking
 
-Benchmarking is performed using the [Google Benchmark](https://github.com/google/benchmark) framework. The script [run.sh](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking/run.sh) is used to generate benchmark data: it makes use also of the [cpupower](https://linux.die.net/man/1/cpupower) tool to run correctly.
+Benchmarking is performed using the [Google Benchmark](https://github.com/google/benchmark) framework. The script [run.sh](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking/run.sh) is used to generate and analyze benchmark data: it makes use also of the [cpupower](https://linux.die.net/man/1/cpupower) tool to run correctly. It launches two other scripts during its run:
+
+- [benchmark.cpp](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking/benchmarking.cpp): is used for data generation. The same procedure, which for `ptc::print` corresponds to:
+
+```c++
+ptc::print( "Testing", 123, "print", '!' );
+```
+
+is repeated for around *300000* times and total execution time is registered. This latter step is repeated again for *100* times and each execution time is mediated with the others. Final mean value with the corresponding standard deviation is considered as the final result.
+
+- [analysis.py](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking/analysis.py): is used for data analysis and plots production, with comparison among each library benchmark results.
+
+**Real time** benchmark results:
+
+<img src="https://github.com/JustWhit3/ptc-print/blob/main/img/benchmarks/real_time/stdout_stream.png">
+
+**CPU time** benchmark results:
+
+<img src="https://github.com/JustWhit3/ptc-print/blob/main/img/benchmarks/CPU_time/stdout_stream.png">
 
 Work in progress...
 
