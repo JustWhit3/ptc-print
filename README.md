@@ -316,9 +316,19 @@ Benchmarking is performed using the [Google Benchmark](https://github.com/google
 ptc::print( "Testing", 123, "print", '!' );
 ```
 
-is repeated for around *300000* times and total execution time is registered. This latter step is repeated again for *100* times and each execution time is mediated with the others. Final mean value with the corresponding standard deviation is considered as the final result.
+is repeated for around *300000* times and total execution time is registered. This latter step is repeated again for *100* times and each execution time is mediated with the others. Final mean value with the corresponding standard deviation is considered as the final result. This script is compiled with `-O3 -O1 -falign-functions=32` flags
 
 - [analysis.py](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking/analysis.py): is used for data analysis and plots production, with comparison among each library benchmark results.
+
+List of functions / objects used for comparison are:
+
+- [`std::cout`](https://en.cppreference.com/w/cpp/io/cout)
+- [`printf`](https://m.cplusplus.com/reference/cstdio/printf/)
+- [`fmt::format`](https://pkg.go.dev/fmt) version 9.0.0
+
+> **NOTE**: comparisons are performed **only** on the same features of each library. For example: I am not comparing the whole `fmtlib` formatting library to mine, but simply the `fmt::print` function.
+
+Other suggestions are more than welcome.
 
 **Real time** benchmark results:
 
