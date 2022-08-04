@@ -326,7 +326,7 @@ is repeated for around *300000* times and total execution time is registered. Th
 
 **CPU time** benchmark results:
 
-<img src="https://github.com/JustWhit3/ptc-print/blob/main/img/benchmarks/CPU_time/stdout_stream.png">
+<img src="https://github.com/JustWhit3/ptc-print/blob/main/img/benchmarks/cpu_time/stdout_stream.png">
 
 Work in progress...
 
