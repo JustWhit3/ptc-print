@@ -71,7 +71,7 @@ namespace ptc
 
      // setEnd
      /**
-      * @brief Setter used to set the value of the "end" variable.
+      * @brief Setter used to set the value of the "end" variable. Templated type is required in order to allow also char variables.
       * 
       * @tparam T The type of the expression inserted to set the value of "end" variable.
       * @param end_val The inserted expression used to set the value of "end" variable.
@@ -84,7 +84,8 @@ namespace ptc
 
      // setSep
      /**
-      * @brief Setter used to set the value of the "sep" variable.
+      * @brief Setter used to set the value of the "sep" variable. Templated type is required in order to allow also char variables.
+      * 
       * 
       * @tparam T The type of the expression inserted to set the value of "sep" variable.
       * @param end_val The inserted expression used to set the value of "sep" variable.
@@ -97,7 +98,8 @@ namespace ptc
 
      // setFlush
      /**
-      * @brief Setter used to set the value of the "flush" variable.
+      * @brief Setter used to set the value of the "flush" variable. Templated type is required in order to allow also char variables.
+      * 
       * 
       * @param flush_val The inserted expression used to set the value of the "flush" variable.
       */
@@ -112,7 +114,7 @@ namespace ptc
 
      // getEnd
      /**
-      * @brief Getter used to get the value of the "end" variable.
+      * @brief Getter used to get the value of the "end" variable. Mainly used for debugging.
       * 
       * @return auto The value of the "end" variable.
       */
@@ -123,7 +125,7 @@ namespace ptc
 
      // getSep
      /**
-      * @brief Getter used to get the value of the "sep" variable.
+      * @brief Getter used to get the value of the "sep" variable. Mainly used for debugging.
       * 
       * @return auto The value of the "sep" variable.
       */
@@ -134,7 +136,7 @@ namespace ptc
 
      // getFlush
      /**
-      * @brief Getter used to get the value of the "flush" variable.
+      * @brief Getter used to get the value of the "flush" variable. Mainly used for debugging.
       * 
       * @return bool The value of the "flush" variable.
       */
@@ -308,11 +310,11 @@ namespace ptc
        // Resetting the stream from ANSI escape sequences
        if constexpr( sizeof...( args ) > 0 )
         {
-         if ( is_escape( first ) || ( ( is_escape( args ) ) || ...) ) os << "\033[0m";
+         if ( is_escape( first ) || ( ( is_escape( args ) ) || ...) ) os << reset_ANSI;
         }
        else 
         {
-        if ( is_escape( first ) ) os << "\033[0m";
+        if ( is_escape( first ) ) os << reset_ANSI;
         }
        if ( getFlush() && ! std::is_base_of_v <std::ostringstream, T_os> ) os << std::flush;
       }
@@ -327,6 +329,7 @@ namespace ptc
      //====================================================
      //     Private constants
      //====================================================
+     inline static const char * reset_ANSI = "\033[0m";
      template <class T> inline static const std::string null_str = Print::null_string<const T&>::value;
    }; // end of Print class
    

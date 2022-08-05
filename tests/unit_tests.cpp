@@ -22,16 +22,16 @@
 #include <string>
 
 //====================================================
-//     __print__ default constructor
+//     Print default constructor
 //====================================================
-TEST_CASE( "Testing the __print__ default constructor." )
+TEST_CASE( "Testing the Print default constructor." )
  {
   CHECK_EQ( ptc::print.getEnd(), "\n" );
   CHECK_EQ( ptc::print.getSep(), " " );
  }
 
 //====================================================
-//     __print__ operator () overload
+//     Print operator () overload
 //====================================================
 TEST_CASE( "Testing the operator () overload." )
  {  
@@ -173,9 +173,9 @@ TEST_CASE( "Testing the operator () overload." )
  }
 
 //====================================================
-//     __print__ setEnd and getEnd
+//     Print setEnd and getEnd
 //====================================================
-TEST_CASE( "Testing the __print__ setEnd and getEnd methods." )
+TEST_CASE( "Testing the Print setEnd and getEnd methods." )
  {
   ptc::print.setEnd( '.' );
   CHECK_EQ( ptc::print.getEnd(), "." );
@@ -193,9 +193,9 @@ TEST_CASE( "Testing the __print__ setEnd and getEnd methods." )
  }
 
 //====================================================
-//     __print__ setSep and getSep
+//     Print setSep and getSep
 //====================================================
-TEST_CASE( "Testing the __print__ setSep and getSep methods." )
+TEST_CASE( "Testing the Print setSep and getSep methods." )
  {
   ptc::print.setSep( "*" );
   CHECK_EQ( ptc::print.getSep(), "*" );
@@ -212,9 +212,9 @@ TEST_CASE( "Testing the __print__ setSep and getSep methods." )
  }
 
 //====================================================
-//     __print__ setFlush and getFlush
+//     Print setFlush and getFlush
 //====================================================
-TEST_CASE( "Testing the __print__ setFlush and getFlush methods." )
+TEST_CASE( "Testing the Print setFlush and getFlush methods." )
  {
   ptc::print.setFlush( true );
   CHECK_EQ( ptc::print.getFlush(), true );

@@ -159,9 +159,9 @@ static void fmt_print_file( bm::State& state )
 
 // stdout
 BENCHMARK( ptc_print_stdout );
-BENCHMARK( fmt_print_stdout ) ;
-BENCHMARK( std_cout_stdout ) ;
-BENCHMARK( printf_stdout );
+//BENCHMARK( fmt_print_stdout ) ;
+//BENCHMARK( std_cout_stdout ) ;
+//BENCHMARK( printf_stdout );
 
 // file writing
 //BENCHMARK( ptc_print_file );
