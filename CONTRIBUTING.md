@@ -50,8 +50,10 @@ If you find any bug or something you think doesn't work correctly in the code, y
 1) If this issue is due to download, compilation or installation of the library, be sure to have read the [installation part](https://github.com/JustWhit3/ptc-print#install-and-use:~:text=setFlush(%20true%20)%3B-,Install%20and%20use,-Steps%3A) in the main README in which all the passages are explained in detail.
 2) If this issue is due to a code feature, be sure to have run all the [tests](https://github.com/JustWhit3/ptc-print#install-and-use:~:text=cpp%0A./a.out-,Tests,-Different%20tests%20are) before, in order to see if your machine has all the necessary prerequisites installed.
 
+Use [this](https://github.com/JustWhit3/ptc-print/blob/main/.github/ISSUE_TEMPLATE/bug_report.md) template to open the issue.
+
 Once the issue is received, I will analyze it and once is solved I will respond asking confirmation about my fixing. In this case, if any answer is received in 7 days, the issue will be automatically closed.
 
 ## Feature request
 
-To request a specific feature, please open an issue and specify that it is a feature request and not a bug.
+To request a specific feature, open an issue and use [this](https://github.com/JustWhit3/ptc-print/blob/main/.github/ISSUE_TEMPLATE/feature_request.md) template.

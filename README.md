@@ -288,6 +288,7 @@ Or separately:
 ./bin/system_tests
 ./bin/threading_tests
 ./include_tests.sh
+cppcheck include/ptc/print.hpp
 ```
 
 To check the automatic memory management through *Memcheck*:
@@ -308,23 +309,23 @@ To install extra libraries used for comparison you can use the [`install_deps.sh
 
 ### Benchmarking
 
-Benchmarking is performed using the [Google Benchmark](https://github.com/google/benchmark) framework. The script [run.sh](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking/run.sh) is used to generate and analyze benchmark data: it makes use also of the [cpupower](https://linux.die.net/man/1/cpupower) tool to run correctly. It launches two other scripts during its run:
+Benchmarking is performed using the [Google Benchmark](https://github.com/google/benchmark) framework. The script [run.sh](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking/run.sh) is used to generate and analyze benchmark data. It makes use of the [cpupower](https://linux.die.net/man/1/cpupower) tool and launches two other scripts during its run:
 
-- [benchmark.cpp](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking/benchmarking.cpp): is used for data generation. The same procedure, which for `ptc::print` corresponds to:
+- [benchmark.cpp](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking/benchmarking.cpp): is used for data generation and benchmarks measurement. The same procedure, which for `ptc::print` corresponds to printing:
 
 ```c++
 ptc::print( "Testing", 123, "print", '!' );
 ```
 
-is repeated for around *300000* times and total execution time is registered. This latter step is repeated again for *100* times and each execution time is mediated with the others. Final mean value with the corresponding standard deviation is considered as the final result. This script is compiled with `-O3 -O1 -falign-functions=32` flags
+is repeated for *300.000* times and the total execution time is registered. This latter step is repeated again for *100* times and results of each iteration are averaged each other. Final mean value with the corresponding standard deviation is considered. This script is compiled with `-O3 -O1 -falign-functions=32` flags.
 
 - [analysis.py](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking/analysis.py): is used for data analysis and plots production, with comparison among each library benchmark results.
 
-List of functions / objects used for comparison are:
+List of functions / objects which `ptc::print` is compared with:
 
 - [`std::cout`](https://en.cppreference.com/w/cpp/io/cout)
 - [`printf`](https://m.cplusplus.com/reference/cstdio/printf/)
-- [`fmt::format`](https://pkg.go.dev/fmt) version 9.0.0
+- [`fmt::print`](https://pkg.go.dev/fmt) version 9.0.0
 
 > **NOTE**: comparisons are performed **only** on the same features of each library. For example: I am not comparing the whole `fmtlib` formatting library to mine, but simply the `fmt::print` function.
 
@@ -338,7 +339,7 @@ Other suggestions are more than welcome.
 
 <img src="https://github.com/JustWhit3/ptc-print/blob/main/img/benchmarks/cpu_time/stdout_stream.png">
 
-Work in progress...
+For the moment `ptc::print` seems to be even faster than `std::cout` and `printf` and almost as fast as `fmt::print`. These considerations hold both for real and CPU time benchmarks.
 
 ### Advantages
 
@@ -356,7 +357,7 @@ ptc::print( "I am", "very similar to Python", 123 );
 fmt::print( "{} {} {}\n", "I am", "very similar to Python", 123 );
 ```
 
-- Speed / executable size etc work in progress...
+- Faster than all the other printing objects with benchmarks close even to the `fmt::print` function. See [Benchmarking](#benchmarking) section.
 
 - Possibility to change *end* and *separator* characters, like in Python:
 
