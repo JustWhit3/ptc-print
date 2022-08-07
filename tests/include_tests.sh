@@ -1,15 +1,10 @@
 #!/bin/bash
 
 #====================================================
-#     Variables
-#====================================================
-INCL=include_tests.cpp
-
-#====================================================
 #     Standard include
 #====================================================
-cp system_tests.cpp ${INCL}
-sed -i '6s/.*/#include <ptc\/print.hpp>/' ${INCL}
+cp system_tests.cpp include_tests.cpp
+sed -i '6s/.*/#include <ptc\/print.hpp>/' include_tests.cpp
 g++ -std=c++17 -pthread include_tests.cpp
 rm include_tests.cpp a.out
 

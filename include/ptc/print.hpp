@@ -26,11 +26,12 @@
 #include <mutex>
 #include <string_view>
 #include <utility>
+#include <ios>
 
 namespace ptc
  {
   //====================================================
-  //     ptc_print class
+  //     mode enum class
   //====================================================
   /**
    * @brief Enum class used to set up the "str" mode to pass a string with the content of the print function.
@@ -159,7 +160,7 @@ namespace ptc
       * @param args The list of all the other objects to be passed to the backend implementation.
       */
      template <class T, class... Args>
-     const Print& operator()( T&& first, Args&&... args ) const
+     void operator()( T&& first, Args&&... args ) const
       {
        if constexpr ( std::is_base_of_v <std::ostream, std::remove_reference_t<T>> )
         {
@@ -167,9 +168,14 @@ namespace ptc
         }
        else
         {
-         print_backend( std::cout, std::forward<T>( first ), std::forward<Args>( args )... );
+         #ifdef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
+           performance_options( 1 );
+           print_backend( std::cout, std::forward<T>( first ), std::forward<Args>( args )... );
+           performance_options( 0 );
+         #else 
+          print_backend( std::cout, std::forward<T>( first ), std::forward<Args>( args )... );
+         #endif
         }
-       return *this;
       }
 
      // String initialization case
@@ -319,6 +325,29 @@ namespace ptc
        if ( getFlush() && ! std::is_base_of_v <std::ostringstream, T_os> ) os << std::flush;
       }
 
+     // performance_options
+     /**
+      * @brief Function used to set on / off the performance improvements to the operator () overload.
+      * 
+      * @param flag A flag which identifies if the performance should be enabled or disabled.
+      */
+     void performance_options( const unsigned short& flag ) const
+      {
+       switch( flag )
+        {
+         case( 1 ):
+          {
+           std::ios_base::sync_with_stdio( false );
+           break;
+          }
+         case( 0 ):
+          {
+           std::ios_base::sync_with_stdio( true );
+           break;
+          }
+        }
+      }
+
      //====================================================
      //     Private attributes
      //====================================================
@@ -329,7 +358,7 @@ namespace ptc
      //====================================================
      //     Private constants
      //====================================================
-     inline static const char * reset_ANSI = "\033[0m";
+     inline static const std::string reset_ANSI = "\033[0m";
      template <class T> inline static const std::string null_str = Print::null_string<const T&>::value;
    }; // end of Print class
    

@@ -339,7 +339,7 @@ Other suggestions are more than welcome.
 
 <img src="https://github.com/JustWhit3/ptc-print/blob/main/img/benchmarks/cpu_time/stdout_stream.png">
 
-For the moment `ptc::print` seems to be even faster than `std::cout` and `printf` and almost as fast as `fmt::print`. These considerations hold both for real and CPU time benchmarks.
+For the moment `ptc::print` is the fastest for what regard real time benchmarks. For CPU time benchmarks it is slightly below `fmt::print`.
 
 ### Advantages
 

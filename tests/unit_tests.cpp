@@ -161,7 +161,7 @@ TEST_CASE( "Testing the operator () overload." )
    }
 
   // Testing usage of ANSI or empty character as first argument
-  SUBCASE( "Testing ANSI escape sequence inside ptc::print." ) // TODO: This should be improved (delete last empty space)
+  SUBCASE( "Testing ANSI escape sequence or empty character as first argument." )
    {
     ptc::print.setEnd( "" );
     const std::string test_a = ptc::print( ptc::mode::str, "", "Testing empty char (ignore this)." );
