@@ -109,10 +109,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a69ee6bb93bff9c2ae974d2554921604b"><td class="memItemLeft" align="right" valign="top">const bool &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1Print.html#a69ee6bb93bff9c2ae974d2554921604b">getFlush</a> () const</td></tr>
 <tr class="memdesc:a69ee6bb93bff9c2ae974d2554921604b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter used to get the value of the "flush" variable. Mainly used for debugging.  <a href="structptc_1_1Print.html#a69ee6bb93bff9c2ae974d2554921604b">More...</a><br /></td></tr>
 <tr class="separator:a69ee6bb93bff9c2ae974d2554921604b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42d1c836d75c4d53bb06f73dbb0be457"><td class="memTemplParams" colspan="2">template&lt;class T , class... Args&gt; </td></tr>
-<tr class="memitem:a42d1c836d75c4d53bb06f73dbb0be457"><td class="memTemplItemLeft" align="right" valign="top">const <a class="el" href="structptc_1_1Print.html">Print</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structptc_1_1Print.html#a42d1c836d75c4d53bb06f73dbb0be457">operator()</a> (T &amp;&amp;first, Args &amp;&amp;... args) const</td></tr>
-<tr class="memdesc:a42d1c836d75c4d53bb06f73dbb0be457"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frontend implementation of the () operator overload to print to the output stream. The backend implementation is called in the required variation.  <a href="structptc_1_1Print.html#a42d1c836d75c4d53bb06f73dbb0be457">More...</a><br /></td></tr>
-<tr class="separator:a42d1c836d75c4d53bb06f73dbb0be457"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38dace1f19a1774cd984d8b87cefef29"><td class="memTemplParams" colspan="2">template&lt;class T , class... Args&gt; </td></tr>
+<tr class="memitem:a38dace1f19a1774cd984d8b87cefef29"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structptc_1_1Print.html#a38dace1f19a1774cd984d8b87cefef29">operator()</a> (T &amp;&amp;first, Args &amp;&amp;... args) const</td></tr>
+<tr class="memdesc:a38dace1f19a1774cd984d8b87cefef29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frontend implementation of the () operator overload to print to the output stream. The backend implementation is called in the required variation.  <a href="structptc_1_1Print.html#a38dace1f19a1774cd984d8b87cefef29">More...</a><br /></td></tr>
+<tr class="separator:a38dace1f19a1774cd984d8b87cefef29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bd94beb0d274d8181c40c6bea0c85fa"><td class="memTemplParams" colspan="2">template&lt;class... Args&gt; </td></tr>
 <tr class="memitem:a5bd94beb0d274d8181c40c6bea0c85fa"><td class="memTemplItemLeft" align="right" valign="top">const std::string&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structptc_1_1Print.html#a5bd94beb0d274d8181c40c6bea0c85fa">operator()</a> (<a class="el" href="namespaceptc.html#aa730094183bf13993032c00ee196eafb">mode</a> &amp;&amp;first, Args &amp;&amp;... args) const</td></tr>
 <tr class="memdesc:a5bd94beb0d274d8181c40c6bea0c85fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frontend implementation of the () operator overload to initialize its content with an std::string object. The backend implementation is called in the required variation. This overload is required in order to hide the output of the "print_backend" function during the initialization.  <a href="structptc_1_1Print.html#a5bd94beb0d274d8181c40c6bea0c85fa">More...</a><br /></td></tr>
@@ -351,8 +351,8 @@ template&lt;class... Args&gt; </div>
 
 </div>
 </div>
-<a id="a42d1c836d75c4d53bb06f73dbb0be457"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a42d1c836d75c4d53bb06f73dbb0be457">&#9670;&nbsp;</a></span>operator()() <span class="overload">[3/3]</span></h2>
+<a id="a38dace1f19a1774cd984d8b87cefef29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38dace1f19a1774cd984d8b87cefef29">&#9670;&nbsp;</a></span>operator()() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -363,7 +363,7 @@ template&lt;class T , class... Args&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="structptc_1_1Print.html">Print</a>&amp; ptc::Print::operator() </td>
+          <td class="memname">void ptc::Print::operator() </td>
           <td>(</td>
           <td class="paramtype">T &amp;&amp;&#160;</td>
           <td class="paramname"><em>first</em>, </td>
