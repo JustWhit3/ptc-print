@@ -357,8 +357,6 @@ Other suggestions are more than welcome.
 
 <img src="https://github.com/JustWhit3/ptc-print/blob/main/img/benchmarks/cpu_time/stdout_stream.png">
 
-For the moment `ptc::print` is the fastest for what regard real and CPU time benchmarks both.
-
 ### Benchmarking with performance improvements
 
 Extra studies are performed using consistent improvements in the execution time, thanks to the `PTC_ENABLE_PERFORMANCE_IMPROVEMENTS` macro usage (see [here](#install-and-use) for more information). Using this macro definition will consistently speed-up the `ptc::print` object, as you can see from the following plots.
