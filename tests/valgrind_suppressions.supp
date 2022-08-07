@@ -1,0 +1,60 @@
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:_Znam
+   fun:_ZNSt13basic_filebufIcSt11char_traitsIcEE27_M_allocate_internal_bufferEv
+   obj:/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+   fun:_ZNSt8ios_base15sync_with_stdioEb
+   fun:_ZNK3ptc5Print19performance_optionsEv
+   fun:_ZNK3ptc5PrintclIRA6_KcJRA5_S2_RA8_S2_EEEvOT_DpOT0_
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:_Znam
+   fun:_ZNSt13basic_filebufIcSt11char_traitsIcEE27_M_allocate_internal_bufferEv
+   obj:/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+   fun:_ZNSt8ios_base15sync_with_stdioEb
+   fun:_ZNK3ptc5Print19performance_optionsEv
+   fun:_ZNK3ptc5PrintclIRA6_KcJRA5_S2_RA8_S2_EEEvOT_DpOT0_
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:_Znam
+   fun:_ZNSt13basic_filebufIcSt11char_traitsIcEE27_M_allocate_internal_bufferEv
+   obj:/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+   fun:_ZNSt8ios_base15sync_with_stdioEb
+   fun:_ZNK3ptc5Print19performance_optionsEv
+   fun:_ZNK3ptc5PrintclIRA6_KcJRA5_S2_RA8_S2_EEEvOT_DpOT0_
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:_Znam
+   fun:_ZNSt13basic_filebufIwSt11char_traitsIwEE27_M_allocate_internal_bufferEv
+   obj:/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+   fun:_ZNSt8ios_base15sync_with_stdioEb
+   fun:_ZNK3ptc5Print19performance_optionsEv
+   fun:_ZNK3ptc5PrintclIRA6_KcJRA5_S2_RA8_S2_EEEvOT_DpOT0_
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:_Znam
+   fun:_ZNSt13basic_filebufIwSt11char_traitsIwEE27_M_allocate_internal_bufferEv
+   obj:/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+   fun:_ZNSt8ios_base15sync_with_stdioEb
+   fun:_ZNK3ptc5Print19performance_optionsEv
+   fun:_ZNK3ptc5PrintclIRA6_KcJRA5_S2_RA8_S2_EEEvOT_DpOT0_
+   fun:main
+}

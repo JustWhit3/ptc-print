@@ -59,13 +59,6 @@ namespace ptc
       */
      Print(): end( "\n" ), sep( " " ), flush( false ) {}
 
-     // Destructor
-     /**
-      * @brief Destructor of the Print class.
-      * 
-      */
-     ~Print(){}
-
      //====================================================
      //     Public setters
      //====================================================
@@ -86,7 +79,6 @@ namespace ptc
      // setSep
      /**
       * @brief Setter used to set the value of the "sep" variable. Templated type is required in order to allow also char variables.
-      * 
       * 
       * @tparam T The type of the expression inserted to set the value of "sep" variable.
       * @param end_val The inserted expression used to set the value of "sep" variable.
@@ -169,12 +161,9 @@ namespace ptc
        else
         {
          #ifdef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
-           performance_options( 1 );
-           print_backend( std::cout, std::forward<T>( first ), std::forward<Args>( args )... );
-           performance_options( 0 );
-         #else 
-          print_backend( std::cout, std::forward<T>( first ), std::forward<Args>( args )... );
+          performance_options();
          #endif
+         print_backend( std::cout, std::forward<T>( first ), std::forward<Args>( args )... );
         }
       }
 
@@ -327,25 +316,12 @@ namespace ptc
 
      // performance_options
      /**
-      * @brief Function used to set on / off the performance improvements to the operator () overload.
-      * 
-      * @param flag A flag which identifies if the performance should be enabled or disabled.
+      * @brief Function used to set on the performance improvements to the operator () overload.
+      *
       */
-     void performance_options( const unsigned short& flag ) const
+     inline void performance_options() const
       {
-       switch( flag )
-        {
-         case( 1 ):
-          {
-           std::ios_base::sync_with_stdio( false );
-           break;
-          }
-         case( 0 ):
-          {
-           std::ios_base::sync_with_stdio( true );
-           break;
-          }
-        }
+       std::ios_base::sync_with_stdio( false );
       }
 
      //====================================================

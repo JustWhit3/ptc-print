@@ -22,9 +22,12 @@
   - [Printing with ANSI escape sequences](#printing-with-ansi-escape-sequences)
   - [Printing non-standard types](#printing-non-standard-types)
 - [Install and use](#install-and-use)
+  - [Install](#insall)
+  - [Performance improvements](#performance-improvements)
 - [Tests](#tests)
 - [Comparison with other libraries](#comparison-with-other-libraries)
   - [Benchmarking](#benchmarking)
+  - [Benchmarking with performance improvements](#benchmarking-with-performance-improvements)
   - [Advantages](#advantages)
 - [Todo](#todo)
 - [Credits](#credits)
@@ -232,6 +235,8 @@ Empty for the moment.
 
 ## Install and use
 
+### Install
+
 Steps:
 
 1) Download one of the repository releases.
@@ -253,12 +258,19 @@ Prerequisites are minimal and are automatically installed with the `install.sh` 
 #include <ptc/print.hpp>
 ```
 
-5) Compile without any extra flag and run:
+### Performance improvements
 
-```bash
-g++ -std=c++17 program.cpp
-./a.out
+To consistently increase performance improvements, in case you don't plan to use both C++ and C output stream objects together (like `std::cout` and `printf` in the same program) you can define the macro:
+
+```C++
+#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
 ```
+
+at the beginning of your program. In this way, as you can see from [benchmarking studies](#benchmarking), execution time will be strongly increased in case you are printing with the default `std::cout` stream. Read [here](https://stackoverflow.com/questions/31162367/significance-of-ios-basesync-with-stdiofalse-cin-tienull) for more information about the benefit of this choice.
+
+> **NOTE**: the usage of `PTC_ENABLE_PERFORMANCE_IMPROVEMENTS` macro will propagate not only to `ptc::print`, but also to `std::cout` in general, since it is directly used inside `ptc::print`.
+
+This operation preserves the library quality, however some memory false-positive errors may occur when running Valgrind *memcheck* tool; they are due to the [`std::ios_base::sync_with_stdio`](https://en.cppreference.com/w/cpp/io/ios_base/sync_with_stdio) function usage inside a generic class. This false-positive has been hidden into a Valgrind [suppression file](https://github.com/JustWhit3/ptc-print/tree/main/tests/valgrind_suppressions.supp).
 
 ## Tests
 
@@ -303,6 +315,12 @@ To check thread safety through *Helgrind*:
 ./profiling.sh helgrind ./bin/system_tests
 ```
 
+Tests using the `PTC_ENABLE_PERFORMANCE_IMPROVEMENTS` macro are automatically performed launching barely the `all_tests.sh` script, or alternatively specifying:
+
+```bash
+./all_tests.sh macro
+```
+
 ## Comparison with other libraries
 
 To install extra libraries used for comparison you can use the [`install_deps.sh`]((https://github.com/JustWhit3/ptc-print/blob/main/studies/install_deps.sh)) script.
@@ -339,7 +357,27 @@ Other suggestions are more than welcome.
 
 <img src="https://github.com/JustWhit3/ptc-print/blob/main/img/benchmarks/cpu_time/stdout_stream.png">
 
-For the moment `ptc::print` is the fastest for what regard real time benchmarks. For CPU time benchmarks it is slightly below `fmt::print`.
+For the moment `ptc::print` is the fastest for what regard real and CPU time benchmarks both.
+
+### Benchmarking with performance improvements
+
+Extra studies are performed using consistent improvements in the execution time, thanks to the `PTC_ENABLE_PERFORMANCE_IMPROVEMENTS` macro usage (see [here](#install-and-use) for more information). Using this macro definition will consistently speed-up the `ptc::print` object, as you can see from the following plots.
+
+To run these benchmarks you can do:
+
+```bash
+./run.sh macro
+```
+
+**Real time** benchmark results with macro usage:
+
+<img src="https://github.com/JustWhit3/ptc-print/blob/main/img/benchmarks/real_time/stdout_stream_macro.png">
+
+**CPU time** benchmark results with macro usage:
+
+<img src="https://github.com/JustWhit3/ptc-print/blob/main/img/benchmarks/cpu_time/stdout_stream_macro.png">
+
+`std::cout` is omitted since some of the performance improvements are directly applied also to it.
 
 ### Advantages
 
@@ -357,7 +395,7 @@ ptc::print( "I am", "very similar to Python", 123 );
 fmt::print( "{} {} {}\n", "I am", "very similar to Python", 123 );
 ```
 
-- Faster than all the other printing objects with benchmarks close even to the `fmt::print` function. See [Benchmarking](#benchmarking) section.
+- Faster than all the other printing objects. In case of `PTC_ENABLE_PERFORMANCE_IMPROVEMENTS` macro usage the library increase even more its speed with respect to the others. See [Benchmarking](#benchmarking) section.
 
 - Possibility to change *end* and *separator* characters, like in Python:
 
@@ -374,8 +412,6 @@ Python `print`:
 ```Python
 print( "I am", "Python", 123, sep = "*", end = "" );
 ```
-
-Work in progress...
 
 ## Todo
 

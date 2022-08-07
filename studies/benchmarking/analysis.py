@@ -141,7 +141,7 @@ def plotter( data, time_type ):
     plt.bar( names.keys(), mean, yerr = std, color = colors, capsize = 5 )
 
     # Adding mean value inside each chart
-    for i in range( 0, 4, 1 ):
+    for i in range( counter ):
         ax.text( -0.15 + i , 70, round( mean[ i ] ), color = "black", fontweight = "bold" )
         
     # Plot settings
@@ -158,10 +158,16 @@ def plotter( data, time_type ):
     if args.save == "no":
         plt.show()
     elif args.save == "yes":
+        if args.macro == "yes":
+            suffix = "_macro"
+        elif args.macro == "no":
+            suffix = ""
+        else:
+            raise RuntimeError( cl( "Inserted --macro option \"{}\" is not supported!".format( args.macro ), "red" ) )
         path = "../../img/benchmarks/{}".format( time_type )
         if not os.path.exists( path ):
             os.makedirs( path )
-        plt.savefig( "../../img/benchmarks/{}/{}".format( time_type, feature_name.replace( " ", "_" ) ) )
+        plt.savefig( "../../img/benchmarks/{}/{}{}".format( time_type, feature_name.replace( " ", "_" ), suffix ) )
     else:
         raise RuntimeError( cl( "Inserted --save option \"{}\" is not supported!".format( args.save ), "red" ) )
 
@@ -179,6 +185,7 @@ if __name__ == "__main__":
     parser.add_argument( "--tests", default = "on", help = "Enable/disable tests (yes / no)." )
     parser.add_argument( "--data", default = "data/benchmarking.json", help = "The input dataset." )
     parser.add_argument( "--save", default = "no", help = "Save the produced plots or not (yes / no)." )
+    parser.add_argument( "--macro", default = "no", help = "Preprocessor macro usage (yes / no)." )
     args = parser.parse_args()
     
     # Main commands
