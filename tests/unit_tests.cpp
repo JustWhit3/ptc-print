@@ -157,6 +157,8 @@ TEST_CASE( "Testing the operator () overload." )
     const std::string test_c = ptc::print( ptc::mode::str, "Testing", "the \033[31mcolors", "(ignore this)." );
     CHECK_EQ( test_c, "Testing the \033[31mcolors (ignore this).\033[0m" );
     CHECK_EQ( ptc::print( ptc::mode::str, 1, "Number" ), "1 Number" );
+    const std::string test_nullptr = ptc::print( ptc::mode::str, "Hey", nullptr, nullptr );
+    CHECK_EQ( test_nullptr, "Hey nullptr nullptr" );
     ptc::print.setEnd( "\n" );
    }
 

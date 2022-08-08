@@ -398,7 +398,7 @@ ptc::print( "I am", "very similar to Python", 123 );
 fmt::print( "{} {} {}\n", "I am", "very similar to Python", 123 );
 ```
 
-- Faster than all the other printing objects. In case of `PTC_ENABLE_PERFORMANCE_IMPROVEMENTS` macro usage the library increase even more its speed with respect to the others. See [Benchmarking](#benchmarking) section.
+- Faster than all the other printing objects. In case of `PTC_ENABLE_PERFORMANCE_IMPROVEMENTS` macro usage the library increases even more its speed with respect to the others. See [Benchmarking](#benchmarking) section.
 
 - Possibility to change *end* and *separator* characters, like in Python:
 

@@ -78,4 +78,10 @@ int main()
   std::string str_out_b = ptc::print( ptc::mode::str, "Also this one" );
   ptc::print( str_out_b );
   ptc::print.setEnd( "\n" );
+
+  // Testing usage of "nullptr" as argument
+  ptc::print( "\nTesting", nullptr, nullptr );
+
+  // Testing usage of other std::ostream objects
+  //ptc::print( std::wcout, "Testing std::wcout!" ); // ERROR
  }

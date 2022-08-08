@@ -31,13 +31,22 @@
 namespace ptc
  {
   //====================================================
-  //     mode enum class
+  //     Enum classes
   //====================================================
+
+  // mode
   /**
    * @brief Enum class used to set up the "str" mode to pass a string with the content of the print function.
    * 
    */
    enum class mode { str };
+
+  // ANSI_pos
+  /**
+   * @brief Enum class used to switch among ANSI escape configurations in the "is_escape" function.
+   * 
+   */
+   enum class ANSI { first, generic };
 
   //====================================================
   //     ptc_print class
@@ -180,7 +189,7 @@ namespace ptc
       */
      template <class... Args>
      const std::string operator()( mode&& first, Args&&... args ) const
-      {    
+      { 
        if constexpr( sizeof...( args ) > 0 )
         {
          switch( first )
@@ -230,7 +239,7 @@ namespace ptc
      //     Private methods
      //====================================================
 
-     // is_escape
+     // is_escape (standard overload)
      /**
       * @brief This method is used to check if an input variable is an ANSI escape sequency or not.
       * 
@@ -241,17 +250,17 @@ namespace ptc
       * @return false Otherwise.
       */
      template <typename T>
-     static constexpr bool is_escape( const T& str, const unsigned short& flag = 1 )
+     static constexpr bool is_escape( const T& str, ANSI&& flag )
       {
-       if constexpr( std::is_convertible_v <T, std::string_view> )
+       if constexpr( std::is_convertible_v <T, std::string_view> && ! std::is_same_v<T, std::nullptr_t> )
         {
          switch( flag )
           {
-           case( 0 ): 
+           case( ANSI::first ): 
             {
              return ( ! std::string_view( str ).rfind( "\033", 0 ) ) && ( std::string_view( str ).length() < 7 );
             }
-           case( 1 ):
+           case( ANSI::generic ):
             {
              return ( std::string_view( str ).find( "\033" ) != std::string_view::npos );
             }
@@ -259,6 +268,21 @@ namespace ptc
         }
        return false;
       }
+
+     // is_escape (nullptr overload)
+     /**
+      * @brief This method is used to check if an input variable is an ANSI escape sequency or not. This overload is for the nullptr case.
+      * 
+      * @tparam T Template type of the input variable.
+      * @param str The input variable.
+      * @param flag A flag which let to return different things with respect to its value. If flag = 0 the ANSI is searched as the first substring of the str argument, otherwise, if flag = 1 the ANSI is searched as a substring inside the str argument.
+      * @return true If the input variable is an ANSI escape sequency.
+      * @return false Otherwise.
+      */
+     //static constexpr bool is_escape( std::nullptr_t str, ANSI&& flag )
+     // {
+     //  return false;
+     // }
 
      // is_null_str
      /**
@@ -299,7 +323,7 @@ namespace ptc
        os << first;
        if constexpr( sizeof...( args ) > 0 ) 
         {
-         if ( is_null_str( first ) || is_escape( first, 0 ) ) ( ( os << args << getSep() ), ...); 
+         if ( is_null_str( first ) || is_escape( first, ANSI::first ) ) ( ( os << args << getSep() ), ...); 
          else ( ( os << getSep() << args ), ...);
         }
        os << getEnd();
@@ -307,11 +331,11 @@ namespace ptc
        // Resetting the stream from ANSI escape sequences
        if constexpr( sizeof...( args ) > 0 )
         {
-         if ( is_escape( first ) || ( ( is_escape( args ) ) || ...) ) os << reset_ANSI;
+         if ( is_escape( first, ANSI::generic ) || ( ( is_escape( args, ANSI::generic ) ) || ...) ) os << reset_ANSI;
         }
        else 
         {
-        if ( is_escape( first ) ) os << reset_ANSI;
+        if ( is_escape( first, ANSI::generic ) ) os << reset_ANSI;
         }
        if ( getFlush() && ! std::is_base_of_v <std::ostringstream, T_os> ) os << std::flush;
       }
