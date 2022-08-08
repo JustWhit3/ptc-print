@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['setend_10',['setEnd',['../structptc_1_1Print.html#a0257ee6796107273fe853ac21cc8b2ed',1,'ptc::Print']]],
-  ['setflush_11',['setFlush',['../structptc_1_1Print.html#af4904f6bc18eff233e0486d22dff1ab1',1,'ptc::Print']]],
-  ['setsep_12',['setSep',['../structptc_1_1Print.html#a37353dfb0f1c62cdb0d6b46c37993791',1,'ptc::Print']]],
-  ['str_13',['str',['../namespaceptc.html#aa730094183bf13993032c00ee196eafba341be97d9aff90c9978347f66f945b77',1,'ptc']]]
+  ['operator_28_29_7',['operator()',['../structptc_1_1Print.html#a38dace1f19a1774cd984d8b87cefef29',1,'ptc::Print::operator()(T &amp;&amp;first, Args &amp;&amp;... args) const'],['../structptc_1_1Print.html#a5bd94beb0d274d8181c40c6bea0c85fa',1,'ptc::Print::operator()(mode &amp;&amp;first, Args &amp;&amp;... args) const'],['../structptc_1_1Print.html#acf8b739f183ea4ef3883bc9b33896a02',1,'ptc::Print::operator()(std::ostream &amp;os=std::cout) const']]]
 ];

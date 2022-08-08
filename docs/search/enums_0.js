@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mode_26',['mode',['../namespaceptc.html#aa730094183bf13993032c00ee196eafb',1,'ptc']]]
+  ['ansi_29',['ANSI',['../namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572d',1,'ptc']]]
 ];

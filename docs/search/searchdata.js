@@ -1,13 +1,13 @@
 var indexSectionsWithContent =
 {
-  0: "gmops",
+  0: "afgmops",
   1: "p",
   2: "p",
   3: "p",
   4: "gops",
   5: "p",
-  6: "m",
-  7: "s"
+  6: "am",
+  7: "fgs"
 };
 
 var indexSectionNames =
