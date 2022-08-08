@@ -54,10 +54,15 @@ namespace ptc
 
      // Default constructor
      /**
-      * @brief Default constructor of the Print class. It initializes the basic class members.
+      * @brief Default constructor of the Print class. It initializes the basic class members and enable (if required) performance improvements..
       * 
       */
-     Print(): end( "\n" ), sep( " " ), flush( false ) {}
+     Print(): end( "\n" ), sep( " " ), flush( false ) 
+      {
+       #ifdef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
+        performance_options();
+       #endif
+      }
 
      //====================================================
      //     Public setters
@@ -160,9 +165,6 @@ namespace ptc
         }
        else
         {
-         #ifdef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
-          performance_options();
-         #endif
          print_backend( std::cout, std::forward<T>( first ), std::forward<Args>( args )... );
         }
       }
@@ -321,7 +323,10 @@ namespace ptc
       */
      inline void performance_options() const
       {
+       std::lock_guard <std::mutex> lock{ mutex_ };
+       
        std::ios_base::sync_with_stdio( false );
+       std::cin.tie( NULL );
       }
 
      //====================================================

@@ -23,6 +23,7 @@ sudo cpupower frequency-set --governor powersave > /dev/null 2>&1
 # Extra option for macro usage
 if [ "$1" == "macro" ] ; then
     sed -i '4d' benchmarking.cpp
+    sed -i '4d' benchmarking.cpp
 fi
 
 # Analyzing data

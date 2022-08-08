@@ -2,7 +2,7 @@
 
 <h3 align="center">A C++17 header-only library for custom printing to the output stream (inspired by the Python print function) </h3>
 <p align="center">
-  <img title="v0.2" alt="v0.2" src="https://img.shields.io/badge/version-v0.2-informational?style=flat-square">
+  <img title="v0.3" alt="v0.3" src="https://img.shields.io/badge/version-v0.3-informational?style=flat-square">
   <img title="MIT License" alt="license" src="https://img.shields.io/badge/license-MIT-informational?style=flat-square">
 	<img title="C++17" alt="C++17" src="https://img.shields.io/badge/c++-17-informational?style=flat-square"><br/>
 	<img title="Code size" alt="code size" src="https://img.shields.io/github/languages/code-size/JustWhit3/ptc-print?color=red">
@@ -260,7 +260,7 @@ Prerequisites are minimal and are automatically installed with the `install.sh` 
 
 ### Performance improvements
 
-To consistently increase performance improvements, in case you don't plan to use both C++ and C output stream objects together (like `std::cout` and `printf` in the same program) you can define the macro:
+To consistently increase performance improvements you can use the following preprocessor directive:
 
 ```C++
 #define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
@@ -270,7 +270,12 @@ at the beginning of your program. In this way, as you can see from [benchmarking
 
 > **NOTE**: the usage of `PTC_ENABLE_PERFORMANCE_IMPROVEMENTS` macro will propagate not only to `ptc::print`, but also to `std::cout` in general, since it is directly used inside `ptc::print`.
 
-This operation preserves the library quality, however some memory false-positive errors may occur when running Valgrind *memcheck* tool; they are due to the [`std::ios_base::sync_with_stdio`](https://en.cppreference.com/w/cpp/io/ios_base/sync_with_stdio) function usage inside a generic class. This false-positive has been hidden into a Valgrind [suppression file](https://github.com/JustWhit3/ptc-print/tree/main/tests/valgrind_suppressions.supp).
+If you plan to use this preprocessor directive pay attention to the **following points**:
+
+- Use this in case you don't plan to use both C++ and C output stream objects together (like `std::cout` and `printf` in the same program).
+- Make sure to flush `ptc::print` manually every time you want to display something before expecting input on `std::cin`, since `std::cout` and `std::cin` have been untied (see [here](https://stackoverflow.com/questions/31162367/significance-of-ios-basesync-with-stdiofalse-cin-tienull)).
+
+These operations preserve the library quality, however some memory false-positive errors may occur when running Valgrind *memcheck* tool; they are due to the [`std::ios_base::sync_with_stdio`](https://en.cppreference.com/w/cpp/io/ios_base/sync_with_stdio) function usage inside a generic class. This false-positive has been hidden into a Valgrind [suppression file](https://github.com/JustWhit3/ptc-print/tree/main/tests/valgrind_suppressions.supp). A related discussion can be found [here](https://stackoverflow.com/questions/73267528/valgrind-complaining-for-possible-memory-problems-from-a-program-which-uses-std?noredirect=1#comment129394781_73267528).
 
 ## Tests
 
