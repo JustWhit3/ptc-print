@@ -66,6 +66,7 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">ptc Namespace Reference</div>  </div>
@@ -89,6 +90,13 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:ab0219b8011d105b1b8fe8b08eb20572d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum class used to switch among ANSI escape configurations in the "is_escape" function.  <a href="namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572d">More...</a><br /></td></tr>
 <tr class="separator:ab0219b8011d105b1b8fe8b08eb20572d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a968610c95b81726e44a28e98a4f83e20"><td class="memTemplParams" colspan="2">template&lt;class T_cmplx &gt; </td></tr>
+<tr class="memitem:a968610c95b81726e44a28e98a4f83e20"><td class="memTemplItemLeft" align="right" valign="top">const std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a968610c95b81726e44a28e98a4f83e20">operator&lt;&lt;</a> (std::ostream &amp;os, const std::complex&lt; T_cmplx &gt; &amp;number)</td></tr>
+<tr class="memdesc:a968610c95b81726e44a28e98a4f83e20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator &lt;&lt; overload for std::complex printing.  <a href="namespaceptc.html#a968610c95b81726e44a28e98a4f83e20">More...</a><br /></td></tr>
+<tr class="separator:a968610c95b81726e44a28e98a4f83e20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -148,6 +156,61 @@ Variables</h2></td></tr>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa730094183bf13993032c00ee196eafba341be97d9aff90c9978347f66f945b77"></a>str&#160;</td><td class="fielddoc"></td></tr>
 </table>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a968610c95b81726e44a28e98a4f83e20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a968610c95b81726e44a28e98a4f83e20">&#9670;&nbsp;</a></span>operator&lt;&lt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T_cmplx &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::ostream&amp; ptc::operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>os</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::complex&lt; T_cmplx &gt; &amp;&#160;</td>
+          <td class="paramname"><em>number</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Operator &lt;&lt; overload for std::complex printing. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T_cmplx</td><td>The type of the real and imaginary part complex number to be printed. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">os</td><td>The type of the output stream. </td></tr>
+    <tr><td class="paramname">number</td><td>The number to be printed. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::ostream&amp; The stream to which the number is printed to. </dd></dl>
 
 </div>
 </div>
