@@ -9,11 +9,12 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <complex>
 
 //====================================================
-//     main
+//     standard
 //====================================================
-int main()
+void standard()
  {
   // Print with stdout
   ptc::print( "Print", "with", "stdout." );
@@ -84,4 +85,27 @@ int main()
 
   // Testing usage of other std::ostream objects
   //ptc::print( std::wcout, "Testing std::wcout!" ); // ERROR
+ }
+
+//====================================================
+//     other_types
+//====================================================
+void other_types()
+ {
+  // Testing std::complex printing
+  std::complex<int> cmplx_no( 2, 3 );
+  std::cout << "Normal complex number printing: " << cmplx_no << "\n";
+  ptc::print( "ptc::print complex number printing:", cmplx_no );
+
+  std::complex<double> cmplx_no_d( 2.1, 3.6 );
+  ptc::print( "ptc::print complex number printing:", cmplx_no_d );
+ }
+
+//====================================================
+//     main
+//====================================================
+int main()
+ {
+  standard();
+  other_types();
  }

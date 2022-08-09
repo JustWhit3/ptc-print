@@ -15,6 +15,7 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <complex>
 
 //====================================================
 //     Namespace directives
@@ -82,6 +83,17 @@ static void ptc_print_str( bm::State& state )
  }
 
 //====================================================
+//      ptc::print non built-in types 
+//====================================================
+
+// ptc_print_complex
+static void ptc_print_complex( bm::State& state ) 
+ {
+  std::complex <int> cmplx_no( 1, 4 );
+  for ( auto _ : state ) ptc::print( cmplx_no );
+ }
+
+//====================================================
 //      stdout
 //====================================================
 
@@ -139,7 +151,7 @@ static void fmt_print_file( bm::State& state )
  }
 
 //====================================================
-//     Benchmarking settings
+//     ptc::print methods
 //====================================================
 
 // ptc::print setters
@@ -156,8 +168,15 @@ static void fmt_print_file( bm::State& state )
 //BENCHMARK( ptc_print_standard );
 //BENCHMARK( ptc_print_str );
 
+// non built-in types
+BENCHMARK( ptc_print_complex );
+
+//====================================================
+//     Comparison with other libraries
+//====================================================
+
 // stdout
-BENCHMARK( ptc_print_stdout );
+//BENCHMARK( ptc_print_stdout );
 //BENCHMARK( fmt_print_stdout ) ;
 //BENCHMARK( std_cout_stdout ) ;
 //BENCHMARK( printf_stdout );

@@ -20,6 +20,7 @@
 #include <sstream>
 #include <fstream>
 #include <string>
+#include <complex>
 
 //====================================================
 //     Print default constructor
@@ -170,6 +171,31 @@ TEST_CASE( "Testing the operator () overload." )
     CHECK_EQ( test_a, "Testing empty char (ignore this). " ); 
     const std::string test_b = ptc::print( ptc::mode::str, "\033[31m", "Testing empty char (ignore this)." );
     CHECK_EQ( test_b, "\033[31mTesting empty char (ignore this). \033[0m" ); 
+    ptc::print.setEnd( "\n" );
+   }
+ }
+
+//====================================================
+//     Print operator << overload
+//====================================================
+TEST_CASE( "Testing the Print operator << overloads." )
+ {
+  SUBCASE( "Testing std::complex printing." )
+   {
+    ptc::print.setEnd( "" );
+    std::complex <int> no( 1, 6 );
+    const std::string test_a = ptc::print( ptc::mode::str, no );
+    CHECK_EQ( test_a, "(1+6j)" );
+    std::complex <double> no_d( 1, 2.1 );
+    const std::string test_b = ptc::print( ptc::mode::str, no_d );
+    CHECK_EQ( test_b, "(1+2.1j)" );
+
+    const std::string test_cerr = ptc::osout( std::cerr, no );
+    CHECK_EQ( test_cerr, "(1+6j) " );
+
+    std::ostringstream ostr;
+    ptc::print( ostr, no );
+    CHECK_EQ( ostr.str(), "(1+6j)" );
     ptc::print.setEnd( "\n" );
    }
  }

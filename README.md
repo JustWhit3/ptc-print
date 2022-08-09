@@ -227,9 +227,10 @@ int main()
 
 ### Printing non-standard types
 
-List of enabled types for printing:
+List of not built-int types ready for custom printing:
 
-- empty
+- [`std::nullptr_t`](https://en.cppreference.com/w/cpp/types/nullptr_t) aka `nullptr`
+- [`std::complex`](https://en.cppreference.com/w/cpp/numeric/complex)
 
 Empty for the moment.
 

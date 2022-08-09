@@ -27,6 +27,7 @@
 #include <string_view>
 #include <utility>
 #include <ios>
+#include <complex>
 
 namespace ptc
  {
@@ -352,6 +353,26 @@ namespace ptc
      inline static const std::string reset_ANSI = "\033[0m";
      template <class T> inline static const std::string null_str = Print::null_string<const T&>::value;
    }; // end of Print class
+
+  //====================================================
+  //     Operator << overloads
+  //====================================================
+
+  // overload for std::complex
+  /**
+   * @brief Operator << overload for std::complex printing.
+   * 
+   * @tparam T_cmplx The type of the real and imaginary part complex number to be printed.
+   * @param os The type of the output stream.
+   * @param number The number to be printed.
+   * @return std::ostream& The stream to which the number is printed to.
+   */
+  template <class T_cmplx>
+  inline const std::ostream& operator << ( std::ostream& os, const std::complex<T_cmplx>& number )
+   {
+    os << "(" << number.real() << "+" << number.imag() << "j)";
+    return os; 
+   }
    
   //====================================================
   //     Other steps
