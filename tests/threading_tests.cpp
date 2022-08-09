@@ -45,6 +45,10 @@ int main()
     ptc::print( file_stream, "Printing the", "1st", "message with std::ofstream" );
 
     std::string str_out = ptc::print( ptc::mode::str, "This", "is the 1st string!" );
+
+    // Non built-in types
+    std::complex<int> cmplx_no( 2, 3 );
+    ptc::print( cmplx_no );
    };
 
   // Second job
@@ -70,6 +74,10 @@ int main()
     ptc::print( file_stream, "Printing the", "2nd", "message with std::ofstream" );
 
     std::string str_out = ptc::print( ptc::mode::str, "This", "is the 2nd string!" );
+
+    // Non built-in types
+    std::complex<int> cmplx_no( 2, 3 );
+    ptc::print( cmplx_no );
    };
 
   std::thread first_job(job1);

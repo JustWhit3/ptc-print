@@ -232,7 +232,7 @@ List of not built-int types ready for custom printing:
 - [`std::nullptr_t`](https://en.cppreference.com/w/cpp/types/nullptr_t) aka `nullptr`
 - [`std::complex`](https://en.cppreference.com/w/cpp/numeric/complex)
 
-Empty for the moment.
+If you need other particular types you can open an issue with a [feature request](https://github.com/JustWhit3/ptc-print/blob/main/.github/ISSUE_TEMPLATE/feature_request.md).
 
 ## Install and use
 
@@ -428,17 +428,6 @@ ptc::print(v);
 
 ```shell
 [1,10,100]
-```
-
-- Add support to complex numbers printing:
-
-```C++
-std::complex<int> no = (1,2)
-ptc::print(no);
-```
-
-```shell
-1 + 2j
 ```
 
 - Add support to date printing.

@@ -368,7 +368,7 @@ namespace ptc
    * @return std::ostream& The stream to which the number is printed to.
    */
   template <class T_cmplx>
-  inline const std::ostream& operator << ( std::ostream& os, const std::complex<T_cmplx>& number )
+  inline std::ostream& operator << ( std::ostream& os, const std::complex<T_cmplx>& number )
    {
     os << "(" << number.real() << "+" << number.imag() << "j)";
     return os; 
