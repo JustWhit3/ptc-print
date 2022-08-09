@@ -239,7 +239,7 @@ namespace ptc
      //     Private methods
      //====================================================
 
-     // is_escape (standard overload)
+     // is_escape
      /**
       * @brief This method is used to check if an input variable is an ANSI escape sequency or not.
       * 
@@ -268,21 +268,6 @@ namespace ptc
         }
        return false;
       }
-
-     // is_escape (nullptr overload)
-     /**
-      * @brief This method is used to check if an input variable is an ANSI escape sequency or not. This overload is for the nullptr case.
-      * 
-      * @tparam T Template type of the input variable.
-      * @param str The input variable.
-      * @param flag A flag which let to return different things with respect to its value. If flag = 0 the ANSI is searched as the first substring of the str argument, otherwise, if flag = 1 the ANSI is searched as a substring inside the str argument.
-      * @return true If the input variable is an ANSI escape sequency.
-      * @return false Otherwise.
-      */
-     //static constexpr bool is_escape( std::nullptr_t str, ANSI&& flag )
-     // {
-     //  return false;
-     // }
 
      // is_null_str
      /**
@@ -351,6 +336,7 @@ namespace ptc
        
        std::ios_base::sync_with_stdio( false );
        std::cin.tie( NULL );
+       std::cout.tie( NULL );
       }
 
      //====================================================

@@ -142,7 +142,7 @@ def plotter( data, time_type ):
 
     # Adding mean value inside each chart
     for i in range( counter ):
-        ax.text( -0.15 + i , 70, round( mean[ i ] ), color = "black", fontweight = "bold" )
+        ax.text( -0.15 + i , 70, round( mean[ i ] ), color = "white", fontweight = "bold" )
         
     # Plot settings
     ax.set_xlabel( "Object / function" )
