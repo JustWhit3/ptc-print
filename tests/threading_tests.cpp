@@ -55,6 +55,8 @@ int main()
     ptc::print( vec );
     std::map <int,int> map = { { 1,2 }, { 2, 2 }, { 3, 3 } };
     ptc::print( map );
+    int arr[3] = { 1, 2, 3 };
+    ptc::print( arr );
    };
 
   // Second job
@@ -88,6 +90,8 @@ int main()
     ptc::print( vec );
     std::map <int,int> map = { { 1,2 }, { 2, 2 }, { 3, 3 } };
     ptc::print( map );
+    int arr[3] = { 1, 2, 3 };
+    ptc::print( arr );
    };
 
   std::thread first_job(job1);

@@ -118,16 +118,50 @@ namespace ptc
    * @tparam ValueType The value type of the container.
    * @tparam Args The arguments of the container.
    * @param os The stream to which the output is printed.
-   * @param c The container to be printed.
+   * @param container The container to be printed.
    * @return std::ostream& The stream to which the overload prints.
    */
   template <template <typename, typename...> class ContainerType, typename ValueType, typename... Args>
   std::enable_if_t< ! is_streamable_v <ContainerType <ValueType, Args...>>, std::ostream&>
-  operator <<( std::ostream& os, const ContainerType<ValueType, Args...>& c ) 
+  operator <<( std::ostream& os, const ContainerType<ValueType, Args...>& container ) 
    {
     os << "[";
-    for ( const auto& v : c ) { os << v << ", "; }
-    os << "\b\b]";
+    const char* separator = "";
+    for ( const auto& elem: container )
+     {
+      os << separator;
+      os << elem;
+      separator = ", ";
+     }
+    os << "]";
+    return os;
+   }
+
+  // Overload for C arrays
+  /**
+   * @brief Overload for C arrays printing.
+   * 
+   * @tparam T1 The type of the array.
+   * @tparam arrSize The size of the array.
+   * @tparam std::enable_if_t< ! std::is_same <T1,char>::value> Enable if it is not const char*.
+   * @param os The stream to which the array is printed to.
+   * @return std::ostream& The stream to which the array is printed to.
+   */
+  template <typename T1, size_t arrSize, typename = std::enable_if_t< ! std::is_same <T1,char>::value>>
+  std::ostream& operator <<( std::ostream& os, const T1( & arr )[ arrSize ] )
+   {
+    os << "[";
+    if ( arrSize )
+     {
+      const char* separator = "";
+      for ( const auto& elem: arr )
+       {
+        os << separator;
+        os << elem;
+        separator = ", ";
+       }
+     }
+    os << "]";
     return os;
    }
 

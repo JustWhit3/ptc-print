@@ -221,11 +221,13 @@ TEST_CASE( "Testing the Print operator << overloads." )
 
     // std::vector
     std::vector <int> vec = { 1, 2, 3 };
-    CHECK_EQ( ptc::print( ptc::mode::str, vec ), "[1, 2, 3, \b\b]" );
+    CHECK_EQ( ptc::print( ptc::mode::str, vec ), "[1, 2, 3]" );
+    std::vector <int> null_v = {};
+    CHECK_EQ( ptc::print( ptc::mode::str, null_v ), "[]" );
 
     // std::deque
     std::deque <int> deque = { 7, 5, 16 };
-    CHECK_EQ( ptc::print( ptc::mode::str, deque ), "[7, 5, 16, \b\b]" );
+    CHECK_EQ( ptc::print( ptc::mode::str, deque ), "[7, 5, 16]" );
 
     // std::forward_list
     std::forward_list <std::pair <int, int> > forwardListOfPairs;
@@ -233,40 +235,40 @@ TEST_CASE( "Testing the Print operator << overloads." )
     forwardListOfPairs.push_front( pair1 );
     std::pair<int, int> pair2 = std::make_pair( 33, 44 );
     forwardListOfPairs.push_front( pair2 );
-    CHECK_EQ( ptc::print( ptc::mode::str, forwardListOfPairs ), "[[33, 44], [11, 22], \b\b]" );
+    CHECK_EQ( ptc::print( ptc::mode::str, forwardListOfPairs ), "[[33, 44], [11, 22]]" );
 
     // std::list
     std::list<int> list = { 7, 5, 16 };
-    CHECK_EQ( ptc::print( ptc::mode::str, list ), "[7, 5, 16, \b\b]" );
+    CHECK_EQ( ptc::print( ptc::mode::str, list ), "[7, 5, 16]" );
 
     // std::set
     std::set<int> set = { 7, 5, 16 };
-    CHECK_EQ( ptc::print( ptc::mode::str, set ), "[5, 7, 16, \b\b]" );
+    CHECK_EQ( ptc::print( ptc::mode::str, set ), "[5, 7, 16]" );
 
     // std::map
     std::map <int,int> map = { { 1, 1 }, { 2, 2 }, { 3, 3 } };
-    CHECK_EQ( ptc::print( ptc::mode::str, map ), "[[1, 1], [2, 2], [3, 3], \b\b]" );
+    CHECK_EQ( ptc::print( ptc::mode::str, map ), "[[1, 1], [2, 2], [3, 3]]" );
 
     // std::multiset
     //std::multiset <int,int> multiset;
     //multiset.insert(40);
     //multiset.insert(23);
     //multiset.insert(1);
-    //CHECK_EQ( ptc::print( ptc::mode::str, multiset ), "[40, 23, 1, \b\b]" );
+    //CHECK_EQ( ptc::print( ptc::mode::str, multiset ), "[40, 23, 1]" );
 
     // std::multimap
     //std::multimap <int, int> multimap;
     //multimap.insert( std::pair <int, int> ( 1, 40 ) );
     //multimap.insert( std::pair <int, int> ( 2, 30 ) );
-    //CHECK_EQ( ptc::print( ptc::mode::str, multimap ), "[40, 23, 1, \b\b]" );
+    //CHECK_EQ( ptc::print( ptc::mode::str, multimap ), "[40, 23, 1]" );
 
     // std::unordered_set
     std::unordered_set<int> u_set = { 7, 5, 16 };
-    CHECK_EQ( ptc::print( ptc::mode::str, u_set ), "[5, 16, 7, \b\b]" );
+    CHECK_EQ( ptc::print( ptc::mode::str, u_set ), "[5, 16, 7]" );
 
     // std::unordered_map
     std::unordered_map <int,int> u_map = { { 1, 1 }, { 2, 2 }, { 3, 3 } };
-    CHECK_EQ( ptc::print( ptc::mode::str, u_map ), "[[3, 3], [2, 2], [1, 1], \b\b]" );
+    CHECK_EQ( ptc::print( ptc::mode::str, u_map ), "[[3, 3], [2, 2], [1, 1]]" );
 
     // std::unordered_multiset
 
@@ -277,16 +279,23 @@ TEST_CASE( "Testing the Print operator << overloads." )
     //stack.push( 21 );
     //stack.push( 22 );
     //stack.push( 24 );
-    //CHECK_EQ( ptc::print( ptc::mode::str, stack ), "[21, 22, 24, \b\b]" );
+    //CHECK_EQ( ptc::print( ptc::mode::str, stack ), "[21, 22, 24]" );
 
     // std::priority_queue ?
     //std::priority_queue<int> p_queue;
     //p_queue.push( 2 );
     //p_queue.push( 5 );
     //p_queue.push( 6 );
-    //CHECK_EQ( ptc::print( ptc::mode::str, p_queue ), "[2, 5, 6, \b\b]" );
+    //CHECK_EQ( ptc::print( ptc::mode::str, p_queue ), "[2, 5, 6]" );
 
     ptc::print.setEnd( "\n" );
+   }
+
+  // Testing C arrays printing
+  SUBCASE( "Testing C arrays printing." )
+   {
+    int arr[3] = { 1, 2, 3 };
+    CHECK_EQ( ptc::print( ptc::mode::str, arr ), "[1, 2, 3]\n" );
    }
  }
 

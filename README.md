@@ -229,6 +229,7 @@ int main()
 
 List of not built-int types ready for custom printing:
 
+- [C array](https://www.learncpp.com/cpp-tutorial/pointers-and-arrays/)
 - [`std::nullptr_t`](https://en.cppreference.com/w/cpp/types/nullptr_t) aka `nullptr`
 - [`std::complex`](https://en.cppreference.com/w/cpp/numeric/complex)
 - [`std::vector`](https://en.cppreference.com/w/cpp/container/vector)
