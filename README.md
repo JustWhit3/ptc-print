@@ -231,8 +231,50 @@ List of not built-int types ready for custom printing:
 
 - [`std::nullptr_t`](https://en.cppreference.com/w/cpp/types/nullptr_t) aka `nullptr`
 - [`std::complex`](https://en.cppreference.com/w/cpp/numeric/complex)
+- [`std::vector`](https://en.cppreference.com/w/cpp/container/vector)
+- [`std::map`](https://en.cppreference.com/w/cpp/container/map)
+- [`std::unordered_map`](https://en.cppreference.com/w/cpp/container/unordered_map)
+- [`std::deque`](https://en.cppreference.com/w/cpp/container/deque)
+- [`std::forward_list`](https://en.cppreference.com/w/cpp/container/forward_list)
+- [`std::list`](https://en.cppreference.com/w/cpp/container/list)
+- [`std::set`](https://en.cppreference.com/w/cpp/container/set)
+- [`std::unordered_set`](https://cplusplus.com/reference/unordered_set/unordered_set/#:~:text=Unordered%20sets%20are%20containers%20that,key%2C%20that%20identifies%20it%20uniquely.)
 
-If you need other particular types you can open an issue with a [feature request](https://github.com/JustWhit3/ptc-print/blob/main/.github/ISSUE_TEMPLATE/feature_request.md).
+If you need support to other particular types you can open an issue with a [feature request](https://github.com/JustWhit3/ptc-print/blob/main/.github/ISSUE_TEMPLATE/feature_request.md).
+
+For example, to print an `std::vector`:
+
+```C++
+#include <ptc/print.hpp>
+#include <vector>
+
+int main()
+ {
+  std::vector<int> vec = { 1, 2, 3 };
+  ptc::print( vec );
+ }
+```
+
+```Bash
+[1, 2, 3]
+```
+
+Or an `std::map`:
+
+```C++
+#include <ptc/print.hpp>
+#include <map>
+
+int main()
+ {
+  std::map<int,int> map = { { 1, 1 }, { 2, 2 }, { 3, 3 } };
+  ptc::print( map );
+ }
+```
+
+```Bash
+[[1, 1], [2, 2], [3, 3]]
+```
 
 ## Install and use
 
@@ -419,19 +461,13 @@ print( "I am", "Python", 123, sep = "*", end = "" );
 
 ## Todo
 
-- Add support to all the containers printing (not only `std::vector`):
-
-```C++
-std::vector<int> v{1, 10, 100};
-ptc::print(v);
-```
-
-```shell
-[1,10,100]
-```
-
 - Add support to date printing.
 - Add support to other types printing.
+- Add support to `std::wcout`, `std::wcerr` and `std::wclog` printing.
+- Add a specific method to reorder the printing of a nidified container.
+- Improve the printing on an external file stream.
+- Add studies on the executable size.
+- Add studies on the compile time.
 
 ## Credits
 

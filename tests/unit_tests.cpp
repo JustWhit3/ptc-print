@@ -22,6 +22,19 @@
 #include <string>
 #include <complex>
 
+// Containers for testing
+#include <vector>
+#include <array>
+#include <deque>
+#include <forward_list>
+#include <list>
+#include <map>
+#include <unordered_map>
+#include <set>
+#include <unordered_set>
+#include <stack>
+#include <queue>
+
 //====================================================
 //     Print default constructor
 //====================================================
@@ -180,22 +193,99 @@ TEST_CASE( "Testing the operator () overload." )
 //====================================================
 TEST_CASE( "Testing the Print operator << overloads." )
  {
+  // Testing std::complex printing
   SUBCASE( "Testing std::complex printing." )
    {
     ptc::print.setEnd( "" );
     std::complex <int> no( 1, 6 );
     const std::string test_a = ptc::print( ptc::mode::str, no );
-    CHECK_EQ( test_a, "(1+6j)" );
+    CHECK_EQ( test_a, "1+6j" );
     std::complex <double> no_d( 1, 2.1 );
     const std::string test_b = ptc::print( ptc::mode::str, no_d );
-    CHECK_EQ( test_b, "(1+2.1j)" );
-
-    const std::string test_cerr = ptc::osout( std::cerr, no );
-    CHECK_EQ( test_cerr, "(1+6j) " );
+    CHECK_EQ( test_b, "1+2.1j" );
 
     std::ostringstream ostr;
     ptc::print( ostr, no );
-    CHECK_EQ( ostr.str(), "(1+6j)" );
+    CHECK_EQ( ostr.str(), "1+6j" );
+    ptc::print.setEnd( "\n" );
+   }
+
+  // Testing all std containers printing
+  SUBCASE( "Testing all std containers printing." )
+   {
+    ptc::print.setEnd( "" );
+
+    // std::array
+    //std::array <int, 3> array = { 1, 2, 3 };
+    //CHECK_EQ( ptc::print( ptc::mode::str, array ), "[1, 2, 3]" );
+
+    // std::vector
+    std::vector <int> vec = { 1, 2, 3 };
+    CHECK_EQ( ptc::print( ptc::mode::str, vec ), "[1, 2, 3, \b\b]" );
+
+    // std::deque
+    std::deque <int> deque = { 7, 5, 16 };
+    CHECK_EQ( ptc::print( ptc::mode::str, deque ), "[7, 5, 16, \b\b]" );
+
+    // std::forward_list
+    std::forward_list <std::pair <int, int> > forwardListOfPairs;
+    std::pair<int, int> pair1 = std::make_pair( 11, 22 );
+    forwardListOfPairs.push_front( pair1 );
+    std::pair<int, int> pair2 = std::make_pair( 33, 44 );
+    forwardListOfPairs.push_front( pair2 );
+    CHECK_EQ( ptc::print( ptc::mode::str, forwardListOfPairs ), "[[33, 44], [11, 22], \b\b]" );
+
+    // std::list
+    std::list<int> list = { 7, 5, 16 };
+    CHECK_EQ( ptc::print( ptc::mode::str, list ), "[7, 5, 16, \b\b]" );
+
+    // std::set
+    std::set<int> set = { 7, 5, 16 };
+    CHECK_EQ( ptc::print( ptc::mode::str, set ), "[5, 7, 16, \b\b]" );
+
+    // std::map
+    std::map <int,int> map = { { 1, 1 }, { 2, 2 }, { 3, 3 } };
+    CHECK_EQ( ptc::print( ptc::mode::str, map ), "[[1, 1], [2, 2], [3, 3], \b\b]" );
+
+    // std::multiset
+    //std::multiset <int,int> multiset;
+    //multiset.insert(40);
+    //multiset.insert(23);
+    //multiset.insert(1);
+    //CHECK_EQ( ptc::print( ptc::mode::str, multiset ), "[40, 23, 1, \b\b]" );
+
+    // std::multimap
+    //std::multimap <int, int> multimap;
+    //multimap.insert( std::pair <int, int> ( 1, 40 ) );
+    //multimap.insert( std::pair <int, int> ( 2, 30 ) );
+    //CHECK_EQ( ptc::print( ptc::mode::str, multimap ), "[40, 23, 1, \b\b]" );
+
+    // std::unordered_set
+    std::unordered_set<int> u_set = { 7, 5, 16 };
+    CHECK_EQ( ptc::print( ptc::mode::str, u_set ), "[5, 16, 7, \b\b]" );
+
+    // std::unordered_map
+    std::unordered_map <int,int> u_map = { { 1, 1 }, { 2, 2 }, { 3, 3 } };
+    CHECK_EQ( ptc::print( ptc::mode::str, u_map ), "[[3, 3], [2, 2], [1, 1], \b\b]" );
+
+    // std::unordered_multiset
+
+    // std::unordered_multimap
+
+    // std::stack
+    //std::stack <int> stack;
+    //stack.push( 21 );
+    //stack.push( 22 );
+    //stack.push( 24 );
+    //CHECK_EQ( ptc::print( ptc::mode::str, stack ), "[21, 22, 24, \b\b]" );
+
+    // std::priority_queue ?
+    //std::priority_queue<int> p_queue;
+    //p_queue.push( 2 );
+    //p_queue.push( 5 );
+    //p_queue.push( 6 );
+    //CHECK_EQ( ptc::print( ptc::mode::str, p_queue ), "[2, 5, 6, \b\b]" );
+
     ptc::print.setEnd( "\n" );
    }
  }

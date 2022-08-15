@@ -16,6 +16,7 @@
 #include <sstream>
 #include <fstream>
 #include <complex>
+#include <vector>
 
 //====================================================
 //     Namespace directives
@@ -91,6 +92,13 @@ static void ptc_print_complex( bm::State& state )
  {
   std::complex <int> cmplx_no( 1, 4 );
   for ( auto _ : state ) ptc::print( cmplx_no );
+ }
+
+// ptc_print_vector
+static void ptc_print_vector( bm::State& state ) 
+ {
+  std::vector <int> vec = { 1, 2, 3 };
+  for ( auto _ : state ) ptc::print( vec );
  }
 
 //====================================================
@@ -169,7 +177,8 @@ static void fmt_print_file( bm::State& state )
 //BENCHMARK( ptc_print_str );
 
 // non built-in types
-BENCHMARK( ptc_print_complex );
+//BENCHMARK( ptc_print_complex );
+BENCHMARK( ptc_print_vector );
 
 //====================================================
 //     Comparison with other libraries

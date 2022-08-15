@@ -10,6 +10,8 @@
 #include <fstream>
 #include <sstream>
 #include <complex>
+#include <vector>
+#include <map>
 
 //====================================================
 //     standard
@@ -99,6 +101,13 @@ void other_types()
 
   std::complex<double> cmplx_no_d( 2.1, 3.6 );
   ptc::print( "ptc::print complex number printing:", cmplx_no_d );
+
+  // Other containers printing
+  std::vector <int> vec = { 1, 2, 3 };
+  ptc::print( "Printing an std::vector:", vec );
+
+  std::map <int,int> map = { { 1, 1 }, { 2, 2 }, { 3, 3 } };
+  ptc::print( "Printing an std::map:", map );
  }
 
 //====================================================

@@ -10,6 +10,8 @@
 #include <fstream>
 #include <sstream>
 #include <thread>
+#include <vector>
+#include <map>
 
 //====================================================
 //     main
@@ -49,6 +51,10 @@ int main()
     // Non built-in types
     std::complex<int> cmplx_no( 2, 3 );
     ptc::print( cmplx_no );
+    std::vector <int> vec = { 1 ,2, 3 };
+    ptc::print( vec );
+    std::map <int,int> map = { { 1,2 }, { 2, 2 }, { 3, 3 } };
+    ptc::print( map );
    };
 
   // Second job
@@ -78,6 +84,10 @@ int main()
     // Non built-in types
     std::complex<int> cmplx_no( 2, 3 );
     ptc::print( cmplx_no );
+    std::vector <int> vec = { 1 ,2, 3 };
+    ptc::print( vec );
+    std::map <int,int> map = { { 1,2 }, { 2, 2 }, { 3, 3 } };
+    ptc::print( map );
    };
 
   std::thread first_job(job1);
