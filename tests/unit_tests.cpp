@@ -297,6 +297,13 @@ TEST_CASE( "Testing the Print operator << overloads." )
     int arr[3] = { 1, 2, 3 };
     CHECK_EQ( ptc::print( ptc::mode::str, arr ), "[1, 2, 3]\n" );
    }
+
+  // Testing nested std containers printing
+  SUBCASE( "Testing nested std containers printing." )
+   {
+    std::vector <std::vector <int>> vec = { { 1, 3 }, { 2, 1 } };
+    CHECK_EQ( ptc::print( ptc::mode::str, vec ), "[[1, 3], [2, 1]]\n" );
+   }
  }
 
 //====================================================
