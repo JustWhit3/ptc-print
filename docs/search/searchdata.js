@@ -1,11 +1,11 @@
 var indexSectionsWithContent =
 {
-  0: "afgmops",
-  1: "p",
+  0: "afgimopstv",
+  1: "ip",
   2: "p",
   3: "p",
-  4: "gops",
-  5: "p",
+  4: "gopst",
+  5: "ipv",
   6: "am",
   7: "fgs"
 };

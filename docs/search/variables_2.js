@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['value_30',['value',['../structptc_1_1null__string.html#a0f9d215e58e93a1d83fe3338f88d2058',1,'ptc::null_string']]]
+  ['value_38',['value',['../structptc_1_1is__streamable.html#ad1439524f17e3d555df26fd3e03c4ba7',1,'ptc::is_streamable']]]
 ];

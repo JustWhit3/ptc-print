@@ -110,6 +110,9 @@ Include dependency graph for print.hpp:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1is__streamable.html">ptc::is_streamable&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct used to define a specific type trait for operator &lt;&lt; overload for container printing.  <a href="structptc_1_1is__streamable.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1Print.html">ptc::Print</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class used to construct the print function.  <a href="structptc_1_1Print.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -137,9 +140,20 @@ Functions</h2></td></tr>
 <tr class="memitem:abb80c82a33f0d1de0459023fd95304f5"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#abb80c82a33f0d1de0459023fd95304f5">ptc::operator&lt;&lt;</a> (std::ostream &amp;os, const std::complex&lt; T_cmplx &gt; &amp;number)</td></tr>
 <tr class="memdesc:abb80c82a33f0d1de0459023fd95304f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator &lt;&lt; overload for std::complex printing.  <a href="namespaceptc.html#abb80c82a33f0d1de0459023fd95304f5">More...</a><br /></td></tr>
 <tr class="separator:abb80c82a33f0d1de0459023fd95304f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a746cb82b95a2dc5f7b9ceb440e859d15"><td class="memTemplParams" colspan="2">template&lt;typename T , typename U &gt; </td></tr>
+<tr class="memitem:a746cb82b95a2dc5f7b9ceb440e859d15"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a746cb82b95a2dc5f7b9ceb440e859d15">ptc::operator&lt;&lt;</a> (std::ostream &amp;os, const std::pair&lt; T, U &gt; &amp;p)</td></tr>
+<tr class="memdesc:a746cb82b95a2dc5f7b9ceb440e859d15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper overload to print test containers (std::vector and std::map).  <a href="namespaceptc.html#a746cb82b95a2dc5f7b9ceb440e859d15">More...</a><br /></td></tr>
+<tr class="separator:a746cb82b95a2dc5f7b9ceb440e859d15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8c7b103b628d43c8217d85fd22a1f68"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename, typename... &gt; class ContainerType, typename ValueType , typename... Args&gt; </td></tr>
+<tr class="memitem:ac8c7b103b628d43c8217d85fd22a1f68"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if_t&lt; ! is_streamable_v&lt; ContainerType&lt; ValueType, Args... &gt; &gt;, std::ostream &amp; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#ac8c7b103b628d43c8217d85fd22a1f68">ptc::operator&lt;&lt;</a> (std::ostream &amp;os, const ContainerType&lt; ValueType, Args... &gt; &amp;c)</td></tr>
+<tr class="memdesc:ac8c7b103b628d43c8217d85fd22a1f68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload for all containers printing. Containers which already has an operator &lt;&lt; overload will be ignored.  <a href="namespaceptc.html#ac8c7b103b628d43c8217d85fd22a1f68">More...</a><br /></td></tr>
+<tr class="separator:ac8c7b103b628d43c8217d85fd22a1f68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:ab0b2783691a9b9945d655b966e07a001"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:ab0b2783691a9b9945d655b966e07a001"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#ab0b2783691a9b9945d655b966e07a001">ptc::is_streamable_v</a> = is_streamable&lt;T&gt;::value</td></tr>
+<tr class="separator:ab0b2783691a9b9945d655b966e07a001"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47e81ebc0f77793fb8f91904742106c9"><td class="memItemLeft" align="right" valign="top">Print&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a47e81ebc0f77793fb8f91904742106c9">ptc::print</a></td></tr>
 <tr class="separator:a47e81ebc0f77793fb8f91904742106c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>

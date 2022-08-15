@@ -75,6 +75,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1is__streamable.html">is_streamable</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct used to define a specific type trait for operator &lt;&lt; overload for container printing.  <a href="structptc_1_1is__streamable.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1Print.html">Print</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class used to construct the print function.  <a href="structptc_1_1Print.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -97,9 +100,20 @@ Functions</h2></td></tr>
 <tr class="memitem:abb80c82a33f0d1de0459023fd95304f5"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#abb80c82a33f0d1de0459023fd95304f5">operator&lt;&lt;</a> (std::ostream &amp;os, const std::complex&lt; T_cmplx &gt; &amp;number)</td></tr>
 <tr class="memdesc:abb80c82a33f0d1de0459023fd95304f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator &lt;&lt; overload for std::complex printing.  <a href="namespaceptc.html#abb80c82a33f0d1de0459023fd95304f5">More...</a><br /></td></tr>
 <tr class="separator:abb80c82a33f0d1de0459023fd95304f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a746cb82b95a2dc5f7b9ceb440e859d15"><td class="memTemplParams" colspan="2">template&lt;typename T , typename U &gt; </td></tr>
+<tr class="memitem:a746cb82b95a2dc5f7b9ceb440e859d15"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a746cb82b95a2dc5f7b9ceb440e859d15">operator&lt;&lt;</a> (std::ostream &amp;os, const std::pair&lt; T, U &gt; &amp;p)</td></tr>
+<tr class="memdesc:a746cb82b95a2dc5f7b9ceb440e859d15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper overload to print test containers (std::vector and std::map).  <a href="namespaceptc.html#a746cb82b95a2dc5f7b9ceb440e859d15">More...</a><br /></td></tr>
+<tr class="separator:a746cb82b95a2dc5f7b9ceb440e859d15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8c7b103b628d43c8217d85fd22a1f68"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename, typename... &gt; class ContainerType, typename ValueType , typename... Args&gt; </td></tr>
+<tr class="memitem:ac8c7b103b628d43c8217d85fd22a1f68"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if_t&lt; ! <a class="el" href="namespaceptc.html#ab0b2783691a9b9945d655b966e07a001">is_streamable_v</a>&lt; ContainerType&lt; ValueType, Args... &gt; &gt;, std::ostream &amp; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#ac8c7b103b628d43c8217d85fd22a1f68">operator&lt;&lt;</a> (std::ostream &amp;os, const ContainerType&lt; ValueType, Args... &gt; &amp;c)</td></tr>
+<tr class="memdesc:ac8c7b103b628d43c8217d85fd22a1f68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload for all containers printing. Containers which already has an operator &lt;&lt; overload will be ignored.  <a href="namespaceptc.html#ac8c7b103b628d43c8217d85fd22a1f68">More...</a><br /></td></tr>
+<tr class="separator:ac8c7b103b628d43c8217d85fd22a1f68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:ab0b2783691a9b9945d655b966e07a001"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:ab0b2783691a9b9945d655b966e07a001"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#ab0b2783691a9b9945d655b966e07a001">is_streamable_v</a> = <a class="el" href="structptc_1_1is__streamable.html">is_streamable</a>&lt;T&gt;::value</td></tr>
+<tr class="separator:ab0b2783691a9b9945d655b966e07a001"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47e81ebc0f77793fb8f91904742106c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structptc_1_1Print.html">Print</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a47e81ebc0f77793fb8f91904742106c9">print</a></td></tr>
 <tr class="separator:a47e81ebc0f77793fb8f91904742106c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -160,8 +174,56 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ac8c7b103b628d43c8217d85fd22a1f68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8c7b103b628d43c8217d85fd22a1f68">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;template&lt; typename, typename... &gt; class ContainerType, typename ValueType , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::enable_if_t&lt; ! <a class="el" href="namespaceptc.html#ab0b2783691a9b9945d655b966e07a001">is_streamable_v</a> &lt;ContainerType &lt;ValueType, Args...&gt; &gt;, std::ostream&amp;&gt; ptc::operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>os</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const ContainerType&lt; ValueType, Args... &gt; &amp;&#160;</td>
+          <td class="paramname"><em>c</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Overload for all containers printing. Containers which already has an operator &lt;&lt; overload will be ignored. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">ContainerType</td><td>The container type (ex std::vector, std::map etc...) </td></tr>
+    <tr><td class="paramname">ValueType</td><td>The value type of the container. </td></tr>
+    <tr><td class="paramname">Args</td><td>The arguments of the container. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">os</td><td>The stream to which the output is printed. </td></tr>
+    <tr><td class="paramname">c</td><td>The container to be printed. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::ostream&amp; The stream to which the overload prints. </dd></dl>
+
+</div>
+</div>
 <a id="abb80c82a33f0d1de0459023fd95304f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb80c82a33f0d1de0459023fd95304f5">&#9670;&nbsp;</a></span>operator&lt;&lt;()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abb80c82a33f0d1de0459023fd95304f5">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -214,7 +276,86 @@ template&lt;class T_cmplx &gt; </div>
 
 </div>
 </div>
+<a id="a746cb82b95a2dc5f7b9ceb440e859d15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a746cb82b95a2dc5f7b9ceb440e859d15">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename U &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream&amp; ptc::operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>os</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::pair&lt; T, U &gt; &amp;&#160;</td>
+          <td class="paramname"><em>p</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper overload to print test containers (std::vector and std::map). </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>First template type of the std::pair variable. </td></tr>
+    <tr><td class="paramname">U</td><td>Second template type of the std::pair variable. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">os</td><td>The stream to which the overload prints. </td></tr>
+    <tr><td class="paramname">p</td><td>The std::pair object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::ostream&amp; The stream to which the overload prints. </dd></dl>
+
+</div>
+</div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a id="ab0b2783691a9b9945d655b966e07a001"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0b2783691a9b9945d655b966e07a001">&#9670;&nbsp;</a></span>is_streamable_v</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool ptc::is_streamable_v = <a class="el" href="structptc_1_1is__streamable.html">is_streamable</a>&lt;T&gt;::value</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a47e81ebc0f77793fb8f91904742106c9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a47e81ebc0f77793fb8f91904742106c9">&#9670;&nbsp;</a></span>print</h2>
 
