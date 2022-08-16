@@ -252,156 +252,157 @@ $(function() {
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="comment"></span>     <span class="keyword">template</span> &lt;<span class="keyword">class </span>T, <span class="keyword">class</span>... Args&gt;</div>
 <div class="line"><a name="l00285"></a><span class="lineno"><a class="line" href="structptc_1_1Print.html#a38dace1f19a1774cd984d8b87cefef29">  285</a></span>&#160;     <span class="keywordtype">void</span> <a class="code" href="structptc_1_1Print.html#a38dace1f19a1774cd984d8b87cefef29">operator()</a>( T&amp;&amp; first, Args&amp;&amp;... args )<span class="keyword"> const</span></div>
 <div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="keyword">      </span>{</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;       <span class="keywordflow">if</span> constexpr ( std::is_base_of_v &lt;std::ostream, std::remove_reference_t&lt;T&gt;&gt; )</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        {</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;         print_backend( std::forward&lt;T&gt;( <a class="code" href="namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572da8b04d5e3775d298e78455efc5ca404d5">first</a> ), std::forward&lt;Args&gt;( args )... );</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        }</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;       <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        {</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;         print_backend( std::cout, std::forward&lt;T&gt;( <a class="code" href="namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572da8b04d5e3775d298e78455efc5ca404d5">first</a> ), std::forward&lt;Args&gt;( args )... );</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        }</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;      }</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; </div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;     <span class="comment">// String initialization case</span></div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment"></span>     <span class="keyword">template</span> &lt;<span class="keyword">class</span>... Args&gt;</div>
-<div class="line"><a name="l00307"></a><span class="lineno"><a class="line" href="structptc_1_1Print.html#a5bd94beb0d274d8181c40c6bea0c85fa">  307</a></span>&#160;     <span class="keyword">const</span> std::string <a class="code" href="structptc_1_1Print.html#a5bd94beb0d274d8181c40c6bea0c85fa">operator()</a>( <a class="code" href="namespaceptc.html#aa730094183bf13993032c00ee196eafb">mode</a>&amp;&amp; first, Args&amp;&amp;... args )<span class="keyword"> const</span></div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="keyword">      </span>{ </div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;       <span class="keywordflow">if</span> constexpr( <span class="keyword">sizeof</span>...( args ) &gt; 0 )</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;        {</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;         <span class="keywordflow">switch</span>( <a class="code" href="namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572da8b04d5e3775d298e78455efc5ca404d5">first</a> )</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;          {</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;           <span class="keywordflow">case</span> <a class="code" href="namespaceptc.html#aa730094183bf13993032c00ee196eafba341be97d9aff90c9978347f66f945b77">mode::str</a>:</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;            {</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;             std::ostringstream oss;</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;             print_backend( oss, std::forward&lt;Args&gt;( args )... );</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;             <span class="keywordflow">return</span> oss.str();</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;            }</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;          }</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        }</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;       <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;      }</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160; </div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;     <span class="comment">// No arguments case</span></div>
-<div class="line"><a name="l00330"></a><span class="lineno"><a class="line" href="structptc_1_1Print.html#acf8b739f183ea4ef3883bc9b33896a02">  330</a></span>&#160;<span class="comment"></span>     <span class="keywordtype">void</span> <a class="code" href="structptc_1_1Print.html#a38dace1f19a1774cd984d8b87cefef29">operator () </a>( std::ostream&amp; os = std::cout )<span class="keyword"> const</span></div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;<span class="keyword">      </span>{</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;       os &lt;&lt; <a class="code" href="structptc_1_1Print.html#a80defb4de858a0ca354d1440d027a756">getEnd</a>();</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;       <span class="keywordflow">if</span> ( <a class="code" href="structptc_1_1Print.html#a69ee6bb93bff9c2ae974d2554921604b">getFlush</a>() ) os &lt;&lt; std::flush;</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;      }</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;     </div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160; </div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;     <span class="comment">//====================================================</span></div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;     <span class="comment">//     Private structs</span></div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;     <span class="comment">//====================================================</span></div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160; </div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;     <span class="comment">// null_string</span></div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="comment"></span>     <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; </div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;     <span class="keyword">struct </span>null_string</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;      {</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;       <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keyword">const</span> std::string value = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;      };</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160; </div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;     <span class="comment">//====================================================</span></div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;     <span class="comment">//     Private methods</span></div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;     <span class="comment">//====================================================</span></div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160; </div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;     <span class="comment">// is_escape</span></div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;<span class="comment"></span>     <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;     <span class="keyword">static</span> constexpr <span class="keywordtype">bool</span> is_escape( <span class="keyword">const</span> T&amp; str, <a class="code" href="namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572d">ANSI</a>&amp;&amp; flag )</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;      {</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;       <span class="keywordflow">if</span> constexpr( std::is_convertible_v &lt;T, std::string_view&gt; &amp;&amp; ! std::is_same_v&lt;T, std::nullptr_t&gt; )</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        {</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;         <span class="keywordflow">switch</span>( flag )</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;          {</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;           <span class="keywordflow">case</span>( <a class="code" href="namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572da8b04d5e3775d298e78455efc5ca404d5">ANSI::first</a> ): </div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;            {</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;             <span class="keywordflow">return</span> ( ! std::string_view( str ).rfind( <span class="stringliteral">&quot;\033&quot;</span>, 0 ) ) &amp;&amp; ( std::string_view( str ).length() &lt; 7 );</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;            }</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;           <span class="keywordflow">case</span>( <a class="code" href="namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572da3d517f8924ac7fd03699a29d97dc52d9">ANSI::generic</a> ):</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;            {</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;             <span class="keywordflow">return</span> ( std::string_view( str ).find( <span class="stringliteral">&quot;\033&quot;</span> ) != std::string_view::npos );</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;            }</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;          }</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;        }</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;       <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;      }</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160; </div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;     <span class="comment">// is_null_str</span></div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;<span class="comment"></span>     <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;     <span class="keyword">static</span> constexpr <span class="keywordtype">bool</span> is_null_str( <span class="keyword">const</span> T&amp; str )</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;      {</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;       <span class="keywordflow">if</span> constexpr( std::is_convertible_v &lt;T, std::string_view&gt; )</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        {</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;         <span class="keywordflow">return</span> <a class="code" href="namespaceptc.html#aa730094183bf13993032c00ee196eafba341be97d9aff90c9978347f66f945b77">str</a> == null_str &lt;T&gt;;</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;        }</div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;       <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;      }</div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;      </div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;     <span class="comment">// print_backend</span></div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;<span class="comment"></span>     <span class="keyword">template</span> &lt;<span class="keyword">class </span>T_os, <span class="keyword">class </span>T, <span class="keyword">class</span>... Args&gt;</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;     <span class="keywordtype">void</span> print_backend( T_os&amp;&amp; os, T&amp;&amp; first, Args&amp;&amp;... args )<span class="keyword"> const</span></div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="keyword">      </span>{</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;       std::lock_guard &lt;std::mutex&gt; lock{ mutex_ };</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160; </div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;       <span class="comment">// Printing all the arguments</span></div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;       os &lt;&lt; <a class="code" href="namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572da8b04d5e3775d298e78455efc5ca404d5">first</a>;</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;       <span class="keywordflow">if</span> constexpr( <span class="keyword">sizeof</span>...( args ) &gt; 0 ) </div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;        {</div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;         <span class="keywordflow">if</span> ( is_null_str( first ) || is_escape( first, <a class="code" href="namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572da8b04d5e3775d298e78455efc5ca404d5">ANSI::first</a> ) ) ( ( os &lt;&lt; args &lt;&lt; <a class="code" href="structptc_1_1Print.html#ad72f1b0039b081f5092fb7c709c2e8f0">getSep</a>() ), ...); </div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;         <span class="keywordflow">else</span> ( ( os &lt;&lt; <a class="code" href="structptc_1_1Print.html#ad72f1b0039b081f5092fb7c709c2e8f0">getSep</a>() &lt;&lt; args ), ...);</div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;        }</div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;       os &lt;&lt; <a class="code" href="structptc_1_1Print.html#a80defb4de858a0ca354d1440d027a756">getEnd</a>();</div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160; </div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;       <span class="comment">// Resetting the stream from ANSI escape sequences</span></div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;       <span class="keywordflow">if</span> constexpr( <span class="keyword">sizeof</span>...( args ) &gt; 0 )</div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;        {</div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;         <span class="keywordflow">if</span> ( is_escape( first, <a class="code" href="namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572da3d517f8924ac7fd03699a29d97dc52d9">ANSI::generic</a> ) || ( ( is_escape( args, <a class="code" href="namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572da3d517f8924ac7fd03699a29d97dc52d9">ANSI::generic</a> ) ) || ...) ) os &lt;&lt; reset_ANSI;</div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;        }</div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;       <span class="keywordflow">else</span> </div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;        {</div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;        <span class="keywordflow">if</span> ( is_escape( first, <a class="code" href="namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572da3d517f8924ac7fd03699a29d97dc52d9">ANSI::generic</a> ) ) os &lt;&lt; reset_ANSI;</div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;        }</div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;       <span class="keywordflow">if</span> ( <a class="code" href="structptc_1_1Print.html#a69ee6bb93bff9c2ae974d2554921604b">getFlush</a>() &amp;&amp; ! std::is_base_of_v &lt;std::ostringstream, T_os&gt; ) os &lt;&lt; std::flush;</div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;      }</div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160; </div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;     <span class="comment">// performance_options</span></div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="comment"></span>     <span class="keyword">inline</span> <span class="keywordtype">void</span> performance_options()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="keyword">      </span>{</div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;       std::lock_guard &lt;std::mutex&gt; lock{ mutex_ };</div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;       </div>
-<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;       std::ios_base::sync_with_stdio( <span class="keyword">false</span> );</div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;       std::cin.tie( NULL );</div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;       std::cout.tie( NULL );</div>
-<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;      }</div>
-<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160; </div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;     <span class="comment">//====================================================</span></div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;     <span class="comment">//     Private attributes</span></div>
-<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;     <span class="comment">//====================================================</span></div>
-<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;     std::string end, sep;</div>
-<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;     <span class="keyword">static</span> std::mutex mutex_;</div>
-<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;     <span class="keywordtype">bool</span> flush;</div>
-<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160; </div>
-<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;     <span class="comment">//====================================================</span></div>
-<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;     <span class="comment">//     Private constants</span></div>
-<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;     <span class="comment">//====================================================</span></div>
-<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;     <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keyword">const</span> std::string reset_ANSI = <span class="stringliteral">&quot;\033[0m&quot;</span>;</div>
-<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;     <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keyword">const</span> std::string null_str = Print::null_string&lt;const T&amp;&gt;::value;</div>
-<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;   }; <span class="comment">// end of Print class</span></div>
-<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;   </div>
-<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;  <span class="comment">//====================================================</span></div>
-<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;  <span class="comment">//     Other steps</span></div>
-<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;  <span class="comment">//====================================================</span></div>
-<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160; </div>
-<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;  <span class="comment">// Print::mutex_ definiton</span></div>
-<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;  <span class="keyword">inline</span> std::mutex Print::mutex_;</div>
-<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160; </div>
-<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;  <span class="comment">// print function initialization</span></div>
-<div class="line"><a name="l00480"></a><span class="lineno"><a class="line" href="namespaceptc.html#a47e81ebc0f77793fb8f91904742106c9">  480</a></span>&#160;  <span class="keyword">inline</span> <a class="code" href="structptc_1_1Print.html">Print</a> <a class="code" href="namespaceptc.html#a47e81ebc0f77793fb8f91904742106c9">print</a>;</div>
-<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160; } <span class="comment">// end of namespace ptc</span></div>
-<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160; </div>
-<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;       <span class="keywordflow">if</span> constexpr ( std::is_base_of_v &lt;std::ostream, std::remove_reference_t&lt;T&gt;&gt; ||</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                      std::is_base_of_v &lt;std::wostream, std::remove_reference_t&lt;T&gt;&gt; )</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        {</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;         print_backend( std::forward&lt;T&gt;( <a class="code" href="namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572da8b04d5e3775d298e78455efc5ca404d5">first</a> ), std::forward&lt;Args&gt;( args )... );</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        }</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;       <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        {</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;         print_backend( std::cout, std::forward&lt;T&gt;( <a class="code" href="namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572da8b04d5e3775d298e78455efc5ca404d5">first</a> ), std::forward&lt;Args&gt;( args )... );</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        }</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;      }</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; </div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;     <span class="comment">// String initialization case</span></div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="comment"></span>     <span class="keyword">template</span> &lt;<span class="keyword">class</span>... Args&gt;</div>
+<div class="line"><a name="l00308"></a><span class="lineno"><a class="line" href="structptc_1_1Print.html#a5bd94beb0d274d8181c40c6bea0c85fa">  308</a></span>&#160;     <span class="keyword">const</span> std::string <a class="code" href="structptc_1_1Print.html#a5bd94beb0d274d8181c40c6bea0c85fa">operator()</a>( <a class="code" href="namespaceptc.html#aa730094183bf13993032c00ee196eafb">mode</a>&amp;&amp; first, Args&amp;&amp;... args )<span class="keyword"> const</span></div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="keyword">      </span>{ </div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;       <span class="keywordflow">if</span> constexpr( <span class="keyword">sizeof</span>...( args ) &gt; 0 )</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        {</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;         <span class="keywordflow">switch</span>( <a class="code" href="namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572da8b04d5e3775d298e78455efc5ca404d5">first</a> )</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;          {</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;           <span class="keywordflow">case</span> <a class="code" href="namespaceptc.html#aa730094183bf13993032c00ee196eafba341be97d9aff90c9978347f66f945b77">mode::str</a>:</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;            {</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;             std::ostringstream oss;</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;             print_backend( oss, std::forward&lt;Args&gt;( args )... );</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;             <span class="keywordflow">return</span> oss.str();</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;            }</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;          }</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        }</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;       <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;      }</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;     <span class="comment">// No arguments case</span></div>
+<div class="line"><a name="l00331"></a><span class="lineno"><a class="line" href="structptc_1_1Print.html#acf8b739f183ea4ef3883bc9b33896a02">  331</a></span>&#160;<span class="comment"></span>     <span class="keywordtype">void</span> <a class="code" href="structptc_1_1Print.html#a38dace1f19a1774cd984d8b87cefef29">operator () </a>( std::ostream&amp; os = std::cout )<span class="keyword"> const</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="keyword">      </span>{</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;       os &lt;&lt; <a class="code" href="structptc_1_1Print.html#a80defb4de858a0ca354d1440d027a756">getEnd</a>();</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;       <span class="keywordflow">if</span> ( <a class="code" href="structptc_1_1Print.html#a69ee6bb93bff9c2ae974d2554921604b">getFlush</a>() ) os &lt;&lt; std::flush;</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;      }</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;     </div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160; </div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;     <span class="comment">//====================================================</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;     <span class="comment">//     Private structs</span></div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;     <span class="comment">//====================================================</span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160; </div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;     <span class="comment">// null_string</span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="comment"></span>     <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; </div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;     <span class="keyword">struct </span>null_string</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;      {</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;       <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keyword">const</span> std::string value = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;      };</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160; </div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;     <span class="comment">//====================================================</span></div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;     <span class="comment">//     Private methods</span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;     <span class="comment">//====================================================</span></div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160; </div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;     <span class="comment">// is_escape</span></div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;<span class="comment"></span>     <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;     <span class="keyword">static</span> constexpr <span class="keywordtype">bool</span> is_escape( <span class="keyword">const</span> T&amp; str, <a class="code" href="namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572d">ANSI</a>&amp;&amp; flag )</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;      {</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;       <span class="keywordflow">if</span> constexpr( std::is_convertible_v &lt;T, std::string_view&gt; &amp;&amp; ! std::is_same_v&lt;T, std::nullptr_t&gt; )</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        {</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;         <span class="keywordflow">switch</span>( flag )</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;          {</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;           <span class="keywordflow">case</span>( <a class="code" href="namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572da8b04d5e3775d298e78455efc5ca404d5">ANSI::first</a> ): </div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;            {</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;             <span class="keywordflow">return</span> ( ! std::string_view( str ).rfind( <span class="stringliteral">&quot;\033&quot;</span>, 0 ) ) &amp;&amp; ( std::string_view( str ).length() &lt; 7 );</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;            }</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;           <span class="keywordflow">case</span>( <a class="code" href="namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572da3d517f8924ac7fd03699a29d97dc52d9">ANSI::generic</a> ):</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;            {</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;             <span class="keywordflow">return</span> ( std::string_view( str ).find( <span class="stringliteral">&quot;\033&quot;</span> ) != std::string_view::npos );</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;            }</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;          }</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;        }</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;       <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;      }</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160; </div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;     <span class="comment">// is_null_str</span></div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;<span class="comment"></span>     <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;     <span class="keyword">static</span> constexpr <span class="keywordtype">bool</span> is_null_str( <span class="keyword">const</span> T&amp; str )</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;      {</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;       <span class="keywordflow">if</span> constexpr( std::is_convertible_v &lt;T, std::string_view&gt; )</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;        {</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;         <span class="keywordflow">return</span> <a class="code" href="namespaceptc.html#aa730094183bf13993032c00ee196eafba341be97d9aff90c9978347f66f945b77">str</a> == null_str &lt;T&gt;;</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;        }</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;       <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;      }</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;      </div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;     <span class="comment">// print_backend</span></div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;<span class="comment"></span>     <span class="keyword">template</span> &lt;<span class="keyword">class </span>T_os, <span class="keyword">class </span>T, <span class="keyword">class</span>... Args&gt;</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;     <span class="keywordtype">void</span> print_backend( T_os&amp;&amp; os, T&amp;&amp; first, Args&amp;&amp;... args )<span class="keyword"> const</span></div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="keyword">      </span>{</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;       std::lock_guard &lt;std::mutex&gt; lock{ mutex_ };</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160; </div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;       <span class="comment">// Printing all the arguments</span></div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;       os &lt;&lt; <a class="code" href="namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572da8b04d5e3775d298e78455efc5ca404d5">first</a>;</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;       <span class="keywordflow">if</span> constexpr( <span class="keyword">sizeof</span>...( args ) &gt; 0 ) </div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;        {</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;         <span class="keywordflow">if</span> ( is_null_str( first ) || is_escape( first, <a class="code" href="namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572da8b04d5e3775d298e78455efc5ca404d5">ANSI::first</a> ) ) ( ( os &lt;&lt; args &lt;&lt; <a class="code" href="structptc_1_1Print.html#ad72f1b0039b081f5092fb7c709c2e8f0">getSep</a>() ), ...); </div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;         <span class="keywordflow">else</span> ( ( os &lt;&lt; <a class="code" href="structptc_1_1Print.html#ad72f1b0039b081f5092fb7c709c2e8f0">getSep</a>() &lt;&lt; args ), ...);</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;        }</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;       os &lt;&lt; <a class="code" href="structptc_1_1Print.html#a80defb4de858a0ca354d1440d027a756">getEnd</a>();</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160; </div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;       <span class="comment">// Resetting the stream from ANSI escape sequences</span></div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;       <span class="keywordflow">if</span> constexpr( <span class="keyword">sizeof</span>...( args ) &gt; 0 )</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;        {</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;         <span class="keywordflow">if</span> ( is_escape( first, <a class="code" href="namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572da3d517f8924ac7fd03699a29d97dc52d9">ANSI::generic</a> ) || ( ( is_escape( args, <a class="code" href="namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572da3d517f8924ac7fd03699a29d97dc52d9">ANSI::generic</a> ) ) || ...) ) os &lt;&lt; reset_ANSI;</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;        }</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;       <span class="keywordflow">else</span> </div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;        {</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;        <span class="keywordflow">if</span> ( is_escape( first, <a class="code" href="namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572da3d517f8924ac7fd03699a29d97dc52d9">ANSI::generic</a> ) ) os &lt;&lt; reset_ANSI;</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;        }</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;       <span class="keywordflow">if</span> ( <a class="code" href="structptc_1_1Print.html#a69ee6bb93bff9c2ae974d2554921604b">getFlush</a>() &amp;&amp; ! std::is_base_of_v &lt;std::ostringstream, T_os&gt; ) os &lt;&lt; std::flush;</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;      }</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160; </div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;     <span class="comment">// performance_options</span></div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="comment"></span>     <span class="keyword">inline</span> <span class="keywordtype">void</span> performance_options()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="keyword">      </span>{</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;       std::lock_guard &lt;std::mutex&gt; lock{ mutex_ };</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;       </div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;       std::ios_base::sync_with_stdio( <span class="keyword">false</span> );</div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;       std::cin.tie( NULL );</div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;       std::cout.tie( NULL );</div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;      }</div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160; </div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;     <span class="comment">//====================================================</span></div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;     <span class="comment">//     Private attributes</span></div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;     <span class="comment">//====================================================</span></div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;     std::string end, sep;</div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;     <span class="keyword">static</span> std::mutex mutex_;</div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;     <span class="keywordtype">bool</span> flush;</div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160; </div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;     <span class="comment">//====================================================</span></div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;     <span class="comment">//     Private constants</span></div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;     <span class="comment">//====================================================</span></div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;     <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keyword">const</span> std::string reset_ANSI = <span class="stringliteral">&quot;\033[0m&quot;</span>;</div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;     <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keyword">const</span> std::string null_str = Print::null_string&lt;const T&amp;&gt;::value;</div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;   }; <span class="comment">// end of Print class</span></div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;   </div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;  <span class="comment">//====================================================</span></div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;  <span class="comment">//     Other steps</span></div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;  <span class="comment">//====================================================</span></div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160; </div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;  <span class="comment">// Print::mutex_ definiton</span></div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;  <span class="keyword">inline</span> std::mutex Print::mutex_;</div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160; </div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;  <span class="comment">// print function initialization</span></div>
+<div class="line"><a name="l00481"></a><span class="lineno"><a class="line" href="namespaceptc.html#a47e81ebc0f77793fb8f91904742106c9">  481</a></span>&#160;  <span class="keyword">inline</span> <a class="code" href="structptc_1_1Print.html">Print</a> <a class="code" href="namespaceptc.html#a47e81ebc0f77793fb8f91904742106c9">print</a>;</div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160; } <span class="comment">// end of namespace ptc</span></div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160; </div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="anamespaceptc_html"><div class="ttname"><a href="namespaceptc.html">ptc</a></div><div class="ttdef"><b>Definition:</b> print.hpp:32</div></div>
-<div class="ttc" id="anamespaceptc_html_a47e81ebc0f77793fb8f91904742106c9"><div class="ttname"><a href="namespaceptc.html#a47e81ebc0f77793fb8f91904742106c9">ptc::print</a></div><div class="ttdeci">Print print</div><div class="ttdef"><b>Definition:</b> print.hpp:480</div></div>
+<div class="ttc" id="anamespaceptc_html_a47e81ebc0f77793fb8f91904742106c9"><div class="ttname"><a href="namespaceptc.html#a47e81ebc0f77793fb8f91904742106c9">ptc::print</a></div><div class="ttdeci">Print print</div><div class="ttdef"><b>Definition:</b> print.hpp:481</div></div>
 <div class="ttc" id="anamespaceptc_html_aa730094183bf13993032c00ee196eafb"><div class="ttname"><a href="namespaceptc.html#aa730094183bf13993032c00ee196eafb">ptc::mode</a></div><div class="ttdeci">mode</div><div class="ttdoc">Enum class used to set up the &quot;str&quot; mode to pass a string with the content of the print function.</div><div class="ttdef"><b>Definition:</b> print.hpp:42</div></div>
 <div class="ttc" id="anamespaceptc_html_aa730094183bf13993032c00ee196eafba341be97d9aff90c9978347f66f945b77"><div class="ttname"><a href="namespaceptc.html#aa730094183bf13993032c00ee196eafba341be97d9aff90c9978347f66f945b77">ptc::mode::str</a></div><div class="ttdeci">@ str</div></div>
 <div class="ttc" id="anamespaceptc_html_ab0219b8011d105b1b8fe8b08eb20572d"><div class="ttname"><a href="namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572d">ptc::ANSI</a></div><div class="ttdeci">ANSI</div><div class="ttdoc">Enum class used to switch among ANSI escape configurations in the &quot;is_escape&quot; function.</div><div class="ttdef"><b>Definition:</b> print.hpp:49</div></div>
@@ -413,7 +414,7 @@ $(function() {
 <div class="ttc" id="astructptc_1_1Print_html_a0257ee6796107273fe853ac21cc8b2ed"><div class="ttname"><a href="structptc_1_1Print.html#a0257ee6796107273fe853ac21cc8b2ed">ptc::Print::setEnd</a></div><div class="ttdeci">void setEnd(const T &amp;end_val)</div><div class="ttdoc">Setter used to set the value of the &quot;end&quot; variable. Templated type is required in order to allow also...</div><div class="ttdef"><b>Definition:</b> print.hpp:204</div></div>
 <div class="ttc" id="astructptc_1_1Print_html_a37353dfb0f1c62cdb0d6b46c37993791"><div class="ttname"><a href="structptc_1_1Print.html#a37353dfb0f1c62cdb0d6b46c37993791">ptc::Print::setSep</a></div><div class="ttdeci">void setSep(const T &amp;sep_val)</div><div class="ttdoc">Setter used to set the value of the &quot;sep&quot; variable. Templated type is required in order to allow also...</div><div class="ttdef"><b>Definition:</b> print.hpp:217</div></div>
 <div class="ttc" id="astructptc_1_1Print_html_a38dace1f19a1774cd984d8b87cefef29"><div class="ttname"><a href="structptc_1_1Print.html#a38dace1f19a1774cd984d8b87cefef29">ptc::Print::operator()</a></div><div class="ttdeci">void operator()(T &amp;&amp;first, Args &amp;&amp;... args) const</div><div class="ttdoc">Frontend implementation of the () operator overload to print to the output stream....</div><div class="ttdef"><b>Definition:</b> print.hpp:285</div></div>
-<div class="ttc" id="astructptc_1_1Print_html_a5bd94beb0d274d8181c40c6bea0c85fa"><div class="ttname"><a href="structptc_1_1Print.html#a5bd94beb0d274d8181c40c6bea0c85fa">ptc::Print::operator()</a></div><div class="ttdeci">const std::string operator()(mode &amp;&amp;first, Args &amp;&amp;... args) const</div><div class="ttdoc">Frontend implementation of the () operator overload to initialize its content with an std::string obj...</div><div class="ttdef"><b>Definition:</b> print.hpp:307</div></div>
+<div class="ttc" id="astructptc_1_1Print_html_a5bd94beb0d274d8181c40c6bea0c85fa"><div class="ttname"><a href="structptc_1_1Print.html#a5bd94beb0d274d8181c40c6bea0c85fa">ptc::Print::operator()</a></div><div class="ttdeci">const std::string operator()(mode &amp;&amp;first, Args &amp;&amp;... args) const</div><div class="ttdoc">Frontend implementation of the () operator overload to initialize its content with an std::string obj...</div><div class="ttdef"><b>Definition:</b> print.hpp:308</div></div>
 <div class="ttc" id="astructptc_1_1Print_html_a5cff2b914ce06a77dff5fb2c6c90bd36"><div class="ttname"><a href="structptc_1_1Print.html#a5cff2b914ce06a77dff5fb2c6c90bd36">ptc::Print::Print</a></div><div class="ttdeci">Print()</div><div class="ttdoc">Default constructor of the Print class. It initializes the basic class members and enable (if require...</div><div class="ttdef"><b>Definition:</b> print.hpp:185</div></div>
 <div class="ttc" id="astructptc_1_1Print_html_a69ee6bb93bff9c2ae974d2554921604b"><div class="ttname"><a href="structptc_1_1Print.html#a69ee6bb93bff9c2ae974d2554921604b">ptc::Print::getFlush</a></div><div class="ttdeci">const bool &amp; getFlush() const</div><div class="ttdoc">Getter used to get the value of the &quot;flush&quot; variable. Mainly used for debugging.</div><div class="ttdef"><b>Definition:</b> print.hpp:266</div></div>
 <div class="ttc" id="astructptc_1_1Print_html_a80defb4de858a0ca354d1440d027a756"><div class="ttname"><a href="structptc_1_1Print.html#a80defb4de858a0ca354d1440d027a756">ptc::Print::getEnd</a></div><div class="ttdeci">const auto &amp; getEnd() const</div><div class="ttdoc">Getter used to get the value of the &quot;end&quot; variable. Mainly used for debugging.</div><div class="ttdef"><b>Definition:</b> print.hpp:244</div></div>
