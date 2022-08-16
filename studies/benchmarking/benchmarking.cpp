@@ -178,14 +178,14 @@ static void fmt_print_file( bm::State& state )
 
 // non built-in types
 //BENCHMARK( ptc_print_complex );
-BENCHMARK( ptc_print_vector );
+//BENCHMARK( ptc_print_vector );
 
 //====================================================
 //     Comparison with other libraries
 //====================================================
 
 // stdout
-//BENCHMARK( ptc_print_stdout );
+BENCHMARK( ptc_print_stdout );
 //BENCHMARK( fmt_print_stdout ) ;
 //BENCHMARK( std_cout_stdout ) ;
 //BENCHMARK( printf_stdout );

@@ -284,7 +284,8 @@ namespace ptc
      template <class T, class... Args>
      void operator()( T&& first, Args&&... args ) const
       {
-       if constexpr ( std::is_base_of_v <std::ostream, std::remove_reference_t<T>> )
+       if constexpr ( std::is_base_of_v <std::ostream, std::remove_reference_t<T>> ||
+                      std::is_base_of_v <std::wostream, std::remove_reference_t<T>> )
         {
          print_backend( std::forward<T>( first ), std::forward<Args>( args )... );
         }
