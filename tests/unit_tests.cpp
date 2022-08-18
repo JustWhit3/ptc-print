@@ -250,17 +250,17 @@ TEST_CASE( "Testing the Print operator << overloads." )
     CHECK_EQ( ptc::print( ptc::mode::str, map ), "[[1, 1], [2, 2], [3, 3]]" );
 
     // std::multiset
-    //std::multiset <int,int> multiset;
-    //multiset.insert(40);
-    //multiset.insert(23);
-    //multiset.insert(1);
-    //CHECK_EQ( ptc::print( ptc::mode::str, multiset ), "[40, 23, 1]" );
+    std::multiset <int, std::greater<int>> multiset;
+    multiset.insert( 40 );
+    multiset.insert( 23 );
+    multiset.insert( 1 );
+    CHECK_EQ( ptc::print( ptc::mode::str, multiset ), "[40, 23, 1]" );
 
     // std::multimap
-    //std::multimap <int, int> multimap;
-    //multimap.insert( std::pair <int, int> ( 1, 40 ) );
-    //multimap.insert( std::pair <int, int> ( 2, 30 ) );
-    //CHECK_EQ( ptc::print( ptc::mode::str, multimap ), "[40, 23, 1]" );
+    std::multimap <int, int> multimap;
+    multimap.insert( std::pair <int, int> ( 1, 40 ) );
+    multimap.insert( std::pair <int, int> ( 2, 30 ) );
+    CHECK_EQ( ptc::print( ptc::mode::str, multimap ), "[[1, 40], [2, 30]]" );
 
     // std::unordered_set
     std::unordered_set<int> u_set = { 7, 5, 16 };
@@ -271,8 +271,14 @@ TEST_CASE( "Testing the Print operator << overloads." )
     CHECK_EQ( ptc::print( ptc::mode::str, u_map ), "[[3, 3], [2, 2], [1, 1]]" );
 
     // std::unordered_multiset
+    std::unordered_multiset <int> u_multiset = { 40, 23, 1 };
+    CHECK_EQ( ptc::print( ptc::mode::str, u_multiset ), "[23, 1, 40]" );
 
     // std::unordered_multimap
+    std::unordered_multimap <int, int> u_multimap;
+    u_multimap.insert( std::pair <int, int> ( 1, 40 ) );
+    u_multimap.insert( std::pair <int, int> ( 2, 30 ) );
+    CHECK_EQ( ptc::print( ptc::mode::str, u_multimap ), "[[2, 30], [1, 40]]" );
 
     // std::stack
     //std::stack <int> stack;
