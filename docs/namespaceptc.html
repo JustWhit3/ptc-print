@@ -108,6 +108,10 @@ Functions</h2></td></tr>
 <tr class="memitem:abfee0deec9615be2f860bb4b1c03ff95"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if_t&lt; ! <a class="el" href="namespaceptc.html#ab0b2783691a9b9945d655b966e07a001">is_streamable_v</a>&lt; ContainerType&lt; ValueType, Args... &gt; &gt;, std::ostream &amp; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#abfee0deec9615be2f860bb4b1c03ff95">operator&lt;&lt;</a> (std::ostream &amp;os, const ContainerType&lt; ValueType, Args... &gt; &amp;container)</td></tr>
 <tr class="memdesc:abfee0deec9615be2f860bb4b1c03ff95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload for all containers printing. Containers which already has an operator &lt;&lt; overload will be ignored.  <a href="namespaceptc.html#abfee0deec9615be2f860bb4b1c03ff95">More...</a><br /></td></tr>
 <tr class="separator:abfee0deec9615be2f860bb4b1c03ff95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a365f41c15db47bf1ff59099e2a2c7188"><td class="memTemplParams" colspan="2">template&lt;class T , size_t T_no&gt; </td></tr>
+<tr class="memitem:a365f41c15db47bf1ff59099e2a2c7188"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a365f41c15db47bf1ff59099e2a2c7188">operator&lt;&lt;</a> (std::ostream &amp;os, const std::array&lt; T, T_no &gt; &amp;container)</td></tr>
+<tr class="memdesc:a365f41c15db47bf1ff59099e2a2c7188"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload for std::array printing.  <a href="namespaceptc.html#a365f41c15db47bf1ff59099e2a2c7188">More...</a><br /></td></tr>
+<tr class="separator:a365f41c15db47bf1ff59099e2a2c7188"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a749b2a08b88b506e86e6f080b9a8814f"><td class="memTemplParams" colspan="2">template&lt;typename T1 , size_t arrSize, typename  = std::enable_if_t&lt; ! std::is_same &lt;T1,char&gt;::value&gt;&gt; </td></tr>
 <tr class="memitem:a749b2a08b88b506e86e6f080b9a8814f"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a749b2a08b88b506e86e6f080b9a8814f">operator&lt;&lt;</a> (std::ostream &amp;os, const T1(&amp;arr)[arrSize])</td></tr>
 <tr class="memdesc:a749b2a08b88b506e86e6f080b9a8814f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload for C arrays printing.  <a href="namespaceptc.html#a749b2a08b88b506e86e6f080b9a8814f">More...</a><br /></td></tr>
@@ -179,7 +183,7 @@ Variables</h2></td></tr>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="abfee0deec9615be2f860bb4b1c03ff95"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abfee0deec9615be2f860bb4b1c03ff95">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[1/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abfee0deec9615be2f860bb4b1c03ff95">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -226,8 +230,55 @@ template&lt;template&lt; typename, typename... &gt; class ContainerType, typenam
 
 </div>
 </div>
+<a id="a365f41c15db47bf1ff59099e2a2c7188"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a365f41c15db47bf1ff59099e2a2c7188">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , size_t T_no&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream&amp; ptc::operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>os</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::array&lt; T, T_no &gt; &amp;&#160;</td>
+          <td class="paramname"><em>container</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Overload for std::array printing. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The type of the array. </td></tr>
+    <tr><td class="paramname">T_no</td><td>The number of elements of the array. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">os</td><td>The stream to which the output is printed. </td></tr>
+    <tr><td class="paramname">container</td><td>The array to be printed. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::ostream&amp; The stream to which the overload prints. </dd></dl>
+
+</div>
+</div>
 <a id="abb80c82a33f0d1de0459023fd95304f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb80c82a33f0d1de0459023fd95304f5">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abb80c82a33f0d1de0459023fd95304f5">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -281,7 +332,7 @@ template&lt;class T_cmplx &gt; </div>
 </div>
 </div>
 <a id="a746cb82b95a2dc5f7b9ceb440e859d15"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a746cb82b95a2dc5f7b9ceb440e859d15">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a746cb82b95a2dc5f7b9ceb440e859d15">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -336,7 +387,7 @@ template&lt;typename T , typename U &gt; </div>
 </div>
 </div>
 <a id="a749b2a08b88b506e86e6f080b9a8814f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a749b2a08b88b506e86e6f080b9a8814f">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a749b2a08b88b506e86e6f080b9a8814f">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
