@@ -9,11 +9,12 @@ Author: Gianluca Bianco
 #     Modules
 #################################################
 import time
-import doctest
 import subprocess
 import argparse as ap
 from termcolor import colored as cl
 import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
 #################################################
 #     get_time_of
@@ -55,11 +56,13 @@ def get_time_of_stats( program ):
         float: mean and std of the compilation time.
     """
     
+    # Extra info for compilation flags
     additional_flags = "-O3 -O1 -falign-functions=32"
     ldflags = ""
     if "fmt" in program:
         ldflags = "-lfmt"
 
+    # Getting time statistics
     iter_mean = np.array( [] )
     for n in range( int( args.niter ) ):
         get_time = get_time_of( "g++ -std=c++17 {} {} {}".format( additional_flags, program, ldflags ) )
@@ -67,6 +70,26 @@ def get_time_of_stats( program ):
     mean, std = iter_mean.mean(), iter_mean.std()
     
     return mean, std
+
+#################################################
+#     do_plot
+#################################################
+def do_plot( data_programs, data_mean, data_std ):
+    """
+    Function used to plot results.
+
+    Args:
+        data_programs (pandas.Series): container for program names.
+        data_mean (pandas.Series): container for mean values.
+        data_std (pandas.Series): container for STD values.
+    """
+
+    # Variables
+    colors = [ "red", "green", "blue", "orange", "pink", "cyan" ]
+    
+    # Plotting results
+    plt.bar( data_programs.keys(), data_mean, yerr = data_std, color = colors, capsize = 5 )
+    plt.show()
     
 #################################################
 #     Main
@@ -74,36 +97,46 @@ def get_time_of_stats( program ):
 def main():
     
     # Variables
+    data_programs = pd.Series( [], dtype = str )
+    data_mean = pd.Series( [], dtype = float )
+    data_std = pd.Series( [], dtype = float )
     programs = [
-        "programs/stdout.cpp",
-        "programs/ptc.cpp",
-        "programs/fmt.cpp"
+        "programs/ptc.cpp",    # ptc
+        "programs/fmt.cpp",    # fmt
+        "programs/printf.cpp", # printf
+        "programs/stdout.cpp"  # stdout
     ]
     
-    # Launch benchmarks
-    print()
-    for program in programs:
+    # Launching benchmarks
+    for index, program in enumerate( programs ):
         mean, std = get_time_of_stats( program )
-        if args.plots == "no":
-            print( "Program: ", cl( program, "green" ) )
-            print( "- Mean: ", mean )
-            print( "- STD: ", std )
-            print()
+        data_programs[ index ] =  program[9:-4]
+        if "ptc" in program:
+            data_programs[ index ] =  "ptc::print"
+        elif "fmt" in program:
+            data_programs[ index ] =  "fmt::print"
+        elif "stdout" in program:
+            data_programs[ index ] =  "std::cout"
+        data_mean[ index ] =  mean
+        data_std[ index ] =  std
+    
+    # Dataframe settings
+    data_dict = { "Object / function": data_programs, "Compile Time (Mean)": data_mean, "Compile Time (STD)": data_std }
+    data = pd.concat( data_dict, axis = 1 )
+    
+    # Doing plots
+    if args.plots == "no":
+        print( data.to_markdown() )
+    elif args.plots == "yes":
+        do_plot( data_programs, data_mean, data_std )
 
 if __name__ == "__main__":
 
     # Parser settings
     parser = ap.ArgumentParser( description = "Parsing input file names." ) 
-    parser.add_argument( "--tests", default = "on", help = "Enable/disable tests (yes / no)." )
     parser.add_argument( "--niter", default = 100, help = "The number of benchmarking iterations." )
     parser.add_argument( "--plots", default = "no", help = "Produce or not plots." )
     args = parser.parse_args()
     
     # Main commands
-    if args.tests == "on":
-        doctest.testmod()
-        main()
-    elif args.tests == "off":
-        main()
-    else:
-        raise RuntimeError( cl( "Inserted --tests option \"{}\" is not supported!".format( args.tests ), "red" ) )
+    main()
