@@ -454,13 +454,38 @@ print( "I am", "Python", 123, sep = "*", end = "" );
 
 ## Todo
 
-- Add support to date printing.
-- Add support to other types printing.
-- Add support to `std::wcout`, `std::wcerr` and `std::wclog` printing.
-- Add a specific method to reorder the printing of a nidified container.
-- Improve the printing on an external file stream.
+- Add support to [date and time](https://en.cppreference.com/w/cpp/chrono) printing.
+- Add standard C pointers printing.
+- Add support to `std::stack` and `std::priority_queue` printing. See [this](https://github.com/JustWhit3/ptc-print/issues/10) issue.
+- Add support to `std::wcout`, `std::wcerr` and `std::wclog` printing. See [this](https://github.com/JustWhit3/ptc-print/issues/9) issue.
+- Add a specific method to reorder the printing of a nidified container. For example:
+
+```C++
+#include <ptc/print.hpp>
+#include <map>
+
+int main()
+ {
+  std::map<int, std::string> map = { {1, "one"}, {3, "three"}, {5, "five"} };
+
+  ptc::print( ptc::reorder( map ) );
+ }
+```
+
+```Bash
+KEY  VALUE
+1    one
+3    three
+5    five
+```
+
+- Improve the printing on an external file stream. Current implementation is too slow.
+- Add possibility / instructions to print user-defined types.
 - Add studies on the executable size.
 - Add studies on the compile time.
+- Test the software with `MSVC` compiler.
+- Upload the package on some package managers (ex: [`Conan`](https://conan.io/) or `dpkg`).
+- Create a [wiki](https://github.com/JustWhit3/ptc-print/wiki) with detailed examples for every feature.
 
 ## Credits
 

@@ -216,8 +216,8 @@ TEST_CASE( "Testing the Print operator << overloads." )
     ptc::print.setEnd( "" );
 
     // std::array
-    //std::array <int, 3> array = { 1, 2, 3 };
-    //CHECK_EQ( ptc::print( ptc::mode::str, array ), "[1, 2, 3]" );
+    std::array <int, 3> array = { 1, 2, 3 };
+    CHECK_EQ( ptc::print( ptc::mode::str, array ), "[1, 2, 3]" );
 
     // std::vector
     std::vector <int> vec = { 1, 2, 3 };

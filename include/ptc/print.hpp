@@ -136,6 +136,31 @@ namespace ptc
     return os;
    }
 
+  // Overload for std::array printing
+  /**
+   * @brief Overload for std::array printing.
+   * 
+   * @tparam T The type of the array.
+   * @tparam T_no The number of elements of the array.
+   * @param os The stream to which the output is printed.
+   * @param container The array to be printed.
+   * @return std::ostream& The stream to which the overload prints.
+   */
+  template <class T, size_t T_no>
+  std::ostream& operator <<( std::ostream& os, const std::array<T, T_no>& container ) 
+   {
+    os << "[";
+    const char* separator = "";
+    for ( const auto& elem: container )
+     {
+      os << separator;
+      os << elem;
+      separator = ", ";
+     }
+    os << "]";
+    return os;
+   }
+
   // Overload for C arrays
   /**
    * @brief Overload for C arrays printing.
