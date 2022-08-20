@@ -379,7 +379,7 @@ Other suggestions are more than welcome.
 
 ### Benchmarking the execution time
 
-Benchmarking is performed using the [Google Benchmark](https://github.com/google/benchmark) framework. The script [run.sh](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking_execution/run.sh) is used to generate and analyze benchmark data. It makes use of the [cpupower](https://linux.die.net/man/1/cpupower) tool and launches two other scripts during its run:
+Benchmarking is performed using the [Google Benchmark](https://github.com/google/benchmark) framework. The script [studies/benchmarking_execution/run.sh](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking_execution/run.sh) is used to generate and analyze benchmark data. It makes use of the [cpupower](https://linux.die.net/man/1/cpupower) tool and launches two other scripts during its run:
 
 - [benchmark.cpp](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking_execution/benchmarking.cpp): is used for data generation and benchmarks measurement. The same procedure, which for `ptc::print` corresponds to printing:
 
@@ -421,19 +421,19 @@ To run these benchmarks you can do:
 
 ### Benchmarking the compilation time
 
-Compilation time studies are performed using the [studies/benchmarking_compilation/run.sh](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking_compilation/run.sh) script. It launches the [analysis.py](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking/analysis.py) script during its run.
+Compilation time studies are performed using the [studies/benchmarking_compilation/run.sh](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking_compilation/run.sh) script, which launches the [analysis.py](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking/analysis.py) script during its run, which generates and analyzes benchmark data.
 
-This script generates and analyze benchmark data: a program performing the same procedure, which for `ptc::print` corresponds to printing:
+During its procedure, program printing the same string, which for `ptc::print` corresponds to:
 
 ```c++
 ptc::print( "Testing", 123, "print", '!' );
 ```
 
-is created and compiled with `-O3 -O1 -falign-functions=32` flags for *100* times. The total compilation time of each run is registered and averaged. Final mean value with the corresponding standard deviation is considered.
-
-**Results**:
+is created and compiled with `-O3 -O1 -falign-functions=32` flags, for *100* times. The total compilation time of each run is registered and averaged. Final mean value with the corresponding standard deviation is considered:
 
 <img src="https://github.com/JustWhit3/ptc-print/blob/main/img/benchmarks/compilation_time/stdout_stream.png">
+
+As seen from the above plot, compilation time of `ptc::print` needs to be improved.
 
 ### Advantages
 
