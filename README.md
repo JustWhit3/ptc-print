@@ -26,8 +26,9 @@
   - [Performance improvements](#performance-improvements)
 - [Tests](#tests)
 - [Comparison with other libraries](#comparison-with-other-libraries)
-  - [Benchmarking](#benchmarking)
-  - [Benchmarking with performance improvements](#benchmarking-with-performance-improvements)
+  - [Benchmarking the execution time](#benchmarking)
+  - [Benchmarking the execution time with performance improvements](#benchmarking-with-performance-improvements)
+  - [Benchmarking the compilation time](#benchmarking-the-compilation-time)
   - [Advantages](#advantages)
 - [Todo](#todo)
 - [Credits](#credits)
@@ -366,20 +367,6 @@ Tests using the `PTC_ENABLE_PERFORMANCE_IMPROVEMENTS` macro are automatically pe
 
 To install extra libraries used for comparison you can use the [`install_deps.sh`]((https://github.com/JustWhit3/ptc-print/blob/main/studies/install_deps.sh)) script.
 
-### Benchmarking
-
-Benchmarking is performed using the [Google Benchmark](https://github.com/google/benchmark) framework. The script [run.sh](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking/run.sh) is used to generate and analyze benchmark data. It makes use of the [cpupower](https://linux.die.net/man/1/cpupower) tool and launches two other scripts during its run:
-
-- [benchmark.cpp](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking/benchmarking.cpp): is used for data generation and benchmarks measurement. The same procedure, which for `ptc::print` corresponds to printing:
-
-```c++
-ptc::print( "Testing", 123, "print", '!' );
-```
-
-is repeated for *300.000* times and the total execution time is registered. This latter step is repeated again for *100* times and results of each iteration are averaged each other. Final mean value with the corresponding standard deviation is considered. This script is compiled with `-O3 -O1 -falign-functions=32` flags.
-
-- [analysis.py](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking/analysis.py): is used for data analysis and plots production, with comparison among each library benchmark results.
-
 List of functions / objects which `ptc::print` is compared with:
 
 - [`std::cout`](https://en.cppreference.com/w/cpp/io/cout)
@@ -390,6 +377,20 @@ List of functions / objects which `ptc::print` is compared with:
 
 Other suggestions are more than welcome.
 
+### Benchmarking the execution time
+
+Benchmarking is performed using the [Google Benchmark](https://github.com/google/benchmark) framework. The script [run.sh](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking_execution/run.sh) is used to generate and analyze benchmark data. It makes use of the [cpupower](https://linux.die.net/man/1/cpupower) tool and launches two other scripts during its run:
+
+- [benchmark.cpp](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking_execution/benchmarking.cpp): is used for data generation and benchmarks measurement. The same procedure, which for `ptc::print` corresponds to printing:
+
+```c++
+ptc::print( "Testing", 123, "print", '!' );
+```
+
+is repeated for *300.000* times and the total execution time is registered. This latter step is repeated again for *100* times and results of each iteration are averaged each other. Final mean value with the corresponding standard deviation is considered. This script is compiled with `-O3 -O1 -falign-functions=32` flags.
+
+- [analysis.py](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking_execution/analysis.py): is used for data analysis and plots production, with comparison among each library benchmark results.
+
 **Real time** benchmark results:
 
 <img src="https://github.com/JustWhit3/ptc-print/blob/main/img/benchmarks/real_time/stdout_stream.png">
@@ -398,7 +399,7 @@ Other suggestions are more than welcome.
 
 <img src="https://github.com/JustWhit3/ptc-print/blob/main/img/benchmarks/cpu_time/stdout_stream.png">
 
-### Benchmarking with performance improvements
+### Benchmarking the execution time with performance improvements
 
 Extra studies are performed using consistent improvements in the execution time, thanks to the `PTC_ENABLE_PERFORMANCE_IMPROVEMENTS` macro usage (see [here](#install-and-use) for more information). Using this macro definition will consistently speed-up the `ptc::print` object, as you can see from the following plots.
 
@@ -417,6 +418,22 @@ To run these benchmarks you can do:
 <img src="https://github.com/JustWhit3/ptc-print/blob/main/img/benchmarks/cpu_time/stdout_stream_macro.png">
 
 `std::cout` is omitted since some of the performance improvements are directly applied also to it.
+
+### Benchmarking the compilation time
+
+Compilation time studies are performed using the [studies/benchmarking_compilation/run.sh](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking_compilation/run.sh) script. It launches the [analysis.py](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking/analysis.py) script during its run.
+
+This script generates and analyze benchmark data: a program performing the same procedure, which for `ptc::print` corresponds to printing:
+
+```c++
+ptc::print( "Testing", 123, "print", '!' );
+```
+
+is created and compiled with `-O3 -O1 -falign-functions=32` flags for *100* times. The total compilation time of each run is registered and averaged. Final mean value with the corresponding standard deviation is considered.
+
+**Results**:
+
+<img src="https://github.com/JustWhit3/ptc-print/blob/main/img/benchmarks/compilation_time/stdout_stream.png">
 
 ### Advantages
 
