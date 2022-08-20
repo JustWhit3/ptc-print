@@ -56,7 +56,7 @@ namespace ptc
   /**
    * @brief Struct used to define a specific type trait for operator << overload for container printing.
    * 
-   * @tparam T 
+   * @tparam T Template type of the type trait.
    */
   template<class T>
   struct is_streamable 

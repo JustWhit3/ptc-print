@@ -15,6 +15,7 @@ from termcolor import colored as cl
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import os
 
 #################################################
 #     get_time_of
@@ -85,11 +86,28 @@ def do_plot( data_programs, data_mean, data_std ):
     """
 
     # Variables
+    fig, ax = plt.subplots()
     colors = [ "red", "green", "blue", "orange", "pink", "cyan" ]
     
     # Plotting results
-    plt.bar( data_programs.keys(), data_mean, yerr = data_std, color = colors, capsize = 5 )
-    plt.show()
+    plt.bar( data_programs, data_mean, yerr = data_std, color = colors, capsize = 5 )
+    
+    # Adding labels
+    for i, val in enumerate( data_programs ):
+        ax.text( i - 0.18 , 0.01, round( data_mean[ i ], 3 ), color = "white", fontweight = "bold" )
+    ax.set_xlabel( "Object / function" )
+    ax.set_ylabel( "Time (s)" )
+    
+    # Other plot settings
+    ax.set_title( r'''$\bf{Compilation \ time \ benchmarks}$ (stdout stream)''' )
+    ax.yaxis.grid( True )
+    ax.set_axisbelow( True )
+
+    # Save plots
+    path = "../../img/benchmarks/compilation_time"
+    if not os.path.exists( path ):
+        os.makedirs( path )
+    plt.savefig( "{}/stdout_stream.png".format( path ) )
     
 #################################################
 #     Main
@@ -121,7 +139,7 @@ def main():
         data_std[ index ] =  std
     
     # Dataframe settings
-    data_dict = { "Object / function": data_programs, "Compile Time (Mean)": data_mean, "Compile Time (STD)": data_std }
+    data_dict = { "Object / function": data_programs, "Compile Time (Mean) [s]": data_mean, "Compile Time (STD) [s]": data_std }
     data = pd.concat( data_dict, axis = 1 )
     
     # Doing plots
