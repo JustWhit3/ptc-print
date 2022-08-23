@@ -85,6 +85,11 @@ void standard()
   // Testing usage of "nullptr" as argument
   ptc::print( "\nTesting", nullptr, nullptr );
 
+  // Testing usage of setPattern
+  ptc::print.setPattern( "|" );
+  ptc::print( "Testing", "this", "pattern", 123 );
+  ptc::print.setPattern( "" );
+
   // Testing usage of other std::ostream objects
   //ptc::print( std::wcout, "Testing std::wcout!" ); // ERROR
  }

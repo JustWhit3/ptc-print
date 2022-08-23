@@ -207,7 +207,7 @@ namespace ptc
       * @brief Default constructor of the Print class. It initializes the basic class members and enable (if required) performance improvements..
       * 
       */
-     Print(): end( "\n" ), sep( " " ), flush( false ) 
+     Print(): end( "\n" ), sep( " " ), pattern( "" ), flush( false )
       {
        #ifdef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
         performance_options();
@@ -248,12 +248,24 @@ namespace ptc
      /**
       * @brief Setter used to set the value of the "flush" variable. Templated type is required in order to allow also char variables.
       * 
-      * 
       * @param flush_val The inserted expression used to set the value of the "flush" variable.
       */
      inline void setFlush( const bool& flush_val )
       {
        flush = flush_val;
+      }
+    
+     // setPattern
+     /**
+      * @brief Setter used to set the value of the "pattern" variable. Templated type is required in order to allow also char variables.
+      * 
+      * @tparam T The type of the expression inserted to set the value of "pattern" variable.
+      * @param pattern_val The inserted expression used to set the value of "pattern" variable.
+      */
+     template <class T>
+     inline void setPattern( const T& pattern_val )
+      {
+       pattern = pattern_val;
       }
 
      //====================================================
@@ -291,6 +303,17 @@ namespace ptc
      inline const bool& getFlush() const
       {
        return flush;
+      }
+
+     // getPattern
+     /**
+      * @brief Getter used to get the value of the "pattern" variable. Mainly used for debugging.
+      * 
+      * @return auto The value of the "pattern" variable.
+      */
+     inline const auto& getPattern() const
+      {
+       return pattern;
       }
 
      //====================================================
@@ -413,7 +436,7 @@ namespace ptc
 
      // is_null_str
      /**
-      * @brief This method is used to check if an input variable is a null string or not.
+      * @brief This method is used to check if an input variable is a null string or not. Method used to ensure the required condition also in case of char, std::string, const char*... types.
       * 
       * @tparam T The templated type of the input variable.
       * @param str The input variable.
@@ -446,23 +469,40 @@ namespace ptc
       {
        std::lock_guard <std::mutex> lock{ mutex_ };
  
-       // Printing all the arguments
-       os << first;
+       // Printing the first argument
+       if( is_null_str( getPattern() ) || is_null_str( first ) || is_escape( first, ANSI::first ) ) os << first;
+       else os << getPattern() << first << getPattern();
+
+       // Printing all the other arguments
        if constexpr( sizeof...( args ) > 0 ) 
         {
-         if ( is_null_str( first ) || is_escape( first, ANSI::first ) ) ( ( os << args << getSep() ), ...); 
-         else ( ( os << getSep() << args ), ...);
+         if ( is_null_str( first ) || is_escape( first, ANSI::first ) ) 
+          {
+           if( is_null_str( getPattern() ) ) ( ( os << args << getSep() ), ...);
+           else ( ( os << getPattern() << args << getPattern() << getSep() ), ...);
+          }
+         else 
+          {
+           if( is_null_str( getPattern() ) ) ( ( os << getSep() << args ), ...);
+           else ( ( os << getSep() << getPattern() << args << getPattern() ), ...);
+          }
         }
        os << getEnd();
 
        // Resetting the stream from ANSI escape sequences
        if constexpr( sizeof...( args ) > 0 )
         {
-         if ( is_escape( first, ANSI::generic ) || ( ( is_escape( args, ANSI::generic ) ) || ...) ) os << reset_ANSI;
+         if ( is_escape( first, ANSI::generic ) || ( ( is_escape( args, ANSI::generic ) ) || ...) )
+          {
+           os << reset_ANSI;
+          }
         }
        else 
         {
-        if ( is_escape( first, ANSI::generic ) ) os << reset_ANSI;
+        if ( is_escape( first, ANSI::generic ) ) 
+         {
+          os << reset_ANSI;
+         }
         }
        if ( getFlush() && ! std::is_base_of_v <std::ostringstream, T_os> ) os << std::flush;
       }
@@ -480,11 +520,11 @@ namespace ptc
        std::cin.tie( NULL );
        std::cout.tie( NULL );
       }
-
+     
      //====================================================
      //     Private attributes
      //====================================================
-     std::string end, sep;
+     std::string end, sep, pattern;
      static std::mutex mutex_;
      bool flush;
 

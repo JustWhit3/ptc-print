@@ -72,7 +72,7 @@ Supported compilers:
 
 ### Standard cases
 
-To normally print messages to stdout:
+To normally **print** messages to stdout:
 
 ```C++
 #include <ptc/print.hpp>
@@ -93,7 +93,7 @@ Printing to stdout!
 Here I am 123 bye!
 ```
 
-Print to a different output stream:
+Print to a **different output stream**:
 
 ```C++
 #include <ptc/print.hpp>
@@ -118,7 +118,7 @@ I am the stderr!
 Printing with in an std::ostringstream.
 ```
 
-To write into a file:
+To **write into a file**:
 
 ```C++
 #include <ptc/print.hpp>
@@ -132,7 +132,7 @@ int main()
  }
 ```
 
-To change the end-line character / instruction:
+To change the **end-line** character / instruction:
 
 ```C++
 #include <ptc/print.hpp>
@@ -158,7 +158,7 @@ These are
 two rows.
 ```
 
-To change the separator character / instruction:
+To change the **separator** character / instruction:
 
 ```C++
 #include <ptc/print.hpp>
@@ -174,13 +174,13 @@ int main()
 Changing*the*sep.
 ```
 
-To allow output stream flush (false by default) use:
+To allow output stream **flush** (false by default) use:
 
 ```C++
 ptc::print.setFlush( true );
 ```
 
-To initialize a string:
+To **initialize a string**:
 
 ```C++
 #include <ptc/print.hpp>
@@ -196,6 +196,22 @@ int main()
 
 ```txt
 I am a string.
+```
+
+To change the **pattern** among each argument of `ptc::print`:
+
+```C++
+#include <ptc/print.hpp>
+
+int main()
+ {
+  ptc::print.setPattern( "|" );
+  ptc::print( "Changing", "the", "pattern" );
+ }
+```
+
+```txt
+|Changing| |the| |pattern|
 ```
 
 ### Printing with ANSI escape sequences
@@ -505,8 +521,6 @@ KEY  VALUE
 
 - Improve the printing on an external file stream. Current implementation is too slow.
 - Add possibility / instructions to print user-defined types.
-- Add studies on the executable size.
-- Add studies on the compile time.
 - Test the software with `MSVC` compiler.
 - Upload the package on some package managers (ex: [`Conan`](https://conan.io/) or `dpkg`).
 - Create a [wiki](https://github.com/JustWhit3/ptc-print/wiki) with detailed examples for every feature.

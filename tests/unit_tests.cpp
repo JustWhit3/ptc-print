@@ -369,3 +369,26 @@ TEST_CASE( "Testing the Print setFlush and getFlush methods." )
 
   ptc::print.setFlush( false );
  }
+
+//====================================================
+//     Print setPattern and getPattern
+//====================================================
+TEST_CASE( "Testing the Print setPattern and getPattern methods." )
+ {
+  ptc::print.setEnd( "" );
+
+  ptc::print.setPattern( "|" );
+  CHECK_EQ( ptc::print( ptc::mode::str, "Testing", "this", "pattern" ), "|Testing| |this| |pattern|" );
+  CHECK_EQ( ptc::print( ptc::mode::str, "", "this", "pattern" ), "|this| |pattern| " );
+  CHECK_EQ( ptc::print( ptc::mode::str, "\033[31m", "this", "pattern" ), "\033[31m|this| |pattern| \033[0m" );
+  CHECK_EQ( ptc::print( ptc::mode::str, "Testing", 1.2, "pattern" ), "|Testing| |1.2| |pattern|" );
+  CHECK_EQ( ptc::print( ptc::mode::str, 1, "this", "pattern" ), "|1| |this| |pattern|" );
+  ptc::print.setPattern( "" );
+
+  ptc::print.setPattern( '|' );
+  CHECK_EQ( ptc::print( ptc::mode::str, "Testing", "this", "pattern" ), "|Testing| |this| |pattern|" );
+  ptc::print.setPattern( "" );
+  CHECK_EQ( ptc::print( ptc::mode::str, "Testing", "this", "pattern" ), "Testing this pattern" );
+
+  ptc::print.setEnd( "\n" );
+ }

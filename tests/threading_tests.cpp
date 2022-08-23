@@ -48,6 +48,10 @@ int main()
 
     std::string str_out = ptc::print( ptc::mode::str, "This", "is the 1st string!" );
 
+    ptc::print.setPattern( "|" );
+    ptc::print( "Testing", "this", "pattern", 123 );
+    ptc::print.setPattern( "" );
+
     // Non built-in types
     std::complex<int> cmplx_no( 2, 3 );
     ptc::print( cmplx_no );
@@ -82,6 +86,10 @@ int main()
     ptc::print( file_stream, "Printing the", "2nd", "message with std::ofstream" );
 
     std::string str_out = ptc::print( ptc::mode::str, "This", "is the 2nd string!" );
+
+    ptc::print.setPattern( "|" );
+    ptc::print( "Testing", "this", "pattern", 123 );
+    ptc::print.setPattern( "" );
 
     // Non built-in types
     std::complex<int> cmplx_no( 2, 3 );
