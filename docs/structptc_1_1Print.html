@@ -97,6 +97,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af4904f6bc18eff233e0486d22dff1ab1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1Print.html#af4904f6bc18eff233e0486d22dff1ab1">setFlush</a> (const bool &amp;flush_val)</td></tr>
 <tr class="memdesc:af4904f6bc18eff233e0486d22dff1ab1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter used to set the value of the "flush" variable. Templated type is required in order to allow also char variables.  <a href="structptc_1_1Print.html#af4904f6bc18eff233e0486d22dff1ab1">More...</a><br /></td></tr>
 <tr class="separator:af4904f6bc18eff233e0486d22dff1ab1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae33159b13db1d02f09e5cb33751d796f"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:ae33159b13db1d02f09e5cb33751d796f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structptc_1_1Print.html#ae33159b13db1d02f09e5cb33751d796f">setPattern</a> (const T &amp;pattern_val)</td></tr>
+<tr class="memdesc:ae33159b13db1d02f09e5cb33751d796f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter used to set the value of the "pattern" variable. Templated type is required in order to allow also char variables.  <a href="structptc_1_1Print.html#ae33159b13db1d02f09e5cb33751d796f">More...</a><br /></td></tr>
+<tr class="separator:ae33159b13db1d02f09e5cb33751d796f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80defb4de858a0ca354d1440d027a756"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1Print.html#a80defb4de858a0ca354d1440d027a756">getEnd</a> () const</td></tr>
 <tr class="memdesc:a80defb4de858a0ca354d1440d027a756"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter used to get the value of the "end" variable. Mainly used for debugging.  <a href="structptc_1_1Print.html#a80defb4de858a0ca354d1440d027a756">More...</a><br /></td></tr>
 <tr class="separator:a80defb4de858a0ca354d1440d027a756"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -106,6 +110,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a69ee6bb93bff9c2ae974d2554921604b"><td class="memItemLeft" align="right" valign="top">const bool &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1Print.html#a69ee6bb93bff9c2ae974d2554921604b">getFlush</a> () const</td></tr>
 <tr class="memdesc:a69ee6bb93bff9c2ae974d2554921604b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter used to get the value of the "flush" variable. Mainly used for debugging.  <a href="structptc_1_1Print.html#a69ee6bb93bff9c2ae974d2554921604b">More...</a><br /></td></tr>
 <tr class="separator:a69ee6bb93bff9c2ae974d2554921604b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2abf25fabfaa776594cbd9800441f1be"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1Print.html#a2abf25fabfaa776594cbd9800441f1be">getPattern</a> () const</td></tr>
+<tr class="memdesc:a2abf25fabfaa776594cbd9800441f1be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter used to get the value of the "pattern" variable. Mainly used for debugging.  <a href="structptc_1_1Print.html#a2abf25fabfaa776594cbd9800441f1be">More...</a><br /></td></tr>
+<tr class="separator:a2abf25fabfaa776594cbd9800441f1be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a38dace1f19a1774cd984d8b87cefef29"><td class="memTemplParams" colspan="2">template&lt;class T , class... Args&gt; </td></tr>
 <tr class="memitem:a38dace1f19a1774cd984d8b87cefef29"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structptc_1_1Print.html#a38dace1f19a1774cd984d8b87cefef29">operator()</a> (T &amp;&amp;first, Args &amp;&amp;... args) const</td></tr>
 <tr class="memdesc:a38dace1f19a1774cd984d8b87cefef29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frontend implementation of the () operator overload to print to the output stream. The backend implementation is called in the required variation.  <a href="structptc_1_1Print.html#a38dace1f19a1774cd984d8b87cefef29">More...</a><br /></td></tr>
@@ -202,6 +209,34 @@ Public Member Functions</h2></td></tr>
 
 <p>Getter used to get the value of the "flush" variable. Mainly used for debugging. </p>
 <dl class="section return"><dt>Returns</dt><dd>bool The value of the "flush" variable. </dd></dl>
+
+</div>
+</div>
+<a id="a2abf25fabfaa776594cbd9800441f1be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2abf25fabfaa776594cbd9800441f1be">&#9670;&nbsp;</a></span>getPattern()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const auto&amp; ptc::Print::getPattern </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Getter used to get the value of the "pattern" variable. Mainly used for debugging. </p>
+<dl class="section return"><dt>Returns</dt><dd>auto The value of the "pattern" variable. </dd></dl>
 
 </div>
 </div>
@@ -445,6 +480,48 @@ template&lt;class T &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">flush_val</td><td>The inserted expression used to set the value of the "flush" variable. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae33159b13db1d02f09e5cb33751d796f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae33159b13db1d02f09e5cb33751d796f">&#9670;&nbsp;</a></span>setPattern()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ptc::Print::setPattern </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>pattern_val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Setter used to set the value of the "pattern" variable. Templated type is required in order to allow also char variables. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The type of the expression inserted to set the value of "pattern" variable. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pattern_val</td><td>The inserted expression used to set the value of "pattern" variable. </td></tr>
   </table>
   </dd>
 </dl>
