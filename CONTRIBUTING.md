@@ -24,7 +24,7 @@ cd tests
 ./all-tests.sh
 ```
 
-4) Run [benchmarks](https://github.com/JustWhit3/ptc-print#install-and-use:~:text=helgrind%20./bin/system_tests-,Comparison%20with%20other%20libraries,-Empty%20for%20the) in order to be sure performance is not lost:
+4) Run [execution benchmarks](https://github.com/JustWhit3/ptc-print#benchmarking) and [compilation benchmarks](https://github.com/JustWhit3/ptc-print#benchmarking-the-compilation-time) in order to be sure performance is not lost:
 
 ```bash
 cd studies

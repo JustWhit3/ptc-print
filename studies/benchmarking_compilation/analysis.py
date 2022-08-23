@@ -16,6 +16,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
+from tqdm import tqdm
 
 #################################################
 #     get_time_of
@@ -44,6 +45,30 @@ def get_time_of( bash_command ):
     return elapsed_time
 
 #################################################
+#     get_size_of
+#################################################
+def get_size_of( executable ):
+    """
+    Function used to get the size of an executable.
+
+    Args:
+        executable (str): the executable file name.
+
+    Returns:
+        float: the size of the executable.
+    """
+    
+    command = "wc -c < bin/{}".format( executable )
+    output = subprocess.check_output( [ "wc", "-c", "bin/{}".format( executable ) ] )
+    if "fmt" in executable or "ptc" in executable:
+        output = str( output )[2:-11]
+    elif "printf" in executable or "stdout" in executable:
+        output = str( output )[2:-14]
+    output = int( output )
+    
+    return output
+
+#################################################
 #     get_time_of_stats
 #################################################
 def get_time_of_stats( program ):
@@ -58,15 +83,17 @@ def get_time_of_stats( program ):
     """
     
     # Extra info for compilation flags
-    additional_flags = "-O3 -O1 -falign-functions=32"
+    additional_flags = "-O3"
     ldflags = ""
     if "fmt" in program:
         ldflags = "-lfmt"
 
     # Getting time statistics
     iter_mean = np.array( [] )
+    if not os.path.exists( "bin" ):
+        os.makedirs( "bin" )
     for n in range( int( args.niter ) ):
-        get_time = get_time_of( "g++ -std=c++17 {} {} {}".format( additional_flags, program, ldflags ) )
+        get_time = get_time_of( "g++ -std=c++17 {} {} {} -o bin/{}".format( additional_flags, program, ldflags, program[9:-4] ) )
         iter_mean = np.append( iter_mean, get_time )
     mean, std = iter_mean.mean(), iter_mean.std()
     
@@ -75,14 +102,15 @@ def get_time_of_stats( program ):
 #################################################
 #     do_plot
 #################################################
-def do_plot( data_programs, data_mean, data_std ):
+def do_plot( data_programs, data, data_std, atype = "Time" ):
     """
     Function used to plot results.
 
     Args:
         data_programs (pandas.Series): container for program names.
-        data_mean (pandas.Series): container for mean values.
+        data (pandas.Series): container for mean values.
         data_std (pandas.Series): container for STD values.
+        type (str): the plot type.
     """
 
     # Variables
@@ -90,21 +118,36 @@ def do_plot( data_programs, data_mean, data_std ):
     colors = [ "red", "green", "blue", "orange", "pink", "cyan" ]
     
     # Plotting results
-    plt.bar( data_programs, data_mean, yerr = data_std, color = colors, capsize = 5 )
+    if atype == "Time":
+        plt.bar( data_programs, data, yerr = data_std, color = colors, capsize = 5 )
+    elif atype == "Size":
+        plt.bar( data_programs, data, color = colors, capsize = 5 )
     
     # Adding labels
     for i, val in enumerate( data_programs ):
-        ax.text( i - 0.18 , 0.01, round( data_mean[ i ], 3 ), color = "white", fontweight = "bold" )
+        if atype == "Time":
+            ax.text( i - 0.18 , 0.01, round( data[ i ], 3 ), color = "white", fontweight = "bold" )
+        elif atype == "Size":
+            ax.text( i - 0.1 , 4, round( data[ i ], 3 ), color = "white", fontweight = "bold" )
     ax.set_xlabel( "Object / function" )
-    ax.set_ylabel( "Time (s)" )
+    if atype == "Time":
+        ax.set_ylabel( "Time (s)" )
+    elif atype == "Size":
+        ax.set_ylabel( "Size (KiB)" )
     
     # Other plot settings
-    ax.set_title( r'''$\bf{Compilation \ time \ benchmarks}$ (stdout stream)''' )
+    if atype == "Time":
+        ax.set_title( r'''$\bf{Compilation \ time \ benchmarks}$ (stdout stream)''' )
+    elif atype == "Size":
+        ax.set_title( r'''$\bf{Executable \ size}$ (stdout stream)''' )
     ax.yaxis.grid( True )
     ax.set_axisbelow( True )
 
     # Save plots
-    path = "../../img/benchmarks/compilation_time"
+    if atype == "Time":
+        path = "../../img/benchmarks/compilation_time"
+    elif atype == "Size":
+        path = "../../img/benchmarks/executable_size"
     if not os.path.exists( path ):
         os.makedirs( path )
     plt.savefig( "{}/stdout_stream.png".format( path ) )
@@ -118,6 +161,7 @@ def main():
     data_programs = pd.Series( [], dtype = str )
     data_mean = pd.Series( [], dtype = float )
     data_std = pd.Series( [], dtype = float )
+    data_size = pd.Series( [], dtype = int )
     programs = [
         "programs/ptc.cpp",    # ptc
         "programs/fmt.cpp",    # fmt
@@ -126,7 +170,8 @@ def main():
     ]
     
     # Launching benchmarks
-    for index, program in enumerate( programs ):
+    print( "Generating data for compile time benchmarks:" )
+    for index, program in enumerate( tqdm( programs ) ):
         mean, std = get_time_of_stats( program )
         data_programs[ index ] =  program[9:-4]
         if "ptc" in program:
@@ -137,16 +182,25 @@ def main():
             data_programs[ index ] =  "std::cout"
         data_mean[ index ] =  mean
         data_std[ index ] =  std
+
+    # Computing executable size
+    print( "Generating data for executable size:" )
+    for index, program in enumerate( tqdm( programs ) ):
+        size = get_size_of( program[9:-4] )
+        data_size[ index ] = round( size / 1000 )
     
     # Dataframe settings
-    data_dict = { "Object / function": data_programs, "Compile Time (Mean) [s]": data_mean, "Compile Time (STD) [s]": data_std }
+    data_dict = { "Object / function": data_programs, "Compile Time (Mean) [s]": data_mean, "Compile Time (STD) [s]": data_std, "Executable Size [KiB]": data_size }
     data = pd.concat( data_dict, axis = 1 )
     
     # Doing plots
+    print( "Doing plots..." )
     if args.plots == "no":
         print( data.to_markdown() )
     elif args.plots == "yes":
-        do_plot( data_programs, data_mean, data_std )
+        do_plot( data_programs, data_mean, data_std, atype = "Time" )
+        do_plot( data_programs, data_size, data_std, atype = "Size" )
+    print( "Done!" )
 
 if __name__ == "__main__":
 

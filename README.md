@@ -29,6 +29,7 @@
   - [Benchmarking the execution time](#benchmarking)
   - [Benchmarking the execution time with performance improvements](#benchmarking-with-performance-improvements)
   - [Benchmarking the compilation time](#benchmarking-the-compilation-time)
+  - [Executable size](#executable-size)
   - [Advantages](#advantages)
 - [Todo](#todo)
 - [Credits](#credits)
@@ -434,6 +435,12 @@ is created and compiled with `-O3 -O1 -falign-functions=32` flags, for *100* tim
 <img src="https://github.com/JustWhit3/ptc-print/blob/main/img/benchmarks/compilation_time/stdout_stream.png">
 
 As seen from the above plot, compilation time of `ptc::print` needs to be improved.
+
+### Executable size
+
+The same script used for [compilation time benchmark studies](#benchmarking-the-compilation-time) does also executable size comparison for each of the object / function previously cited. For each of them, a small program doing the same stuff is stored into the [studies/benchmarking_compilation/programs](https://github.com/JustWhit3/ptc-print/tree/main/studies/benchmarking_compilation/programs) folder and is compiled with optimized building flag `-O3`. The size of the executable is then computed and compared in the following plot:
+
+<img src="https://github.com/JustWhit3/ptc-print/blob/main/img/benchmarks/executable_size/stdout_stream.png">
 
 ### Advantages
 
