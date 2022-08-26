@@ -37,9 +37,9 @@ namespace ptc
   //====================================================
   namespace stype
    {
-    template <class T> using string = std::__cxx11::basic_string<T>;
+    template <class T> using string = std::basic_string<T>;
     template <class T> using string_view = std::basic_string_view<T>;
-    template <class T> using ostringstream = std::__cxx11::basic_ostringstream<T>;
+    template <class T> using ostringstream = std::basic_ostringstream<T>;
     template <class T> using ostream = std::basic_ostream<T>;
    }
 

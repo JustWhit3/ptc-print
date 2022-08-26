@@ -21,7 +21,7 @@
   - [Standard cases](#standard-cases)
   - [Printing with ANSI escape sequences](#printing-with-ansi-escape-sequences)
   - [Printing non-standard types](#printing-non-standard-types)
-  - [Printing using different char types](#printing-non-standard-types)
+  - [Printing using different char types](#printing-using-different-char-types)
 - [Install and use](#install-and-use)
   - [Install](#insall)
   - [Performance improvements](#performance-improvements)
