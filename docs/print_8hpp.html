@@ -70,6 +70,8 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
@@ -86,12 +88,14 @@ $(function() {
 <code>#include &lt;utility&gt;</code><br />
 <code>#include &lt;ios&gt;</code><br />
 <code>#include &lt;complex&gt;</code><br />
+<code>#include &lt;locale&gt;</code><br />
+<code>#include &lt;codecvt&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for print.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="print_8hpp__incl.png" border="0" usemap="#ainclude_2ptc_2print_8hpp" alt=""/></div>
 <map name="ainclude_2ptc_2print_8hpp" id="ainclude_2ptc_2print_8hpp">
-<area shape="rect" title=" " alt="" coords="341,5,480,32"/>
+<area shape="rect" title=" " alt="" coords="439,5,577,32"/>
 <area shape="rect" title=" " alt="" coords="5,80,77,107"/>
 <area shape="rect" title=" " alt="" coords="102,80,157,107"/>
 <area shape="rect" title=" " alt="" coords="181,80,264,107"/>
@@ -101,6 +105,8 @@ Include dependency graph for print.hpp:</div>
 <area shape="rect" title=" " alt="" coords="577,80,629,107"/>
 <area shape="rect" title=" " alt="" coords="653,80,691,107"/>
 <area shape="rect" title=" " alt="" coords="715,80,786,107"/>
+<area shape="rect" title=" " alt="" coords="811,80,867,107"/>
+<area shape="rect" title=" " alt="" coords="891,80,959,107"/>
 </map>
 </div>
 </div>
@@ -108,10 +114,18 @@ Include dependency graph for print.hpp:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1is__streamable.html">ptc::is_streamable&lt; T &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1is__streamable.html">ptc::is_streamable&lt; T, T_str &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct used to define a specific type trait for operator &lt;&lt; overload for container printing.  <a href="structptc_1_1is__streamable.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1Print.html">ptc::Print</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1select__cout_3_01char_01_4.html">ptc::select_cout&lt; char &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1select__cout_3_01wchar__t_01_4.html">ptc::select_cout&lt; wchar_t &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1select__cin_3_01char_01_4.html">ptc::select_cin&lt; char &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1select__cin_3_01wchar__t_01_4.html">ptc::select_cin&lt; wchar_t &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1Print.html">ptc::Print&lt; T_str &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class used to construct the print function.  <a href="structptc_1_1Print.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -119,6 +133,28 @@ Classes</h2></td></tr>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespaceptc"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceptc.html">ptc</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespaceptc_1_1stype"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceptc_1_1stype.html">ptc::stype</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a773de52bf69c802bc093bca5b63d80f5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a773de52bf69c802bc093bca5b63d80f5">TOSTRING</a>(T,  str)&#160;&#160;&#160;ToString &lt;T&gt;( str, L##str )</td></tr>
+<tr class="separator:a773de52bf69c802bc093bca5b63d80f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a40038763cf8b1ee378920074e57843a5"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a40038763cf8b1ee378920074e57843a5"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc_1_1stype.html#a40038763cf8b1ee378920074e57843a5">ptc::stype::string</a> = std::__cxx11::basic_string&lt; T &gt;</td></tr>
+<tr class="separator:a40038763cf8b1ee378920074e57843a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4c92eae0326cbb317af227b3473795e"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:af4c92eae0326cbb317af227b3473795e"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc_1_1stype.html#af4c92eae0326cbb317af227b3473795e">ptc::stype::string_view</a> = std::basic_string_view&lt; T &gt;</td></tr>
+<tr class="separator:af4c92eae0326cbb317af227b3473795e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1a3b637899bee9b422618b438c9089d"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:af1a3b637899bee9b422618b438c9089d"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc_1_1stype.html#af1a3b637899bee9b422618b438c9089d">ptc::stype::ostringstream</a> = std::__cxx11::basic_ostringstream&lt; T &gt;</td></tr>
+<tr class="separator:af1a3b637899bee9b422618b438c9089d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8705ce01a0d340f850ae53effd9f92c8"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a8705ce01a0d340f850ae53effd9f92c8"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc_1_1stype.html#a8705ce01a0d340f850ae53effd9f92c8">ptc::stype::ostream</a> = std::basic_ostream&lt; T &gt;</td></tr>
+<tr class="separator:a8705ce01a0d340f850ae53effd9f92c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -134,40 +170,81 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:abb80c82a33f0d1de0459023fd95304f5"><td class="memTemplParams" colspan="2">template&lt;class T_cmplx &gt; </td></tr>
-<tr class="memitem:abb80c82a33f0d1de0459023fd95304f5"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#abb80c82a33f0d1de0459023fd95304f5">ptc::operator&lt;&lt;</a> (std::ostream &amp;os, const std::complex&lt; T_cmplx &gt; &amp;number)</td></tr>
-<tr class="memdesc:abb80c82a33f0d1de0459023fd95304f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator &lt;&lt; overload for std::complex printing.  <a href="namespaceptc.html#abb80c82a33f0d1de0459023fd95304f5">More...</a><br /></td></tr>
-<tr class="separator:abb80c82a33f0d1de0459023fd95304f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a746cb82b95a2dc5f7b9ceb440e859d15"><td class="memTemplParams" colspan="2">template&lt;typename T , typename U &gt; </td></tr>
-<tr class="memitem:a746cb82b95a2dc5f7b9ceb440e859d15"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a746cb82b95a2dc5f7b9ceb440e859d15">ptc::operator&lt;&lt;</a> (std::ostream &amp;os, const std::pair&lt; T, U &gt; &amp;p)</td></tr>
-<tr class="memdesc:a746cb82b95a2dc5f7b9ceb440e859d15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper overload to print test containers (std::vector and std::map).  <a href="namespaceptc.html#a746cb82b95a2dc5f7b9ceb440e859d15">More...</a><br /></td></tr>
-<tr class="separator:a746cb82b95a2dc5f7b9ceb440e859d15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abfee0deec9615be2f860bb4b1c03ff95"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename, typename... &gt; class ContainerType, typename ValueType , typename... Args&gt; </td></tr>
-<tr class="memitem:abfee0deec9615be2f860bb4b1c03ff95"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if_t&lt; ! is_streamable_v&lt; ContainerType&lt; ValueType, Args... &gt; &gt;, std::ostream &amp; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#abfee0deec9615be2f860bb4b1c03ff95">ptc::operator&lt;&lt;</a> (std::ostream &amp;os, const ContainerType&lt; ValueType, Args... &gt; &amp;container)</td></tr>
-<tr class="memdesc:abfee0deec9615be2f860bb4b1c03ff95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload for all containers printing. Containers which already has an operator &lt;&lt; overload will be ignored.  <a href="namespaceptc.html#abfee0deec9615be2f860bb4b1c03ff95">More...</a><br /></td></tr>
-<tr class="separator:abfee0deec9615be2f860bb4b1c03ff95"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a365f41c15db47bf1ff59099e2a2c7188"><td class="memTemplParams" colspan="2">template&lt;class T , size_t T_no&gt; </td></tr>
-<tr class="memitem:a365f41c15db47bf1ff59099e2a2c7188"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a365f41c15db47bf1ff59099e2a2c7188">ptc::operator&lt;&lt;</a> (std::ostream &amp;os, const std::array&lt; T, T_no &gt; &amp;container)</td></tr>
-<tr class="memdesc:a365f41c15db47bf1ff59099e2a2c7188"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload for std::array printing.  <a href="namespaceptc.html#a365f41c15db47bf1ff59099e2a2c7188">More...</a><br /></td></tr>
-<tr class="separator:a365f41c15db47bf1ff59099e2a2c7188"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a749b2a08b88b506e86e6f080b9a8814f"><td class="memTemplParams" colspan="2">template&lt;typename T1 , size_t arrSize, typename  = std::enable_if_t&lt; ! std::is_same &lt;T1,char&gt;::value&gt;&gt; </td></tr>
-<tr class="memitem:a749b2a08b88b506e86e6f080b9a8814f"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a749b2a08b88b506e86e6f080b9a8814f">ptc::operator&lt;&lt;</a> (std::ostream &amp;os, const T1(&amp;arr)[arrSize])</td></tr>
-<tr class="memdesc:a749b2a08b88b506e86e6f080b9a8814f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload for C arrays printing.  <a href="namespaceptc.html#a749b2a08b88b506e86e6f080b9a8814f">More...</a><br /></td></tr>
-<tr class="separator:a749b2a08b88b506e86e6f080b9a8814f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a962330721986c09a5c60c7a97d6d7b70"><td class="memTemplParams" colspan="2">template&lt;class CharT &gt; </td></tr>
+<tr class="memitem:a962330721986c09a5c60c7a97d6d7b70"><td class="memTemplItemLeft" align="right" valign="top">const CharT *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a962330721986c09a5c60c7a97d6d7b70">ptc::ToString</a> (const char *str, const wchar_t *wstr)</td></tr>
+<tr class="memdesc:a962330721986c09a5c60c7a97d6d7b70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function used to convert a std::string into a std::wstring or vice-versa.  <a href="namespaceptc.html#a962330721986c09a5c60c7a97d6d7b70">More...</a><br /></td></tr>
+<tr class="separator:a962330721986c09a5c60c7a97d6d7b70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fe591667dee439ca9cf611094be1811"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:a1fe591667dee439ca9cf611094be1811"><td class="memTemplItemLeft" align="right" valign="top">const char *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a1fe591667dee439ca9cf611094be1811">ptc::ToString&lt; char &gt;</a> (const char *str, const wchar_t *wstr)</td></tr>
+<tr class="separator:a1fe591667dee439ca9cf611094be1811"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a927df30e4e95ee56efb001f626f8e5e8"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:a927df30e4e95ee56efb001f626f8e5e8"><td class="memTemplItemLeft" align="right" valign="top">const wchar_t *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a927df30e4e95ee56efb001f626f8e5e8">ptc::ToString&lt; wchar_t &gt;</a> (const char *str, const wchar_t *wstr)</td></tr>
+<tr class="separator:a927df30e4e95ee56efb001f626f8e5e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e3ef66af64b4240517ec316c6a03d45"><td class="memTemplParams" colspan="2">template&lt;class T_str , class T_cmplx &gt; </td></tr>
+<tr class="memitem:a4e3ef66af64b4240517ec316c6a03d45"><td class="memTemplItemLeft" align="right" valign="top">stype::ostream&lt; T_str &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a4e3ef66af64b4240517ec316c6a03d45">ptc::operator&lt;&lt;</a> (stype::ostream&lt; T_str &gt; &amp;os, const std::complex&lt; T_cmplx &gt; &amp;number)</td></tr>
+<tr class="memdesc:a4e3ef66af64b4240517ec316c6a03d45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator &lt;&lt; overload for std::complex printing.  <a href="namespaceptc.html#a4e3ef66af64b4240517ec316c6a03d45">More...</a><br /></td></tr>
+<tr class="separator:a4e3ef66af64b4240517ec316c6a03d45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba0c4285e2471a64499e61509fbe9355"><td class="memTemplParams" colspan="2">template&lt;class T_str , class T , class U &gt; </td></tr>
+<tr class="memitem:aba0c4285e2471a64499e61509fbe9355"><td class="memTemplItemLeft" align="right" valign="top">stype::ostream&lt; T_str &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#aba0c4285e2471a64499e61509fbe9355">ptc::operator&lt;&lt;</a> (stype::ostream&lt; T_str &gt; &amp;os, const std::pair&lt; T, U &gt; &amp;p)</td></tr>
+<tr class="memdesc:aba0c4285e2471a64499e61509fbe9355"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper overload to print test containers (std::vector and std::map).  <a href="namespaceptc.html#aba0c4285e2471a64499e61509fbe9355">More...</a><br /></td></tr>
+<tr class="separator:aba0c4285e2471a64499e61509fbe9355"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a127088f5c1d79744553b7f1ef4fe41c3"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename, typename... &gt; class ContainerType, typename ValueType , typename... Args, class T_str &gt; </td></tr>
+<tr class="memitem:a127088f5c1d79744553b7f1ef4fe41c3"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if_t&lt; ! is_streamable_v&lt; ContainerType&lt; ValueType, Args... &gt;, T_str &gt;, stype::ostream&lt; T_str &gt; &amp; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a127088f5c1d79744553b7f1ef4fe41c3">ptc::operator&lt;&lt;</a> (stype::ostream&lt; T_str &gt; &amp;os, const ContainerType&lt; ValueType, Args... &gt; &amp;container)</td></tr>
+<tr class="memdesc:a127088f5c1d79744553b7f1ef4fe41c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload for all containers printing. Containers which already has an operator &lt;&lt; overload will be ignored.  <a href="namespaceptc.html#a127088f5c1d79744553b7f1ef4fe41c3">More...</a><br /></td></tr>
+<tr class="separator:a127088f5c1d79744553b7f1ef4fe41c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac38d4fe0336f1b6dacf3d5c794264bec"><td class="memTemplParams" colspan="2">template&lt;class T_str , class T , size_t T_no&gt; </td></tr>
+<tr class="memitem:ac38d4fe0336f1b6dacf3d5c794264bec"><td class="memTemplItemLeft" align="right" valign="top">stype::ostream&lt; T_str &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#ac38d4fe0336f1b6dacf3d5c794264bec">ptc::operator&lt;&lt;</a> (stype::ostream&lt; T_str &gt; &amp;os, const std::array&lt; T, T_no &gt; &amp;container)</td></tr>
+<tr class="memdesc:ac38d4fe0336f1b6dacf3d5c794264bec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload for std::array printing.  <a href="namespaceptc.html#ac38d4fe0336f1b6dacf3d5c794264bec">More...</a><br /></td></tr>
+<tr class="separator:ac38d4fe0336f1b6dacf3d5c794264bec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1224e29a181c410a4e9c481b1f351394"><td class="memTemplParams" colspan="2">template&lt;class T_str , class T1 , size_t arrSize, typename  = std::enable_if_t&lt; ! std::is_same &lt;T1,char&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:a1224e29a181c410a4e9c481b1f351394"><td class="memTemplItemLeft" align="right" valign="top">stype::ostream&lt; T_str &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a1224e29a181c410a4e9c481b1f351394">ptc::operator&lt;&lt;</a> (stype::ostream&lt; T_str &gt; &amp;os, const T1(&amp;arr)[arrSize])</td></tr>
+<tr class="memdesc:a1224e29a181c410a4e9c481b1f351394"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload for C arrays printing.  <a href="namespaceptc.html#a1224e29a181c410a4e9c481b1f351394">More...</a><br /></td></tr>
+<tr class="separator:a1224e29a181c410a4e9c481b1f351394"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ab0b2783691a9b9945d655b966e07a001"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:ab0b2783691a9b9945d655b966e07a001"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#ab0b2783691a9b9945d655b966e07a001">ptc::is_streamable_v</a> = is_streamable&lt;T&gt;::value</td></tr>
-<tr class="separator:ab0b2783691a9b9945d655b966e07a001"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47e81ebc0f77793fb8f91904742106c9"><td class="memItemLeft" align="right" valign="top">Print&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a47e81ebc0f77793fb8f91904742106c9">ptc::print</a></td></tr>
-<tr class="separator:a47e81ebc0f77793fb8f91904742106c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0db64718b918a0226588059f28b00d1"><td class="memTemplParams" colspan="2">template&lt;class T , class T_str &gt; </td></tr>
+<tr class="memitem:ac0db64718b918a0226588059f28b00d1"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#ac0db64718b918a0226588059f28b00d1">ptc::is_streamable_v</a> = is_streamable&lt;T, T_str&gt;::value</td></tr>
+<tr class="separator:ac0db64718b918a0226588059f28b00d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac14b2c96674a6fe97ebd485b3af8e1f7"><td class="memItemLeft" align="right" valign="top">Print&lt; char &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceptc.html#ac14b2c96674a6fe97ebd485b3af8e1f7">ptc::print</a></td></tr>
+<tr class="separator:ac14b2c96674a6fe97ebd485b3af8e1f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1285a46f2b3851daf2e85e1644778a6e"><td class="memItemLeft" align="right" valign="top">Print&lt; wchar_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a1285a46f2b3851daf2e85e1644778a6e">ptc::wprint</a></td></tr>
+<tr class="separator:a1285a46f2b3851daf2e85e1644778a6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Gianluca Bianco (<a href="#" onclick="location.href='mai'+'lto:'+'bia'+'nc'+'ogi'+'an'+'luc'+'a9'+'@gm'+'ai'+'l.c'+'om'; return false;">bianc<span style="display: none;">.nosp@m.</span>ogia<span style="display: none;">.nosp@m.</span>nluca<span style="display: none;">.nosp@m.</span>9@gm<span style="display: none;">.nosp@m.</span>ail.c<span style="display: none;">.nosp@m.</span>om</a>) </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2022-07-14 </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2022 Gianluca Bianco under the MIT license. </dd></dl>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a773de52bf69c802bc093bca5b63d80f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a773de52bf69c802bc093bca5b63d80f5">&#9670;&nbsp;</a></span>TOSTRING</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TOSTRING</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">T, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">str&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;ToString &lt;T&gt;( str, L##str )</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ptc-print: ptc::is_streamable&lt; T &gt; Struct Template Reference</title>
+<title>ptc-print: ptc::is_streamable&lt; T, T_str &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -72,7 +72,7 @@ $(function() {
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="structptc_1_1is__streamable-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">ptc::is_streamable&lt; T &gt; Struct Template Reference</div>  </div>
+<div class="title">ptc::is_streamable&lt; T, T_str &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -83,20 +83,20 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ad7176560dcda61a7d40b39656c38f412"><td class="memItemLeft" align="right" valign="top">static std::false_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1is__streamable.html#ad7176560dcda61a7d40b39656c38f412">test</a> (...)</td></tr>
-<tr class="separator:ad7176560dcda61a7d40b39656c38f412"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c914a6719b4905d4ba8c42b473f2daa"><td class="memTemplParams" colspan="2">template&lt;class U &gt; </td></tr>
-<tr class="memitem:a7c914a6719b4905d4ba8c42b473f2daa"><td class="memTemplItemLeft" align="right" valign="top">static auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structptc_1_1is__streamable.html#a7c914a6719b4905d4ba8c42b473f2daa">test</a> (const U &amp;u) -&gt; decltype(std::declval&lt; std::ostream &amp; &gt;()&lt;&lt; u, std::true_type{})</td></tr>
-<tr class="separator:a7c914a6719b4905d4ba8c42b473f2daa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4368e92f6cdb1648448098879992b55"><td class="memItemLeft" align="right" valign="top">static std::false_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1is__streamable.html#ab4368e92f6cdb1648448098879992b55">test</a> (...)</td></tr>
+<tr class="separator:ab4368e92f6cdb1648448098879992b55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf311ecb80a9d5e37585462a25d75ce8"><td class="memTemplParams" colspan="2">template&lt;class U &gt; </td></tr>
+<tr class="memitem:acf311ecb80a9d5e37585462a25d75ce8"><td class="memTemplItemLeft" align="right" valign="top">static auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structptc_1_1is__streamable.html#acf311ecb80a9d5e37585462a25d75ce8">test</a> (const U &amp;u) -&gt; decltype(std::declval&lt; <a class="el" href="namespaceptc_1_1stype.html#a8705ce01a0d340f850ae53effd9f92c8">stype::ostream</a>&lt; T_str &gt; &amp; &gt;()&lt;&lt; u, std::true_type{})</td></tr>
+<tr class="separator:acf311ecb80a9d5e37585462a25d75ce8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:ad1439524f17e3d555df26fd3e03c4ba7"><td class="memItemLeft" align="right" valign="top">static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1is__streamable.html#ad1439524f17e3d555df26fd3e03c4ba7">value</a> = decltype( <a class="el" href="structptc_1_1is__streamable.html#ad7176560dcda61a7d40b39656c38f412">test</a>( std::declval &lt;T&gt;() ) )::value</td></tr>
-<tr class="separator:ad1439524f17e3d555df26fd3e03c4ba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b467fb27b2f779b60a2a10202a4627b"><td class="memItemLeft" align="right" valign="top">static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1is__streamable.html#a1b467fb27b2f779b60a2a10202a4627b">value</a> = decltype( <a class="el" href="structptc_1_1is__streamable.html#ab4368e92f6cdb1648448098879992b55">test</a>( std::declval &lt;T&gt;() ) )::value</td></tr>
+<tr class="separator:a1b467fb27b2f779b60a2a10202a4627b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class T&gt;<br />
-struct ptc::is_streamable&lt; T &gt;</h3>
+<div class="textblock"><h3>template&lt;class T, class T_str&gt;<br />
+struct ptc::is_streamable&lt; T, T_str &gt;</h3>
 
 <p>Struct used to define a specific type trait for operator &lt;&lt; overload for container printing. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -106,19 +106,19 @@ struct ptc::is_streamable&lt; T &gt;</h3>
   </dd>
 </dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ad7176560dcda61a7d40b39656c38f412"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad7176560dcda61a7d40b39656c38f412">&#9670;&nbsp;</a></span>test() <span class="overload">[1/2]</span></h2>
+<a id="ab4368e92f6cdb1648448098879992b55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4368e92f6cdb1648448098879992b55">&#9670;&nbsp;</a></span>test() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T &gt; </div>
+template&lt;class T , class T_str &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static std::false_type <a class="el" href="structptc_1_1is__streamable.html">ptc::is_streamable</a>&lt; T &gt;::test </td>
+          <td class="memname">static std::false_type <a class="el" href="structptc_1_1is__streamable.html">ptc::is_streamable</a>&lt; T, T_str &gt;::test </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>...</em></td><td>)</td>
@@ -134,13 +134,13 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="a7c914a6719b4905d4ba8c42b473f2daa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c914a6719b4905d4ba8c42b473f2daa">&#9670;&nbsp;</a></span>test() <span class="overload">[2/2]</span></h2>
+<a id="acf311ecb80a9d5e37585462a25d75ce8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf311ecb80a9d5e37585462a25d75ce8">&#9670;&nbsp;</a></span>test() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T &gt; </div>
+template&lt;class T , class T_str &gt; </div>
 <div class="memtemplate">
 template&lt;class U &gt; </div>
 <table class="mlabels">
@@ -148,11 +148,11 @@ template&lt;class U &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static auto <a class="el" href="structptc_1_1is__streamable.html">ptc::is_streamable</a>&lt; T &gt;::test </td>
+          <td class="memname">static auto <a class="el" href="structptc_1_1is__streamable.html">ptc::is_streamable</a>&lt; T, T_str &gt;::test </td>
           <td>(</td>
           <td class="paramtype">const U &amp;&#160;</td>
           <td class="paramname"><em>u</em></td><td>)</td>
-          <td> -&gt;  decltype(std::declval&lt; std::ostream &amp; &gt;()&lt;&lt; u, std::true_type{})</td>
+          <td> -&gt;  decltype(std::declval&lt; <a class="el" href="namespaceptc_1_1stype.html#a8705ce01a0d340f850ae53effd9f92c8">stype::ostream</a>&lt; T_str &gt; &amp; &gt;()&lt;&lt; u, std::true_type{})</td>
         </tr>
       </table>
   </td>
@@ -165,19 +165,19 @@ template&lt;class U &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="ad1439524f17e3d555df26fd3e03c4ba7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1439524f17e3d555df26fd3e03c4ba7">&#9670;&nbsp;</a></span>value</h2>
+<a id="a1b467fb27b2f779b60a2a10202a4627b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b467fb27b2f779b60a2a10202a4627b">&#9670;&nbsp;</a></span>value</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T &gt; </div>
+template&lt;class T , class T_str &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr bool <a class="el" href="structptc_1_1is__streamable.html">ptc::is_streamable</a>&lt; T &gt;::value = decltype( <a class="el" href="structptc_1_1is__streamable.html#ad7176560dcda61a7d40b39656c38f412">test</a>( std::declval &lt;T&gt;() ) )::value</td>
+          <td class="memname">constexpr bool <a class="el" href="structptc_1_1is__streamable.html">ptc::is_streamable</a>&lt; T, T_str &gt;::value = decltype( <a class="el" href="structptc_1_1is__streamable.html#ab4368e92f6cdb1648448098879992b55">test</a>( std::declval &lt;T&gt;() ) )::value</td>
         </tr>
       </table>
   </td>

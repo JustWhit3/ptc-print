@@ -1,13 +1,15 @@
 var indexSectionsWithContent =
 {
-  0: "afgimopstv",
-  1: "ip",
+  0: "acfgimopstvw",
+  1: "ips",
   2: "p",
   3: "p",
   4: "gopst",
-  5: "ipv",
-  6: "am",
-  7: "fgs"
+  5: "cipvw",
+  6: "os",
+  7: "am",
+  8: "fgs",
+  9: "t"
 };
 
 var indexSectionNames =
@@ -18,8 +20,10 @@ var indexSectionNames =
   3: "files",
   4: "functions",
   5: "variables",
-  6: "enums",
-  7: "enumvalues"
+  6: "typedefs",
+  7: "enums",
+  8: "enumvalues",
+  9: "defines"
 };
 
 var indexSectionLabels =
@@ -30,7 +34,9 @@ var indexSectionLabels =
   3: "Files",
   4: "Functions",
   5: "Variables",
-  6: "Enumerations",
-  7: "Enumerator"
+  6: "Typedefs",
+  7: "Enumerations",
+  8: "Enumerator",
+  9: "Macros"
 };
 

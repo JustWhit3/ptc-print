@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['first_1',['first',['../namespaceptc.html#ab0219b8011d105b1b8fe8b08eb20572da8b04d5e3775d298e78455efc5ca404d5',1,'ptc']]]
+  ['cin_1',['cin',['../structptc_1_1select__cin_3_01char_01_4.html#a49bc2760e893e885d3dcfd8fad750432',1,'ptc::select_cin&lt; char &gt;::cin()'],['../structptc_1_1select__cin_3_01wchar__t_01_4.html#a47db898875204308f40274d0649a3c66',1,'ptc::select_cin&lt; wchar_t &gt;::cin()']]],
+  ['cout_2',['cout',['../structptc_1_1select__cout_3_01char_01_4.html#a236f62a90cd355b52f3e43a7dab87bc9',1,'ptc::select_cout&lt; char &gt;::cout()'],['../structptc_1_1select__cout_3_01wchar__t_01_4.html#a1f90eaf7c48267eeca5f4a9776936f40',1,'ptc::select_cout&lt; wchar_t &gt;::cout()']]]
 ];
