@@ -11,6 +11,6 @@ var searchData=
   ['setpattern_30',['setPattern',['../structptc_1_1Print.html#afc8125add122e4749e7e2a11ef576805',1,'ptc::Print']]],
   ['setsep_31',['setSep',['../structptc_1_1Print.html#a6e806a4699367ece3b537cc4bc3153f2',1,'ptc::Print']]],
   ['str_32',['str',['../namespaceptc.html#aa730094183bf13993032c00ee196eafba341be97d9aff90c9978347f66f945b77',1,'ptc']]],
-  ['string_33',['string',['../namespaceptc_1_1stype.html#a40038763cf8b1ee378920074e57843a5',1,'ptc::stype']]],
+  ['string_33',['string',['../namespaceptc_1_1stype.html#a7219d14f77077bcda44c5bde147fefa4',1,'ptc::stype']]],
   ['string_5fview_34',['string_view',['../namespaceptc_1_1stype.html#af4c92eae0326cbb317af227b3473795e',1,'ptc::stype']]]
 ];
