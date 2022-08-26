@@ -2,6 +2,7 @@
 //     headers
 //====================================================
 
+
 // My headers
 #include "../include/ptc/print.hpp"
 
@@ -12,6 +13,7 @@
 #include <thread>
 #include <vector>
 #include <map>
+#include <string>
 
 //====================================================
 //     main
@@ -28,7 +30,7 @@ int main()
   auto job1 = [ &strout, &file_stream ]() 
    {
     // Testing constructor
-    ptc::Print first;
+    ptc::Print <char> first;
  
     // Testing methods
     ptc::print( std::cerr, "Printing the", "1st", "message with std::cerr" ); 
@@ -52,6 +54,10 @@ int main()
     ptc::print( "Testing", "this", "pattern", 123 );
     ptc::print.setPattern( "" );
 
+    // Other ostream objects
+    ptc::wprint();
+    ptc::wprint( std::wcout, "Testing std::wcout!" );
+
     // Non built-in types
     std::complex<int> cmplx_no( 2, 3 );
     ptc::print( cmplx_no );
@@ -67,7 +73,7 @@ int main()
   auto job2 = [ &strout, &file_stream ]()
    {
     // Testing constructor
-    ptc::Print second;
+    ptc::Print <char> second;
 
     // Testing methods
     ptc::print( std::cerr, "Printing the", "2nd", "message with std::cerr" ); 
@@ -90,6 +96,10 @@ int main()
     ptc::print.setPattern( "|" );
     ptc::print( "Testing", "this", "pattern", 123 );
     ptc::print.setPattern( "" );
+
+    // Other ostream objects
+    ptc::wprint();
+    ptc::wprint( std::wcout, "Testing std::wcout!" );
 
     // Non built-in types
     std::complex<int> cmplx_no( 2, 3 );

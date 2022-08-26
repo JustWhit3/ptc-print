@@ -2,6 +2,7 @@
 //     headers
 //====================================================
 
+
 // My headers
 #include "../include/ptc/print.hpp"
 
@@ -41,10 +42,13 @@ void standard()
   ptc::print();
   ptc::print.setSep( " " );
 
-  // Print ostringstream
+  // Print ostringstream and wostringstream
   std::ostringstream strout;
   ptc::print( strout, "I am an", "std::ostringstream object!" );
   ptc::print( strout.str() );
+  std::wostringstream wstrout;
+  ptc::wprint( wstrout, "I am an", "std::wostringstream object!" );
+  ptc::wprint( wstrout.str() );
 
   // Printing on a file with ostream
   std::ofstream file_stream_o( "test.txt", std::ios::trunc );
@@ -90,8 +94,12 @@ void standard()
   ptc::print( "Testing", "this", "pattern", 123 );
   ptc::print.setPattern( "" );
 
-  // Testing usage of other std::ostream objects
-  //ptc::print( std::wcout, "Testing std::wcout!" ); // ERROR
+  // Testing usage of other ostream objects
+  ptc::wprint();
+  ptc::wprint( std::wcout, "Testing std::wcout!" );
+  ptc::wprint( std::wcerr, "Testing std::wcerr!" );
+  std::wstring wstr_out = ptc::wprint( ptc::mode::str, "This", "is a wstring!\n" );
+  std::wcout << wstr_out;
  }
 
 //====================================================
@@ -113,6 +121,9 @@ void other_types()
 
   std::map <int,int> map = { { 1, 1 }, { 2, 2 }, { 3, 3 } };
   ptc::print( "Printing an std::map:", map );
+
+  // Tests with ptc::wprint
+  ptc::wprint( "Printing an std::map with wcout:", map );
  }
 
 //====================================================

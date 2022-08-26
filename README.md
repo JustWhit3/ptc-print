@@ -21,6 +21,7 @@
   - [Standard cases](#standard-cases)
   - [Printing with ANSI escape sequences](#printing-with-ansi-escape-sequences)
   - [Printing non-standard types](#printing-non-standard-types)
+  - [Printing using different char types](#printing-non-standard-types)
 - [Install and use](#install-and-use)
   - [Install](#insall)
   - [Performance improvements](#performance-improvements)
@@ -43,6 +44,8 @@
 It is constructed through the [`Print`](https://justwhit3.github.io/ptc-print/classptc_1_1Print.html) functor, which is a fully *type-* and *thread-safe* class with *automatic memory management*, implemented through an [header-only](https://github.com/JustWhit3/ptc-print/blob/main/ptc/print.hpp) library, with minimal and indispensable [dependencies](#install-and-use). It supports also the usage of [ANSI escape sequences](#printing-with-ansi-escape-sequences).
 
 `ptc::print` supports the printing of all the standard types and some non-standard ones (list [here](#printing-non-standard-types)).
+
+It is possible to choose to print using different char types (`char`, `wchar_t`...). List of supported `char` types can be found [here](#printing-non-standard-types).
 
 If you want to contribute to the repository, please read [this](https://github.com/JustWhit3/ptc-print/blob/main/CONTRIBUTING.md) file before.
 
@@ -287,6 +290,28 @@ int main()
 [[1, 1], [2, 2], [3, 3]]
 ```
 
+### Printing using different char types
+
+It is possible to choose a different char type with respect to the standard `char` used to define an `std::string`. A list of supported char types by the `ptc::print` object is the following:
+
+- `char`
+- `wchar_t`
+
+To print using `wchar_t` you can use the `ptc::wprint` function:
+
+```C++
+#include <ptc/print.hpp>
+
+int main()
+ {
+  ptc::wprint( "Printing to", "std::wcout!" );
+ }
+```
+
+```Bash
+Printing to std::wcout!
+```
+
 ## Install and use
 
 ### Install
@@ -497,7 +522,6 @@ print( "I am", "Python", 123, sep = "*", end = "" );
 - Add support to [date and time](https://en.cppreference.com/w/cpp/chrono) printing.
 - Add standard C pointers printing.
 - Add support to `std::stack` and `std::priority_queue` printing. See [this](https://github.com/JustWhit3/ptc-print/issues/10) issue.
-- Add support to `std::wcout`, `std::wcerr` and `std::wclog` printing. See [this](https://github.com/JustWhit3/ptc-print/issues/9) issue.
 - Add a specific method to reorder the printing of a nidified container. For example:
 
 ```C++
@@ -519,7 +543,7 @@ KEY  VALUE
 5    five
 ```
 
-- Improve the printing on an external file stream. Current implementation is too slow.
+- Improve the printing to an external file stream. Current implementation is too slow.
 - Add possibility / instructions to print user-defined types.
 - Test the software with `MSVC` compiler.
 - Upload the package on some package managers (ex: [`Conan`](https://conan.io/) or `dpkg`).

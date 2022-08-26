@@ -27,9 +27,22 @@
 #include <utility>
 #include <ios>
 #include <complex>
+#include <locale>
+#include <codecvt>
 
 namespace ptc
  {
+  //====================================================
+  //     Type aliases
+  //====================================================
+  namespace stype
+   {
+    template <class T> using string = std::__cxx11::basic_string<T>;
+    template <class T> using string_view = std::basic_string_view<T>;
+    template <class T> using ostringstream = std::__cxx11::basic_ostringstream<T>;
+    template <class T> using ostream = std::basic_ostream<T>;
+   }
+
   //====================================================
   //     Enum classes
   //====================================================
@@ -58,19 +71,96 @@ namespace ptc
    * 
    * @tparam T Template type of the type trait.
    */
-  template<class T>
+  template <class T, class T_str>
   struct is_streamable 
    {
     static std::false_type test( ... );
       
     template<class U>
-    static auto test( const U& u ) -> decltype( std::declval <std::ostream&>() << u, std::true_type{} );
+    static auto test( const U& u ) -> decltype( std::declval <stype::ostream<T_str>&>() << u, std::true_type{} );
   
     static constexpr bool value = decltype( test( std::declval <T>() ) )::value;
    };
   
-  template<class T>
-  inline constexpr bool is_streamable_v = is_streamable<T>::value;
+  template<class T, class T_str>
+  inline constexpr bool is_streamable_v = is_streamable<T, T_str>::value;
+
+  // TOSTRING
+  /**
+   * @brief Function used to convert a std::string into a std::wstring or vice-versa.
+   * 
+   * @tparam CharT The char type (char, wchar_t...).
+   * @param str The char object.
+   * @param wstr The wchar_t object.
+   * @return const CharT* The char or wchar_t object.
+   */
+  template <class CharT>
+  const CharT* ToString( const char* str, const wchar_t* wstr );
+  
+  template<>
+  const char* ToString <char>( const char* str, const wchar_t* wstr )
+   {
+    ( void ) *wstr;
+    return str;
+   }
+  
+  template<>
+  const wchar_t* ToString <wchar_t>( const char* str, const wchar_t* wstr )
+   {
+    ( void ) *str;
+    return wstr;
+   }
+  
+  #define TOSTRING( T, str ) ToString <T>( str, L##str )
+
+  // select_cout
+  /**
+   * @brief Struct used to define a way to template the choice of the "std::cout" object in order to be "std::cout" for "char" type or "std::wcout" for "wchar_t" type.
+   * 
+   * @tparam T The template type of the "std::cout" object (char, wchar_t, ...).
+   */
+  template <class T> 
+  struct select_cout;
+  
+  template<> struct select_cout <char> 
+   {
+    static std::ostream &cout;
+   };
+
+  std::ostream &select_cout <char>::cout = std::cout;
+  
+  template<> 
+  struct select_cout <wchar_t>
+   {
+    static std::wostream &cout;
+   };
+
+  std::wostream &select_cout <wchar_t>::cout = std::wcout;
+ 
+  // select_cin
+  /**
+   * @brief Struct used to define a way to template the choice of the "std::cin" object in order to be "std::cin" for "char" type or "std::wcin" for "wchar_t" type.
+   * 
+   * @tparam T The template type of the "std::cin" object (char, wchar_t, ...).
+   */
+  template <class T>
+  struct select_cin;
+  
+  template<> 
+  struct select_cin <char>
+   {
+    static std::istream &cin;
+   };
+
+  std::istream &select_cin <char>::cin = std::cin;
+  
+  template<>
+  struct select_cin <wchar_t>
+   {
+    static std::wistream &cin;
+   };
+
+  std::wistream &select_cin <wchar_t>::cin = std::wcin;
 
   //====================================================
   //     Operator << overloads
@@ -85,8 +175,8 @@ namespace ptc
    * @param number The number to be printed.
    * @return std::ostream& The stream to which the number is printed to.
    */
-  template <class T_cmplx>
-  inline std::ostream& operator << ( std::ostream& os, const std::complex<T_cmplx>& number )
+  template <class T_str, class T_cmplx>
+  inline stype::ostream<T_str>& operator << ( stype::ostream<T_str>& os, const std::complex<T_cmplx>& number )
    {
     os << number.real() << "+" << number.imag() << "j";
     return os; 
@@ -102,8 +192,8 @@ namespace ptc
    * @param p The std::pair object.
    * @return std::ostream& The stream to which the overload prints.
    */
-  template <typename T, typename U>
-  inline std::ostream& operator <<( std::ostream& os, const std::pair <T, U>& p ) 
+  template <class T_str, class T, class U>
+  inline stype::ostream<T_str>& operator <<( stype::ostream<T_str>& os, const std::pair <T, U>& p ) 
    {
     os << "[" << p.first << ", " << p.second << "]";
     return os;
@@ -120,9 +210,9 @@ namespace ptc
    * @param container The container to be printed.
    * @return std::ostream& The stream to which the overload prints.
    */
-  template <template <typename, typename...> class ContainerType, typename ValueType, typename... Args>
-  std::enable_if_t< ! is_streamable_v <ContainerType <ValueType, Args...>>, std::ostream&>
-  operator <<( std::ostream& os, const ContainerType<ValueType, Args...>& container ) 
+  template <template <typename, typename...> class ContainerType, typename ValueType, typename... Args, class T_str>
+  std::enable_if_t< ! is_streamable_v <ContainerType <ValueType, Args...>, T_str>, stype::ostream<T_str>&>
+  operator <<( stype::ostream<T_str>& os, const ContainerType<ValueType, Args...>& container ) 
    {
     os << "[";
     const char* separator = "";
@@ -146,8 +236,8 @@ namespace ptc
    * @param container The array to be printed.
    * @return std::ostream& The stream to which the overload prints.
    */
-  template <class T, size_t T_no>
-  std::ostream& operator <<( std::ostream& os, const std::array<T, T_no>& container ) 
+  template <class T_str, class T, size_t T_no>
+  stype::ostream<T_str>& operator <<( stype::ostream<T_str>& os, const std::array<T, T_no>& container ) 
    {
     os << "[";
     const char* separator = "";
@@ -171,8 +261,8 @@ namespace ptc
    * @param os The stream to which the array is printed to.
    * @return std::ostream& The stream to which the array is printed to.
    */
-  template <typename T1, size_t arrSize, typename = std::enable_if_t< ! std::is_same <T1,char>::value>>
-  std::ostream& operator <<( std::ostream& os, const T1( & arr )[ arrSize ] )
+  template <class T_str, class T1, size_t arrSize, typename = std::enable_if_t< ! std::is_same <T1,char>::value>>
+  stype::ostream<T_str>& operator <<( stype::ostream<T_str>& os, const T1( & arr )[ arrSize ] )
    {
     os << "[";
     if ( arrSize )
@@ -195,7 +285,9 @@ namespace ptc
   /**
    * @brief Class used to construct the print function.
    * 
+   * @tparam T The type of the string objects defined inside the struct. This template is used in case you are dealing with std::string or std::wstring objects.
    */
+  template <class T_str>
   struct Print
    {
      //====================================================
@@ -207,8 +299,12 @@ namespace ptc
       * @brief Default constructor of the Print class. It initializes the basic class members and enable (if required) performance improvements..
       * 
       */
-     Print(): end( "\n" ), sep( " " ), pattern( "" ), flush( false )
-      {
+     Print(): 
+      end( TOSTRING( T_str, "\n" ) ),
+      sep( TOSTRING( T_str, " " ) ),
+      pattern( TOSTRING( T_str, "" ) ),
+      flush( false )
+      {       
        #ifdef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
         performance_options();
        #endif
@@ -332,14 +428,13 @@ namespace ptc
      template <class T, class... Args>
      void operator()( T&& first, Args&&... args ) const
       {
-       if constexpr ( std::is_base_of_v <std::ostream, std::remove_reference_t<T>> ||
-                      std::is_base_of_v <std::wostream, std::remove_reference_t<T>> )
+       if constexpr ( std::is_base_of_v <stype::ostream<T_str>, std::remove_reference_t<T>> )
         {
          print_backend( std::forward<T>( first ), std::forward<Args>( args )... );
         }
        else
         {
-         print_backend( std::cout, std::forward<T>( first ), std::forward<Args>( args )... );
+         print_backend( select_cout<T_str>::cout, std::forward<T>( first ), std::forward<Args>( args )... );
         }
       }
 
@@ -353,7 +448,7 @@ namespace ptc
       * @return const std::string The whole print content in std::string format.
       */
      template <class... Args>
-     const std::string operator()( mode&& first, Args&&... args ) const
+     const stype::string<T_str> operator()( mode&& first, Args&&... args ) const
       { 
        if constexpr( sizeof...( args ) > 0 )
         {
@@ -361,13 +456,13 @@ namespace ptc
           {
            case mode::str:
             {
-             std::ostringstream oss;
+             stype::ostringstream<T_str> oss;
              print_backend( oss, std::forward<Args>( args )... );
              return oss.str();
             }
           }
         }
-       return "";
+       return null_str<stype::string<T_str>>;
       }
 
      // No arguments case
@@ -376,7 +471,7 @@ namespace ptc
       * 
       * @param os The stream in which you want to print the output.
       */
-     void operator () ( std::ostream& os = std::cout ) const
+     inline void operator () ( stype::ostream<T_str>& os = select_cout<T_str>::cout ) const
       {
        os << getEnd();
        if ( getFlush() ) os << std::flush;
@@ -397,7 +492,7 @@ namespace ptc
      template <class T> 
      struct null_string
       {
-       inline static const std::string value = "";
+       inline static const stype::string<T_str> value = TOSTRING( T_str, "" );
       };
 
      //====================================================
@@ -417,17 +512,18 @@ namespace ptc
      template <typename T>
      static constexpr bool is_escape( const T& str, ANSI&& flag )
       {
-       if constexpr( std::is_convertible_v <T, std::string_view> && ! std::is_same_v<T, std::nullptr_t> )
+       if constexpr( std::is_convertible_v <T, stype::string_view<T_str>> && ! std::is_same_v<T, std::nullptr_t> )
         {
          switch( flag )
           {
            case( ANSI::first ): 
             {
-             return ( ! std::string_view( str ).rfind( "\033", 0 ) ) && ( std::string_view( str ).length() < 7 );
+             return ( ! stype::string_view<T_str>( str ).rfind( TOSTRING( T_str, "\033" ), 0 ) ) && 
+                    ( stype::string_view<T_str>( str ).length() < 7 );
             }
            case( ANSI::generic ):
             {
-             return ( std::string_view( str ).find( "\033" ) != std::string_view::npos );
+             return ( stype::string_view<T_str>( str ).find( TOSTRING( T_str, "\033" ) ) != stype::string_view<T_str>::npos );
             }
           }
         }
@@ -446,7 +542,7 @@ namespace ptc
      template <typename T>
      static constexpr bool is_null_str( const T& str )
       {
-       if constexpr( std::is_convertible_v <T, std::string_view> )
+       if constexpr( std::is_convertible_v <T, stype::string_view<T_str>> )
         {
          return str == null_str <T>;
         }
@@ -504,7 +600,9 @@ namespace ptc
           os << reset_ANSI;
          }
         }
-       if ( getFlush() && ! std::is_base_of_v <std::ostringstream, T_os> ) os << std::flush;
+
+       // Other operations
+       if ( getFlush() && ! std::is_base_of_v <stype::ostringstream<T_str>, T_os> ) os << std::flush;
       }
 
      // performance_options
@@ -517,33 +615,34 @@ namespace ptc
        std::lock_guard <std::mutex> lock{ mutex_ };
        
        std::ios_base::sync_with_stdio( false );
-       std::cin.tie( NULL );
-       std::cout.tie( NULL );
+       select_cout<T_str>::cout.tie( NULL );
+       select_cin<T_str>::cin.tie( NULL );
       }
      
      //====================================================
      //     Private attributes
      //====================================================
-     std::string end, sep, pattern;
+     stype::string<T_str> end, sep, pattern;
      static std::mutex mutex_;
      bool flush;
 
      //====================================================
      //     Private constants
      //====================================================
-     inline static const std::string reset_ANSI = "\033[0m";
-     template <class T> inline static const std::string null_str = Print::null_string<const T&>::value;
-   }; // end of Print class
+     inline static const stype::string<T_str> reset_ANSI = TOSTRING( T_str, "\033[0m" );
+     template <class T> inline static const stype::string<T_str> null_str = Print::null_string<const T&>::value;
+   };
    
   //====================================================
   //     Other steps
   //====================================================
 
   // Print::mutex_ definiton
-  inline std::mutex Print::mutex_;
+  template <class T_str> inline std::mutex Print <T_str>::mutex_;
 
-  // print function initialization
-  inline Print print;
- } // end of namespace ptc
+  // Print objects initialization
+  inline Print <char> print;       // char
+  inline Print <wchar_t> wprint;   // wchar_t
+ }
 
 #endif

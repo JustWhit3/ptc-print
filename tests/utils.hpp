@@ -21,73 +21,63 @@ namespace ptc
   //====================================================
   //     savebuf class declarations
   //====================================================
-  class savebuf: public std::streambuf 
+  template <class T>
+  class savebuf: public std::basic_streambuf<T>
    {
     public:
-     savebuf( std::streambuf* sbuf );
-     std::string str() const;
+     savebuf( std::basic_streambuf<T>* sbuf ): sbuf( sbuf ) {};
+     stype::string<T> str() const { return save; };
 
     private:
-     int overflow( int c );
-     int sync();
-     std::streambuf* sbuf;
-     std::string     save;
+     int overflow( int c )
+      {
+       if ( ! std::char_traits<T>::eq_int_type( c, std::char_traits<T>::eof() ) ) 
+        {
+         save.push_back( std::char_traits<T>::to_char_type( c ) );
+         return sbuf -> sputc( c );
+        }
+       else 
+        {
+         return std::char_traits<T>::not_eof( c );
+        }
+      } 
+     int sync() { return sbuf -> pubsync(); };
+     std::basic_streambuf<T>* sbuf;
+     stype::string<T> save;
    };
-
-  //====================================================
-  //     savebuf class members definition
-  //====================================================
-  savebuf::savebuf( std::streambuf* sbuf ): sbuf( sbuf ) {}
-
-  std::string savebuf::str() const { return save; }
-
-  int savebuf::sync() { return sbuf -> pubsync(); }
-
-  int savebuf::overflow( int c ) 
-   {
-    if ( ! traits_type::eq_int_type( c, traits_type::eof() ) ) 
-     {
-      save.push_back( traits_type::to_char_type( c ) );
-      return sbuf -> sputc( c );
-     }
-    else 
-     {
-      return traits_type::not_eof( c );
-     }
-   } 
 
   //====================================================
   //     osout
   //====================================================
-  template <class... Args>
-  inline const std::string osout( std::ostream& os = std::cout, const Args&... args )
+  template <class T, class... Args>
+  inline const stype::string<T> osout( stype::ostream<T>& os = select_cout<T>::cout, const Args&... args )
    {
-    std::streambuf* buf = os.rdbuf();
-    std::ostringstream str;
+    Print<T> printer;
+    std::basic_streambuf<T>* buf = os.rdbuf();
+    stype::ostringstream<T> str;
 
-    savebuf sbuf( buf );
+    savebuf<T> sbuf( buf );
     os.rdbuf( &sbuf );
-    
-    ( ( str << args << print.getSep() ), ... );
 
-    ptc::print( os, str.str() );
+    ( ( str << args << printer.getSep() ), ... );
+    printer( os, str.str() );
     os.rdbuf( buf );
     return sbuf.str();
    }
 
-  template <class... Args>
-  inline const std::string osout( const Args&... args )
+  template <class T, class... Args>
+  inline const stype::string<T> osout( const Args&... args )
    {
-    std::streambuf* buf = std::cout.rdbuf();
-    std::ostringstream str;
+    Print<T> printer;
+    std::basic_streambuf<T>* buf = select_cout<T>::cout.rdbuf();
+    stype::ostringstream<T> str;
 
-    savebuf sbuf( buf );
-    std::cout.rdbuf( &sbuf );
+    savebuf<T> sbuf( buf );
+    select_cout<T>::cout.rdbuf( &sbuf );
 
-    ( ( str << args << print.getSep() ), ... );
-
-    ptc::print( std::cout, str.str() );
-    std::cout.rdbuf( buf );
+    ( ( str << args << printer.getSep() ), ... );
+    printer( select_cout<T>::cout, str.str() );
+    select_cout<T>::cout.rdbuf( buf );
     return sbuf.str();
    }
  }

@@ -4,6 +4,7 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #define DOCTEST_CONFIG_SUPER_FAST_ASSERTS
 
+
 //====================================================
 //     Headers
 //====================================================
@@ -76,7 +77,7 @@ TEST_CASE( "Testing the operator () overload." )
   // stdout case
   SUBCASE( "Stdout case." )
    {
-    const std::string test = ptc::osout( "Test passes", "(ignore this)." );
+    const std::string test = ptc::osout<char>( "Test passes", "(ignore this)." );
     CHECK_EQ( test, "Test passes (ignore this). \n" );
     CHECK( test != "Test thisssa.\n" );
    }
@@ -140,7 +141,7 @@ TEST_CASE( "Testing the operator () overload." )
   SUBCASE( "Passing variables inside ptc::print." )
    {
     std::string str = "Test passes";
-    const std::string test = ptc::osout( str, "(ignore this)." );
+    const std::string test = ptc::osout<char>( str, "(ignore this)." );
     CHECK_EQ( test, "Test passes (ignore this). \n" );
     CHECK( test != "Test thisssa.\n" );
    }
@@ -162,7 +163,7 @@ TEST_CASE( "Testing the operator () overload." )
   // Testing usage of ANSI escape sequence and final reset
   SUBCASE( "Testing usage of ANSI escape sequence and final reset." )
    {
-    const std::string test_a = ptc::osout( "\033[31mTesting colors", "(ignore this)." );
+    const std::string test_a = ptc::osout<char>( "\033[31mTesting colors", "(ignore this)." );
     CHECK_EQ( test_a, "\033[31mTesting colors (ignore this). \n\033[0m" );
 
     ptc::print.setEnd( "" );
@@ -184,6 +185,28 @@ TEST_CASE( "Testing the operator () overload." )
     CHECK_EQ( test_a, "Testing empty char (ignore this). " ); 
     const std::string test_b = ptc::print( ptc::mode::str, "\033[31m", "Testing empty char (ignore this)." );
     CHECK_EQ( test_b, "\033[31mTesting empty char (ignore this). \033[0m" ); 
+    ptc::print.setEnd( "\n" );
+   }
+ }
+
+//====================================================
+//     Other char types
+//====================================================
+TEST_CASE( "Testing case of other char types." )
+ {  
+  // wchar_t
+  SUBCASE( "Testing wchar_t" )
+   {
+    ptc::print.setEnd( "" );
+  
+    std::wstring wstr_in = ptc::wprint( ptc::mode::str, "Testing", "this" );
+    std::wstring wstr_out = L"Testing this\n";
+    CHECK_EQ( wstr_in, wstr_out );
+  
+    std::wstring wstr_in_2 = ptc::wprint( ptc::mode::str );
+    std::wstring wstr_out_2 = L"";
+    CHECK_EQ( wstr_in_2, wstr_out_2 );
+  
     ptc::print.setEnd( "\n" );
    }
  }

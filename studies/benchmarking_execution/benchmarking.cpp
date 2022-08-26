@@ -83,6 +83,12 @@ static void ptc_print_str( bm::State& state )
   for ( auto _ : state ) bm::DoNotOptimize( ptc::print( ptc::mode::str, "Testing", 123, "print", '!' ) );
  }
 
+// ptc_print_TOSTRING
+static void ptc_print_TOSTRING( bm::State& state ) 
+ {
+  for ( auto _ : state ) bm::DoNotOptimize( ptc::TOSTRING( char, "Hey" ) );
+ }
+
 //====================================================
 //      ptc::print non built-in types 
 //====================================================
@@ -175,6 +181,7 @@ static void fmt_print_file( bm::State& state )
 // ptc::print other 
 //BENCHMARK( ptc_print_standard );
 //BENCHMARK( ptc_print_str );
+//BENCHMARK( ptc_print_TOSTRING );
 
 // non built-in types
 //BENCHMARK( ptc_print_complex );
