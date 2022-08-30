@@ -11,24 +11,20 @@
 //====================================================
 //     Preprocessor directives
 //====================================================
+#pragma once
 #ifndef PRINT_HPP
 #define PRINT_HPP
-#pragma once
 
 //====================================================
 //     Headers
 //====================================================
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <type_traits>
-#include <sstream>
 #include <mutex>
-#include <string_view>
 #include <utility>
-#include <ios>
 #include <complex>
-#include <locale>
-#include <codecvt>
 
 namespace ptc
  {
@@ -641,8 +637,10 @@ namespace ptc
   template <class T_str> inline std::mutex Print <T_str>::mutex_;
 
   // Print objects initialization
-  inline Print <char> print;       // char
-  inline Print <wchar_t> wprint;   // wchar_t
+  inline Print <char> print;        // char
+  inline Print <wchar_t> wprint;    // wchar_t
+  //inline Print <char16_t> wprint_16;   // char16_t
+  //inline Print <char32_t> wprint_32;   // char16_t
  }
 
 #endif

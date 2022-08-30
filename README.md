@@ -548,6 +548,7 @@ KEY  VALUE
 - Test the software with `MSVC` compiler.
 - Upload the package on some package managers (ex: [`Conan`](https://conan.io/) or `dpkg`).
 - Create a [wiki](https://github.com/JustWhit3/ptc-print/wiki) with detailed examples for every feature.
+- Extend the support to `char16_t` and `char32_t` types.
 
 ## Credits
 

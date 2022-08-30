@@ -37,6 +37,33 @@
 #include <queue>
 
 //====================================================
+//     Utils
+//====================================================
+TEST_CASE( "Testing utils." )
+ {
+  // TOSTRING
+  SUBCASE( "Testing TOSTRING macro." )
+   {
+    CHECK_EQ( ptc::TOSTRING( char, "Hello" ), "Hello" );
+    CHECK_EQ( ptc::TOSTRING( wchar_t, "Hello" ), L"Hello" );
+   }
+
+  // select_cout
+  SUBCASE( "Testing select_cout." )
+   {
+    CHECK_EQ( &ptc::select_cout<char>::cout, &std::cout );
+    CHECK_EQ( &ptc::select_cout<wchar_t>::cout, &std::wcout );
+   }
+
+  // select_cin
+  SUBCASE( "Testing select_cin." )
+   {
+    CHECK_EQ( &ptc::select_cin<char>::cin, &std::cin );
+    CHECK_EQ( &ptc::select_cin<wchar_t>::cin, &std::wcin );
+   }
+ }
+
+//====================================================
 //     Print default constructor
 //====================================================
 TEST_CASE( "Testing the Print default constructor." )
@@ -287,7 +314,7 @@ TEST_CASE( "Testing the Print operator << overloads." )
 
     // std::unordered_set
     std::unordered_set<int> u_set = { 7, 5, 16 };
-    CHECK_EQ( ptc::print( ptc::mode::str, u_set ), "[5, 16, 7]" );
+    CHECK_EQ( ptc::print( ptc::mode::str, u_set ), "[16, 5, 7]" );
 
     // std::unordered_map
     std::unordered_map <int,int> u_map = { { 1, 1 }, { 2, 2 }, { 3, 3 } };
