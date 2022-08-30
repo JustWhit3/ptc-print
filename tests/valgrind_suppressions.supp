@@ -4,13 +4,14 @@
    match-leak-kinds: reachable
    fun:_Znam
    fun:_ZNSt13basic_filebufIwSt11char_traitsIwEE27_M_allocate_internal_bufferEv
-   obj:/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+   obj:/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30
    fun:_ZNSt8ios_base15sync_with_stdioEb
    fun:_ZNK3ptc5PrintIcE19performance_optionsEv
    fun:_ZN3ptc5PrintIcEC1Ev
    fun:_Z41__static_initialization_and_destruction_0ii
    fun:_GLOBAL__sub_I__ZN3ptc8ToStringIcEEPKT_PKcPKw
-   fun:__libc_csu_init
+   fun:call_init
+   fun:__libc_start_main@@GLIBC_2.34
    fun:(below main)
 }
 {
@@ -19,13 +20,14 @@
    match-leak-kinds: reachable
    fun:_Znam
    fun:_ZNSt13basic_filebufIwSt11char_traitsIwEE27_M_allocate_internal_bufferEv
-   obj:/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+   obj:/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30
    fun:_ZNSt8ios_base15sync_with_stdioEb
    fun:_ZNK3ptc5PrintIcE19performance_optionsEv
    fun:_ZN3ptc5PrintIcEC1Ev
    fun:_Z41__static_initialization_and_destruction_0ii
    fun:_GLOBAL__sub_I__ZN3ptc8ToStringIcEEPKT_PKcPKw
-   fun:__libc_csu_init
+   fun:call_init
+   fun:__libc_start_main@@GLIBC_2.34
    fun:(below main)
 }
 {
@@ -34,13 +36,14 @@
    match-leak-kinds: reachable
    fun:_Znam
    fun:_ZNSt13basic_filebufIwSt11char_traitsIwEE27_M_allocate_internal_bufferEv
-   obj:/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+   obj:/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30
    fun:_ZNSt8ios_base15sync_with_stdioEb
    fun:_ZNK3ptc5PrintIcE19performance_optionsEv
    fun:_ZN3ptc5PrintIcEC1Ev
    fun:_Z41__static_initialization_and_destruction_0ii
    fun:_GLOBAL__sub_I__ZN3ptc8ToStringIcEEPKT_PKcPKw
-   fun:__libc_csu_init
+   fun:call_init
+   fun:__libc_start_main@@GLIBC_2.34
    fun:(below main)
 }
 {
@@ -49,13 +52,14 @@
    match-leak-kinds: reachable
    fun:_Znam
    fun:_ZNSt13basic_filebufIcSt11char_traitsIcEE27_M_allocate_internal_bufferEv
-   obj:/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+   obj:/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30
    fun:_ZNSt8ios_base15sync_with_stdioEb
    fun:_ZNK3ptc5PrintIcE19performance_optionsEv
    fun:_ZN3ptc5PrintIcEC1Ev
    fun:_Z41__static_initialization_and_destruction_0ii
    fun:_GLOBAL__sub_I__ZN3ptc8ToStringIcEEPKT_PKcPKw
-   fun:__libc_csu_init
+   fun:call_init
+   fun:__libc_start_main@@GLIBC_2.34
    fun:(below main)
 }
 {
@@ -64,13 +68,14 @@
    match-leak-kinds: reachable
    fun:_Znam
    fun:_ZNSt13basic_filebufIcSt11char_traitsIcEE27_M_allocate_internal_bufferEv
-   obj:/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+   obj:/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30
    fun:_ZNSt8ios_base15sync_with_stdioEb
    fun:_ZNK3ptc5PrintIcE19performance_optionsEv
    fun:_ZN3ptc5PrintIcEC1Ev
    fun:_Z41__static_initialization_and_destruction_0ii
    fun:_GLOBAL__sub_I__ZN3ptc8ToStringIcEEPKT_PKcPKw
-   fun:__libc_csu_init
+   fun:call_init
+   fun:__libc_start_main@@GLIBC_2.34
    fun:(below main)
 }
 {
@@ -79,12 +84,13 @@
    match-leak-kinds: reachable
    fun:_Znam
    fun:_ZNSt13basic_filebufIcSt11char_traitsIcEE27_M_allocate_internal_bufferEv
-   obj:/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+   obj:/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30
    fun:_ZNSt8ios_base15sync_with_stdioEb
    fun:_ZNK3ptc5PrintIcE19performance_optionsEv
    fun:_ZN3ptc5PrintIcEC1Ev
    fun:_Z41__static_initialization_and_destruction_0ii
    fun:_GLOBAL__sub_I__ZN3ptc8ToStringIcEEPKT_PKcPKw
-   fun:__libc_csu_init
+   fun:call_init
+   fun:__libc_start_main@@GLIBC_2.34
    fun:(below main)
 }
