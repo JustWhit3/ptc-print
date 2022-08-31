@@ -173,12 +173,12 @@ namespace ptc
   void print_adaptor( stype::ostream<T_str>& os, const Container& container )
    {
     typename Container::const_iterator beg = container.begin();
-    const char* separator = "";
+    const T_str* separator = TOSTRING( T_str, "" );
     
     while( beg != container.end() )
      {
       os << separator << *beg++;
-      separator = ", ";
+      separator = TOSTRING( T_str, ", " );
      }
    }
   
@@ -285,16 +285,16 @@ namespace ptc
    {
     bool constexpr is_stack = std::is_same_v <ContainerType<ValueType, Args...>, std::stack<ValueType>>;
     bool constexpr is_pqueue = std::is_same_v <ContainerType<ValueType, Args...>, std::priority_queue<ValueType>>;
-    const char* separator = "";
-
+    
     os << "[";
     if constexpr ( ! is_stack && ! is_pqueue )
      {
+      const T_str* separator = TOSTRING( T_str, "" );
       for ( const auto& elem: container )
        {
         os << separator;
         os << elem;
-        separator = ", ";
+        separator = TOSTRING( T_str, ", " );
        }
      }
     else
@@ -321,12 +321,12 @@ namespace ptc
   stype::ostream<T_str>& operator <<( stype::ostream<T_str>& os, const std::array<T, T_no>& container ) 
    {
     os << "[";
-    const char* separator = "";
+    const T_str* separator = TOSTRING( T_str, "" );
     for ( const auto& elem: container )
      {
       os << separator;
       os << elem;
-      separator = ", ";
+      separator = TOSTRING( T_str, ", " );
      }
     os << "]";
     return os;
@@ -350,12 +350,12 @@ namespace ptc
     os << "[";
     if ( arrSize )
      {
-      const char* separator = "";
+      const T_str* separator = TOSTRING( T_str, "" );
       for ( const auto& elem: arr )
        {
         os << separator;
         os << elem;
-        separator = ", ";
+        separator = TOSTRING( T_str, ", " );
        }
      }
     os << "]";

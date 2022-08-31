@@ -195,8 +195,8 @@ static void fmt_print_file( bm::State& state )
 
 // non built-in types
 //BENCHMARK( ptc_print_complex );
-//BENCHMARK( ptc_print_vector );
-BENCHMARK( ptc_print_stack );
+BENCHMARK( ptc_print_vector );
+//BENCHMARK( ptc_print_stack );
 
 //====================================================
 //     Comparison with other libraries
