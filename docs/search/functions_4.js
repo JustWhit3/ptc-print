@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['test_65',['test',['../structptc_1_1is__streamable.html#ab4368e92f6cdb1648448098879992b55',1,'ptc::is_streamable::test(...)'],['../structptc_1_1is__streamable.html#acf311ecb80a9d5e37585462a25d75ce8',1,'ptc::is_streamable::test(const U &amp;u) -&gt; decltype(std::declval&lt; stype::ostream&lt; T_str &gt; &amp; &gt;()&lt;&lt; u, std::true_type{})']]],
-  ['tostring_66',['ToString',['../namespaceptc.html#a962330721986c09a5c60c7a97d6d7b70',1,'ptc']]],
-  ['tostring_3c_20char_20_3e_67',['ToString&lt; char &gt;',['../namespaceptc.html#a1fe591667dee439ca9cf611094be1811',1,'ptc']]],
-  ['tostring_3c_20wchar_5ft_20_3e_68',['ToString&lt; wchar_t &gt;',['../namespaceptc.html#a927df30e4e95ee56efb001f626f8e5e8',1,'ptc']]]
+  ['setend_65',['setEnd',['../structptc_1_1Print.html#a2e9da41ec9b54085f300f13703167ca1',1,'ptc::Print']]],
+  ['setflush_66',['setFlush',['../structptc_1_1Print.html#a7f3e13892c757bbe634e3896771beaa6',1,'ptc::Print']]],
+  ['setpattern_67',['setPattern',['../structptc_1_1Print.html#afc8125add122e4749e7e2a11ef576805',1,'ptc::Print']]],
+  ['setsep_68',['setSep',['../structptc_1_1Print.html#a6e806a4699367ece3b537cc4bc3153f2',1,'ptc::Print']]]
 ];

@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['getend_54',['getEnd',['../structptc_1_1Print.html#a38256734d5677eef0c5039a62c839157',1,'ptc::Print']]],
-  ['getflush_55',['getFlush',['../structptc_1_1Print.html#a1da3e95dce6abd52a2e57b99af28d1a1',1,'ptc::Print']]],
-  ['getpattern_56',['getPattern',['../structptc_1_1Print.html#afaff8de3e0a5537b885e653622e3f78f',1,'ptc::Print']]],
-  ['getsep_57',['getSep',['../structptc_1_1Print.html#a9a1b896236af7263028cb0a71c1b1050',1,'ptc::Print']]]
+  ['container_5fmod_56',['container_mod',['../namespaceptc.html#a5d8490b0f1fdce42a767daa8a6fee5a8',1,'ptc::container_mod(const std::stack&lt; Type, Container &gt; &amp;stack)'],['../namespaceptc.html#a5954da34a273a8d34688ad6fd0fdbe10',1,'ptc::container_mod(const std::priority_queue&lt; Type, Container &gt; &amp;priority_queue)']]]
 ];
