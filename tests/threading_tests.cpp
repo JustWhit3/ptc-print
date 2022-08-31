@@ -1,6 +1,7 @@
 //====================================================
 //     headers
 //====================================================
+#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
 
 
 // My headers
@@ -14,6 +15,7 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <stack>
 
 //====================================================
 //     main
@@ -67,6 +69,11 @@ int main()
     ptc::print( map );
     int arr[3] = { 1, 2, 3 };
     ptc::print( arr );
+
+    std::stack<int> my_stack;
+    my_stack.push( 12 );
+    my_stack.push( 8 );
+    ptc::print( "Printing an std::stack:", my_stack );
    };
 
   // Second job
@@ -110,6 +117,11 @@ int main()
     ptc::print( map );
     int arr[3] = { 1, 2, 3 };
     ptc::print( arr );
+
+    std::stack<int> my_stack;
+    my_stack.push( 12 );
+    my_stack.push( 8 );
+    ptc::print( "Printing an std::stack:", my_stack );
    };
 
   std::thread first_job(job1);

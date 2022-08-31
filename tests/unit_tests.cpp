@@ -3,6 +3,7 @@
 //====================================================
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #define DOCTEST_CONFIG_SUPER_FAST_ASSERTS
+#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
 
 
 //====================================================
@@ -331,18 +332,22 @@ TEST_CASE( "Testing the Print operator << overloads." )
     CHECK_EQ( ptc::print( ptc::mode::str, u_multimap ), "[[2, 30], [1, 40]]" );
 
     // std::stack
-    //std::stack <int> stack;
-    //stack.push( 21 );
-    //stack.push( 22 );
-    //stack.push( 24 );
-    //CHECK_EQ( ptc::print( ptc::mode::str, stack ), "[21, 22, 24]" );
+    std::stack <int> stack;
+    stack.push( 21 );
+    stack.push( 22 );
+    stack.push( 24 );
+    CHECK_EQ( ptc::print( ptc::mode::str, stack ), "[24, 22, 21]" );
+    CHECK_EQ( ptc::print( ptc::mode::str, stack ), "[24, 22, 21]" );
 
-    // std::priority_queue ?
-    //std::priority_queue<int> p_queue;
-    //p_queue.push( 2 );
-    //p_queue.push( 5 );
-    //p_queue.push( 6 );
-    //CHECK_EQ( ptc::print( ptc::mode::str, p_queue ), "[2, 5, 6]" );
+    std::stack <int> empty_stack;
+    CHECK_EQ( ptc::print( ptc::mode::str, empty_stack ), "[]" );
+
+    // std::priority_queue
+    std::priority_queue<int> p_queue;
+    p_queue.push( 2 );
+    p_queue.push( 5 );
+    p_queue.push( 6 );
+    CHECK_EQ( ptc::print( ptc::mode::str, p_queue ), "[6, 5, 2]" );
 
     ptc::print.setEnd( "\n" );
    }

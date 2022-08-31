@@ -70,6 +70,7 @@ Supported compilers:
 
 - **gcc** (tested)
 - **clang** (tested)
+-- **MSVC** (tested)
 
 ## Examples
 
@@ -252,6 +253,7 @@ List of not built-int types ready for custom printing:
 
 - C containers: [C arrays](https://www.learncpp.com/cpp-tutorial/pointers-and-arrays/).
 - C++ containers: [`std::vector`](https://en.cppreference.com/w/cpp/container/vector), [`std::map`](https://en.cppreference.com/w/cpp/container/map), [`std::unordered_map`](https://en.cppreference.com/w/cpp/container/unordered_map), [`std::deque`](https://en.cppreference.com/w/cpp/container/deque), [`std::forward_list`](https://en.cppreference.com/w/cpp/container/forward_list), [`std::list`](https://en.cppreference.com/w/cpp/container/list), [`std::set`](https://en.cppreference.com/w/cpp/container/set), [`std::unordered_set`](https://cplusplus.com/reference/unordered_set/unordered_set/#:~:text=Unordered%20sets%20are%20containers%20that,key%2C%20that%20identifies%20it%20uniquely.), [`std::multimap`](https://cplusplus.com/reference/map/multimap/), [`std::multiset`](https://cplusplus.com/reference/set/multiset/), [`std::unordered_multiset`](https://en.cppreference.com/w/cpp/container/unordered_multiset#:~:text=Unordered%20multiset%20is%20an%20associative,order%2C%20but%20organized%20into%20buckets.), [`std::unordered_multimap`](https://en.cppreference.com/w/cpp/container/unordered_multimap).
+- Container adaptors: [`std::stack`](https://en.cppreference.com/w/cpp/container/stack), [`std::priority_queue`](https://en.cppreference.com/w/cpp/container/priority_queue).
 - Other types: [`std::complex`](https://en.cppreference.com/w/cpp/numeric/complex).
 
 If you need support to other particular types you can open an issue with a [feature request](https://github.com/JustWhit3/ptc-print/blob/main/.github/ISSUE_TEMPLATE/feature_request.md).
@@ -521,7 +523,6 @@ print( "I am", "Python", 123, sep = "*", end = "" );
 
 - Add support to [date and time](https://en.cppreference.com/w/cpp/chrono) printing.
 - Add standard C pointers printing.
-- Add support to `std::stack` and `std::priority_queue` printing. See [this](https://github.com/JustWhit3/ptc-print/issues/10) issue.
 - Add a specific method to reorder the printing of a nidified container. For example:
 
 ```C++

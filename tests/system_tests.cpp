@@ -1,6 +1,7 @@
 //====================================================
 //     headers
 //====================================================
+#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
 
 
 // My headers
@@ -13,6 +14,7 @@
 #include <complex>
 #include <vector>
 #include <map>
+#include <stack>
 
 //====================================================
 //     standard
@@ -124,6 +126,12 @@ void other_types()
 
   // Tests with ptc::wprint
   ptc::wprint( "Printing an std::map with wcout:", map );
+
+  // Testing std::stack
+  std::stack<int> my_stack;
+  my_stack.push( 12 );
+  my_stack.push( 8 );
+  ptc::print( "Printing an std::stack:", my_stack );
  }
 
 //====================================================

@@ -26,6 +26,10 @@
 #include <utility>
 #include <complex>
 
+// Include?
+#include <stack>
+#include <queue>
+
 namespace ptc
  {
   //====================================================
@@ -166,10 +170,11 @@ namespace ptc
   /**
    * @brief Operator << overload for std::complex printing.
    * 
+   * @tparam T_str The char type of the ostream object.
    * @tparam T_cmplx The type of the real and imaginary part complex number to be printed.
    * @param os The type of the output stream.
    * @param number The number to be printed.
-   * @return std::ostream& The stream to which the number is printed to.
+   * @return stype::ostream<T_str>& The stream to which the number is printed to.
    */
   template <class T_str, class T_cmplx>
   inline stype::ostream<T_str>& operator << ( stype::ostream<T_str>& os, const std::complex<T_cmplx>& number )
@@ -182,11 +187,12 @@ namespace ptc
   /**
    * @brief Helper overload to print test containers (std::vector and std::map).
    * 
+   * @tparam T_str The char type of the ostream object.
    * @tparam T First template type of the std::pair variable.
    * @tparam U Second template type of the std::pair variable.
    * @param os The stream to which the overload prints.
    * @param p The std::pair object.
-   * @return std::ostream& The stream to which the overload prints.
+   * @return stype::ostream<T_str>& The stream to which the container is printed to.
    */
   template <class T_str, class T, class U>
   inline stype::ostream<T_str>& operator <<( stype::ostream<T_str>& os, const std::pair <T, U>& p ) 
@@ -199,12 +205,13 @@ namespace ptc
   /**
    * @brief Overload for all containers printing. Containers which already has an operator << overload will be ignored.
    * 
+   * @tparam T_str The char type of the ostream object.
    * @tparam ContainerType The container type (ex std::vector, std::map etc...)
    * @tparam ValueType The value type of the container.
    * @tparam Args The arguments of the container.
    * @param os The stream to which the output is printed.
    * @param container The container to be printed.
-   * @return std::ostream& The stream to which the overload prints.
+   * @return stype::ostream<T_str>& The stream to which the container is printed to.
    */
   template <template <typename, typename...> class ContainerType, typename ValueType, typename... Args, class T_str>
   std::enable_if_t< ! is_streamable_v <ContainerType <ValueType, Args...>, T_str>, stype::ostream<T_str>&>
@@ -226,11 +233,12 @@ namespace ptc
   /**
    * @brief Overload for std::array printing.
    * 
+   * @tparam T_str The char type of the ostream object.
    * @tparam T The type of the array.
    * @tparam T_no The number of elements of the array.
    * @param os The stream to which the output is printed.
    * @param container The array to be printed.
-   * @return std::ostream& The stream to which the overload prints.
+   * @return stype::ostream<T_str>& The stream to which the array is printed to.
    */
   template <class T_str, class T, size_t T_no>
   stype::ostream<T_str>& operator <<( stype::ostream<T_str>& os, const std::array<T, T_no>& container ) 
@@ -251,13 +259,15 @@ namespace ptc
   /**
    * @brief Overload for C arrays printing.
    * 
+   * @tparam T_str The char type of the ostream object.
    * @tparam T1 The type of the array.
    * @tparam arrSize The size of the array.
    * @tparam std::enable_if_t< ! std::is_same <T1,char>::value> Enable if it is not const char*.
    * @param os The stream to which the array is printed to.
-   * @return std::ostream& The stream to which the array is printed to.
+   * @return stype::ostream<T_str>& The stream to which the array is printed to.
    */
-  template <class T_str, class T1, size_t arrSize, typename = std::enable_if_t< ! std::is_same <T1,char>::value>>
+  template <class T_str, class T1, size_t arrSize, 
+  typename = std::enable_if_t< ! std::is_same <T1,char>::value>>
   stype::ostream<T_str>& operator <<( stype::ostream<T_str>& os, const T1( & arr )[ arrSize ] )
    {
     os << "[";
@@ -275,13 +285,42 @@ namespace ptc
     return os;
    }
 
+  // Overload for container adaptors (std::stack and std::priority_queue)
+  /**
+   * @brief Operator << overload for container adaptors: std::stack and std::priority_queue.
+   * 
+   * @tparam T_str The char type of the ostream object.
+   * @tparam c_type The type of the container elements.
+   * @tparam ContainerType The type of the container.
+   * @tparam std::enable_if_t<std::is_same_v <ContainerType<c_type>, std::stack<c_type>> || std::is_same_v <ContainerType<c_type>, std::priority_queue<c_type>>> Enable if ContainerType is a container adaptor.
+   * @param os The stream to which the container is printed to.
+   * @param container The container to be printed.
+   * @return stype::ostream<T_str>& The stream to which the container is printed to.
+   */
+  template <class T_str, class c_type, template <typename> class ContainerType,
+  typename = std::enable_if_t<std::is_same_v <ContainerType<c_type>, std::stack<c_type>> || std::is_same_v <ContainerType<c_type>, std::priority_queue<c_type>>>>
+  stype::ostream<T_str>& operator <<( stype::ostream<T_str>& os, ContainerType<c_type> container )
+   {
+    os << "[";
+    const char* separator = "";
+    while( ! container.empty() ) 
+     {
+      os << separator;
+      os << container.top();
+      container.pop();
+      separator = ", ";
+     }
+    os << "]";
+    return os;
+   }
+
   //====================================================
   //     ptc_print class
   //====================================================
   /**
    * @brief Class used to construct the print function.
    * 
-   * @tparam T The type of the string objects defined inside the struct. This template is used in case you are dealing with std::string or std::wstring objects.
+   * @tparam T _strThe type of the string objects defined inside the struct. This template is used in case you are dealing with std::string or std::wstring objects.
    */
   template <class T_str>
   struct Print
@@ -441,7 +480,7 @@ namespace ptc
       * @tparam Args Generic type of all the other objects to be passed to the backend implementation.
       * @param first First object to be passed to the backend implementation.
       * @param args The list of all the other objects to be passed to the backend implementation.
-      * @return const std::string The whole print content in std::string format.
+      * @return const stype::string<T_str> The whole print content in string format.
       */
      template <class... Args>
      const stype::string<T_str> operator()( mode&& first, Args&&... args ) const
