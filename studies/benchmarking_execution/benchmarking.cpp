@@ -17,6 +17,7 @@
 #include <fstream>
 #include <complex>
 #include <vector>
+#include <stack>
 
 //====================================================
 //     Namespace directives
@@ -107,6 +108,15 @@ static void ptc_print_vector( bm::State& state )
   for ( auto _ : state ) ptc::print( vec );
  }
 
+// ptc_print_stack
+static void ptc_print_stack( bm::State& state ) 
+ {
+  std::stack <int> stack;
+  stack.push( 2 );
+  stack.push( 4 );
+  for ( auto _ : state ) ptc::print( stack );
+ }
+
 //====================================================
 //      stdout
 //====================================================
@@ -186,13 +196,14 @@ static void fmt_print_file( bm::State& state )
 // non built-in types
 //BENCHMARK( ptc_print_complex );
 //BENCHMARK( ptc_print_vector );
+BENCHMARK( ptc_print_stack );
 
 //====================================================
 //     Comparison with other libraries
 //====================================================
 
 // stdout
-BENCHMARK( ptc_print_stdout );
+//BENCHMARK( ptc_print_stdout );
 //BENCHMARK( fmt_print_stdout ) ;
 //BENCHMARK( std_cout_stdout ) ;
 //BENCHMARK( printf_stdout );

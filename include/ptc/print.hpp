@@ -25,8 +25,6 @@
 #include <mutex>
 #include <utility>
 #include <complex>
-
-// Include?
 #include <stack>
 #include <queue>
 
@@ -162,6 +160,74 @@ namespace ptc
 
   std::wistream &select_cin <wchar_t>::cin = std::wcin;
 
+  // Helper function for container adaptors printing
+  /**
+   * @brief Helper function for container adaptors printing.
+   * 
+   * @tparam Container The modified type of the container to be printed.
+   * @tparam T_str The char type of the stream.
+   * @param os The stream to which the container is printed to.
+   * @param container The container to be printed.
+   */
+  template <class Container, class T_str>
+  void print_adaptor( stype::ostream<T_str>& os, const Container& container )
+   {
+    typename Container::const_iterator beg = container.begin();
+    const char* separator = "";
+    
+    while( beg != container.end() )
+     {
+      os << separator << *beg++;
+      separator = ", ";
+     }
+   }
+  
+  // container_mod overload for std::stack hacked printing
+  /**
+   * @brief Overload used to create a modified stack object in order to be successfully printed.
+   * 
+   * @tparam Type The type of the stack elements..
+   * @tparam Container The type of the container.
+   * @param stack The stack to be modified.
+   * @return const Container& The modified stack.
+   */
+  template <class Type, class Container>
+  const Container& container_mod( const std::stack<Type, Container>& stack )
+   {
+    struct HackedStack : private std::stack<Type, Container>
+     {
+      static const Container& container( const std::stack<Type, Container>& stack )
+       {
+        return stack.*&HackedStack::c;
+       }
+     };
+  
+    return HackedStack::container( stack );
+   }
+
+  // container_mod overload for std::priority_queue hacked printing
+  /**
+   * @brief Overload used to create a modified priority_queue object in order to be successfully printed.
+   * 
+   * @tparam Type The type of the priority_queue elements..
+   * @tparam Container The type of the container.
+   * @param priority_queue The priority_queue to be modified.
+   * @return const Container& The modified priority_queue.
+   */
+  template < class Type, class Container >
+  const Container& container_mod( const std::priority_queue<Type, Container>& priority_queue )
+   {
+    struct HackedQueue : private std::priority_queue<Type, Container>
+     {
+      static const Container& container( const std::priority_queue<Type, Container>& priority_queue )
+       {
+        return priority_queue.*&HackedQueue::c;
+       }
+     };
+
+    return HackedQueue::container( priority_queue );
+   }
+
   //====================================================
   //     Operator << overloads
   //====================================================
@@ -217,15 +283,26 @@ namespace ptc
   std::enable_if_t< ! is_streamable_v <ContainerType <ValueType, Args...>, T_str>, stype::ostream<T_str>&>
   operator <<( stype::ostream<T_str>& os, const ContainerType<ValueType, Args...>& container ) 
    {
-    os << "[";
+    bool constexpr is_stack = std::is_same_v <ContainerType<ValueType, Args...>, std::stack<ValueType>>;
+    bool constexpr is_pqueue = std::is_same_v <ContainerType<ValueType, Args...>, std::priority_queue<ValueType>>;
     const char* separator = "";
-    for ( const auto& elem: container )
+
+    os << "[";
+    if constexpr ( ! is_stack && ! is_pqueue )
      {
-      os << separator;
-      os << elem;
-      separator = ", ";
+      for ( const auto& elem: container )
+       {
+        os << separator;
+        os << elem;
+        separator = ", ";
+       }
+     }
+    else
+     {
+      print_adaptor( os, container_mod( container ) );
      }
     os << "]";
+
     return os;
    }
 
@@ -280,35 +357,6 @@ namespace ptc
         os << elem;
         separator = ", ";
        }
-     }
-    os << "]";
-    return os;
-   }
-
-  // Overload for container adaptors (std::stack and std::priority_queue)
-  /**
-   * @brief Operator << overload for container adaptors: std::stack and std::priority_queue.
-   * 
-   * @tparam T_str The char type of the ostream object.
-   * @tparam c_type The type of the container elements.
-   * @tparam ContainerType The type of the container.
-   * @tparam std::enable_if_t<std::is_same_v <ContainerType<c_type>, std::stack<c_type>> || std::is_same_v <ContainerType<c_type>, std::priority_queue<c_type>>> Enable if ContainerType is a container adaptor.
-   * @param os The stream to which the container is printed to.
-   * @param container The container to be printed.
-   * @return stype::ostream<T_str>& The stream to which the container is printed to.
-   */
-  template <class T_str, class c_type, template <typename> class ContainerType,
-  typename = std::enable_if_t<std::is_same_v <ContainerType<c_type>, std::stack<c_type>> || std::is_same_v <ContainerType<c_type>, std::priority_queue<c_type>>>>
-  stype::ostream<T_str>& operator <<( stype::ostream<T_str>& os, ContainerType<c_type> container )
-   {
-    os << "[";
-    const char* separator = "";
-    while( ! container.empty() ) 
-     {
-      os << separator;
-      os << container.top();
-      container.pop();
-      separator = ", ";
      }
     os << "]";
     return os;

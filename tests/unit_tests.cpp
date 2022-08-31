@@ -3,7 +3,7 @@
 //====================================================
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #define DOCTEST_CONFIG_SUPER_FAST_ASSERTS
-#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
+
 
 
 //====================================================
@@ -336,8 +336,8 @@ TEST_CASE( "Testing the Print operator << overloads." )
     stack.push( 21 );
     stack.push( 22 );
     stack.push( 24 );
-    CHECK_EQ( ptc::print( ptc::mode::str, stack ), "[24, 22, 21]" );
-    CHECK_EQ( ptc::print( ptc::mode::str, stack ), "[24, 22, 21]" );
+    CHECK_EQ( ptc::print( ptc::mode::str, stack ), "[21, 22, 24]" );
+    CHECK_EQ( ptc::print( ptc::mode::str, stack ), "[21, 22, 24]" );
 
     std::stack <int> empty_stack;
     CHECK_EQ( ptc::print( ptc::mode::str, empty_stack ), "[]" );
@@ -347,7 +347,7 @@ TEST_CASE( "Testing the Print operator << overloads." )
     p_queue.push( 2 );
     p_queue.push( 5 );
     p_queue.push( 6 );
-    CHECK_EQ( ptc::print( ptc::mode::str, p_queue ), "[6, 5, 2]" );
+    CHECK_EQ( ptc::print( ptc::mode::str, p_queue ), "[6, 2, 5]" );
 
     ptc::print.setEnd( "\n" );
    }
