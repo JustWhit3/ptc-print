@@ -7,5 +7,6 @@ var searchData=
   ['print_5fadaptor_21',['print_adaptor',['../namespaceptc.html#a499bf1b00480c5d9eaa0d57997f23caa',1,'ptc']]],
   ['print_5fhpp_22',['PRINT_HPP',['../print_8hpp.html#ac01f051092772542bc190d3eff5c0f3d',1,'print.hpp']]],
   ['ptc_23',['ptc',['../namespaceptc.html',1,'']]],
-  ['stype_24',['stype',['../namespaceptc_1_1stype.html',1,'ptc']]]
+  ['sconstant_24',['sconstant',['../namespaceptc_1_1sconstant.html',1,'ptc']]],
+  ['stype_25',['stype',['../namespaceptc_1_1stype.html',1,'ptc']]]
 ];

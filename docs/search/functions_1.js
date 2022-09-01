@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['getend_57',['getEnd',['../structptc_1_1Print.html#a38256734d5677eef0c5039a62c839157',1,'ptc::Print']]],
-  ['getflush_58',['getFlush',['../structptc_1_1Print.html#a1da3e95dce6abd52a2e57b99af28d1a1',1,'ptc::Print']]],
-  ['getpattern_59',['getPattern',['../structptc_1_1Print.html#afaff8de3e0a5537b885e653622e3f78f',1,'ptc::Print']]],
-  ['getsep_60',['getSep',['../structptc_1_1Print.html#a9a1b896236af7263028cb0a71c1b1050',1,'ptc::Print']]]
+  ['getend_60',['getEnd',['../structptc_1_1Print.html#a38256734d5677eef0c5039a62c839157',1,'ptc::Print']]],
+  ['getflush_61',['getFlush',['../structptc_1_1Print.html#a1da3e95dce6abd52a2e57b99af28d1a1',1,'ptc::Print']]],
+  ['getpattern_62',['getPattern',['../structptc_1_1Print.html#afaff8de3e0a5537b885e653622e3f78f',1,'ptc::Print']]],
+  ['getsep_63',['getSep',['../structptc_1_1Print.html#a9a1b896236af7263028cb0a71c1b1050',1,'ptc::Print']]]
 ];

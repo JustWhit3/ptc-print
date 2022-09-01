@@ -76,6 +76,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
+<tr class="memitem:namespaceptc_1_1sconstant"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceptc_1_1sconstant.html">sconstant</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespaceptc_1_1stype"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceptc_1_1stype.html">stype</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -158,6 +160,10 @@ Functions</h2></td></tr>
 <tr class="memitem:a1224e29a181c410a4e9c481b1f351394"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceptc_1_1stype.html#a8705ce01a0d340f850ae53effd9f92c8">stype::ostream</a>&lt; T_str &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a1224e29a181c410a4e9c481b1f351394">operator&lt;&lt;</a> (<a class="el" href="namespaceptc_1_1stype.html#a8705ce01a0d340f850ae53effd9f92c8">stype::ostream</a>&lt; T_str &gt; &amp;os, const T1(&amp;arr)[arrSize])</td></tr>
 <tr class="memdesc:a1224e29a181c410a4e9c481b1f351394"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload for C arrays printing.  <a href="namespaceptc.html#a1224e29a181c410a4e9c481b1f351394">More...</a><br /></td></tr>
 <tr class="separator:a1224e29a181c410a4e9c481b1f351394"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a016d4225189a93e3f2d2e3491d7f4302"><td class="memTemplParams" colspan="2">template&lt;class T_str , class T_time , class int_type &gt; </td></tr>
+<tr class="memitem:a016d4225189a93e3f2d2e3491d7f4302"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespaceptc_1_1stype.html#a8705ce01a0d340f850ae53effd9f92c8">stype::ostream</a>&lt; T_str &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a016d4225189a93e3f2d2e3491d7f4302">operator&lt;&lt;</a> (<a class="el" href="namespaceptc_1_1stype.html#a8705ce01a0d340f850ae53effd9f92c8">stype::ostream</a>&lt; T_str &gt; &amp;os, const std::chrono::duration&lt; int_type, T_time &gt; &amp;val)</td></tr>
+<tr class="memdesc:a016d4225189a93e3f2d2e3491d7f4302"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator &lt;&lt; overload for std::chrono::duration objects printing.  <a href="namespaceptc.html#a016d4225189a93e3f2d2e3491d7f4302">More...</a><br /></td></tr>
+<tr class="separator:a016d4225189a93e3f2d2e3491d7f4302"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -299,7 +305,7 @@ template&lt;class Type , class Container &gt; </div>
 </div>
 </div>
 <a id="a127088f5c1d79744553b7f1ef4fe41c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a127088f5c1d79744553b7f1ef4fe41c3">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[1/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a127088f5c1d79744553b7f1ef4fe41c3">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[1/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -348,7 +354,7 @@ template&lt;template&lt; typename, typename... &gt; class ContainerType, typenam
 </div>
 </div>
 <a id="ac38d4fe0336f1b6dacf3d5c794264bec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac38d4fe0336f1b6dacf3d5c794264bec">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[2/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac38d4fe0336f1b6dacf3d5c794264bec">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[2/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -395,8 +401,56 @@ template&lt;class T_str , class T , size_t T_no&gt; </div>
 
 </div>
 </div>
+<a id="a016d4225189a93e3f2d2e3491d7f4302"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a016d4225189a93e3f2d2e3491d7f4302">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[3/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T_str , class T_time , class int_type &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceptc_1_1stype.html#a8705ce01a0d340f850ae53effd9f92c8">stype::ostream</a>&lt;T_str&gt;&amp; ptc::operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceptc_1_1stype.html#a8705ce01a0d340f850ae53effd9f92c8">stype::ostream</a>&lt; T_str &gt; &amp;&#160;</td>
+          <td class="paramname"><em>os</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::chrono::duration&lt; int_type, T_time &gt; &amp;&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Operator &lt;&lt; overload for std::chrono::duration objects printing. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T_str</td><td>The char type of the ostream object. </td></tr>
+    <tr><td class="paramname">T_time</td><td>The order of magnitude of the time object. </td></tr>
+    <tr><td class="paramname">int_type</td><td>The int type of the time object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">os</td><td>The stream to which the time object is printed to. </td></tr>
+    <tr><td class="paramname">val</td><td>The time object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="namespaceptc_1_1stype.html#a8705ce01a0d340f850ae53effd9f92c8">stype::ostream&lt;T_str&gt;</a>&amp; The stream to which the time object is printed to. </dd></dl>
+
+</div>
+</div>
 <a id="a4e3ef66af64b4240517ec316c6a03d45"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e3ef66af64b4240517ec316c6a03d45">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[3/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e3ef66af64b4240517ec316c6a03d45">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[4/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -451,7 +505,7 @@ template&lt;class T_str , class T_cmplx &gt; </div>
 </div>
 </div>
 <a id="aba0c4285e2471a64499e61509fbe9355"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba0c4285e2471a64499e61509fbe9355">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[4/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aba0c4285e2471a64499e61509fbe9355">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[5/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -507,7 +561,7 @@ template&lt;class T_str , class T , class U &gt; </div>
 </div>
 </div>
 <a id="a1224e29a181c410a4e9c481b1f351394"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1224e29a181c410a4e9c481b1f351394">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[5/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1224e29a181c410a4e9c481b1f351394">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[6/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
