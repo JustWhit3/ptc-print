@@ -4,8 +4,6 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #define DOCTEST_CONFIG_SUPER_FAST_ASSERTS
 
-
-
 //====================================================
 //     Headers
 //====================================================
@@ -23,6 +21,7 @@
 #include <fstream>
 #include <string>
 #include <complex>
+#include <chrono>
 
 // Containers for testing
 #include <vector>
@@ -36,6 +35,11 @@
 #include <unordered_set>
 #include <stack>
 #include <queue>
+
+//====================================================
+//     Namespaces
+//====================================================
+using namespace std::literals::chrono_literals;
 
 //====================================================
 //     Utils
@@ -348,6 +352,14 @@ TEST_CASE( "Testing the Print operator << overloads." )
     p_queue.push( 5 );
     p_queue.push( 6 );
     CHECK_EQ( ptc::print( ptc::mode::str, p_queue ), "[6, 2, 5]" );
+
+    // std::chrono::duration
+    CHECK_EQ( ptc::print( ptc::mode::str, 5ns ), "5ns" );
+    CHECK_EQ( ptc::print( ptc::mode::str, 5us ), "5us" );
+    CHECK_EQ( ptc::print( ptc::mode::str, 5ms ), "5ms" );
+    CHECK_EQ( ptc::print( ptc::mode::str, 5s ), "5s" );
+    CHECK_EQ( ptc::print( ptc::mode::str, 5min ), "5min" );
+    CHECK_EQ( ptc::print( ptc::mode::str, 5h ), "5h" );
 
     ptc::print.setEnd( "\n" );
    }

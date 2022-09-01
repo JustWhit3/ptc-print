@@ -27,6 +27,11 @@
 #include <complex>
 #include <stack>
 #include <queue>
+#include <chrono>
+#include <unordered_map>
+#include <typeindex>
+#include <typeinfo>
+
 
 namespace ptc
  {
@@ -39,6 +44,21 @@ namespace ptc
     template <class T> using string_view = std::basic_string_view<T>;
     template <class T> using ostringstream = std::basic_ostringstream<T>;
     template <class T> using ostream = std::basic_ostream<T>;
+   }
+
+  //====================================================
+  //     Global constants
+  //====================================================
+  namespace sconstant
+   {
+    inline std::unordered_map<std::type_index, std::string> time_map
+     {
+      { typeid( std::nano ), "ns" },
+      { typeid( std::micro ), "us" },
+      { typeid( std::milli ), "ms" },
+      { typeid( std::ratio<60> ), "min" },
+      { typeid( std::ratio<3600> ), "h" }
+     };
    }
 
   //====================================================
@@ -359,6 +379,31 @@ namespace ptc
        }
      }
     os << "]";
+    return os;
+   }
+
+  // Overload for std::chrono::duration objects
+  /**
+   * @brief Operator << overload for std::chrono::duration objects printing.
+   * 
+   * @tparam T_str The char type of the ostream object.
+   * @tparam T_time The order of magnitude of the time object.
+   * @tparam int_type The int type of the time object.
+   * @param os The stream to which the time object is printed to.
+   * @param val The time object.
+   * @return stype::ostream<T_str>& The stream to which the time object is printed to.
+   */
+  template <class T_str, class T_time, class int_type>
+  stype::ostream<T_str>& operator <<( stype::ostream<T_str>& os, const std::chrono::duration<int_type, T_time>& val )
+   {
+    if constexpr( ! std::is_same_v<std::chrono::duration<int_type, T_time>, std::chrono::duration<int_type>> )
+     {
+      os << val.count() << sconstant::time_map[ typeid( T_time ) ];
+     }
+    else if constexpr( std::is_same_v<std::chrono::duration<int_type, T_time>, std::chrono::duration<int_type>> )
+     {
+      os << val.count() << "s";
+     }
     return os;
    }
 

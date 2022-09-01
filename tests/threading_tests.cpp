@@ -16,6 +16,7 @@
 #include <map>
 #include <string>
 #include <stack>
+#include <chrono>
 
 //====================================================
 //     main
@@ -74,6 +75,8 @@ int main()
     my_stack.push( 12 );
     my_stack.push( 8 );
     ptc::print( "Printing an std::stack:", my_stack );
+
+    ptc::print( std::chrono::seconds( 5 ) );
    };
 
   // Second job
@@ -122,6 +125,8 @@ int main()
     my_stack.push( 12 );
     my_stack.push( 8 );
     ptc::print( "Printing an std::stack:", my_stack );
+
+    ptc::print( std::chrono::seconds( 5 ) );
    };
 
   std::thread first_job(job1);

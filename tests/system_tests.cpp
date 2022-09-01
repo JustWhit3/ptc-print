@@ -2,8 +2,6 @@
 //     headers
 //====================================================
 
-
-
 // My headers
 #include "../include/ptc/print.hpp"
 
@@ -15,6 +13,12 @@
 #include <vector>
 #include <map>
 #include <stack>
+#include <chrono>
+
+//====================================================
+//     Namespaces
+//====================================================
+using namespace std::literals::chrono_literals;
 
 //====================================================
 //     standard
@@ -132,6 +136,11 @@ void other_types()
   my_stack.push( 12 );
   my_stack.push( 8 );
   ptc::print( "Printing an std::stack:", my_stack );
+
+  // Testing std::chrono objects printing
+  ptc::print( "Printing an std::chrono::duration time in nanoseconds:", 30ns );
+  ptc::print( "Printing an std::chrono::duration time in seconds:", 5s );
+  ptc::wprint( "Printing an std::chrono::duration time in seconds with wprint:", 5s );
  }
 
 //====================================================

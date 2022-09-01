@@ -18,6 +18,7 @@
 #include <complex>
 #include <vector>
 #include <stack>
+#include <chrono>
 
 //====================================================
 //     Namespace directives
@@ -117,6 +118,12 @@ static void ptc_print_stack( bm::State& state )
   for ( auto _ : state ) ptc::print( stack );
  }
 
+// ptc_print_duration
+static void ptc_print_duration( bm::State& state ) 
+ {
+  for ( auto _ : state ) ptc::print( std::chrono::seconds( 5 ) );
+ }
+
 //====================================================
 //      stdout
 //====================================================
@@ -195,8 +202,9 @@ static void fmt_print_file( bm::State& state )
 
 // non built-in types
 //BENCHMARK( ptc_print_complex );
-BENCHMARK( ptc_print_vector );
+//BENCHMARK( ptc_print_vector );
 //BENCHMARK( ptc_print_stack );
+BENCHMARK( ptc_print_duration );
 
 //====================================================
 //     Comparison with other libraries

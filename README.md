@@ -292,6 +292,23 @@ int main()
 [[1, 1], [2, 2], [3, 3]]
 ```
 
+To print `std::chrono::duration` objects:
+
+```C++
+#include <ptc/print.hpp>
+#include <chrono>
+using namespace std::literals::chrono_literals;
+
+int main()
+ {
+  ptc::print( "Time:", 5m, 30s );
+ }
+```
+
+```Bash
+Time: 5m 30s
+```
+
 ### Printing using different char types
 
 It is possible to choose a different char type with respect to the standard `char` used to define an `std::string`. A list of supported char types by the `ptc::print` object is the following:
@@ -521,7 +538,6 @@ print( "I am", "Python", 123, sep = "*", end = "" );
 
 ## Todo
 
-- Add support to [date and time](https://en.cppreference.com/w/cpp/chrono) printing.
 - Add standard C pointers printing.
 - Add a specific method to reorder the printing of a nidified container. For example:
 
