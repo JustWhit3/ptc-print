@@ -21,25 +21,29 @@
   - [Standard cases](#standard-cases)
   - [Printing with ANSI escape sequences](#printing-with-ansi-escape-sequences)
   - [Printing non-standard types](#printing-non-standard-types)
+  - [Printing user-defined types](#printing-user-defined-types)
   - [Printing using different char types](#printing-using-different-char-types)
 - [Install and use](#install-and-use)
-  - [Install](#insall)
+  - [Install](#install)
   - [Performance improvements](#performance-improvements)
 - [Tests](#tests)
 - [Comparison with other libraries](#comparison-with-other-libraries)
-  - [Benchmarking the execution time](#benchmarking)
-  - [Benchmarking the execution time with performance improvements](#benchmarking-with-performance-improvements)
+  - [Benchmarking the execution time](#benchmarking-the-execution-time)
+  - [Benchmarking the execution time with performance improvements](#benchmarking-the-execution-time-with-performance-improvements)
   - [Benchmarking the compilation time](#benchmarking-the-compilation-time)
   - [Executable size](#executable-size)
   - [Advantages](#advantages)
-- [Todo](#todo)
+- [Todo](#todo)]
+  - [New features](#new-features)
+  - [Improvements](#improvements)
+- [Projects which use this library](#projects-which-use-this-library)
 - [Credits](#credits)
   - [Main maintainers](#main-maintainers)
   - [Other contributors](#other-contributors)
 
 ## Introduction
 
-`ptc::print` (*py-to-cpp print*) is a C++17 printing object inspired by the Python [`print`](https://realpython.com/python-print/) function, which provides you a most comfortable way to print messages and logs to the output stream.
+`ptc::print` (*py-to-cpp print*) is a C++17 printing object (compiles also with C++20) inspired by the Python [`print`](https://realpython.com/python-print/) function, which provides you a most comfortable way to print messages and logs to the output stream.
 
 It is constructed through the [`Print`](https://justwhit3.github.io/ptc-print/classptc_1_1Print.html) functor, which is a fully *type-* and *thread-safe* class with *automatic memory management*, implemented through an [header-only](https://github.com/JustWhit3/ptc-print/blob/main/ptc/print.hpp) library, with minimal and indispensable [dependencies](#install-and-use). It supports also the usage of [ANSI escape sequences](#printing-with-ansi-escape-sequences).
 
@@ -48,6 +52,8 @@ It is constructed through the [`Print`](https://justwhit3.github.io/ptc-print/cl
 It is possible to choose to print using different char types (`char`, `wchar_t`...). List of supported `char` types can be found [here](#printing-non-standard-types).
 
 If you want to contribute to the repository, please read [this](https://github.com/JustWhit3/ptc-print/blob/main/CONTRIBUTING.md) file before.
+
+If you plan to use this tool in one of your projects please let me know so I can link you to the [Projects which use this library](#projects-which-use-this-library) section.
 
 Code documentation is generated using [*Doxygen*](https://www.doxygen.nl/manual/starting.html) and can be accessed [here](https://justwhit3.github.io/ptc-print/). Updates and news will be published at [this](https://github.com/JustWhit3/ptc-print/discussions/categories/announcements) discussion page.
 
@@ -64,6 +70,7 @@ Supported operating systems:
   - *MSYS2* (tested)
   - *MinGW* (tested)
   - *WSL* (tested)
+  - *Powershell* (tested)
 - **MacOS**
 
 Supported compilers:
@@ -254,7 +261,7 @@ List of not built-int types ready for custom printing:
 - C containers: [C arrays](https://www.learncpp.com/cpp-tutorial/pointers-and-arrays/).
 - C++ containers: [`std::vector`](https://en.cppreference.com/w/cpp/container/vector), [`std::map`](https://en.cppreference.com/w/cpp/container/map), [`std::unordered_map`](https://en.cppreference.com/w/cpp/container/unordered_map), [`std::deque`](https://en.cppreference.com/w/cpp/container/deque), [`std::forward_list`](https://en.cppreference.com/w/cpp/container/forward_list), [`std::list`](https://en.cppreference.com/w/cpp/container/list), [`std::set`](https://en.cppreference.com/w/cpp/container/set), [`std::unordered_set`](https://cplusplus.com/reference/unordered_set/unordered_set/#:~:text=Unordered%20sets%20are%20containers%20that,key%2C%20that%20identifies%20it%20uniquely.), [`std::multimap`](https://cplusplus.com/reference/map/multimap/), [`std::multiset`](https://cplusplus.com/reference/set/multiset/), [`std::unordered_multiset`](https://en.cppreference.com/w/cpp/container/unordered_multiset#:~:text=Unordered%20multiset%20is%20an%20associative,order%2C%20but%20organized%20into%20buckets.), [`std::unordered_multimap`](https://en.cppreference.com/w/cpp/container/unordered_multimap).
 - Container adaptors: [`std::stack`](https://en.cppreference.com/w/cpp/container/stack), [`std::priority_queue`](https://en.cppreference.com/w/cpp/container/priority_queue).
-- Other types: [`std::complex`](https://en.cppreference.com/w/cpp/numeric/complex).
+- Other types: [`std::complex`](https://en.cppreference.com/w/cpp/numeric/complex), [`std::chrono::duration`](https://en.cppreference.com/w/cpp/chrono/duration).
 
 If you need support to other particular types you can open an issue with a [feature request](https://github.com/JustWhit3/ptc-print/blob/main/.github/ISSUE_TEMPLATE/feature_request.md).
 
@@ -271,7 +278,7 @@ int main()
  }
 ```
 
-```Bash
+```txt
 [1, 2, 3]
 ```
 
@@ -288,7 +295,7 @@ int main()
  }
 ```
 
-```Bash
+```txt
 [[1, 1], [2, 2], [3, 3]]
 ```
 
@@ -305,8 +312,37 @@ int main()
  }
 ```
 
-```Bash
+```txt
 Time: 5m 30s
+```
+
+### Printing user-defined types
+
+Within `ptc::print` it is possible to print any user-defined type. For example:
+
+```C++
+#include <ptc/print.hpp>
+
+// Define a new type
+struct foo
+ {
+  foo( int a_, int b_ ): a(a_), b(b_) {}
+  int a, b;
+ };
+
+// Overload operator << for the new type
+template <class T_str>
+ptc::stype::ostream<T_str>& operator <<( ptc::stype::ostream<T_str>& os, const foo& object )
+ {
+  os << object.a << "+" << object.b;
+  return os;
+ }
+
+int main()
+ {
+  foo object( 2, 3 );
+  ptc::print( object );
+ }
 ```
 
 ### Printing using different char types
@@ -327,7 +363,7 @@ int main()
  }
 ```
 
-```Bash
+```txt
 Printing to std::wcout!
 ```
 
@@ -341,7 +377,7 @@ Steps:
 2) Unzip the downloaded directory and `cd` into it.
 3) Copy the **ptc** folder in one of your projects or in a specific path or install into the system with this command:
 
-```bash
+```txt
 ./install.sh
 ```
 
@@ -385,20 +421,20 @@ Tests are produced using `-Wall -Wextra -pedantic` flags. To check them you need
 
 They are installed in the second step of the installation through the `install.sh` script. Before running test codes you need to compile them:
 
-```bash
+```txt
 cd tests
 make
 ```
 
 To launch all tests simultaneously:
 
-```bash
+```txt
 ./all_tests.sh
 ```
 
 Or separately:
 
-```bash
+```txt
 ./bin/unit_tests
 ./bin/system_tests
 ./bin/threading_tests
@@ -408,19 +444,19 @@ cppcheck include/ptc/print.hpp
 
 To check the automatic memory management through *Memcheck*:
 
-```bash
+```txt
 ./profiling.sh memcheck ./bin/system_tests
 ```
 
 To check thread safety through *Helgrind*:
 
-```bash
+```txt
 ./profiling.sh helgrind ./bin/system_tests
 ```
 
 Tests using the `PTC_ENABLE_PERFORMANCE_IMPROVEMENTS` macro are automatically performed launching barely the `all_tests.sh` script, or alternatively specifying:
 
-```bash
+```txt
 ./all_tests.sh macro
 ```
 
@@ -435,6 +471,8 @@ List of functions / objects which `ptc::print` is compared with:
 - [`fmt::print`](https://pkg.go.dev/fmt) version 9.0.0
 
 > **NOTE**: comparisons are performed **only** on the same features of each library. For example: I am not comparing the whole `fmtlib` formatting library to mine, but simply the `fmt::print` function.
+
+Studies are performed with the `g++ (Ubuntu 11.2.0-19ubuntu1)` compiler.
 
 Other suggestions are more than welcome.
 
@@ -466,7 +504,7 @@ Extra studies are performed using consistent improvements in the execution time,
 
 To run these benchmarks you can do:
 
-```bash
+```txt
 ./run.sh macro
 ```
 
@@ -494,7 +532,7 @@ is created and compiled with `-O3 -O1 -falign-functions=32` flags, for *100* tim
 
 <img src="https://github.com/JustWhit3/ptc-print/blob/main/img/benchmarks/compilation_time/stdout_stream.png">
 
-As seen from the above plot, compilation time of `ptc::print` needs to be improved.
+The hight compilation time of `ptc::print` with respect to the other libraries is probably due to the fact that it is an object defined into an header-only library.
 
 ### Executable size
 
@@ -538,7 +576,8 @@ print( "I am", "Python", 123, sep = "*", end = "" );
 
 ## Todo
 
-- Add standard C pointers printing.
+### New features
+
 - Add a specific method to reorder the printing of a nidified container. For example:
 
 ```C++
@@ -553,19 +592,113 @@ int main()
  }
 ```
 
-```Bash
+```txt
 KEY  VALUE
 1    one
 3    three
 5    five
 ```
 
+- Add a method to print time in strftime-like format. For example
+
+```C++
+#include <ptc/print.hpp>
+#include <chrono>
+using namespace std::literals::chrono_literals;
+
+int main()
+ {
+  ptc::print( 1h + 30min + 5s );
+ }
+```
+
+```txt
+01:30:05
+```
+
+- Add standard C pointers printing. For example:
+
+```C++
+#include <ptc/print.hpp>
+
+int main()
+ {
+  int *ptr = new int[2];
+  ptr[0] = 1;
+  ptr[1] = 2;
+  ptc::print( ptr );
+ }
+```
+
+```txt
+Pointer name: "ptr"
+Value: 0x55b776e15060
+Direction: 0x7ffd370e32c8
+Printing: [1, 2]
+```
+
+Or in case someone wants only the printing:
+
+```C++
+ptc::print( ptr_printing( ptr ) );
+```
+
+```txt
+[1, 2]
+```
+
+- Enable printing of fixed-size heterogeneous tuples. For example:
+
+```C++
+#include <ptc/print.hpp>
+#include <tuple>
+
+int main()
+ {
+  auto get_info = []( int index )  
+   {
+    if ( index == 0 ) return std::make_tuple( 3.8, '32', "Bologna" );
+    if ( index == 1 ) return std::make_tuple( 2.9, '12', "Milano" );
+    throw std::invalid_argument( "index" );
+   };
+
+  ptc::print( { get_info(0), get_info(1) } );
+ }
+```
+
+```txt
+{ (2.9, '12', "Milano"), (3.8, '32', "Bologna") }
+```
+
+- Enable printing of `std::optional` values:
+
+```C++
+#include <ptc/print.hpp>
+#include <optional>
+
+int main()
+ {
+  std::optional<int> opt = 32;
+  ptc::print( opt );
+ }
+```
+
+```txt
+32
+```
+
+### Improvements
+
 - Improve the printing to an external file stream. Current implementation is too slow.
-- Add possibility / instructions to print user-defined types.
-- Test the software with `MSVC` compiler.
 - Upload the package on some package managers (ex: [`Conan`](https://conan.io/) or `dpkg`).
 - Create a [wiki](https://github.com/JustWhit3/ptc-print/wiki) with detailed examples for every feature.
 - Extend the support to `char16_t` and `char32_t` types.
+- Add a macro (or other structure) to disable `operator <<` overloads in `print.hpp` in case non-standard-types printing is not needed.
+- Extend benchmarking studies with other libraries.
+
+## Projects which use this library
+
+Empty for the moment.
 
 ## Credits
 
