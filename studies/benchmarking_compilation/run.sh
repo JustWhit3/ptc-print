@@ -4,7 +4,7 @@
 sudo cpupower frequency-set --governor performance > /dev/null 2>&1
 
 ./analysis.py \
---niter=10 \
+--niter=100 \
 --plots=no
 
 sudo cpupower frequency-set --governor powersave > /dev/null 2>&1

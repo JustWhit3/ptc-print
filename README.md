@@ -26,6 +26,8 @@
 - [Install and use](#install-and-use)
   - [Install](#install)
   - [Performance improvements](#performance-improvements)
+    - [Execution](#execution)
+    - [Compilation](#compilation)
 - [Tests](#tests)
 - [Comparison with other libraries](#comparison-with-other-libraries)
   - [Benchmarking the execution time](#benchmarking-the-execution-time)
@@ -394,7 +396,9 @@ Prerequisites are minimal and are automatically installed with the `install.sh` 
 
 ### Performance improvements
 
-To consistently increase performance improvements you can use the following preprocessor directive:
+#### Execution
+
+To consistently increase **performance improvements** you can use the following preprocessor directive:
 
 ```C++
 #define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
@@ -410,6 +414,16 @@ If you plan to use this preprocessor directive pay attention to the **following 
 - Make sure to flush `ptc::print` manually every time you want to display something before expecting input on `std::cin`, since `std::cout` and `std::cin` have been untied (see [here](https://stackoverflow.com/questions/31162367/significance-of-ios-basesync-with-stdiofalse-cin-tienull)).
 
 These operations preserve the library quality, however some memory false-positive errors may occur when running Valgrind *memcheck* tool; they are due to the [`std::ios_base::sync_with_stdio`](https://en.cppreference.com/w/cpp/io/ios_base/sync_with_stdio) function usage inside a generic class. This false-positive has been hidden into a Valgrind [suppression file](https://github.com/JustWhit3/ptc-print/tree/main/tests/valgrind_suppressions.supp). A related discussion can be found [here](https://stackoverflow.com/questions/73267528/valgrind-complaining-for-possible-memory-problems-from-a-program-which-uses-std?noredirect=1#comment129394781_73267528).
+
+#### Compilation
+
+To slightly decrease the **compilation time** you can use the following preprocessor directive:
+
+```C++
+#define PTC_DISABLE_STD_TYPES_PRINTING
+```
+
+You can use the previous directive if you plan to not use any of the standard C++ containers (or extra types) printing into the `ptc::print` object.
 
 ## Tests
 
@@ -533,6 +547,8 @@ is created and compiled with `-O3 -O1 -falign-functions=32` flags, for *100* tim
 <img src="https://github.com/JustWhit3/ptc-print/blob/main/img/benchmarks/compilation_time/stdout_stream.png">
 
 The hight compilation time of `ptc::print` with respect to the other libraries is probably due to the fact that it is an object defined into an header-only library.
+
+To slightly decrease the compilation time see the [Compilation](#compilation) subsection of the [Performance improvements](#performance-improvements) section.
 
 ### Executable size
 

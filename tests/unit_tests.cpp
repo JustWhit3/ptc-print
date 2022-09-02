@@ -60,12 +60,16 @@ TEST_CASE( "Testing utils." )
     CHECK_EQ( &ptc::select_cout<wchar_t>::cout, &std::wcout );
    }
 
+  #ifdef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
+
   // select_cin
   SUBCASE( "Testing select_cin." )
    {
     CHECK_EQ( &ptc::select_cin<char>::cin, &std::cin );
     CHECK_EQ( &ptc::select_cin<wchar_t>::cin, &std::wcin );
    }
+
+  #endif
  }
 
 //====================================================

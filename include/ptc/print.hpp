@@ -1,5 +1,5 @@
 //====================================================
-//     Metadata
+//     File data
 //====================================================
 /**
  * @file print.hpp
@@ -32,7 +32,6 @@
 #include <typeindex>
 #include <typeinfo>
 
-
 namespace ptc
  {
   //====================================================
@@ -51,6 +50,8 @@ namespace ptc
   //====================================================
   namespace sconstant
    {
+    #ifndef PTC_DISABLE_STD_TYPES_PRINTING
+
     inline std::unordered_map<std::type_index, std::string> time_map
      {
       { typeid( std::nano ), "ns" },
@@ -59,6 +60,8 @@ namespace ptc
       { typeid( std::ratio<60> ), "min" },
       { typeid( std::ratio<3600> ), "h" }
      };
+
+    #endif
    }
 
   //====================================================
@@ -82,26 +85,6 @@ namespace ptc
   //====================================================
   //     Helper tools
   //====================================================
-
-  // is_streamable
-  /**
-   * @brief Struct used to define a specific type trait for operator << overload for container printing.
-   * 
-   * @tparam T Template type of the type trait.
-   */
-  template <class T, class T_str>
-  struct is_streamable 
-   {
-    static std::false_type test( ... );
-      
-    template<class U>
-    static auto test( const U& u ) -> decltype( std::declval <stype::ostream<T_str>&>() << u, std::true_type{} );
-  
-    static constexpr bool value = decltype( test( std::declval <T>() ) )::value;
-   };
-  
-  template<class T, class T_str>
-  inline constexpr bool is_streamable_v = is_streamable<T, T_str>::value;
 
   // TOSTRING
   /**
@@ -154,6 +137,8 @@ namespace ptc
    };
 
   std::wostream &select_cout <wchar_t>::cout = std::wcout;
+
+  #ifdef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
  
   // select_cin
   /**
@@ -179,6 +164,30 @@ namespace ptc
    };
 
   std::wistream &select_cin <wchar_t>::cin = std::wcin;
+
+  #endif
+
+  #ifndef PTC_DISABLE_STD_TYPES_PRINTING
+
+  // is_streamable
+  /**
+   * @brief Struct used to define a specific type trait for operator << overload for container printing.
+   * 
+   * @tparam T Template type of the type trait.
+   */
+  template <class T, class T_str>
+  struct is_streamable 
+   {
+    static std::false_type test( ... );
+      
+    template<class U>
+    static auto test( const U& u ) -> decltype( std::declval <stype::ostream<T_str>&>() << u, std::true_type{} );
+  
+    static constexpr bool value = decltype( test( std::declval <T>() ) )::value;
+   };
+  
+  template<class T, class T_str>
+  inline constexpr bool is_streamable_v = is_streamable<T, T_str>::value;
 
   // Helper function for container adaptors printing
   /**
@@ -407,6 +416,8 @@ namespace ptc
     return os;
    }
 
+  #endif
+
   //====================================================
   //     ptc_print class
   //====================================================
@@ -434,7 +445,7 @@ namespace ptc
       flush( false )
       {       
        #ifdef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
-        performance_options();
+       performance_options();
        #endif
       }
 
@@ -744,7 +755,10 @@ namespace ptc
        
        std::ios_base::sync_with_stdio( false );
        select_cout<T_str>::cout.tie( NULL );
+
+       #ifdef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
        select_cin<T_str>::cin.tie( NULL );
+       #endif
       }
      
      //====================================================
