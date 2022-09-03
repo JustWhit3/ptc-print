@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ptc-print: ptc::select_cout&lt; T &gt; Struct Template Reference</title>
+<title>ptc-print: ptc::select_cout&lt; T_str &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -67,16 +67,35 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="structptc_1_1select__cout-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">ptc::select_cout&lt; T &gt; Struct Template Reference</div>  </div>
+<div class="title">ptc::select_cout&lt; T_str &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>Struct used to define a way to template the choice of the "std::cout" object in order to be "std::cout" for "char" type or "std::wcout" for "wchar_t" type.  
  <a href="structptc_1_1select__cout.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="print_8hpp_source.html">print.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a236f62a90cd355b52f3e43a7dab87bc9"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1select__cout.html#a236f62a90cd355b52f3e43a7dab87bc9">cout</a></td></tr>
+<tr class="separator:a236f62a90cd355b52f3e43a7dab87bc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f90eaf7c48267eeca5f4a9776936f40"><td class="memItemLeft" align="right" valign="top">std::wostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1select__cout.html#a1f90eaf7c48267eeca5f4a9776936f40">cout</a></td></tr>
+<tr class="separator:a1f90eaf7c48267eeca5f4a9776936f40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a4e7a1218c4244d8fee70e137c962eec5"><td class="memItemLeft" align="right" valign="top">static std::basic_ostream&lt; T_str &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1select__cout.html#a4e7a1218c4244d8fee70e137c962eec5">cout</a></td></tr>
+<tr class="separator:a4e7a1218c4244d8fee70e137c962eec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class T&gt;<br />
-struct ptc::select_cout&lt; T &gt;</h3>
+<div class="textblock"><h3>template&lt;class T_str&gt;<br />
+struct ptc::select_cout&lt; T_str &gt;</h3>
 
 <p>Struct used to define a way to template the choice of the "std::cout" object in order to be "std::cout" for "char" type or "std::wcout" for "wchar_t" type. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -85,7 +104,61 @@ struct ptc::select_cout&lt; T &gt;</h3>
   </table>
   </dd>
 </dl>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a236f62a90cd355b52f3e43a7dab87bc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a236f62a90cd355b52f3e43a7dab87bc9">&#9670;&nbsp;</a></span>cout() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream &amp; <a class="el" href="structptc_1_1select__cout.html">ptc::select_cout</a>&lt; char &gt;::cout</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1f90eaf7c48267eeca5f4a9776936f40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f90eaf7c48267eeca5f4a9776936f40">&#9670;&nbsp;</a></span>cout() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::wostream &amp; <a class="el" href="structptc_1_1select__cout.html">ptc::select_cout</a>&lt; wchar_t &gt;::cout</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a4e7a1218c4244d8fee70e137c962eec5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e7a1218c4244d8fee70e137c962eec5">&#9670;&nbsp;</a></span>cout</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T_str &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::basic_ostream&lt;T_str&gt;&amp; <a class="el" href="structptc_1_1select__cout.html">ptc::select_cout</a>&lt; T_str &gt;::cout</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/ptc/<a class="el" href="print_8hpp_source.html">print.hpp</a></li>
 </ul>
 </div><!-- contents -->

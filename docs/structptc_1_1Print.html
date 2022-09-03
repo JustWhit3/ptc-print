@@ -117,13 +117,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa7f949df605d2c7db8bd215743a8b992"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structptc_1_1Print.html#aa7f949df605d2c7db8bd215743a8b992">operator()</a> (T &amp;&amp;first, Args &amp;&amp;... args) const</td></tr>
 <tr class="memdesc:aa7f949df605d2c7db8bd215743a8b992"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frontend implementation of the () operator overload to print to the output stream. The backend implementation is called in the required variation.  <a href="structptc_1_1Print.html#aa7f949df605d2c7db8bd215743a8b992">More...</a><br /></td></tr>
 <tr class="separator:aa7f949df605d2c7db8bd215743a8b992"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad01a1766b05a04de2202848345ebacec"><td class="memTemplParams" colspan="2">template&lt;class... Args&gt; </td></tr>
-<tr class="memitem:ad01a1766b05a04de2202848345ebacec"><td class="memTemplItemLeft" align="right" valign="top">const <a class="el" href="namespaceptc_1_1stype.html#a7219d14f77077bcda44c5bde147fefa4">stype::string</a>&lt; T_str &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structptc_1_1Print.html#ad01a1766b05a04de2202848345ebacec">operator()</a> (<a class="el" href="namespaceptc.html#aa730094183bf13993032c00ee196eafb">mode</a> &amp;&amp;first, Args &amp;&amp;... args) const</td></tr>
-<tr class="memdesc:ad01a1766b05a04de2202848345ebacec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frontend implementation of the () operator overload to initialize its content with an std::string object. The backend implementation is called in the required variation. This overload is required in order to hide the output of the "print_backend" function during the initialization.  <a href="structptc_1_1Print.html#ad01a1766b05a04de2202848345ebacec">More...</a><br /></td></tr>
-<tr class="separator:ad01a1766b05a04de2202848345ebacec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf3ef1cd34782c6e4b41ef67d68bcf6d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1Print.html#adf3ef1cd34782c6e4b41ef67d68bcf6d">operator()</a> (<a class="el" href="namespaceptc_1_1stype.html#a8705ce01a0d340f850ae53effd9f92c8">stype::ostream</a>&lt; T_str &gt; &amp;os=<a class="el" href="structptc_1_1select__cout.html">select_cout</a>&lt; T_str &gt;::cout) const</td></tr>
-<tr class="memdesc:adf3ef1cd34782c6e4b41ef67d68bcf6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template operator redefinition used to print an empty line on the screen. This is the no argument case overload. Can be used with "ptc::print()" or "ptc::print( ostream_name )".  <a href="structptc_1_1Print.html#adf3ef1cd34782c6e4b41ef67d68bcf6d">More...</a><br /></td></tr>
-<tr class="separator:adf3ef1cd34782c6e4b41ef67d68bcf6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9c7371cbaa5bb1ead8c2fc44cb19c01"><td class="memTemplParams" colspan="2">template&lt;class... Args&gt; </td></tr>
+<tr class="memitem:af9c7371cbaa5bb1ead8c2fc44cb19c01"><td class="memTemplItemLeft" align="right" valign="top">const std::basic_string&lt; T_str &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structptc_1_1Print.html#af9c7371cbaa5bb1ead8c2fc44cb19c01">operator()</a> (<a class="el" href="namespaceptc.html#aa730094183bf13993032c00ee196eafb">mode</a> &amp;&amp;first, Args &amp;&amp;... args) const</td></tr>
+<tr class="memdesc:af9c7371cbaa5bb1ead8c2fc44cb19c01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frontend implementation of the () operator overload to initialize its content with an std::string object. The backend implementation is called in the required variation. This overload is required in order to hide the output of the "print_backend" function during the initialization.  <a href="structptc_1_1Print.html#af9c7371cbaa5bb1ead8c2fc44cb19c01">More...</a><br /></td></tr>
+<tr class="separator:af9c7371cbaa5bb1ead8c2fc44cb19c01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfda6c224be6431a04ea74f1dead4585"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1Print.html#acfda6c224be6431a04ea74f1dead4585">operator()</a> (std::basic_ostream&lt; T_str &gt; &amp;os=<a class="el" href="structptc_1_1select__cout.html">select_cout</a>&lt; T_str &gt;::cout) const</td></tr>
+<tr class="memdesc:acfda6c224be6431a04ea74f1dead4585"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template operator redefinition used to print an empty line on the screen. This is the no argument case overload. Can be used with "ptc::print()" or "ptc::print( ostream_name )".  <a href="structptc_1_1Print.html#acfda6c224be6431a04ea74f1dead4585">More...</a><br /></td></tr>
+<tr class="separator:acfda6c224be6431a04ea74f1dead4585"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class T_str&gt;<br />
@@ -287,8 +287,8 @@ template&lt;class T_str &gt; </div>
 
 </div>
 </div>
-<a id="ad01a1766b05a04de2202848345ebacec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad01a1766b05a04de2202848345ebacec">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/3]</span></h2>
+<a id="af9c7371cbaa5bb1ead8c2fc44cb19c01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9c7371cbaa5bb1ead8c2fc44cb19c01">&#9670;&nbsp;</a></span>operator()() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -301,7 +301,7 @@ template&lt;class... Args&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="namespaceptc_1_1stype.html#a7219d14f77077bcda44c5bde147fefa4">stype::string</a>&lt;T_str&gt; <a class="el" href="structptc_1_1Print.html">ptc::Print</a>&lt; T_str &gt;::operator() </td>
+          <td class="memname">const std::basic_string&lt;T_str&gt; <a class="el" href="structptc_1_1Print.html">ptc::Print</a>&lt; T_str &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceptc.html#aa730094183bf13993032c00ee196eafb">mode</a> &amp;&amp;&#160;</td>
           <td class="paramname"><em>first</em>, </td>
@@ -339,12 +339,12 @@ template&lt;class... Args&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>const <a class="el" href="namespaceptc_1_1stype.html#a7219d14f77077bcda44c5bde147fefa4">stype::string&lt;T_str&gt;</a> The whole print content in string format. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>const std::basic_string&lt;T_str&gt; The whole print content in string format. </dd></dl>
 
 </div>
 </div>
-<a id="adf3ef1cd34782c6e4b41ef67d68bcf6d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf3ef1cd34782c6e4b41ef67d68bcf6d">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/3]</span></h2>
+<a id="acfda6c224be6431a04ea74f1dead4585"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfda6c224be6431a04ea74f1dead4585">&#9670;&nbsp;</a></span>operator()() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -357,7 +357,7 @@ template&lt;class T_str &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="structptc_1_1Print.html">ptc::Print</a>&lt; T_str &gt;::operator() </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceptc_1_1stype.html#a8705ce01a0d340f850ae53effd9f92c8">stype::ostream</a>&lt; T_str &gt; &amp;&#160;</td>
+          <td class="paramtype">std::basic_ostream&lt; T_str &gt; &amp;&#160;</td>
           <td class="paramname"><em>os</em> = <code><a class="el" href="structptc_1_1select__cout.html">select_cout</a>&lt;T_str&gt;::cout</code></td><td>)</td>
           <td> const</td>
         </tr>
