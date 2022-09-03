@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['cout_57',['cout',['../structptc_1_1select__cout.html#a4e7a1218c4244d8fee70e137c962eec5',1,'ptc::select_cout']]]
+  ['cout_57',['cout',['../structptc_1_1Print_1_1select__cout.html#a32c16c4353222886712c89ad5d0328b3',1,'ptc::Print::select_cout']]]
 ];

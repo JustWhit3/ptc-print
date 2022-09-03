@@ -81,6 +81,12 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="print_8hpp_source.html">print.hpp</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1Print_1_1select__cout.html">select_cout</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct used to define a way to template the choice of the "std::cout" object in order to be "std::cout" for "char" type or "std::wcout" for "wchar_t" type.  <a href="structptc_1_1Print_1_1select__cout.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a12cc1bfc50278ad688822f2fa9967cc3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1Print.html#a12cc1bfc50278ad688822f2fa9967cc3">Print</a> ()</td></tr>
@@ -121,7 +127,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af9c7371cbaa5bb1ead8c2fc44cb19c01"><td class="memTemplItemLeft" align="right" valign="top">const std::basic_string&lt; T_str &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structptc_1_1Print.html#af9c7371cbaa5bb1ead8c2fc44cb19c01">operator()</a> (<a class="el" href="namespaceptc.html#aa730094183bf13993032c00ee196eafb">mode</a> &amp;&amp;first, Args &amp;&amp;... args) const</td></tr>
 <tr class="memdesc:af9c7371cbaa5bb1ead8c2fc44cb19c01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frontend implementation of the () operator overload to initialize its content with an std::string object. The backend implementation is called in the required variation. This overload is required in order to hide the output of the "print_backend" function during the initialization.  <a href="structptc_1_1Print.html#af9c7371cbaa5bb1ead8c2fc44cb19c01">More...</a><br /></td></tr>
 <tr class="separator:af9c7371cbaa5bb1ead8c2fc44cb19c01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acfda6c224be6431a04ea74f1dead4585"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1Print.html#acfda6c224be6431a04ea74f1dead4585">operator()</a> (std::basic_ostream&lt; T_str &gt; &amp;os=<a class="el" href="structptc_1_1select__cout.html">select_cout</a>&lt; T_str &gt;::cout) const</td></tr>
+<tr class="memitem:acfda6c224be6431a04ea74f1dead4585"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structptc_1_1Print.html#acfda6c224be6431a04ea74f1dead4585">operator()</a> (std::basic_ostream&lt; T_str &gt; &amp;os=<a class="el" href="structptc_1_1Print_1_1select__cout.html">select_cout</a>&lt; T_str &gt;::cout) const</td></tr>
 <tr class="memdesc:acfda6c224be6431a04ea74f1dead4585"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template operator redefinition used to print an empty line on the screen. This is the no argument case overload. Can be used with "ptc::print()" or "ptc::print( ostream_name )".  <a href="structptc_1_1Print.html#acfda6c224be6431a04ea74f1dead4585">More...</a><br /></td></tr>
 <tr class="separator:acfda6c224be6431a04ea74f1dead4585"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -358,7 +364,7 @@ template&lt;class T_str &gt; </div>
           <td class="memname">void <a class="el" href="structptc_1_1Print.html">ptc::Print</a>&lt; T_str &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">std::basic_ostream&lt; T_str &gt; &amp;&#160;</td>
-          <td class="paramname"><em>os</em> = <code><a class="el" href="structptc_1_1select__cout.html">select_cout</a>&lt;T_str&gt;::cout</code></td><td>)</td>
+          <td class="paramname"><em>os</em> = <code><a class="el" href="structptc_1_1Print_1_1select__cout.html">select_cout</a>&lt;T_str&gt;::cout</code></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
