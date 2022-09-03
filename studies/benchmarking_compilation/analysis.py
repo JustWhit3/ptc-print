@@ -17,6 +17,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 from tqdm import tqdm
+from datetime import date
 
 #################################################
 #     get_time_of
@@ -136,10 +137,15 @@ def do_plot( data_programs, data, data_std, atype = "Time" ):
         ax.set_ylabel( "Size (KiB)" )
     
     # Other plot settings
+    current_date = date.today()
     if atype == "Time":
-        ax.set_title( r'''$\bf{Compilation \ time \ benchmarks}$ (stdout stream)''' )
+        ax.set_title( r'''$\bf{Compilation \ time \ benchmarks}$ (stdout stream)''' 
+                      "\n"
+                      r''' Date: (%(date)s)'''% { "date": current_date })
     elif atype == "Size":
-        ax.set_title( r'''$\bf{Executable \ size}$ (stdout stream)''' )
+        ax.set_title( r'''$\bf{Executable \ size}$ (stdout stream)'''
+                      "\n"
+                      r''' Date: (%(date)s)'''% { "date": current_date })
     ax.yaxis.grid( True )
     ax.set_axisbelow( True )
 

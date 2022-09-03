@@ -15,6 +15,7 @@ from termcolor import colored as cl
 import pandas as pd
 import json
 import os
+from datetime import date
 
 #################################################
 #     set_y_label
@@ -147,10 +148,15 @@ def plotter( data, time_type ):
     # Plot settings
     ax.set_xlabel( "Object / function" )
     ax.set_ylabel( "{} (ns)".format( set_y_label( time_type ) ) )
+    current_date = date.today()
     if "Real" in ax.get_ylabel():
-        ax.set_title( r'''$\bf{Real \ time \ benchmarks}$ (%(feature)s)'''% { "feature": feature_name } )
+        ax.set_title( r'''$\bf{Real \ time \ benchmarks}$ (%(feature)s)'''
+                      "\n"
+                      r''' Date: (%(date)s)'''% { "feature": feature_name, "date": current_date })
     elif "CPU" in ax.get_ylabel():
-        ax.set_title( r'''$\bf{CPU \ time \ benchmarks}$ (%(feature)s)'''% { "feature": feature_name } )
+        ax.set_title( r'''$\bf{CPU \ time \ benchmarks}$ (%(feature)s)'''
+                      "\n"
+                      r''' Date: (%(date)s)'''% { "feature": feature_name, "date": current_date })
     ax.yaxis.grid( True )
     ax.set_axisbelow( True )
         
