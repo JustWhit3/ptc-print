@@ -47,6 +47,30 @@ namespace ptc
    };
 
   //====================================================
+  //     select_cout
+  //====================================================
+  template <class T_str> 
+  struct select_cout
+   {
+    static std::basic_ostream<T_str> &cout;
+   };
+
+  template <> std::ostream &select_cout <char>::cout = std::cout;
+  template <> std::wostream &select_cout <wchar_t>::cout = std::wcout;
+
+  //====================================================
+  //     select_cin
+  //====================================================
+  template <class T_str> 
+  struct select_cin
+   {
+    static std::basic_istream<T_str> &cin;
+   };
+
+  template <> std::istream &select_cin <char>::cin = std::cin;
+  template <> std::wistream &select_cin <wchar_t>::cin = std::wcin;
+
+  //====================================================
   //     osout
   //====================================================
   template <class T, class... Args>

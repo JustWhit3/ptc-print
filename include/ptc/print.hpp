@@ -90,40 +90,6 @@ namespace ptc
   
   #define TOSTRING( T, str ) ToString <T>( str, L##str )
 
-  // select_cout
-  /**
-   * @brief Struct used to define a way to template the choice of the "std::cout" object in order to be "std::cout" for "char" type or "std::wcout" for "wchar_t" type.
-   * 
-   * @tparam T The template type of the "std::cout" object (char, wchar_t, ...).
-   */  
-  template <class T_str> 
-  struct select_cout
-   {
-    static std::basic_ostream<T_str> &cout;
-   };
-
-  template <> std::ostream &select_cout <char>::cout = std::cout;
-  template <> std::wostream &select_cout <wchar_t>::cout = std::wcout;
-
-  #ifdef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
- 
-  // select_cin
-  /**
-   * @brief Struct used to define a way to template the choice of the "std::cin" object in order to be "std::cin" for "char" type or "std::wcin" for "wchar_t" type.
-   * 
-   * @tparam T The template type of the "std::cin" object (char, wchar_t, ...).
-   */  
-  template <class T_str> 
-  struct select_cin
-   {
-    static std::basic_istream<T_str> &cin;
-   };
-
-  template <> std::istream &select_cin <char>::cin = std::cin;
-  template <> std::wistream &select_cin <wchar_t>::cin = std::wcin;
-
-  #endif
-
   #ifndef PTC_DISABLE_STD_TYPES_PRINTING
 
   // is_streamable
@@ -420,6 +386,38 @@ namespace ptc
       performance_options();
       #endif
      }
+
+    //====================================================
+    //     Public structs
+    //====================================================
+
+    // select_cout
+    /**
+     * @brief Struct used to define a way to template the choice of the "std::cout" object in order to be "std::cout" for "char" type or "std::wcout" for "wchar_t" type.
+     * 
+     * @tparam T The template type of the "std::cout" object (char, wchar_t, ...).
+     */  
+    template <class T> 
+    struct select_cout
+     {
+      static std::basic_ostream<T> &cout;
+     };
+
+    #ifdef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
+   
+    // select_cin
+    /**
+     * @brief Struct used to define a way to template the choice of the "std::cin" object in order to be "std::cin" for "char" type or "std::wcin" for "wchar_t" type.
+     * 
+     * @tparam T The template type of the "std::cin" object (char, wchar_t, ...).
+     */  
+    template <class T> 
+    struct select_cin
+     {
+      static std::basic_istream<T> &cin;
+     };
+  
+    #endif
 
     //====================================================
     //     Public setters
@@ -755,6 +753,15 @@ namespace ptc
   //====================================================
   //     Other steps
   //====================================================
+
+  // Print structs specializations
+  template <> template<> std::ostream &Print<char>::select_cout <char>::cout = std::cout;
+  template <> template<> std::wostream &Print<wchar_t>::select_cout <wchar_t>::cout = std::wcout;
+
+  #ifdef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
+  template <> template <> std::istream &Print<char>::select_cin <char>::cin = std::cin;
+  template <> template <> std::wistream &Print<wchar_t>::select_cin <wchar_t>::cin = std::wcin;
+  #endif
 
   // Print::mutex_ definiton
   template <class T_str> inline std::mutex Print <T_str>::mutex_;
