@@ -1,6 +1,12 @@
 //====================================================
+//     Preprocessor directives
+//====================================================
+#define PTC_DISABLE_STD_TYPES_PRINTING
+
+//====================================================
 //     Headers
 //====================================================
+
 // My headers
 #include "../../include/ptc/print.hpp"
 
@@ -47,6 +53,12 @@ static void ptc_print_setFlush( bm::State& state )
   for ( auto _ : state ) ptc::print.setFlush( true );
  }
 
+// ptc_print_setPattern
+static void ptc_print_setPattern( bm::State& state ) 
+ {
+  for ( auto _ : state ) ptc::print.setPattern( "|" );
+ }
+
 //====================================================
 //     ptc::print getters
 //====================================================
@@ -67,6 +79,12 @@ static void ptc_print_getSep( bm::State& state )
 static void ptc_print_getFlush( bm::State& state ) 
  {
   for ( auto _ : state ) bm::DoNotOptimize( ptc::print.getFlush() );
+ }
+
+// ptc_print_getPattern
+static void ptc_print_getPattern( bm::State& state ) 
+ {
+  for ( auto _ : state ) bm::DoNotOptimize( ptc::print.getPattern() );
  }
 
 //====================================================
@@ -94,6 +112,8 @@ static void ptc_print_TOSTRING( bm::State& state )
 //====================================================
 //      ptc::print non built-in types 
 //====================================================
+
+#ifndef PTC_DISABLE_STD_TYPES_PRINTING
 
 // ptc_print_complex
 static void ptc_print_complex( bm::State& state ) 
@@ -123,6 +143,8 @@ static void ptc_print_duration( bm::State& state )
  {
   for ( auto _ : state ) ptc::print( std::chrono::seconds( 5 ) );
  }
+
+#endif
 
 //====================================================
 //      stdout
@@ -189,11 +211,13 @@ static void fmt_print_file( bm::State& state )
 //BENCHMARK( ptc_print_setEnd );
 //BENCHMARK( ptc_print_setSep );
 //BENCHMARK( ptc_print_setFlush );
+//BENCHMARK( ptc_print_setPattern );
 
 // ptc::print getters
 //BENCHMARK( ptc_print_getEnd );
 //BENCHMARK( ptc_print_getSep );
 //BENCHMARK( ptc_print_getFlush );
+//BENCHMARK( ptc_print_getPattern );
 
 // ptc::print other 
 //BENCHMARK( ptc_print_standard );
@@ -204,17 +228,17 @@ static void fmt_print_file( bm::State& state )
 //BENCHMARK( ptc_print_complex );
 //BENCHMARK( ptc_print_vector );
 //BENCHMARK( ptc_print_stack );
-BENCHMARK( ptc_print_duration );
+//BENCHMARK( ptc_print_duration );
 
 //====================================================
 //     Comparison with other libraries
 //====================================================
 
 // stdout
-//BENCHMARK( ptc_print_stdout );
-//BENCHMARK( fmt_print_stdout ) ;
-//BENCHMARK( std_cout_stdout ) ;
-//BENCHMARK( printf_stdout );
+BENCHMARK( ptc_print_stdout );
+BENCHMARK( fmt_print_stdout ) ;
+BENCHMARK( std_cout_stdout ) ;
+BENCHMARK( printf_stdout );
 
 // file writing
 //BENCHMARK( ptc_print_file );

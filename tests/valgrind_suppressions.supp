@@ -9,7 +9,7 @@
    fun:_ZNK3ptc5PrintIcE19performance_optionsEv
    fun:_ZN3ptc5PrintIcEC1Ev
    fun:_Z41__static_initialization_and_destruction_0ii
-   fun:_GLOBAL__sub_I__ZN3ptc8ToStringIcEEPKT_PKcPKw
+   fun:_GLOBAL__sub_I__ZN3ptc11select_coutIcE4coutE
    fun:call_init
    fun:__libc_start_main@@GLIBC_2.34
    fun:(below main)
@@ -25,7 +25,7 @@
    fun:_ZNK3ptc5PrintIcE19performance_optionsEv
    fun:_ZN3ptc5PrintIcEC1Ev
    fun:_Z41__static_initialization_and_destruction_0ii
-   fun:_GLOBAL__sub_I__ZN3ptc8ToStringIcEEPKT_PKcPKw
+   fun:_GLOBAL__sub_I__ZN3ptc11select_coutIcE4coutE
    fun:call_init
    fun:__libc_start_main@@GLIBC_2.34
    fun:(below main)
@@ -41,7 +41,7 @@
    fun:_ZNK3ptc5PrintIcE19performance_optionsEv
    fun:_ZN3ptc5PrintIcEC1Ev
    fun:_Z41__static_initialization_and_destruction_0ii
-   fun:_GLOBAL__sub_I__ZN3ptc8ToStringIcEEPKT_PKcPKw
+   fun:_GLOBAL__sub_I__ZN3ptc11select_coutIcE4coutE
    fun:call_init
    fun:__libc_start_main@@GLIBC_2.34
    fun:(below main)
@@ -57,7 +57,7 @@
    fun:_ZNK3ptc5PrintIcE19performance_optionsEv
    fun:_ZN3ptc5PrintIcEC1Ev
    fun:_Z41__static_initialization_and_destruction_0ii
-   fun:_GLOBAL__sub_I__ZN3ptc8ToStringIcEEPKT_PKcPKw
+   fun:_GLOBAL__sub_I__ZN3ptc11select_coutIcE4coutE
    fun:call_init
    fun:__libc_start_main@@GLIBC_2.34
    fun:(below main)
@@ -73,7 +73,7 @@
    fun:_ZNK3ptc5PrintIcE19performance_optionsEv
    fun:_ZN3ptc5PrintIcEC1Ev
    fun:_Z41__static_initialization_and_destruction_0ii
-   fun:_GLOBAL__sub_I__ZN3ptc8ToStringIcEEPKT_PKcPKw
+   fun:_GLOBAL__sub_I__ZN3ptc11select_coutIcE4coutE
    fun:call_init
    fun:__libc_start_main@@GLIBC_2.34
    fun:(below main)
@@ -89,7 +89,7 @@
    fun:_ZNK3ptc5PrintIcE19performance_optionsEv
    fun:_ZN3ptc5PrintIcEC1Ev
    fun:_Z41__static_initialization_and_destruction_0ii
-   fun:_GLOBAL__sub_I__ZN3ptc8ToStringIcEEPKT_PKcPKw
+   fun:_GLOBAL__sub_I__ZN3ptc11select_coutIcE4coutE
    fun:call_init
    fun:__libc_start_main@@GLIBC_2.34
    fun:(below main)

@@ -7,7 +7,7 @@ mkdir -p data
 
 # Extra option for macro usage
 if [ "$1" == "macro" ] ; then
-    sed -i '4s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' benchmarking.cpp
+    sed -i '5s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' benchmarking.cpp
 fi
 
 # Generating benchmarking data
@@ -15,15 +15,14 @@ make
 sudo cpupower frequency-set --governor performance > /dev/null 2>&1
 ./bin/benchmarking \
 --benchmark_out=data/benchmarking.json \
---benchmark_repetitions=15 \
+--benchmark_repetitions=5 \
 --benchmark_display_aggregates_only=true \
 --benchmark_report_aggregates_only=true
 sudo cpupower frequency-set --governor powersave > /dev/null 2>&1
 
 # Extra option for macro usage
 if [ "$1" == "macro" ] ; then
-    sed -i '4d' benchmarking.cpp
-    sed -i '4d' benchmarking.cpp
+    sed -i '5d' benchmarking.cpp
 fi
 
 # Analyzing data

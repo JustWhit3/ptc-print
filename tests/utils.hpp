@@ -26,7 +26,7 @@ namespace ptc
    {
     public:
      savebuf( std::basic_streambuf<T>* sbuf ): sbuf( sbuf ) {};
-     stype::string<T> str() const { return save; };
+     std::basic_string<T> str() const { return save; };
 
     private:
      int overflow( int c )
@@ -43,18 +43,18 @@ namespace ptc
       } 
      int sync() { return sbuf -> pubsync(); };
      std::basic_streambuf<T>* sbuf;
-     stype::string<T> save;
+     std::basic_string<T> save;
    };
 
   //====================================================
   //     osout
   //====================================================
   template <class T, class... Args>
-  inline const stype::string<T> osout( stype::ostream<T>& os = select_cout<T>::cout, const Args&... args )
+  inline const std::basic_string<T> osout( std::basic_ostream<T>& os = select_cout<T>::cout, const Args&... args )
    {
     Print<T> printer;
     std::basic_streambuf<T>* buf = os.rdbuf();
-    stype::ostringstream<T> str;
+    std::basic_ostringstream<T> str;
 
     savebuf<T> sbuf( buf );
     os.rdbuf( &sbuf );
@@ -66,11 +66,11 @@ namespace ptc
    }
 
   template <class T, class... Args>
-  inline const stype::string<T> osout( const Args&... args )
+  inline const std::basic_string<T> osout( const Args&... args )
    {
     Print<T> printer;
     std::basic_streambuf<T>* buf = select_cout<T>::cout.rdbuf();
-    stype::ostringstream<T> str;
+    std::basic_ostringstream<T> str;
 
     savebuf<T> sbuf( buf );
     select_cout<T>::cout.rdbuf( &sbuf );
