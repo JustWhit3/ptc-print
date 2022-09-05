@@ -406,7 +406,7 @@ To consistently increase **performance improvements** you can use the following 
 
 at the beginning of your program. In this way, as you can see from [benchmarking studies](#benchmarking), execution time will be strongly increased in case you are printing with the default `std::cout` stream. Read [here](https://stackoverflow.com/questions/31162367/significance-of-ios-basesync-with-stdiofalse-cin-tienull) for more information about the benefit of this choice.
 
-> **NOTE**: the usage of `PTC_ENABLE_PERFORMANCE_IMPROVEMENTS` macro will propagate not only to `ptc::print`, but also to `std::cout` in general, since it is directly used inside `ptc::print`.
+> :warning: the usage of `PTC_ENABLE_PERFORMANCE_IMPROVEMENTS` macro will propagate not only to `ptc::print`, but also to `std::cout` in general, since it is directly used inside `ptc::print`.
 
 If you plan to use this preprocessor directive pay attention to the **following points**:
 
@@ -417,13 +417,13 @@ These operations preserve the library quality, however some memory false-positiv
 
 #### Compilation
 
-To slightly decrease the **compilation time** you can use the following preprocessor directive:
+To decrease the **compilation time** you can use the following preprocessor directive:
 
 ```C++
 #define PTC_DISABLE_STD_TYPES_PRINTING
 ```
 
-You can use the previous directive if you plan to not use any of the standard C++ containers (or extra types) printing into the `ptc::print` object.
+This operation will reduce the compilation time by 30% more or less. You can use the previous directive if you plan to not use any of the standard C++ containers (or extra types), since it basically disable the [printing of non-standard types](#printing-non-standard-types).
 
 ## Tests
 
@@ -484,9 +484,18 @@ List of functions / objects which `ptc::print` is compared with:
 - [`printf`](https://m.cplusplus.com/reference/cstdio/printf/)
 - [`fmt::print`](https://pkg.go.dev/fmt) version 9.0.0
 
-> **NOTE**: comparisons are performed **only** on the same features of each library. For example: I am not comparing the whole `fmtlib` formatting library to mine, but simply the `fmt::print` function.
+> :warning: comparisons are performed **only** on the same features of each library. For example: I am not comparing the whole `fmtlib` formatting library to mine, but simply the `fmt::print` function.
 
 Studies are performed with the `g++ (Ubuntu 11.2.0-19ubuntu1)` compiler.
+
+Before each benchmarking study an environment set-up is performed in order to reduce the noise (i.e the standard-deviation of each data-point). In particular the following operations are performed:
+
+- Set `scaling_governor` to *performance*.
+- Disable Turboboost.
+- Drop file system cache.
+- Disable address space randomization.
+
+Motivations for each choice can be found [here](https://easyperf.net/blog/2019/08/02/Perf-measurement-environment-on-Linux). At the end of the final benchmarking run, old system settings are restored.
 
 Other suggestions are more than welcome.
 
