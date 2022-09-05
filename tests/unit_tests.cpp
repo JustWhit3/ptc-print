@@ -4,6 +4,8 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #define DOCTEST_CONFIG_SUPER_FAST_ASSERTS
 
+
+
 //====================================================
 //     Headers
 //====================================================
@@ -47,10 +49,12 @@ using namespace std::literals::chrono_literals;
 TEST_CASE( "Testing utils." )
  {
   // TOSTRING
-  SUBCASE( "Testing TOSTRING macro." )
+  SUBCASE( "Testing StringConverter function." )
    {
-    CHECK_EQ( ptc::TOSTRING( char, "Hello" ), "Hello" );
-    CHECK_EQ( ptc::TOSTRING( wchar_t, "Hello" ), L"Hello" );
+    CHECK_EQ( ptc::StringConverter<char>( "Hello" ), "Hello" );
+    CHECK_EQ( ptc::StringConverter<wchar_t>( "Hello" ), L"Hello" );
+    CHECK_EQ( ptc::StringConverter<char>( "Test a long string" ), "Test a long string" );
+    CHECK_EQ( ptc::StringConverter<wchar_t>( "Test a long string" ), L"Test a long string" );
    }
 
   // select_cout

@@ -7,7 +7,7 @@ mkdir -p data
 
 # Extra option for macro usage
 if [ "$1" == "macro" ] ; then
-    sed -i '5s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' benchmarking.cpp
+    sed -i '4s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' benchmarking.cpp
 fi
 
 # Compiling
@@ -23,7 +23,7 @@ echo 0 | sudo tee /proc/sys/kernel/randomize_va_space > /dev/null 2>&1          
 # Generating benchmarking data
 ./bin/benchmarking \
 --benchmark_out=data/benchmarking.json \
---benchmark_repetitions=100 \
+--benchmark_repetitions=15 \
 --benchmark_display_aggregates_only=true \
 --benchmark_report_aggregates_only=true
 
@@ -36,7 +36,7 @@ echo 2 | sudo tee /proc/sys/kernel/randomize_va_space > /dev/null 2>&1
 
 # Extra option for macro usage
 if [ "$1" == "macro" ] ; then
-    sed -i '5d' benchmarking.cpp
+    sed -i '4d' benchmarking.cpp
 fi
 
 # Analyzing data

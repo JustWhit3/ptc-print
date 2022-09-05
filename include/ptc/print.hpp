@@ -26,6 +26,8 @@
 #include <type_traits>
 #include <mutex>
 #include <utility>
+#include <locale>
+#include <codecvt>
 
 // Extra types headers
 #ifndef PTC_DISABLE_STD_TYPES_PRINTING
@@ -37,6 +39,11 @@
 #include <typeindex>
 #include <typeinfo>
 #endif
+
+//====================================================
+//     Namespaces
+//====================================================
+using namespace std::literals::string_literals;
 
 namespace ptc
  {
@@ -62,33 +69,25 @@ namespace ptc
   //     Helper tools
   //====================================================
 
-  // TOSTRING
+  // StringConverter
   /**
-   * @brief Function used to convert a std::string into a std::wstring or vice-versa.
+   * @brief Function used to convert an std::string into other string types (std::wstring etc...). If the argument is an std::string it will be returned without any modification.
    * 
-   * @tparam CharT The char type (char, wchar_t...).
-   * @param str The char object.
-   * @param wstr The wchar_t object.
-   * @return const CharT* The char or wchar_t object.
+   * @tparam CharT The char type (char, wchar_t...) to which the string is converted..
+   * @param input_str The input std::string object.
+   * @return std::basic_string<CharT> The converted string object.
    */
   template <class CharT>
-  inline const CharT* ToString( const char* str, const wchar_t* wstr );
-  
-  template<>
-  inline const char* ToString <char>( const char* str, const wchar_t* wstr )
+  inline std::basic_string<CharT> StringConverter( std::string input_str )
    {
-    ( void ) *wstr;
-    return str;
+    if constexpr( std::is_same_v <CharT, char> ) return input_str;
+    else if constexpr( std::is_same_v <CharT, wchar_t> )
+     {
+      static std::wstring_convert <std::codecvt_utf8_utf16 <wchar_t>> converter;
+      return converter.from_bytes( input_str );
+     }
+    return nullptr;
    }
-  
-  template<>
-  inline const wchar_t* ToString <wchar_t>( const char* str, const wchar_t* wstr )
-   {
-    ( void ) *str;
-    return wstr;
-   }
-  
-  #define TOSTRING( T, str ) ToString <T>( str, L##str )
 
   #ifndef PTC_DISABLE_STD_TYPES_PRINTING
 
@@ -125,12 +124,12 @@ namespace ptc
   inline void print_adaptor( std::basic_ostream<T_str>& os, const Container& container )
    {
     typename Container::const_iterator beg = container.begin();
-    const T_str* separator = TOSTRING( T_str, "" );
+    std::basic_string<T_str> separator = StringConverter<T_str>( ""s );
     
     while( beg != container.end() )
      {
       os << separator << *beg++;
-      separator = TOSTRING( T_str, ", " );
+      separator = StringConverter<T_str>( ", "s );
      }
    }
   
@@ -243,12 +242,12 @@ namespace ptc
     os << "[";
     if constexpr ( ! is_stack && ! is_pqueue )
      {
-      const T_str* separator = TOSTRING( T_str, "" );
+      std::basic_string<T_str> separator = StringConverter<T_str>( ""s );
       for ( const auto& elem: container )
        {
         os << separator;
         os << elem;
-        separator = TOSTRING( T_str, ", " );
+        separator = StringConverter<T_str>( ", "s );
        }
      }
     else
@@ -274,14 +273,14 @@ namespace ptc
   template <class T_str, class T, size_t T_no>
   std::basic_ostream<T_str>& operator <<( std::basic_ostream<T_str>& os, const std::array<T, T_no>& container ) 
    {
-    const T_str* separator = TOSTRING( T_str, "" );
+    std::basic_string<T_str> separator = StringConverter<T_str>( ""s );
 
     os << "[";
     for ( const auto& elem: container )
      {
       os << separator;
       os << elem;
-      separator = TOSTRING( T_str, ", " );
+      separator = StringConverter<T_str>( ", "s );
      }
     os << "]";
 
@@ -306,12 +305,12 @@ namespace ptc
     os << "[";
     if ( arrSize )
      {
-      const T_str* separator = TOSTRING( T_str, "" );
+      std::basic_string<T_str> separator = StringConverter<T_str>( ""s );
       for ( const auto& elem: arr )
        {
         os << separator;
         os << elem;
-        separator = TOSTRING( T_str, ", " );
+        separator = StringConverter<T_str>( ", "s );
        }
      }
     os << "]";
@@ -362,7 +361,7 @@ namespace ptc
   /**
    * @brief Class used to construct the print function.
    * 
-   * @tparam T _strThe type of the string objects defined inside the struct. This template is used in case you are dealing with std::string or std::wstring objects.
+   * @tparam T_str The type of the string objects defined inside the struct. This template is used in case you are dealing with std::string or std::wstring objects.
    */
   template <class T_str>
   struct Print
@@ -377,9 +376,9 @@ namespace ptc
      * 
      */
     Print(): 
-     end( TOSTRING( T_str, "\n" ) ),
-     sep( TOSTRING( T_str, " " ) ),
-     pattern( TOSTRING( T_str, "" ) ),
+     end( StringConverter<T_str>( "\n"s ) ),
+     sep( StringConverter<T_str>( " "s ) ),
+     pattern( StringConverter<T_str>( ""s ) ),
      flush( false )
      {       
       #ifdef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
@@ -566,7 +565,7 @@ namespace ptc
           case mode::str:
            {
             static std::basic_ostringstream<T_str> oss;
-            oss.str( TOSTRING( T_str, "" ) );
+            oss.str( StringConverter<T_str>( ""s ) );
             oss.clear();
             print_backend( oss, std::forward<Args>( args )... );
 
@@ -574,7 +573,7 @@ namespace ptc
            }
          }
        }
-
+       
       return null_str<std::basic_string<T_str>>;
      }
 
@@ -605,7 +604,7 @@ namespace ptc
     template <class T> 
     struct null_string
      {
-      inline static const std::basic_string<T_str> value = TOSTRING( T_str, "" );
+      inline static const std::basic_string<T_str> value = StringConverter<T_str>( ""s );
      };
 
     //====================================================
@@ -631,12 +630,12 @@ namespace ptc
          {
           case( ANSI::first ): 
            {
-            return ( ! std::basic_string_view<T_str>( str ).rfind( TOSTRING( T_str, "\033" ), 0 ) ) && 
+            return ( ! std::basic_string_view<T_str>( str ).rfind( StringConverter<T_str>( "\033"s ), 0 ) ) && 
                    ( std::basic_string_view<T_str>( str ).length() < 7 );
            }
           case( ANSI::generic ):
            {
-            return ( std::basic_string_view<T_str>( str ).find( TOSTRING( T_str, "\033" ) ) != std::basic_string_view<T_str>::npos );
+            return ( std::basic_string_view<T_str>( str ).find( StringConverter<T_str>( "\033"s ) ) != std::basic_string_view<T_str>::npos );
            }
          }
        }
@@ -679,25 +678,24 @@ namespace ptc
       std::lock_guard <std::mutex> lock{ mutex_ };
 
       // Printing the first argument
-      if( is_null_str( getPattern() ) || is_null_str( first ) || is_escape( first, ANSI::first ) ) os << first;
-      else os << getPattern() << first << getPattern();
+      if( is_null_str( pattern ) || is_null_str( first ) || is_escape( first, ANSI::first ) ) os << first;
+      else os << pattern << first << pattern;
       
       // Printing all the other arguments
       if constexpr( sizeof...( args ) > 0 ) 
        {
         if ( is_null_str( first ) || is_escape( first, ANSI::first ) ) 
          {
-          if( is_null_str( getPattern() ) ) ( ( os << args << getSep() ), ...);
-          else ( ( os << getPattern() << args << getPattern() << getSep() ), ...);
+          if( is_null_str( pattern ) ) ( ( os << args << sep ), ...);
+          else ( ( os << pattern << args << pattern << sep ), ...);
          }
         else 
          {
-          if( is_null_str( getPattern() ) ) ( ( os << getSep() << args ), ...);
-          else ( ( os << getSep() << getPattern() << args << getPattern() ), ...);
+          if( is_null_str( pattern ) ) ( ( os << sep << args ), ...);
+          else ( ( os << sep << pattern << args << pattern ), ...);
          }
        }
-
-      os << getEnd();
+      os << end;
       
       // Resetting the stream from ANSI escape sequences
       if constexpr( sizeof...( args ) > 0 )
@@ -746,7 +744,7 @@ namespace ptc
     //====================================================
     //     Private constants
     //====================================================
-    inline static const std::basic_string<T_str> reset_ANSI = TOSTRING( T_str, "\033[0m" );
+    inline static const std::basic_string<T_str> reset_ANSI = StringConverter<T_str>( "\033[0m"s );
     template <class T> inline static const std::basic_string<T_str> null_str = Print::null_string<const T&>::value;
    };
    
@@ -755,8 +753,8 @@ namespace ptc
   //====================================================
 
   // Print structs specializations
-  template <> template<> std::ostream &Print<char>::select_cout <char>::cout = std::cout;
-  template <> template<> std::wostream &Print<wchar_t>::select_cout <wchar_t>::cout = std::wcout;
+  template <> template <> std::ostream &Print<char>::select_cout <char>::cout = std::cout;
+  template <> template <> std::wostream &Print<wchar_t>::select_cout <wchar_t>::cout = std::wcout;
 
   #ifdef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
   template <> template <> std::istream &Print<char>::select_cin <char>::cin = std::cin;

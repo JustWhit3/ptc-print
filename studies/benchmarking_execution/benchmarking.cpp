@@ -1,9 +1,4 @@
 //====================================================
-//     Preprocessor directives
-//====================================================
-#define PTC_DISABLE_STD_TYPES_PRINTING
-
-//====================================================
 //     Headers
 //====================================================
 
@@ -103,17 +98,21 @@ static void ptc_print_str( bm::State& state )
   for ( auto _ : state ) bm::DoNotOptimize( ptc::print( ptc::mode::str, "Testing", 123, "print", '!' ) );
  }
 
-// ptc_print_TOSTRING
-static void ptc_print_TOSTRING( bm::State& state ) 
+// ptc_print_StringConverter_char
+static void ptc_print_StringConverter_char( bm::State& state ) 
  {
-  for ( auto _ : state ) bm::DoNotOptimize( ptc::TOSTRING( char, "Hey" ) );
+  for ( auto _ : state ) bm::DoNotOptimize( ptc::StringConverter<char>( "Hey" ) );
+ }
+
+// ptc_print_StringConverter_wchar_t
+static void ptc_print_StringConverter_wchar_t( bm::State& state ) 
+ {
+  for ( auto _ : state ) bm::DoNotOptimize( ptc::StringConverter<wchar_t>( "Hey" ) );
  }
 
 //====================================================
 //      ptc::print non built-in types 
 //====================================================
-
-#ifndef PTC_DISABLE_STD_TYPES_PRINTING
 
 // ptc_print_complex
 static void ptc_print_complex( bm::State& state ) 
@@ -143,8 +142,6 @@ static void ptc_print_duration( bm::State& state )
  {
   for ( auto _ : state ) ptc::print( std::chrono::seconds( 5 ) );
  }
-
-#endif
 
 //====================================================
 //      stdout
@@ -222,7 +219,8 @@ static void fmt_print_file( bm::State& state )
 // ptc::print other 
 //BENCHMARK( ptc_print_standard );
 //BENCHMARK( ptc_print_str );
-//BENCHMARK( ptc_print_TOSTRING );
+//BENCHMARK( ptc_print_StringConverter_char );
+//BENCHMARK( ptc_print_StringConverter_wchar_t );
 
 // non built-in types
 //BENCHMARK( ptc_print_complex );
@@ -236,8 +234,8 @@ static void fmt_print_file( bm::State& state )
 
 // stdout
 BENCHMARK( ptc_print_stdout );
-BENCHMARK( fmt_print_stdout ) ;
-BENCHMARK( std_cout_stdout ) ;
+BENCHMARK( fmt_print_stdout );
+BENCHMARK( std_cout_stdout );
 BENCHMARK( printf_stdout );
 
 // file writing
