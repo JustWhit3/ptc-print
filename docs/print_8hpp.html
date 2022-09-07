@@ -155,10 +155,10 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a69fe76695e910153bae4928621eeb099"><td class="memTemplParams" colspan="2">template&lt;class CharT &gt; </td></tr>
-<tr class="memitem:a69fe76695e910153bae4928621eeb099"><td class="memTemplItemLeft" align="right" valign="top">std::basic_string&lt; CharT &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a69fe76695e910153bae4928621eeb099">ptc::StringConverter</a> (std::string input_str)</td></tr>
-<tr class="memdesc:a69fe76695e910153bae4928621eeb099"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function used to convert an std::string into other string types (std::wstring etc...). If the argument is an std::string it will be returned without any modification.  <a href="namespaceptc.html#a69fe76695e910153bae4928621eeb099">More...</a><br /></td></tr>
-<tr class="separator:a69fe76695e910153bae4928621eeb099"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e800f408c636fa99b5a95109cef63b4"><td class="memTemplParams" colspan="2">template&lt;class CharT &gt; </td></tr>
+<tr class="memitem:a4e800f408c636fa99b5a95109cef63b4"><td class="memTemplItemLeft" align="right" valign="top">std::conditional_t&lt; std::is_same_v&lt; CharT, char &gt;, const std::basic_string&lt; CharT &gt; &amp;, std::basic_string&lt; CharT &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a4e800f408c636fa99b5a95109cef63b4">ptc::StringConverter</a> (const std::string &amp;input_str)</td></tr>
+<tr class="memdesc:a4e800f408c636fa99b5a95109cef63b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function used to convert an std::string into other string types (std::wstring etc...). If the argument is an std::string it will be returned without any modification.  <a href="namespaceptc.html#a4e800f408c636fa99b5a95109cef63b4">More...</a><br /></td></tr>
+<tr class="separator:a4e800f408c636fa99b5a95109cef63b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af11991300b28f6e1a5251104d835318c"><td class="memTemplParams" colspan="2">template&lt;class Container , class T_str &gt; </td></tr>
 <tr class="memitem:af11991300b28f6e1a5251104d835318c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#af11991300b28f6e1a5251104d835318c">ptc::print_adaptor</a> (std::basic_ostream&lt; T_str &gt; &amp;os, const Container &amp;container)</td></tr>
 <tr class="memdesc:af11991300b28f6e1a5251104d835318c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function for container adaptors printing.  <a href="namespaceptc.html#af11991300b28f6e1a5251104d835318c">More...</a><br /></td></tr>
