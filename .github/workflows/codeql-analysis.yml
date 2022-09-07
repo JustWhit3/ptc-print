@@ -38,9 +38,6 @@ jobs:
        sudo apt install build-essential g++ doctest-dev
        cd tests
 
-       # g++ 11
-       make CXX=g++-11
-
        # g++ 10
        make CXX=g++-10
 
