@@ -10,7 +10,8 @@ echo 0 | sudo tee /proc/sys/kernel/randomize_va_space > /dev/null 2>&1          
 # Launching benchmarks
 ./analysis.py \
 --niter=100 \
---plots=no
+--plots=yes \
+--macro=yes
 
 # Setting-up environment back to old settings
 sudo cpupower frequency-set --governor powersave > /dev/null 2>&1

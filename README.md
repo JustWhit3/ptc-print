@@ -1,6 +1,6 @@
 <p align="center"><img src="https://github.com/JustWhit3/ptc-print/blob/main/img/images/logo.svg" height=220></p>
 
-<h3 align="center">A C++17 header-only library for custom printing to the output stream (inspired by the Python print function) </h3>
+<h3 align="center">An header-only library for custom printing to the output stream. </h3>
 <p align="center">
   <img title="v0.4" alt="v0.4" src="https://img.shields.io/badge/version-v0.4-informational?style=flat-square">
   <img title="MIT License" alt="license" src="https://img.shields.io/badge/license-MIT-informational?style=flat-square">
@@ -33,9 +33,10 @@
   - [Benchmarking the runtime](#benchmarking-the-runtime)
   - [Benchmarking the runtime with performance improvements](#benchmarking-the-runtime-with-performance-improvements)
   - [Benchmarking the compilation time](#benchmarking-the-compilation-time)
+  - [Benchmarking the compilation time with performance improvements](#benchmarking-the-compilation-time-with-performance-improvements)
   - [Executable size](#executable-size)
   - [Advantages](#advantages)
-- [Todo](#todo)]
+- [Todo](#todo)
   - [New features](#new-features)
   - [Improvements](#improvements)
 - [Projects which use this library](#projects-which-use-this-library)
@@ -401,7 +402,7 @@ Prerequisites are minimal and are automatically installed with the `install.sh` 
 
 ### Performance improvements
 
-#### runtime
+#### Runtime
 
 To consistently increase **performance improvements** you can use the following preprocessor directive:
 
@@ -526,6 +527,8 @@ is repeated for *300.000* times and the total runtime is registered. This latter
 
 <img src="https://github.com/JustWhit3/ptc-print/blob/main/img/benchmarks/cpu_time/stdout_stream.png">
 
+Without performance optimizations `ptc::print` is slightly slower than the others.
+
 ### Benchmarking the runtime with performance improvements
 
 Extra studies are performed using consistent improvements in the runtime, thanks to the `PTC_ENABLE_PERFORMANCE_IMPROVEMENTS` macro usage (see [here](#install-and-use) for more information). Using this macro definition will consistently speed-up the `ptc::print` object, as you can see from the following plots.
@@ -546,6 +549,8 @@ To run these benchmarks you can do:
 
 `std::cout` is omitted since some of the performance improvements are directly applied also to it.
 
+With performance optimizations `ptc::print` is much faster than the others.
+
 ### Benchmarking the compilation time
 
 Compilation time studies are performed using the [studies/benchmarking_compilation/run.sh](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking_compilation/run.sh) script, which launches the [analysis.py](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking/analysis.py) script during its run, which generates and analyzes benchmark data.
@@ -560,9 +565,13 @@ is created and compiled with `-O3 -O1 -falign-functions=32` flags, for *100* tim
 
 <img src="https://github.com/JustWhit3/ptc-print/blob/main/img/benchmarks/compilation_time/stdout_stream.png">
 
-The hight compilation time of `ptc::print` with respect to the other libraries is probably due to the fact that it is an object defined into an header-only library.
+The hight compilation time of `ptc::print` with respect to the other libraries is probably due to the fact that it comes from an header-only library.
 
-To slightly decrease the compilation time see the [Compilation](#compilation) subsection of the [Performance improvements](#performance-improvements) section.
+### Benchmarking the compilation time with performance improvements
+
+To decrease the compilation time see the [Compilation](#compilation) subsection of the [Performance improvements](#performance-improvements) section. With performance improvements enabled these are the results:
+
+<img src="https://github.com/JustWhit3/ptc-print/blob/main/img/benchmarks/compilation_time/stdout_stream_macro.png">
 
 ### Executable size
 
@@ -586,7 +595,7 @@ ptc::print( "I am", "very similar to Python", 123 );
 fmt::print( "{} {} {}\n", "I am", "very similar to Python", 123 );
 ```
 
-- Faster than all the other printing objects. In case of `PTC_ENABLE_PERFORMANCE_IMPROVEMENTS` macro usage the library increases even more its speed with respect to the others. See [Benchmarking](#benchmarking) section.
+- Faster than all the other printing objects: in case of `PTC_ENABLE_PERFORMANCE_IMPROVEMENTS` macro usage the library increases its speed with respect to the other similar utils. See [Benchmarking](#benchmarking) section.
 
 - Possibility to change *end* and *separator* characters, like in Python:
 
@@ -603,6 +612,8 @@ Python `print`:
 ```Python
 print( "I am", "Python", 123, sep = "*", end = "" );
 ```
+
+- Much more...
 
 ## Todo
 

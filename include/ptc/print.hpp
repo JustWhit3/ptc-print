@@ -672,19 +672,19 @@ namespace ptc
        {
         if ( is_escape( first, ANSI::generic ) || ( ( is_escape( args, ANSI::generic ) ) || ...) )
          {
-          os << reset_ANSI;
+          os << "\033[0m";
          }
        }
       else 
        {
        if ( is_escape( first, ANSI::generic ) ) 
         {
-         os << reset_ANSI;
+         os << "\033[0m";
         }
        }
 
       // Other operations
-      if ( flush && ! std::is_base_of_v <std::basic_ostringstream<T_str>, T_os> ) os << std::flush;
+      if ( flush ) os << std::flush;
      }
 
     // performance_options
@@ -710,11 +710,6 @@ namespace ptc
     std::basic_string<T_str> end, sep, pattern;
     static std::mutex mutex_;
     bool flush;
-
-    //====================================================
-    //     Private constants
-    //====================================================
-    inline static const std::basic_string<T_str> reset_ANSI = StringConverter<T_str>( "\033[0m"s );
    };
    
   //====================================================

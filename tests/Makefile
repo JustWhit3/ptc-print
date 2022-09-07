@@ -61,7 +61,7 @@ unit_tests.o: unit_tests.cpp
 
 # Clang tests
 clang:
-	clan$(CXX) -c system_tests.cpp $(EXTRAFLAGS) $(WARNINGS) 
+	clang -c system_tests.cpp $(EXTRAFLAGS) $(WARNINGS) 
 	@ mv *.o obj
 	@ mv *.d obj
 

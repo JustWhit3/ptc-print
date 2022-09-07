@@ -150,13 +150,17 @@ def do_plot( data_programs, data, data_std, atype = "Time" ):
     ax.set_axisbelow( True )
 
     # Save plots
+    if args.macro == "yes":
+        suffix = "_macro"
+    elif args.macro == "no":
+        suffix = ""
     if atype == "Time":
         path = "../../img/benchmarks/compilation_time"
     elif atype == "Size":
         path = "../../img/benchmarks/executable_size"
     if not os.path.exists( path ):
         os.makedirs( path )
-    plt.savefig( "{}/stdout_stream.png".format( path ) )
+    plt.savefig( "{}/stdout_stream{}.png".format( path, suffix ) )
     
 #################################################
 #     Main
@@ -214,6 +218,7 @@ if __name__ == "__main__":
     parser = ap.ArgumentParser( description = "Parsing input file names." ) 
     parser.add_argument( "--niter", default = 100, help = "The number of benchmarking iterations." )
     parser.add_argument( "--plots", default = "no", help = "Produce or not plots." )
+    parser.add_argument( "--macro", default = "no", help = "Enable or disable macro usage." )
     args = parser.parse_args()
     
     # Main commands

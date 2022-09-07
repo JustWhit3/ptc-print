@@ -4,9 +4,6 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #define DOCTEST_CONFIG_SUPER_FAST_ASSERTS
 
-
-
-
 //====================================================
 //     Headers
 //====================================================
@@ -49,7 +46,7 @@ using namespace std::literals::chrono_literals;
 //====================================================
 TEST_CASE( "Testing utils." )
  {
-  // TOSTRING
+  // StringConverter
   SUBCASE( "Testing StringConverter function." )
    {
     CHECK_EQ( ptc::StringConverter<char>( "Hello" ), "Hello" );
@@ -288,6 +285,10 @@ TEST_CASE( "Testing the Print operator << overloads." )
     CHECK_EQ( ptc::print( ptc::mode::str, vec ), "[1, 2, 3]" );
     std::vector <int> null_v = {};
     CHECK_EQ( ptc::print( ptc::mode::str, null_v ), "[]" );
+
+    std::wstring vec_in = ptc::wprint( ptc::mode::str, vec );
+    std::wstring vec_out = L"[1, 2, 3]\n";
+    CHECK_EQ( vec_in, vec_out );
 
     // std::deque
     std::deque <int> deque = { 7, 5, 16 };
