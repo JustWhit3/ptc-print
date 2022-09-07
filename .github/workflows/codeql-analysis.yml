@@ -37,36 +37,7 @@ jobs:
       run: |
        sudo apt install build-essential g++ doctest-dev
        cd tests
-
-       # g++ 10
-       make CXX=g++-10
-
-       # g++ 9
-       make CXX=g++-9
-
-       # g++ 8
-       make CXX=g++-8
-
-       # g++ 7
-       make CXX=g++-7
-
-       # g++ 6
-       make CXX=g++-6
-
-       # g++ 5
-       make CXX=g++-5
-
-       # g++ 4
-       make CXX=g++-4
-
-       # g++ 3
-       make CXX=g++-3
-
-       # g++ 2
-       make CXX=g++-2
-
-       # g++ 1
-       make CXX=g++-1
+       make
     - name: Installing extra dependencies and compiling (MacOS)
       if: matrix.os == 'macos-latest'
       run: |
