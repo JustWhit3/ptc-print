@@ -26,12 +26,12 @@
 - [Install and use](#install-and-use)
   - [Install](#install)
   - [Performance improvements](#performance-improvements)
-    - [Execution](#execution)
+    - [Runtime](#runtime)
     - [Compilation](#compilation)
 - [Tests](#tests)
 - [Comparison with other libraries](#comparison-with-other-libraries)
-  - [Benchmarking the execution time](#benchmarking-the-execution-time)
-  - [Benchmarking the execution time with performance improvements](#benchmarking-the-execution-time-with-performance-improvements)
+  - [Benchmarking the runtime](#benchmarking-the-runtime)
+  - [Benchmarking the runtime with performance improvements](#benchmarking-the-runtime-with-performance-improvements)
   - [Benchmarking the compilation time](#benchmarking-the-compilation-time)
   - [Executable size](#executable-size)
   - [Advantages](#advantages)
@@ -79,7 +79,7 @@ Supported compilers:
 
 - **gcc** (tested)
 - **clang** (tested)
--- **MSVC** (tested)
+- **MSVC** (tested)
 
 ## Examples
 
@@ -265,6 +265,8 @@ List of not built-int types ready for custom printing:
 - Container adaptors: [`std::stack`](https://en.cppreference.com/w/cpp/container/stack), [`std::priority_queue`](https://en.cppreference.com/w/cpp/container/priority_queue).
 - Other types: [`std::complex`](https://en.cppreference.com/w/cpp/numeric/complex), [`std::chrono::duration`](https://en.cppreference.com/w/cpp/chrono/duration).
 
+These special types printing are characterized by specific `operator <<` overloads. These overloads are defined into the `ptc` namespace, therefore they will not work outside of the `ptc::print` objects unless you use the `using namespace ptc` directive (warmly discouraged).
+
 If you need support to other particular types you can open an issue with a [feature request](https://github.com/JustWhit3/ptc-print/blob/main/.github/ISSUE_TEMPLATE/feature_request.md).
 
 For example, to print an `std::vector`:
@@ -332,12 +334,15 @@ struct foo
   int a, b;
  };
 
-// Overload operator << for the new type
-template <class T_str>
-ptc::stype::ostream<T_str>& operator <<( ptc::stype::ostream<T_str>& os, const foo& object )
+// Overload operator << for the new type in namespace ptc in order to be available only for ptc::print.
+namespace ptc
  {
-  os << object.a << "+" << object.b;
-  return os;
+  template <class T_str>
+  std::basic_ostream<T_str>& operator <<( std::basic_ostream<T_str>& os, const foo& object )
+   {
+    os << object.a << "+" << object.b;
+    return os;
+   }
  }
 
 int main()
@@ -396,7 +401,7 @@ Prerequisites are minimal and are automatically installed with the `install.sh` 
 
 ### Performance improvements
 
-#### Execution
+#### runtime
 
 To consistently increase **performance improvements** you can use the following preprocessor directive:
 
@@ -404,7 +409,7 @@ To consistently increase **performance improvements** you can use the following 
 #define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
 ```
 
-at the beginning of your program. In this way, as you can see from [benchmarking studies](#benchmarking), execution time will be strongly increased in case you are printing with the default `std::cout` stream. Read [here](https://stackoverflow.com/questions/31162367/significance-of-ios-basesync-with-stdiofalse-cin-tienull) for more information about the benefit of this choice.
+at the beginning of your program. In this way, as you can see from [benchmarking studies](#benchmarking), runtime will be strongly increased in case you are printing with the default `std::cout` stream. Read [here](https://stackoverflow.com/questions/31162367/significance-of-ios-basesync-with-stdiofalse-cin-tienull) for more information about the benefit of this choice.
 
 > :warning: the usage of `PTC_ENABLE_PERFORMANCE_IMPROVEMENTS` macro will propagate not only to `ptc::print`, but also to `std::cout` in general, since it is directly used inside `ptc::print`.
 
@@ -499,7 +504,7 @@ Motivations for each choice can be found [here](https://easyperf.net/blog/2019/0
 
 Other suggestions are more than welcome.
 
-### Benchmarking the execution time
+### Benchmarking the runtime
 
 Benchmarking is performed using the [Google Benchmark](https://github.com/google/benchmark) framework. The script [studies/benchmarking_execution/run.sh](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking_execution/run.sh) is used to generate and analyze benchmark data. It makes use of the [cpupower](https://linux.die.net/man/1/cpupower) tool and launches two other scripts during its run:
 
@@ -509,7 +514,7 @@ Benchmarking is performed using the [Google Benchmark](https://github.com/google
 ptc::print( "Testing", 123, "print", '!' );
 ```
 
-is repeated for *300.000* times and the total execution time is registered. This latter step is repeated again for *100* times and results of each iteration are averaged each other. Final mean value with the corresponding standard deviation is considered. This script is compiled with `-O3 -O1 -falign-functions=32` flags.
+is repeated for *300.000* times and the total runtime is registered. This latter step is repeated again for *100* times and results of each iteration are averaged each other. Final mean value with the corresponding standard deviation is considered. This script is compiled with `-O3 -O1 -falign-functions=32` flags.
 
 - [analysis.py](https://github.com/JustWhit3/ptc-print/blob/main/studies/benchmarking_execution/analysis.py): is used for data analysis and plots production, with comparison among each library benchmark results.
 
@@ -521,9 +526,9 @@ is repeated for *300.000* times and the total execution time is registered. This
 
 <img src="https://github.com/JustWhit3/ptc-print/blob/main/img/benchmarks/cpu_time/stdout_stream.png">
 
-### Benchmarking the execution time with performance improvements
+### Benchmarking the runtime with performance improvements
 
-Extra studies are performed using consistent improvements in the execution time, thanks to the `PTC_ENABLE_PERFORMANCE_IMPROVEMENTS` macro usage (see [here](#install-and-use) for more information). Using this macro definition will consistently speed-up the `ptc::print` object, as you can see from the following plots.
+Extra studies are performed using consistent improvements in the runtime, thanks to the `PTC_ENABLE_PERFORMANCE_IMPROVEMENTS` macro usage (see [here](#install-and-use) for more information). Using this macro definition will consistently speed-up the `ptc::print` object, as you can see from the following plots.
 
 To run these benchmarks you can do:
 
@@ -603,11 +608,12 @@ print( "I am", "Python", 123, sep = "*", end = "" );
 
 ### New features
 
-- Add a specific method to reorder the printing of a nidified container. For example:
+- Add a specific method to reorder the printing of a nidified containers. For example:
 
 ```C++
 #include <ptc/print.hpp>
 #include <map>
+#include <string>
 
 int main()
  {
@@ -718,8 +724,8 @@ int main()
 - Upload the package on some package managers (ex: [`Conan`](https://conan.io/) or `dpkg`).
 - Create a [wiki](https://github.com/JustWhit3/ptc-print/wiki) with detailed examples for every feature.
 - Extend the support to `char16_t` and `char32_t` types.
-- Add a macro (or other structure) to disable `operator <<` overloads in `print.hpp` in case non-standard-types printing is not needed.
 - Extend benchmarking studies with other libraries.
+- Add support to C++20 features.
 
 ## Projects which use this library
 

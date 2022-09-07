@@ -75,18 +75,25 @@ namespace ptc
    * 
    * @tparam CharT The char type (char, wchar_t...) to which the string is converted..
    * @param input_str The input std::string object.
-   * @return std::basic_string<CharT> The converted string object.
+   * @return std::conditional_t<std::is_same_v<CharT, char>, const std::basic_string<CharT>&, std::basic_string<CharT>> The converted string object.
    */
   template <class CharT>
-  inline std::basic_string<CharT> StringConverter( std::string input_str )
+  std::conditional_t<std::is_same_v<CharT, char>, const std::basic_string<CharT>&, std::basic_string<CharT>>
+  StringConverter( const std::string& input_str )
    {
-    if constexpr( std::is_same_v <CharT, char> ) return input_str;
+    if constexpr( std::is_same_v <CharT, char> ) 
+     {
+      return input_str;
+     }
     else if constexpr( std::is_same_v <CharT, wchar_t> )
      {
       static std::wstring_convert <std::codecvt_utf8_utf16 <wchar_t>> converter;
       return converter.from_bytes( input_str );
+     } 
+    else 
+     {
+      return StringConverter<CharT>( "" );
      }
-    return nullptr;
    }
 
   #ifndef PTC_DISABLE_STD_TYPES_PRINTING
@@ -196,7 +203,7 @@ namespace ptc
   template <class T_str, class T_cmplx>
   inline std::basic_ostream<T_str>& operator << ( std::basic_ostream<T_str>& os, const std::complex<T_cmplx>& number )
    {
-    os << number.real() << "+" << number.imag() << "j";
+    os << number.real() << '+' << number.imag() << 'j';
 
     return os; 
    }
@@ -215,7 +222,7 @@ namespace ptc
   template <class T_str, class T, class U>
   inline std::basic_ostream<T_str>& operator <<( std::basic_ostream<T_str>& os, const std::pair <T, U>& p ) 
    {
-    os << "[" << p.first << ", " << p.second << "]";
+    os << '[' << p.first << ", " << p.second << ']';
 
     return os;
    } 
@@ -239,7 +246,7 @@ namespace ptc
     static bool constexpr is_stack = std::is_same_v <ContainerType<ValueType, Args...>, std::stack<ValueType>>;
     static bool constexpr is_pqueue = std::is_same_v <ContainerType<ValueType, Args...>, std::priority_queue<ValueType>>;
     
-    os << "[";
+    os << '[';
     if constexpr ( ! is_stack && ! is_pqueue )
      {
       std::basic_string<T_str> separator = StringConverter<T_str>( ""s );
@@ -254,7 +261,7 @@ namespace ptc
      {
       print_adaptor( os, container_mod( container ) );
      }
-    os << "]";
+    os << ']';
 
     return os;
    }
@@ -275,14 +282,14 @@ namespace ptc
    {
     std::basic_string<T_str> separator = StringConverter<T_str>( ""s );
 
-    os << "[";
+    os << '[';
     for ( const auto& elem: container )
      {
       os << separator;
       os << elem;
       separator = StringConverter<T_str>( ", "s );
      }
-    os << "]";
+    os << ']';
 
     return os;
    }
@@ -302,7 +309,7 @@ namespace ptc
   typename = std::enable_if_t< ! std::is_same <T1,char>::value>>
   std::basic_ostream<T_str>& operator <<( std::basic_ostream<T_str>& os, const T1( & arr )[ arrSize ] )
    {
-    os << "[";
+    os << '[';
     if ( arrSize )
      {
       std::basic_string<T_str> separator = StringConverter<T_str>( ""s );
@@ -313,7 +320,7 @@ namespace ptc
         separator = StringConverter<T_str>( ", "s );
        }
      }
-    os << "]";
+    os << ']';
 
     return os;
    }
@@ -347,7 +354,7 @@ namespace ptc
      }
     else if constexpr( std::is_same_v<std::chrono::duration<int_type, T_time>, std::chrono::duration<int_type>> )
      {
-      os << val.count() << "s";
+      os << val.count() << 's';
      }
 
     return os;
@@ -378,7 +385,6 @@ namespace ptc
     Print(): 
      end( StringConverter<T_str>( "\n"s ) ),
      sep( StringConverter<T_str>( " "s ) ),
-     pattern( StringConverter<T_str>( ""s ) ),
      flush( false )
      {       
       #ifdef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
@@ -574,7 +580,7 @@ namespace ptc
          }
        }
        
-      return null_str<std::basic_string<T_str>>;
+      return StringConverter<T_str>( "" );
      }
 
     // No arguments case
@@ -592,22 +598,6 @@ namespace ptc
    private:
 
     //====================================================
-    //     Private structs
-    //====================================================
-
-    // null_string
-    /**
-     * @brief Struct used to define the "null_str" constant. This workaround is needed for correct compilation in both gcc and clang.
-     * 
-     * @tparam T The template parameter of the future "null_string" constant.
-     */
-    template <class T> 
-    struct null_string
-     {
-      inline static const std::basic_string<T_str> value = StringConverter<T_str>( ""s );
-     };
-
-    //====================================================
     //     Private methods
     //====================================================
 
@@ -617,12 +607,12 @@ namespace ptc
      * 
      * @tparam T Template type of the input variable.
      * @param str The input variable.
-     * @param flag A flag which let to return different things with respect to its value. If flag = 0 the ANSI is searched as the first substring of the str argument, otherwise, if flag = 1 the ANSI is searched as a substring inside the str argument.
+     * @param flag A flag which let to return different things with respect to its value. If flag = ANSI::first the ANSI is searched as the first substring of the str argument, otherwise, if flag = ANSI::generic the ANSI is searched as a substring inside the str argument.
      * @return true If the input variable is an ANSI escape sequency.
      * @return false Otherwise.
      */
     template <typename T>
-    static constexpr bool is_escape( const T& str, ANSI&& flag )
+    static constexpr bool is_escape( const T& str, const ANSI& flag )
      {
       if constexpr( std::is_convertible_v <T, std::basic_string_view<T_str>> && ! std::is_same_v<T, std::nullptr_t> )
        {
@@ -630,33 +620,13 @@ namespace ptc
          {
           case( ANSI::first ): 
            {
-            return ( ! std::basic_string_view<T_str>( str ).rfind( StringConverter<T_str>( "\033"s ), 0 ) ) && 
-                   ( std::basic_string_view<T_str>( str ).length() < 7 );
+            return ( std::basic_string_view<T_str>( str ).length() < 7 ) && ( str[0] == '\033' );
            }
           case( ANSI::generic ):
            {
-            return ( std::basic_string_view<T_str>( str ).find( StringConverter<T_str>( "\033"s ) ) != std::basic_string_view<T_str>::npos );
+            return ( std::basic_string_view<T_str>( str ).find( '\033' ) != std::basic_string_view<T_str>::npos );
            }
          }
-       }
-      return false;
-     }
-
-    // is_null_str
-    /**
-     * @brief This method is used to check if an input variable is a null string or not. Method used to ensure the required condition also in case of char, std::string, const char*... types.
-     * 
-     * @tparam T The templated type of the input variable.
-     * @param str The input variable.
-     * @return true If the variable is a null string.
-     * @return false Otherwise.
-     */
-    template <typename T>
-    static constexpr bool is_null_str( const T& str )
-     {
-      if constexpr( std::is_convertible_v <T, std::basic_string_view<T_str>> )
-       {
-        return str == null_str <T>;
        }
       return false;
      }
@@ -678,20 +648,20 @@ namespace ptc
       std::lock_guard <std::mutex> lock{ mutex_ };
 
       // Printing the first argument
-      if( is_null_str( pattern ) || is_null_str( first ) || is_escape( first, ANSI::first ) ) os << first;
+      if( is_escape( first, ANSI::first ) || pattern.empty() ) os << first;
       else os << pattern << first << pattern;
       
       // Printing all the other arguments
       if constexpr( sizeof...( args ) > 0 ) 
        {
-        if ( is_null_str( first ) || is_escape( first, ANSI::first ) ) 
+        if ( is_escape( first, ANSI::first ) ) 
          {
-          if( is_null_str( pattern ) ) ( ( os << args << sep ), ...);
+          if( pattern.empty() ) ( ( os << args << sep ), ...);
           else ( ( os << pattern << args << pattern << sep ), ...);
          }
         else 
          {
-          if( is_null_str( pattern ) ) ( ( os << sep << args ), ...);
+          if( pattern.empty() ) ( ( os << sep << args ), ...);
           else ( ( os << sep << pattern << args << pattern ), ...);
          }
        }
@@ -714,7 +684,7 @@ namespace ptc
        }
 
       // Other operations
-      if ( getFlush() && ! std::is_base_of_v <std::basic_ostringstream<T_str>, T_os> ) os << std::flush;
+      if ( flush && ! std::is_base_of_v <std::basic_ostringstream<T_str>, T_os> ) os << std::flush;
      }
 
     // performance_options
@@ -745,7 +715,6 @@ namespace ptc
     //     Private constants
     //====================================================
     inline static const std::basic_string<T_str> reset_ANSI = StringConverter<T_str>( "\033[0m"s );
-    template <class T> inline static const std::basic_string<T_str> null_str = Print::null_string<const T&>::value;
    };
    
   //====================================================

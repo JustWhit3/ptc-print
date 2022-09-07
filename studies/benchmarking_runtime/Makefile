@@ -6,11 +6,12 @@ ifeq ($(OS),Windows_NT)
 else
 	EXEC := benchmarking
 endif
+CXX := g++
 
 #====================================================
 #     FLAGS
 #====================================================
-WARNINGS := -Wall -Wextra -Wno-unused-function
+WARNINGS := -Wall -Wextra -Wno-unused-function -Wno-unused-parameter
 EXTRAFLAGS := -std=c++17 -O3 -O1 -falign-functions=32 
 LDFLAGS := -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lfmt -lpthread -o $(EXEC)
 
@@ -18,13 +19,13 @@ LDFLAGS := -isystem benchmark/include -Lbenchmark/build/src -lbenchmark -lfmt -l
 #     Compilation
 #====================================================
 bin/$(EXEC): benchmarking.o
-	g++ benchmarking.o -o $(EXEC) $(LDFLAGS)
+	$(CXX) benchmarking.o -o $(EXEC) $(LDFLAGS)
 	@ mkdir -p obj bin
 	@ mv *.o obj
 	@ mv benchmarking bin
 
 benchmarking.o: benchmarking.cpp
-	g++ -c benchmarking.cpp $(EXTRAFLAGS) $(WARNINGS) 
+	$(CXX) -c benchmarking.cpp $(EXTRAFLAGS) $(WARNINGS) 
 
 clean:
 	rm -rf obj bin

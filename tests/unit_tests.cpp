@@ -6,6 +6,7 @@
 
 
 
+
 //====================================================
 //     Headers
 //====================================================
@@ -55,6 +56,8 @@ TEST_CASE( "Testing utils." )
     CHECK_EQ( ptc::StringConverter<wchar_t>( "Hello" ), L"Hello" );
     CHECK_EQ( ptc::StringConverter<char>( "Test a long string" ), "Test a long string" );
     CHECK_EQ( ptc::StringConverter<wchar_t>( "Test a long string" ), L"Test a long string" );
+    CHECK_EQ( ptc::StringConverter<char>( "" ), "" );
+    CHECK_EQ( ptc::StringConverter<wchar_t>( "" ), L"" );
    }
 
   // select_cout
@@ -221,8 +224,6 @@ TEST_CASE( "Testing the operator () overload." )
   SUBCASE( "Testing ANSI escape sequence or empty character as first argument." )
    {
     ptc::print.setEnd( "" );
-    const std::string test_a = ptc::print( ptc::mode::str, "", "Testing empty char (ignore this)." );
-    CHECK_EQ( test_a, "Testing empty char (ignore this). " ); 
     const std::string test_b = ptc::print( ptc::mode::str, "\033[31m", "Testing empty char (ignore this)." );
     CHECK_EQ( test_b, "\033[31mTesting empty char (ignore this). \033[0m" ); 
     ptc::print.setEnd( "\n" );
@@ -454,7 +455,6 @@ TEST_CASE( "Testing the Print setPattern and getPattern methods." )
 
   ptc::print.setPattern( "|" );
   CHECK_EQ( ptc::print( ptc::mode::str, "Testing", "this", "pattern" ), "|Testing| |this| |pattern|" );
-  CHECK_EQ( ptc::print( ptc::mode::str, "", "this", "pattern" ), "|this| |pattern| " );
   CHECK_EQ( ptc::print( ptc::mode::str, "\033[31m", "this", "pattern" ), "\033[31m|this| |pattern| \033[0m" );
   CHECK_EQ( ptc::print( ptc::mode::str, "Testing", 1.2, "pattern" ), "|Testing| |1.2| |pattern|" );
   CHECK_EQ( ptc::print( ptc::mode::str, 1, "this", "pattern" ), "|1| |this| |pattern|" );
