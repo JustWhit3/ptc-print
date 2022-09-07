@@ -190,6 +190,25 @@ namespace ptc
   //     Operator << overloads
   //====================================================
 
+  #if defined(__GNUC__) && (__GNUC___ <= 9)
+
+  // Overload for std::nullptr_t
+  /**
+   * @brief Operator << overload for std::nullptr_t printing.
+   * 
+   * @tparam T_str The char type of the ostream object.
+   * @param os The type of the output stream.
+   * @return std::basic_ostream<T_str>& The stream to which the object is printed to.
+   */
+  template <class T_str>
+  inline std::basic_ostream<T_str>& operator << ( std::basic_ostream<T_str>& os, std::nullptr_t )
+   {
+    os << "nullptr";
+    return os; 
+   }
+
+  #endif
+
   // Overload for std::complex
   /**
    * @brief Operator << overload for std::complex printing.
