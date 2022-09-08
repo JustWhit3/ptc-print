@@ -63,13 +63,13 @@ elif [ "$1" == "macro" ] ; then
     echo "======================================================"
     echo ""
     sed -i '4s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' system_tests.cpp
-    sed -i '4s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' threading_tests.cpp
-    sed -i '6s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' unit_tests.cpp
+    sed -i '5s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' threading_tests.cpp
+    sed -i '7s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' unit_tests.cpp
     make
     run_all_tests
     sed -i '4d' system_tests.cpp
-    sed -i '4d' threading_tests.cpp
-    sed -i '6d' unit_tests.cpp
+    sed -i '5d' threading_tests.cpp
+    sed -i '7d' unit_tests.cpp
 else
     echo "======================================================"
     echo "     COMPILING"
@@ -84,13 +84,13 @@ else
     echo ""
     make clean
     sed -i '4s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' system_tests.cpp
-    sed -i '4s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' threading_tests.cpp
-    sed -i '6s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' unit_tests.cpp
+    sed -i '5s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' threading_tests.cpp
+    sed -i '7s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' unit_tests.cpp
     make
     run_all_tests
     sed -i '4d' system_tests.cpp
-    sed -i '4d' threading_tests.cpp
-    sed -i '6d' unit_tests.cpp
+    sed -i '5d' threading_tests.cpp
+    sed -i '7d' unit_tests.cpp
 fi
 
 # Cppcheck

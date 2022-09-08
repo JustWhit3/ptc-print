@@ -501,6 +501,8 @@ namespace ptc
     //     Public getters
     //====================================================
 
+    #ifdef PTC_ENABLE_GETTERS_FOR_UNIT_TESTS
+
     // getEnd
     /**
      * @brief Getter used to get the value of the "end" variable. Mainly used for debugging.
@@ -544,6 +546,8 @@ namespace ptc
      {
       return pattern;
      }
+
+    #endif
 
     //====================================================
     //     Public operator () overloads
@@ -610,8 +614,8 @@ namespace ptc
      */
     inline void operator () ( std::basic_ostream<T_str>& os = select_cout<T_str>::cout ) const
      {
-      os << getEnd();
-      if ( getFlush() ) os << std::flush;
+      os << end;
+      if ( flush ) os << std::flush;
      }
      
    private:

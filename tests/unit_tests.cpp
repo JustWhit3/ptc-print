@@ -3,6 +3,7 @@
 //====================================================
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #define DOCTEST_CONFIG_SUPER_FAST_ASSERTS
+#define PTC_ENABLE_GETTERS_FOR_UNIT_TESTS
 
 //====================================================
 //     Headers
