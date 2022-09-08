@@ -23,7 +23,7 @@ echo 0 | sudo tee /proc/sys/kernel/randomize_va_space > /dev/null 2>&1          
 # Generating benchmarking data
 ./bin/benchmarking \
 --benchmark_out=data/benchmarking.json \
---benchmark_repetitions=100 \
+--benchmark_repetitions=15 \
 --benchmark_display_aggregates_only=true \
 --benchmark_report_aggregates_only=true
 
@@ -43,5 +43,5 @@ fi
 ./analysis.py \
 --tests=on \
 --data=data/benchmarking.json \
---save=yes \
---macro=yes
+--save=no \
+--macro=no
