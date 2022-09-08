@@ -65,7 +65,7 @@ services:
 
     # clang 5
     build_clang_5:
-        image: gcc:7.1.0
+        image: clang:5.1.0
         network_mode: bridge
         volumes:
             - .:/proj
