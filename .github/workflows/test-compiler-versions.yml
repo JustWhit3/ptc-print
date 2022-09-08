@@ -1,9 +1,9 @@
-- name: Docker Compose Action
-  uses: isbang/compose-action@v1.2.0
-
-  steps:
-    - uses: actions/checkout@v3
-    - uses: isbang/compose-action@v1.2.0
-      with:
-        compose-file: "./docker/docker-compose.yml"
-        compose-flags: "run --rm build"
+name: Docker Compose Actions Workflow
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build with gcc 7
+        run: docker-compose run --rm build_gcc_7
