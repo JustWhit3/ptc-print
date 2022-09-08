@@ -152,12 +152,3 @@ services:
             - .:/proj
         container_name: build
         command: 'bash -c "cd /proj/tests && make bin/system_tests CXX=clang++"'
-
-    # clang 15
-    build_clang_15:
-        image: silkeh/clang:15
-        network_mode: bridge
-        volumes:
-            - .:/proj
-        container_name: build
-        command: 'bash -c "cd /proj/tests && make bin/system_tests CXX=clang++"'
