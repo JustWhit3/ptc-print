@@ -81,9 +81,9 @@ Supported compilers:
 - **gcc**
   - *Versions*: 7/8/9/10/11/12
 - **clang**
-  - *Versions*: 19 (only one tested)
-- **MSVC** (tested)
   - *Versions*: 5/6/7/8/9/10/11/12/13/14/15
+- **MSVC**
+  - *Versions*: 19 (only one tested)
 
 ## Examples
 

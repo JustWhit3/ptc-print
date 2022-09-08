@@ -1,0 +1,9 @@
+- name: Docker Compose Action
+  uses: isbang/compose-action@v1.2.0
+
+  steps:
+    - uses: actions/checkout@v3
+    - uses: isbang/compose-action@v1.2.0
+      with:
+        compose-file: "./docker/docker-compose.yml"
+        compose-flags: "run --rm build"

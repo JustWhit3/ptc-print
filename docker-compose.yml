@@ -1,0 +1,68 @@
+version: "2"
+services:
+
+    ##########################################
+    #      GCC
+    ##########################################
+
+    # gcc 7
+    build_gcc_7:
+        image: gcc:7.1.0
+        network_mode: bridge
+        volumes:
+            - .:/proj
+        container_name: build
+        command: 'bash -c "cd /proj/tests && make bin/system_tests CXX=g++"'
+
+    # gcc 8
+    build_gcc_8:
+        image: gcc:8.1.0
+        network_mode: bridge
+        volumes:
+            - .:/proj
+        container_name: build
+        command: 'bash -c "cd /proj/tests && make bin/system_tests CXX=g++"'
+
+    # gcc 9
+    build_gcc_9:
+        image: gcc:9.1.0
+        network_mode: bridge
+        volumes:
+            - .:/proj
+        container_name: build
+        command: 'bash -c "cd /proj/tests && make bin/system_tests CXX=g++"'
+
+    # gcc 10
+    build_gcc_10:
+        image: gcc:10.1.0
+        network_mode: bridge
+        volumes:
+            - .:/proj
+        container_name: build
+        command: 'bash -c "cd /proj/tests && make bin/system_tests CXX=g++"'
+
+    # gcc 11
+    build_gcc_11:
+        image: gcc:11.1.0
+        network_mode: bridge
+        volumes:
+            - .:/proj
+        container_name: build
+        command: 'bash -c "cd /proj/tests && make bin/system_tests CXX=g++"'
+
+    # gcc 12
+    build_gcc_12:
+        image: gcc:12.1.0
+        network_mode: bridge
+        volumes:
+            - .:/proj
+        container_name: build
+        command: 'bash -c "cd /proj/tests && make bin/system_tests CXX=g++"'
+
+    ##########################################
+    #      CLANG
+    ##########################################
+
+    ##########################################
+    #      MSVC
+    ##########################################
