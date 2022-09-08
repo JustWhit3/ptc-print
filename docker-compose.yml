@@ -6,15 +6,6 @@ services:
     ##########################################
 
     # gcc 7
-    build_gcc_6:
-        image: gcc:6.1.0
-        network_mode: bridge
-        volumes:
-            - .:/proj
-        container_name: build
-        command: 'bash -c "cd /proj/tests && make bin/system_tests CXX=g++"'
-
-    # gcc 7
     build_gcc_7:
         image: gcc:7.1.0
         network_mode: bridge
@@ -71,6 +62,15 @@ services:
     ##########################################
     #      CLANG
     ##########################################
+
+    # clang 5
+    build_clang_5:
+        image: gcc:7.1.0
+        network_mode: bridge
+        volumes:
+            - .:/proj
+        container_name: build
+        command: 'bash -c "cd /proj/tests && make bin/system_tests CXX=clang++"'
 
     ##########################################
     #      MSVC
