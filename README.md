@@ -46,7 +46,7 @@
 
 ## Introduction
 
-`ptc::print` (*py-to-cpp print*) is a C++17 printing object (compiles also with C++20) inspired by the Python [`print`](https://realpython.com/python-print/) function, which provides you a most comfortable way to print messages and logs to the output stream.
+`ptc::print` (*py-to-cpp print*) is a C++17/20 printing object (compiles also with C++20) inspired by the Python [`print`](https://realpython.com/python-print/) function, which provides you a most comfortable way to print messages and logs to the output stream.
 
 It is constructed through the [`Print`](https://justwhit3.github.io/ptc-print/classptc_1_1Print.html) functor, which is a fully *type-* and *thread-safe* class with *automatic memory management*, implemented through an [header-only](https://github.com/JustWhit3/ptc-print/blob/main/ptc/print.hpp) library, with minimal and indispensable [dependencies](#install-and-use). It supports also the usage of [ANSI escape sequences](#printing-with-ansi-escape-sequences).
 
@@ -78,12 +78,15 @@ Supported operating systems:
 
 Supported compilers:
 
-- **gcc**
-  - *Versions*: 7/8/9/10/11/12
-- **clang**
-  - *Versions*: 5/6/7/8/9/10/11/12/13/14/15
-- **MSVC**
-  - *Versions*: 19 (only one tested)
+- **gcc** versions:
+  - *C++17*: 7/8/9/10/11/12
+  - *C++20*: 10/11/12
+- **clang** versions:
+  - *C++17*: 5/6/7/8/9/10/11/12/13/14/15
+  - *C++20*: 9/10/11/12/13/14/15
+- **MSVC** versions:
+  - *C++17*: 19 (only this one tested)
+  - *C++20*: //
 
 ## Examples
 

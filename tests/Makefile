@@ -10,13 +10,14 @@ else
 	UNIT := unit_tests
 	THREAD := threading_tests
 endif
-$(CXX) := g++
+CXX := g++
 
 #====================================================
 #     FLAGS
 #====================================================
 WARNINGS := -Wall -Wextra -pedantic
-EXTRAFLAGS := -std=c++17 -MMD -MP
+CXXFLAGS := -std=c++17
+EXTRAFLAGS := $(CXXFLAGS) -MMD -MP
 LDFLAGS := -pthread
 
 #====================================================
