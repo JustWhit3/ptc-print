@@ -11,9 +11,17 @@
 //====================================================
 //     Preprocessor directives
 //====================================================
+
+// Include guards
 #pragma once
 #ifndef PRINT_HPP
 #define PRINT_HPP
+
+// Other settings
+#ifdef __APPLE__
+#define char16_t uint16_t
+#define char32_t uint32_t
+#endif
 
 //====================================================
 //     Headers
