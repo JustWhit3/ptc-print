@@ -17,6 +17,17 @@
 #ifndef PRINT_HPP
 #define PRINT_HPP
 
+// Other settings
+#ifdef __APPLE__
+#if defined(__STDC_UTF_16__) || (defined(_HAS_CHAR16_T_LANGUAGE_SUPPORT) && _HAS_CHAR16_T_LANGUAGE_SUPPORT)
+typedef UINT16_T CHAR16_T;
+#elif defined(_MSC_VER)
+typedef wchar_t CHAR16_T;
+#else
+typedef UINT16_T CHAR16_T;
+#endif
+#endif
+
 //====================================================
 //     Headers
 //====================================================
