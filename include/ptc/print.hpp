@@ -767,7 +767,7 @@ namespace ptc
 
   #ifndef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
   inline Print <char16_t> print16;  // char16_t
-  inline Print <char32_t> print32;  // char16_t
+  inline Print <char32_t> print32;  // char32_t
   #endif
  }
 

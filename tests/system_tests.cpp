@@ -14,6 +14,7 @@
 #include <map>
 #include <stack>
 #include <chrono>
+#include <string>
 
 //====================================================
 //     Namespaces
