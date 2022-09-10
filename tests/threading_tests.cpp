@@ -64,6 +64,16 @@ int main()
     ptc::wprint();
     ptc::wprint( std::wcout, "Testing std::wcout!" );
 
+    #ifndef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
+
+    std::basic_ostringstream<char16_t> oss16;
+    ptc::print16( oss16, "Hello" );
+
+    std::basic_ostringstream<char32_t> oss32;
+    ptc::print32( oss32, "Hello" );
+
+    #endif
+
     // Non built-in types
     std::complex<int> cmplx_no( 2, 3 );
     ptc::print( cmplx_no );
@@ -113,6 +123,16 @@ int main()
     // Other ostream objects
     ptc::wprint();
     ptc::wprint( std::wcout, "Testing std::wcout!" );
+
+    #ifndef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
+
+    std::basic_ostringstream<char16_t> oss16;
+    ptc::print16( oss16, "Hello" );
+
+    std::basic_ostringstream<char32_t> oss32;
+    ptc::print32( oss32, "Hello" );
+
+    #endif
 
     // Non built-in types
     std::complex<int> cmplx_no( 2, 3 );

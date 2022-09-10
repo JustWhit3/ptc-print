@@ -363,8 +363,10 @@ int main()
 
 It is possible to choose a different char type with respect to the standard `char` used to define an `std::string`. A list of supported char types by the `ptc::print` object is the following:
 
-- `char`
-- `wchar_t`
+- `char` (`ptc::print`)
+- `wchar_t` (`ptc::wprint`)
+- `char16_t` (`ptc::print16`)
+- `char32_t` (`ptc::print32`)
 
 To print using `wchar_t` you can use the `ptc::wprint` function:
 
@@ -419,6 +421,8 @@ To consistently increase **performance improvements** you can use the following 
 at the beginning of your program. In this way, as you can see from [benchmarking studies](#benchmarking), runtime will be strongly increased in case you are printing with the default `std::cout` stream. Read [here](https://stackoverflow.com/questions/31162367/significance-of-ios-basesync-with-stdiofalse-cin-tienull) for more information about the benefit of this choice.
 
 > :warning: the usage of `PTC_ENABLE_PERFORMANCE_IMPROVEMENTS` macro will propagate not only to `ptc::print`, but also to `std::cout` in general, since it is directly used inside `ptc::print`.
+
+> :warning: do not use in case of `ptc::print16` or `ptc::print32` usage, since for `char16_t` and `char32_t` there is any `std::cout` counterpart and optimization will raise an error.
 
 If you plan to use this preprocessor directive pay attention to the **following points**:
 

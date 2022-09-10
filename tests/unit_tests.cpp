@@ -50,12 +50,25 @@ TEST_CASE( "Testing utils." )
   // StringConverter
   SUBCASE( "Testing StringConverter function." )
    {
+    // char
     CHECK_EQ( ptc::StringConverter<char>( "Hello" ), "Hello" );
-    CHECK_EQ( ptc::StringConverter<wchar_t>( "Hello" ), L"Hello" );
     CHECK_EQ( ptc::StringConverter<char>( "Test a long string" ), "Test a long string" );
-    CHECK_EQ( ptc::StringConverter<wchar_t>( "Test a long string" ), L"Test a long string" );
     CHECK_EQ( ptc::StringConverter<char>( "" ), "" );
+
+    // wchar_t
+    CHECK_EQ( ptc::StringConverter<wchar_t>( "Hello" ), L"Hello" );
+    CHECK_EQ( ptc::StringConverter<wchar_t>( "Test a long string" ), L"Test a long string" );
     CHECK_EQ( ptc::StringConverter<wchar_t>( "" ), L"" );
+
+    // char16_t
+    CHECK_EQ( ptc::StringConverter<char16_t>( "Hello" ), u"Hello" );
+    CHECK_EQ( ptc::StringConverter<char16_t>( "Test a long string" ), u"Test a long string" );
+    CHECK_EQ( ptc::StringConverter<char16_t>( "" ), u"" );
+
+    // char32_t
+    CHECK_EQ( ptc::StringConverter<char32_t>( "Hello" ), U"Hello" );
+    CHECK_EQ( ptc::StringConverter<char32_t>( "Test a long string" ), U"Test a long string" );
+    CHECK_EQ( ptc::StringConverter<char32_t>( "" ), U"" );
    }
 
   // select_cout
@@ -236,8 +249,6 @@ TEST_CASE( "Testing case of other char types." )
   // wchar_t
   SUBCASE( "Testing wchar_t" )
    {
-    ptc::print.setEnd( "" );
-  
     std::wstring wstr_in = ptc::wprint( ptc::mode::str, "Testing", "this" );
     std::wstring wstr_out = L"Testing this\n";
     CHECK_EQ( wstr_in, wstr_out );
@@ -245,9 +256,35 @@ TEST_CASE( "Testing case of other char types." )
     std::wstring wstr_in_2 = ptc::wprint( ptc::mode::str );
     std::wstring wstr_out_2 = L"";
     CHECK_EQ( wstr_in_2, wstr_out_2 );
-  
-    ptc::print.setEnd( "\n" );
    }
+
+  #ifndef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
+
+  // char16_t
+  SUBCASE( "Testing char16_t" )
+   {
+    std::basic_string<char16_t> wstr_in = ptc::print16( ptc::mode::str, "Testing", "this" );
+    std::basic_string<char16_t> wstr_out = u"";
+    CHECK_EQ( wstr_in, wstr_out );
+  
+    std::basic_string<char16_t> wstr_in_2 = ptc::print16( ptc::mode::str );
+    std::basic_string<char16_t> wstr_out_2 = u"";
+    CHECK_EQ( wstr_in_2, wstr_out_2 );
+   }
+
+  // char32_t
+  SUBCASE( "Testing char16_t" )
+   {
+    std::basic_string<char32_t> wstr_in = ptc::print32( ptc::mode::str, "Testing", "this" );
+    std::basic_string<char32_t> wstr_out = U"";
+    CHECK_EQ( wstr_in, wstr_out );
+  
+    std::basic_string<char32_t> wstr_in_2 = ptc::print32( ptc::mode::str );
+    std::basic_string<char32_t> wstr_out_2 = U"";
+    CHECK_EQ( wstr_in_2, wstr_out_2 );
+   }
+
+  #endif
  }
 
 //====================================================

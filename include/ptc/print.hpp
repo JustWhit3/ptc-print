@@ -87,8 +87,18 @@ namespace ptc
      }
     else if constexpr( std::is_same_v <CharT, wchar_t> )
      {
-      static std::wstring_convert <std::codecvt_utf8_utf16 <wchar_t>> converter;
-      return converter.from_bytes( input_str );
+      static std::wstring_convert <std::codecvt_utf8_utf16 <wchar_t>> converter_wchar_t;
+      return converter_wchar_t.from_bytes( input_str );
+     } 
+    else if constexpr( std::is_same_v <CharT, char16_t> )
+     {
+      static std::wstring_convert <std::codecvt_utf8_utf16 <char16_t>, char16_t> converter_16_t;
+      return converter_16_t.from_bytes( input_str );
+     } 
+    else if constexpr( std::is_same_v <CharT, char32_t> )
+     {
+      static std::wstring_convert <std::codecvt_utf8_utf16 <char32_t>, char32_t> converter_32_t;
+      return converter_32_t.from_bytes( input_str );
      } 
     else 
      {
@@ -187,7 +197,7 @@ namespace ptc
    }
 
   //====================================================
-  //     Operator << overloads
+  //     Operator << overloads for stdlib types
   //====================================================
 
   #if defined(__GNUC__) && (__GNUC___ <= 9)
@@ -360,13 +370,13 @@ namespace ptc
    {
     if constexpr( ! std::is_same_v<std::chrono::duration<int_type, T_time>, std::chrono::duration<int_type>> )
      {
-      static std::unordered_map<std::type_index, const std::string> time_map
+      static std::unordered_map<std::type_index, const std::basic_string<T_str>> time_map
        {
-        { typeid( std::nano ), "ns" },
-        { typeid( std::micro ), "us" },
-        { typeid( std::milli ), "ms" },
-        { typeid( std::ratio<60> ), "min" },
-        { typeid( std::ratio<3600> ), "h" }
+        { typeid( std::nano ), StringConverter<T_str>( "ns" ) },
+        { typeid( std::micro ), StringConverter<T_str>( "us" ) },
+        { typeid( std::milli ), StringConverter<T_str>( "ms" ) },
+        { typeid( std::ratio<60> ), StringConverter<T_str>( "min" ) },
+        { typeid( std::ratio<3600> ), StringConverter<T_str>( "h" ) }
        };
        
       os << val.count() << time_map[ typeid( T_time ) ];
@@ -754,6 +764,11 @@ namespace ptc
   // Print objects initialization
   inline Print <char> print;        // char
   inline Print <wchar_t> wprint;    // wchar_t
+
+  #ifndef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
+  inline Print <char16_t> print16;  // char16_t
+  inline Print <char32_t> print32;  // char16_t
+  #endif
  }
 
 #endif

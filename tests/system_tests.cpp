@@ -2,10 +2,6 @@
 //     headers
 //====================================================
 
-
-
-
-
 // My headers
 #include "../include/ptc/print.hpp"
 
@@ -104,12 +100,28 @@ void standard()
   ptc::print( "Testing", "this", "pattern", 123 );
   ptc::print.setPattern( "" );
 
-  // Testing usage of other ostream objects
+  // Testing usage of wprint
   ptc::wprint();
   ptc::wprint( std::wcout, "Testing std::wcout!" );
   ptc::wprint( std::wcerr, "Testing std::wcerr!" );
   std::wstring wstr_out = ptc::wprint( ptc::mode::str, "This", "is a wstring!\n" );
   std::wcout << wstr_out;
+
+  #ifndef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
+
+  // Testing usage of print16
+  std::basic_fstream<char16_t> file_stream_16( "test.txt", std::basic_ios<char16_t>::out | std::basic_ios<char16_t>::trunc );
+  ptc::print16( file_stream_16, "You can also write in a file some char16_u stuff!" );
+  file_stream_16.close();
+  std::basic_string<char16_t> str16_out = ptc::print16( ptc::mode::str, "This", "is a wstring!\n" );
+
+  // Testing usage of print32
+  std::basic_fstream<char32_t> file_stream_32( "test.txt", std::basic_ios<char32_t>::out | std::basic_ios<char32_t>::trunc );
+  ptc::print32( file_stream_32, "You can also write in a file some char16_u stuff!" );
+  file_stream_32.close();
+  std::basic_string<char32_t> str32_out = ptc::print32( ptc::mode::str, "This", "is a wstring!\n" );
+
+  #endif
  }
 
 //====================================================
