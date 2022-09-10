@@ -258,7 +258,7 @@ TEST_CASE( "Testing case of other char types." )
     CHECK_EQ( wstr_in_2, wstr_out_2 );
    }
 
-  #ifndef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
+  #if ! defined( PTC_ENABLE_PERFORMANCE_IMPROVEMENTS ) && ! defined( __APPLE__ )
 
   // char16_t
   SUBCASE( "Testing char16_t" )

@@ -108,7 +108,7 @@ void standard()
   std::wstring wstr_out = ptc::wprint( ptc::mode::str, "This", "is a wstring!\n" );
   std::wcout << wstr_out;
 
-  #ifndef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
+  #if ! defined( PTC_ENABLE_PERFORMANCE_IMPROVEMENTS ) && ! defined( __APPLE__ )
 
   // Testing usage of print16
   std::basic_fstream<char16_t> file_stream_16( "test.txt", std::basic_ios<char16_t>::out | std::basic_ios<char16_t>::trunc );

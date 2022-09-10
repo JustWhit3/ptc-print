@@ -11,8 +11,6 @@
 //====================================================
 //     Preprocessor directives
 //====================================================
-
-// Include guards
 #pragma once
 #ifndef PRINT_HPP
 #define PRINT_HPP
@@ -20,13 +18,6 @@
 //====================================================
 //     Headers
 //====================================================
-
-// Other settings
-#ifdef __APPLE__
-#include <cstdint>
-#define char16_t uint16_t
-#define char32_t uint32_t
-#endif
 
 // Standard headers
 #include <iostream>
@@ -98,7 +89,8 @@ namespace ptc
      {
       static std::wstring_convert <std::codecvt_utf8_utf16 <wchar_t>> converter_wchar_t;
       return converter_wchar_t.from_bytes( input_str );
-     } 
+     }
+    #ifndef __APPLE__
     else if constexpr( std::is_same_v <CharT, char16_t> )
      {
       static std::wstring_convert <std::codecvt_utf8_utf16 <char16_t>, char16_t> converter_16_t;
@@ -108,7 +100,8 @@ namespace ptc
      {
       static std::wstring_convert <std::codecvt_utf8_utf16 <char32_t>, char32_t> converter_32_t;
       return converter_32_t.from_bytes( input_str );
-     } 
+     }
+    #endif
     else 
      {
       return StringConverter<CharT>( "" );
@@ -209,7 +202,7 @@ namespace ptc
   //     Operator << overloads for stdlib types
   //====================================================
 
-  #if defined(__GNUC__) && (__GNUC___ <= 9)
+  #if defined( __GNUC__ ) && ( __GNUC___ <= 9 )
 
   // Overload for std::nullptr_t
   /**
@@ -774,7 +767,7 @@ namespace ptc
   inline Print <char> print;        // char
   inline Print <wchar_t> wprint;    // wchar_t
 
-  #ifndef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
+  #if ! defined( PTC_ENABLE_PERFORMANCE_IMPROVEMENTS ) && ! defined( __APPLE__ )
   inline Print <char16_t> print16;  // char16_t
   inline Print <char32_t> print32;  // char32_t
   #endif

@@ -64,7 +64,7 @@ int main()
     ptc::wprint();
     ptc::wprint( std::wcout, "Testing std::wcout!" );
 
-    #ifndef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
+    #if ! defined( PTC_ENABLE_PERFORMANCE_IMPROVEMENTS ) && ! defined( __APPLE__ )
 
     std::basic_ostringstream<char16_t> oss16;
     ptc::print16( oss16, "Hello" );
@@ -124,7 +124,7 @@ int main()
     ptc::wprint();
     ptc::wprint( std::wcout, "Testing std::wcout!" );
 
-    #ifndef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
+    #if ! defined( PTC_ENABLE_PERFORMANCE_IMPROVEMENTS ) && ! defined( __APPLE__ )
 
     std::basic_ostringstream<char16_t> oss16;
     ptc::print16( oss16, "Hello" );
