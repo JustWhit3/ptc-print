@@ -368,6 +368,8 @@ It is possible to choose a different char type with respect to the standard `cha
 - `char16_t` (`ptc::print16`)
 - `char32_t` (`ptc::print32`)
 
+> :warning: MacOS operating systems don't support `char16_t` neither `char32_t`, since these types are defined in the [`cuchar`](https://cplusplus.com/reference/cuchar/) header which is not present in XCode.
+
 To print using `wchar_t` you can use the `ptc::wprint` function:
 
 ```C++

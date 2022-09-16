@@ -380,6 +380,13 @@ namespace ptc
         { typeid( std::ratio<60> ), StringConverter<T_str>( "min" ) },
         { typeid( std::ratio<3600> ), StringConverter<T_str>( "h" ) }
        };
+
+        #if ( __cplusplus >= 202002L )
+        time_map.insert( { typeid( std::ratio<86400> ), StringConverter<T_str>( "d" ) } );
+        time_map.insert( { typeid( std::ratio<604800> ), StringConverter<T_str>( "w" ) } );
+        time_map.insert( { typeid( std::ratio<2629746> ), StringConverter<T_str>( "mos" ) } );
+        time_map.insert( { typeid( std::ratio<31556952> ), StringConverter<T_str>( "y" ) } );
+        #endif
        
       os << val.count() << time_map[ typeid( T_time ) ];
      }

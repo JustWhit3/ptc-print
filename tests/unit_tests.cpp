@@ -409,6 +409,13 @@ TEST_CASE( "Testing the Print operator << overloads." )
     CHECK_EQ( ptc::print( ptc::mode::str, 5min ), "5min" );
     CHECK_EQ( ptc::print( ptc::mode::str, 5h ), "5h" );
 
+    #if ( __cplusplus >= 202002L )
+    CHECK_EQ( ptc::print( ptc::mode::str, std::chrono::days( 2 ) ), "2d" );
+    CHECK_EQ( ptc::print( ptc::mode::str, std::chrono::weeks( 5 ) ), "5w" );
+    CHECK_EQ( ptc::print( ptc::mode::str, std::chrono::months( 1 ) ), "1mos" );
+    CHECK_EQ( ptc::print( ptc::mode::str, std::chrono::years( 23 ) ), "23y" );
+    #endif
+
     ptc::print.setEnd( "\n" );
    }
 
