@@ -20,6 +20,7 @@
 #include <string>
 #include <stack>
 #include <chrono>
+#include <optional>
 
 //====================================================
 //     main
@@ -90,6 +91,9 @@ int main()
     ptc::print( "Printing an std::stack:", my_stack );
 
     ptc::print( std::chrono::seconds( 5 ) );
+
+    std::optional <int> opt = 3;
+    ptc::print( "Printing an std::optional:", opt );
    };
 
   // Second job
@@ -150,6 +154,9 @@ int main()
     ptc::print( "Printing an std::stack:", my_stack );
 
     ptc::print( std::chrono::seconds( 5 ) );
+
+    std::optional <int> opt = 3;
+    ptc::print( "Printing an std::optional:", opt );
    };
 
   std::thread first_job(job1);

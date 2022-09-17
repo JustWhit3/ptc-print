@@ -36,6 +36,7 @@
 #include <unordered_set>
 #include <stack>
 #include <queue>
+#include <optional>
 
 //====================================================
 //     Namespaces
@@ -452,6 +453,16 @@ TEST_CASE( "Testing the Print operator << overloads." )
    {
     std::vector <std::vector <int>> vec = { { 1, 3 }, { 2, 1 } };
     CHECK_EQ( ptc::print( ptc::mode::str, vec ), "[[1, 3], [2, 1]]\n" );
+   }
+
+  // Testing std::optional printing
+  SUBCASE( "Testing std::optional printing." )
+   {
+    std::optional<int> opt = 43;
+    CHECK_EQ( ptc::print( ptc::mode::str, opt ), "43\n" );
+
+    std::optional<int> opt_n;
+    CHECK_EQ( ptc::print( ptc::mode::str, opt_n ), "nullopt\n" );
    }
  }
 

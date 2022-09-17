@@ -15,6 +15,7 @@
 #include <stack>
 #include <chrono>
 #include <string>
+#include <optional>
 
 //====================================================
 //     Namespaces
@@ -158,6 +159,10 @@ void other_types()
   ptc::print( "Printing an std::chrono::duration time in nanoseconds:", 30ns );
   ptc::print( "Printing an std::chrono::duration time in seconds:", 5s );
   ptc::wprint( "Printing an std::chrono::duration time in seconds with wprint:", 5s );
+
+  // Testing std::optional
+  std::optional <int> opt = 3;
+  ptc::print( "Printing an std::optional:", opt );
  }
 
 //====================================================

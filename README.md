@@ -40,8 +40,6 @@
   - [Executable size](#executable-size)
   - [Advantages](#advantages)
 - [Todo](#todo)
-  - [New features](#new-features)
-  - [Improvements](#improvements)
 - [Projects which use this library](#projects-which-use-this-library)
 - [Credits](#credits)
   - [Main maintainers](#main-maintainers)
@@ -634,8 +632,6 @@ print( "I am", "Python", 123, sep = "*", end = "" );
 
 ## Todo
 
-### New features
-
 - Add a specific method to reorder the printing of a nidified containers. For example:
 
 ```C++
@@ -729,31 +725,9 @@ int main()
 { (2.9, '12', "Milano"), (3.8, '32', "Bologna") }
 ```
 
-- Enable printing of `std::optional` values:
-
-```C++
-#include <ptc/print.hpp>
-#include <optional>
-
-int main()
- {
-  std::optional<int> opt = 32;
-  ptc::print( opt );
- }
-```
-
-```txt
-32
-```
-
-### Improvements
-
 - Improve the printing to an external file stream. Current implementation is too slow.
-- Upload the package on some package managers (ex: [`Conan`](https://conan.io/) or `dpkg`).
 - Create a [wiki](https://github.com/JustWhit3/ptc-print/wiki) with detailed examples for every feature.
-- Extend the support to `char16_t` and `char32_t` types.
 - Extend benchmarking studies with other libraries.
-- Add support to C++20 features.
 
 ## Projects which use this library
 

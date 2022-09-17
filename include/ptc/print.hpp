@@ -38,6 +38,7 @@
 #include <unordered_map>
 #include <typeindex>
 #include <typeinfo>
+#include <optional>
 #endif
 
 //====================================================
@@ -401,6 +402,16 @@ namespace ptc
       os << val.count() << 's';
      }
 
+    return os;
+   }
+
+  // Overload for std::optional
+  template <class T_str, class T>
+  std::basic_ostream<T_str>& operator <<( std::basic_ostream<T_str>& os, std::optional<T> const& opt )
+   {
+    if ( opt ) os << opt.value();
+    else os << "nullopt"; 
+    
     return os;
    }
 
