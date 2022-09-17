@@ -162,7 +162,7 @@ services:
         image: abrarov/msvc-2022
         network_mode: bridge
         volumes:
-            - .:/proj
+            - .:\proj
         container_name: build
-        command: 'bash -c "cd /proj/tests && make bin/system_tests CXX=msvc CXXFLAGS=/std:c++17 && make bin/system_tests CXX=msvc CXXFLAGS=/std:c++20"'
+        command: 'bash -c "cd proj\tests && make bin\system_tests CXX=msvc CXXFLAGS=/std:c++17 && make bin\system_tests CXX=msvc CXXFLAGS=/std:c++20"'
         
