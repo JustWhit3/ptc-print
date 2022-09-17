@@ -41,9 +41,3 @@ jobs:
         run: docker-compose run --rm build_clang_13
       - name: Build with clang 14
         run: docker-compose run --rm build_clang_14
-  MSVC:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Build with MSVC 2022
-        run: docker-compose run --rm build_msvc_2022
