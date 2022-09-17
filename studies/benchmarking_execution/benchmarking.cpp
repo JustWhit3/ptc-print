@@ -2,7 +2,6 @@
 //     Headers
 //====================================================
 
-
 // My headers
 #include "../../include/ptc/print.hpp"
 
@@ -59,6 +58,8 @@ static void ptc_print_setPattern( bm::State& state )
 //     ptc::print getters
 //====================================================
 
+#ifdef PTC_ENABLE_GETTERS_FOR_UNIT_TESTS
+
 // ptc_print_getEnd
 static void ptc_print_getEnd( bm::State& state ) 
  {
@@ -82,6 +83,8 @@ static void ptc_print_getPattern( bm::State& state )
  {
   for ( auto _ : state ) bm::DoNotOptimize( ptc::print.getPattern() );
  }
+
+#endif
 
 //====================================================
 //      ptc::print other 
@@ -235,9 +238,9 @@ static void fmt_print_file( bm::State& state )
 
 // stdout
 BENCHMARK( ptc_print_stdout );
-BENCHMARK( fmt_print_stdout );
+//BENCHMARK( fmt_print_stdout );
 //BENCHMARK( std_cout_stdout );
-BENCHMARK( printf_stdout );
+//BENCHMARK( printf_stdout );
 
 // file writing
 //BENCHMARK( ptc_print_file );

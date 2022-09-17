@@ -69,6 +69,13 @@ TEST_CASE( "Testing utils." )
     CHECK_EQ( ptc::StringConverter<char32_t>( "Hello" ), U"Hello" );
     CHECK_EQ( ptc::StringConverter<char32_t>( "Test a long string" ), U"Test a long string" );
     CHECK_EQ( ptc::StringConverter<char32_t>( "" ), U"" );
+
+    // char8_t
+    #if ( __cplusplus >= 202002L )
+    CHECK_EQ( ptc::StringConverter<char8_t>( "Hello" ), u8"Hello" );
+    CHECK_EQ( ptc::StringConverter<char8_t>( "Test a long string" ), u8"Test a long string" );
+    CHECK_EQ( ptc::StringConverter<char8_t>( "" ), u8"" );
+    #endif
    }
 
   // select_cout
@@ -283,6 +290,20 @@ TEST_CASE( "Testing case of other char types." )
     std::basic_string<char32_t> wstr_out_2 = U"";
     CHECK_EQ( wstr_in_2, wstr_out_2 );
    }
+
+  // char8_t
+  #if ( __cplusplus >= 202002L )
+  SUBCASE( "Testing char8_t" )
+   {
+    std::basic_string<char8_t> wstr_in = ptc::print8( ptc::mode::str, "Testing", "this" );
+    std::basic_string<char8_t> wstr_out = u8"";
+    CHECK_EQ( wstr_in, wstr_out );
+  
+    std::basic_string<char8_t> wstr_in_2 = ptc::print8( ptc::mode::str );
+    std::basic_string<char8_t> wstr_out_2 = u8"";
+    CHECK_EQ( wstr_in_2, wstr_out_2 );
+   }
+  #endif
 
   #endif
  }

@@ -91,6 +91,12 @@ namespace ptc
       return converter_wchar_t.from_bytes( input_str );
      }
     #ifndef __APPLE__
+    #if ( __cplusplus >= 202002L )
+    else if constexpr( std::is_same_v <CharT, char8_t> )
+     {
+      return reinterpret_cast <const char8_t*>( input_str.c_str() );
+     }
+    #endif
     else if constexpr( std::is_same_v <CharT, char16_t> )
      {
       static std::wstring_convert <std::codecvt_utf8_utf16 <char16_t>, char16_t> converter_16_t;
@@ -381,12 +387,12 @@ namespace ptc
         { typeid( std::ratio<3600> ), StringConverter<T_str>( "h" ) }
        };
 
-        #if ( __cplusplus >= 202002L )
-        time_map.insert( { typeid( std::ratio<86400> ), StringConverter<T_str>( "d" ) } );
-        time_map.insert( { typeid( std::ratio<604800> ), StringConverter<T_str>( "w" ) } );
-        time_map.insert( { typeid( std::ratio<2629746> ), StringConverter<T_str>( "mos" ) } );
-        time_map.insert( { typeid( std::ratio<31556952> ), StringConverter<T_str>( "y" ) } );
-        #endif
+      #if ( __cplusplus >= 202002L )
+      time_map.insert( { typeid( std::ratio<86400> ), StringConverter<T_str>( "d" ) } );
+      time_map.insert( { typeid( std::ratio<604800> ), StringConverter<T_str>( "w" ) } );
+      time_map.insert( { typeid( std::ratio<2629746> ), StringConverter<T_str>( "mos" ) } );
+      time_map.insert( { typeid( std::ratio<31556952> ), StringConverter<T_str>( "y" ) } );
+      #endif
        
       os << val.count() << time_map[ typeid( T_time ) ];
      }
@@ -775,6 +781,9 @@ namespace ptc
   inline Print <wchar_t> wprint;    // wchar_t
 
   #if ! defined( PTC_ENABLE_PERFORMANCE_IMPROVEMENTS ) && ! defined( __APPLE__ )
+  #if ( __cplusplus >= 202002L )
+  inline Print <char8_t> print8;  // char8_t
+  #endif
   inline Print <char16_t> print16;  // char16_t
   inline Print <char32_t> print32;  // char32_t
   #endif
