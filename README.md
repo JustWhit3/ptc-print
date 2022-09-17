@@ -4,7 +4,7 @@
 <p align="center">
   <img title="v1.1" alt="v1.1" src="https://img.shields.io/badge/version-v1.1-informational?style=flat-square">
   <img title="MIT License" alt="license" src="https://img.shields.io/badge/license-MIT-informational?style=flat-square">
-	<img title="C++17" alt="C++17" src="https://img.shields.io/badge/c++-17-informational?style=flat-square"><br/>
+	<img title="C++17/20" alt="C++17/20" src="https://img.shields.io/badge/c++-17/20-informational?style=flat-square"><br/>
 	<img title="Code size" alt="code size" src="https://img.shields.io/github/languages/code-size/JustWhit3/ptc-print?color=red">
 	<img title="Repo size" alt="repo size" src="https://img.shields.io/github/repo-size/JustWhit3/ptc-print?color=red">
 	<img title="Lines of code" alt="total lines" src="https://img.shields.io/tokei/lines/github/JustWhit3/ptc-print?color=red"></br>
@@ -17,6 +17,9 @@
 ## Table of contents
 
 - [Introduction](#introduction)
+- [Architectures support](#architectures-support)
+  - [Operating systems](#operating-systems)
+  - [Compilers](#compilers)
 - [Examples](#examples)
   - [Standard cases](#standard-cases)
   - [Printing with ANSI escape sequences](#printing-with-ansi-escape-sequences)
@@ -46,9 +49,9 @@
 
 ## Introduction
 
-`ptc::print` (*py-to-cpp print*) is a C++17/20 printing object (compiles also with C++20) inspired by the Python [`print`](https://realpython.com/python-print/) function, which provides you a most comfortable way to print messages and logs to the output stream.
+`ptc::print` (*py-to-cpp print*) is a C++17/20 printing object inspired by the Python [`print`](https://realpython.com/python-print/) function, which provides you a most comfortable way to print messages and logs to the output stream.
 
-It is constructed through the [`Print`](https://justwhit3.github.io/ptc-print/classptc_1_1Print.html) functor, which is a fully *type-* and *thread-safe* class with *automatic memory management*, implemented through an [header-only](https://github.com/JustWhit3/ptc-print/blob/main/ptc/print.hpp) library, with minimal and indispensable [dependencies](#install-and-use). It supports also the usage of [ANSI escape sequences](#printing-with-ansi-escape-sequences).
+It is constructed through the [`Print`](https://justwhit3.github.io/ptc-print/classptc_1_1Print.html) functor, which is a fully *type-* and *thread-safe* class with *automatic memory management*, implemented through an [header-only](https://github.com/JustWhit3/ptc-print/blob/main/ptc/print.hpp) library, with minimal and indispensable [dependencies](#install-and-use). It supports also the usage of [ANSI escape sequences](#printing-with-ansi-escape-sequences) and is cross-platform.
 
 `ptc::print` supports the printing of all the standard types and some non-standard ones (list [here](#printing-non-standard-types)).
 
@@ -64,7 +67,9 @@ The software is and will stay **free**, but if you want to support me with a don
 
 <a href="https://www.buymeacoffee.com/JustWhit33" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
-Supported operating systems:
+## Architectures support
+
+### Operating systems
 
 - **Linux**
   - *Ubuntu* (tested)
@@ -76,15 +81,15 @@ Supported operating systems:
   - *Powershell* (tested)
 - **MacOS**
 
-Supported compilers:
+### Compilers
 
-- **gcc** versions:
+- **gcc**:
   - *C++17*: 7/8/9/10/11/12
   - *C++20*: 10/11/12
-- **clang** versions:
+- **clang**:
   - *C++17*: 5/6/7/8/9/10/11/12/13/14/15
   - *C++20*: 9/10/11/12/13/14/15
-- **MSVC** versions:
+- **MSVC**:
   - *C++17*: 19 (only this one tested)
   - *C++20*: //
 
@@ -401,8 +406,8 @@ Steps:
 
 Prerequisites are minimal and are automatically installed with the `install.sh` script. They are:
 
-- g++ (like *gcc* or *clang*) compiler.
-- C++17 standard.
+- C++ (like *gcc*, *clang* or *MSVC*) compiler.
+- C++17/20 standard.
 
 4) Include the header into your project:
 

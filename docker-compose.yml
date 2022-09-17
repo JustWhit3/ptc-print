@@ -152,3 +152,17 @@ services:
             - .:/proj
         container_name: build
         command: 'bash -c "cd /proj/tests && make bin/system_tests CXX=clang++ CXXFLAGS=-std=c++17 && make bin/system_tests CXX=clang++ CXXFLAGS=-std=c++2a"'
+
+    ##########################################
+    #      MSVC
+    ##########################################
+
+    # MSVC 2022
+    build_msvc_2022:
+        image: abrarov/msvc-2022
+        network_mode: bridge
+        volumes:
+            - .:/proj
+        container_name: build
+        command: 'bash -c "cd /proj/tests && make bin/system_tests CXX=msvc CXXFLAGS=/std:c++17 && make bin/system_tests CXX=msvc CXXFLAGS=/std:c++20"'
+        
