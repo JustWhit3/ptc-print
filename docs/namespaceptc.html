@@ -138,7 +138,16 @@ Functions</h2></td></tr>
 <tr class="separator:a521a7e2d40feba2a46d7b873edc52705"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74ea609fa1d566f0a030b6cf0e1d4736"><td class="memTemplParams" colspan="2">template&lt;class T_str , class T &gt; </td></tr>
 <tr class="memitem:a74ea609fa1d566f0a030b6cf0e1d4736"><td class="memTemplItemLeft" align="right" valign="top">std::basic_ostream&lt; T_str &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a74ea609fa1d566f0a030b6cf0e1d4736">operator&lt;&lt;</a> (std::basic_ostream&lt; T_str &gt; &amp;os, std::optional&lt; T &gt; const &amp;opt)</td></tr>
+<tr class="memdesc:a74ea609fa1d566f0a030b6cf0e1d4736"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator &lt;&lt; overload for std::optional printing.  <a href="namespaceptc.html#a74ea609fa1d566f0a030b6cf0e1d4736">More...</a><br /></td></tr>
 <tr class="separator:a74ea609fa1d566f0a030b6cf0e1d4736"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace943d075c91bba7265425760ede4cb4"><td class="memTemplParams" colspan="2">template&lt;class T_str  = char, class T &gt; </td></tr>
+<tr class="memitem:ace943d075c91bba7265425760ede4cb4"><td class="memTemplItemLeft" align="right" valign="top">std::basic_string&lt; T_str &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#ace943d075c91bba7265425760ede4cb4">ptr</a> (T *ptr)</td></tr>
+<tr class="memdesc:ace943d075c91bba7265425760ede4cb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function used to print memory and address information about a generic pointer.  <a href="namespaceptc.html#ace943d075c91bba7265425760ede4cb4">More...</a><br /></td></tr>
+<tr class="separator:ace943d075c91bba7265425760ede4cb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77a45cf874b061828407ce0d14b42ca2"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a77a45cf874b061828407ce0d14b42ca2"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceptc.html#a77a45cf874b061828407ce0d14b42ca2">name</a> (const T &amp;a)</td></tr>
+<tr class="memdesc:a77a45cf874b061828407ce0d14b42ca2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function used to return the name of a variable.  <a href="namespaceptc.html#a77a45cf874b061828407ce0d14b42ca2">More...</a><br /></td></tr>
+<tr class="separator:a77a45cf874b061828407ce0d14b42ca2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -280,6 +289,41 @@ template&lt;class Type , class Container &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>const Container&amp; The modified stack. </dd></dl>
+
+</div>
+</div>
+<a id="a77a45cf874b061828407ce0d14b42ca2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77a45cf874b061828407ce0d14b42ca2">&#9670;&nbsp;</a></span>name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto ptc::name </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function used to return the name of a variable. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The type of the variable. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The variable. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>auto The type of the variable. </dd></dl>
 
 </div>
 </div>
@@ -615,6 +659,23 @@ template&lt;class T_str , class T &gt; </div>
       </table>
 </div><div class="memdoc">
 
+<p>Operator &lt;&lt; overload for std::optional printing. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T_str</td><td>The char type of the ostream object. </td></tr>
+    <tr><td class="paramname">T</td><td>The type of the std::optional value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">os</td><td>The stream to which the time object is printed to. </td></tr>
+    <tr><td class="paramname">opt</td><td>The std::optional value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::basic_ostream&lt;T_str&gt;&amp; The stream to which the time object is printed to. </dd></dl>
+
 </div>
 </div>
 <a id="af11991300b28f6e1a5251104d835318c"></a>
@@ -668,6 +729,42 @@ template&lt;class Container , class T_str &gt; </div>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="ace943d075c91bba7265425760ede4cb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace943d075c91bba7265425760ede4cb4">&#9670;&nbsp;</a></span>ptr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T_str  = char, class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::basic_string&lt;T_str&gt; ptc::ptr </td>
+          <td>(</td>
+          <td class="paramtype">T *&#160;</td>
+          <td class="paramname"><em>ptr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function used to print memory and address information about a generic pointer. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T_str</td><td>The char type of the ostream object. </td></tr>
+    <tr><td class="paramname">T</td><td>The type of the pointer. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ptr</td><td>The pointer. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::basic_string&lt;T_str&gt; The stream to which the time object is printed to. </dd></dl>
 
 </div>
 </div>

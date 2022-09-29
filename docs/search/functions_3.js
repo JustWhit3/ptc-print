@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['setend_40',['setEnd',['../structptc_1_1Print.html#a2e9da41ec9b54085f300f13703167ca1',1,'ptc::Print']]],
-  ['setflush_41',['setFlush',['../structptc_1_1Print.html#a7f3e13892c757bbe634e3896771beaa6',1,'ptc::Print']]],
-  ['setpattern_42',['setPattern',['../structptc_1_1Print.html#afc8125add122e4749e7e2a11ef576805',1,'ptc::Print']]],
-  ['setsep_43',['setSep',['../structptc_1_1Print.html#a6e806a4699367ece3b537cc4bc3153f2',1,'ptc::Print']]],
-  ['stringconverter_44',['StringConverter',['../namespaceptc.html#a4e800f408c636fa99b5a95109cef63b4',1,'ptc']]]
+  ['print_42',['Print',['../structptc_1_1Print.html#a12cc1bfc50278ad688822f2fa9967cc3',1,'ptc::Print']]],
+  ['print_5fadaptor_43',['print_adaptor',['../namespaceptc.html#af11991300b28f6e1a5251104d835318c',1,'ptc']]],
+  ['ptr_44',['ptr',['../namespaceptc.html#ace943d075c91bba7265425760ede4cb4',1,'ptc']]]
 ];
