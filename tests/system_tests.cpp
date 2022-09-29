@@ -163,6 +163,14 @@ void other_types()
   // Testing std::optional
   std::optional <int> opt = 3;
   ptc::print( "Printing an std::optional:", opt );
+  ptc::print();
+
+  // Testing ptr method for pointers printing
+  int add = 2;
+  int *pointer;
+  pointer = &add;
+  ptc::print( "Printing information of a pointer:" );
+  ptc::print( ptc::ptr( pointer ) );
  }
 
 //====================================================

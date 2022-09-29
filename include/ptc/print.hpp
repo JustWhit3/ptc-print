@@ -12,8 +12,8 @@
 //     Preprocessor directives
 //====================================================
 #pragma once
-#ifndef PRINT_HPP
-#define PRINT_HPP
+#ifndef PYTHON_TO_CPP_PRINT_HPP
+#define PYTHON_TO_CPP_PRINT_HPP
 
 //====================================================
 //     Headers
@@ -48,6 +48,15 @@ using namespace std::literals::string_literals;
 
 namespace ptc
  {
+  //====================================================
+  //     Macros
+  //====================================================
+  /**
+   * @brief Macro used to print the name of a variable.
+   * 
+   */
+  #define NAME( x ) ( #x )
+
   //====================================================
   //     Enum classes
   //====================================================
@@ -406,6 +415,15 @@ namespace ptc
    }
 
   // Overload for std::optional
+  /**
+   * @brief Operator << overload for std::optional printing.
+   * 
+   * @tparam T_str The char type of the ostream object.
+   * @tparam T The type of the std::optional value.
+   * @param os The stream to which the time object is printed to.
+   * @param opt The std::optional value.
+   * @return std::basic_ostream<T_str>& The stream to which the time object is printed to.
+   */
   template <class T_str, class T>
   std::basic_ostream<T_str>& operator <<( std::basic_ostream<T_str>& os, std::optional<T> const& opt )
    {
@@ -416,6 +434,48 @@ namespace ptc
    }
 
   #endif
+
+  //====================================================
+  //     Functions used to select printing format
+  //====================================================
+
+  // ptr
+  /**
+   * @brief Function used to print memory and address information about a generic pointer.
+   * 
+   * @tparam T_str The char type of the ostream object.
+   * @tparam T The type of the pointer.
+   * @param ptr The pointer.
+   * @return std::basic_string<T_str> The stream to which the time object is printed to.
+   */
+  template <class T_str = char, class T>
+  std::basic_string<T_str> ptr( T* ptr )
+   {
+    static std::basic_ostringstream<T_str> oss;
+    oss.str( StringConverter<T_str>( ""s ) );
+    oss.clear();
+
+    oss << "Name: " << NAME( ptr ) << "\n";
+    oss << "Value: " << ptr << "\n";
+    oss << "Address: " << &ptr;
+
+    return oss.str();
+   }
+
+  // name
+  /**
+   * @brief Function used to return the name of a variable.
+   * 
+   * @tparam T The type of the variable.
+   * @param a The variable.
+   * @return auto The type of the variable.
+   */
+  template <class T>
+  auto name( const T& a )
+   {
+    ( void ) a;
+    return NAME( a );
+   }
 
   //====================================================
   //     ptc_print class
