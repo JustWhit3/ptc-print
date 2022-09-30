@@ -49,7 +49,7 @@
 
 `ptc::print` (*py-to-cpp print*) is a C++17/20 printing object inspired by the Python [`print`](https://realpython.com/python-print/) function, which provides you a most comfortable way to print messages and logs to the output stream.
 
-It is constructed through the [`Print`](https://justwhit3.github.io/ptc-print/classptc_1_1Print.html) functor, which is a fully *type-* and *thread-safe* class with *automatic memory management*, implemented through an [header-only](https://github.com/JustWhit3/ptc-print/blob/main/ptc/print.hpp) library, with minimal and indispensable [dependencies](#install-and-use). It supports also the usage of [ANSI escape sequences](#printing-with-ansi-escape-sequences) and is cross-platform.
+It is constructed through the [`Print`](https://justwhit3.github.io/ptc-print/structptc_1_1Print.html) functor, which is a fully *type-* and *thread-safe* class with *automatic memory management*, implemented through an [header-only](https://github.com/JustWhit3/ptc-print/blob/main/ptc/print.hpp) library, with minimal and indispensable [dependencies](#install-and-use). It supports also the usage of [ANSI escape sequences](#printing-with-ansi-escape-sequences) and is cross-platform.
 
 `ptc::print` supports the printing of all the standard types and some non-standard ones (list [here](#printing-non-standard-types)).
 
@@ -270,7 +270,7 @@ int main()
 
 List of not built-int types ready for custom printing:
 
-- C containers: [C arrays](https://www.learncpp.com/cpp-tutorial/pointers-and-arrays/).
+- C containers: [C arrays](https://www.learncpp.com/cpp-tutorial/pointers-and-arrays/), [C pointers](https://cplusplus.com/doc/tutorial/pointers/).
 - C++ containers: [`std::vector`](https://en.cppreference.com/w/cpp/container/vector), [`std::map`](https://en.cppreference.com/w/cpp/container/map), [`std::unordered_map`](https://en.cppreference.com/w/cpp/container/unordered_map), [`std::deque`](https://en.cppreference.com/w/cpp/container/deque), [`std::forward_list`](https://en.cppreference.com/w/cpp/container/forward_list), [`std::list`](https://en.cppreference.com/w/cpp/container/list), [`std::set`](https://en.cppreference.com/w/cpp/container/set), [`std::unordered_set`](https://cplusplus.com/reference/unordered_set/unordered_set/#:~:text=Unordered%20sets%20are%20containers%20that,key%2C%20that%20identifies%20it%20uniquely.), [`std::multimap`](https://cplusplus.com/reference/map/multimap/), [`std::multiset`](https://cplusplus.com/reference/set/multiset/), [`std::unordered_multiset`](https://en.cppreference.com/w/cpp/container/unordered_multiset#:~:text=Unordered%20multiset%20is%20an%20associative,order%2C%20but%20organized%20into%20buckets.), [`std::unordered_multimap`](https://en.cppreference.com/w/cpp/container/unordered_multimap).
 - Container adaptors: [`std::stack`](https://en.cppreference.com/w/cpp/container/stack), [`std::priority_queue`](https://en.cppreference.com/w/cpp/container/priority_queue).
 - Other types: [`std::complex`](https://en.cppreference.com/w/cpp/numeric/complex), [`std::chrono::duration`](https://en.cppreference.com/w/cpp/chrono/duration).
@@ -328,6 +328,26 @@ int main()
 
 ```txt
 Time: 5m 30s
+```
+
+To print pointer information use the [ptc::ptr](https://justwhit3.github.io/ptc-print/namespaceptc.html#ace943d075c91bba7265425760ede4cb4) function:
+
+```C++
+#include <ptc/print.hpp>
+
+int main()
+ {
+  int add = 2;
+  int *pointer;
+  pointer = &add;
+  ptc::print( ptc::ptr( pointer ) );
+ }
+```
+
+```txt
+Name: pointer
+Value: 0x7fffc43b1d24
+Address: 0x7fffc43b1cc0
 ```
 
 ### Printing user-defined types

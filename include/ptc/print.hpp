@@ -42,21 +42,23 @@
 #endif
 
 //====================================================
+//     Macros
+//====================================================
+/**
+ * @brief Macro used to print the name of a variable.
+ * 
+ * @param stack The stack to be modified.
+ * @return const Container& The modified stack.
+ */
+#define PTC_PRINT_NAME( var ) ( #var )
+
+//====================================================
 //     Namespaces
 //====================================================
 using namespace std::literals::string_literals;
 
 namespace ptc
  {
-  //====================================================
-  //     Macros
-  //====================================================
-  /**
-   * @brief Macro used to print the name of a variable.
-   * 
-   */
-  #define NAME( x ) ( #x )
-
   //====================================================
   //     Enum classes
   //====================================================
@@ -455,26 +457,11 @@ namespace ptc
     oss.str( StringConverter<T_str>( ""s ) );
     oss.clear();
 
-    oss << "Name: " << NAME( ptr ) << "\n";
+    oss << "Name: " << PTC_PRINT_NAME( ptr ) << "\n";
     oss << "Value: " << ptr << "\n";
     oss << "Address: " << &ptr;
 
     return oss.str();
-   }
-
-  // name
-  /**
-   * @brief Function used to return the name of a variable.
-   * 
-   * @tparam T The type of the variable.
-   * @param a The variable.
-   * @return auto The type of the variable.
-   */
-  template <class T>
-  auto name( const T& a )
-   {
-    ( void ) a;
-    return NAME( a );
    }
 
   //====================================================

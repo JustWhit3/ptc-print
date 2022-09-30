@@ -44,6 +44,19 @@
 using namespace std::literals::chrono_literals;
 
 //====================================================
+//     Macros
+//====================================================
+TEST_CASE( "Testing macros." )
+ {
+  SUBCASE( "Testing PTC_PRINT_NAME macro." )
+   {
+    int this_variable;
+    ( void ) this_variable;
+    CHECK_EQ( PTC_PRINT_NAME( this_variable ), "this_variable" );
+   }
+ }
+
+//====================================================
 //     Utils
 //====================================================
 TEST_CASE( "Testing utils." )
