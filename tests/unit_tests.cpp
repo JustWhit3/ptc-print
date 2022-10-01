@@ -50,8 +50,7 @@ TEST_CASE( "Testing macros." )
  {
   SUBCASE( "Testing PTC_PRINT_NAME macro." )
    {
-    int this_variable;
-    ( void ) this_variable;
+    [[maybe_unused]] int this_variable = 3;
     CHECK_EQ( PTC_PRINT_NAME( this_variable ), "this_variable" );
    }
  }
