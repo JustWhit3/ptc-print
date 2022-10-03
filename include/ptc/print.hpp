@@ -43,17 +43,6 @@
 #endif
 
 //====================================================
-//     Macros
-//====================================================
-/**
- * @brief Macro used to print the name of a variable.
- * 
- * @param stack The stack to be modified.
- * @return const Container& The modified stack.
- */
-#define PTC_PRINT_NAME( var ) ( #var )
-
-//====================================================
 //     Namespaces
 //====================================================
 using namespace std::literals::string_literals;
@@ -460,7 +449,6 @@ namespace ptc
       oss.str( StringConverter<T_str>( ""s ) );
       oss.clear();
   
-      oss << "Name: " << PTC_PRINT_NAME( ptr ) << "\n";
       oss << "Value: " << ptr << "\n";
       oss << "Address: " << &ptr;
   

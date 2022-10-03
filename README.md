@@ -345,10 +345,11 @@ int main()
 ```
 
 ```txt
-Name: pointer
 Value: 0x7fffc43b1d24
 Address: 0x7fffc43b1cc0
 ```
+
+It works also for higher-order pointers (ex: pointer of a pointer).
 
 ### Printing user-defined types
 
