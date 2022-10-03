@@ -115,6 +115,18 @@ static void ptc_print_StringConverter_wchar_t( bm::State& state )
  }
 
 //====================================================
+//      ptc::print utils
+//====================================================
+
+// ptc_print_standard
+static void ptc_ptr( bm::State& state ) 
+ {
+  int a = 4;
+  int* p = &a;
+  for ( auto _ : state ) ptc::ptr( p );
+ }
+
+//====================================================
 //      ptc::print non built-in types 
 //====================================================
 
@@ -232,12 +244,15 @@ static void fmt_print_file( bm::State& state )
 //BENCHMARK( ptc_print_stack );
 //BENCHMARK( ptc_print_duration );
 
+// utils
+BENCHMARK( ptc_ptr );
+
 //====================================================
 //     Comparison with other libraries
 //====================================================
 
 // stdout
-BENCHMARK( ptc_print_stdout );
+//BENCHMARK( ptc_print_stdout );
 //BENCHMARK( fmt_print_stdout );
 //BENCHMARK( std_cout_stdout );
 //BENCHMARK( printf_stdout );

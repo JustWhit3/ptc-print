@@ -150,7 +150,7 @@ namespace ptc
   inline constexpr bool is_streamable_v = is_streamable<T, T_str>::value;
 
   // Helper function for container adaptors printing
-  /**
+  /**std::string
    * @brief Helper function for container adaptors printing.
    * 
    * @tparam Container The modified type of the container to be printed.
@@ -391,7 +391,7 @@ namespace ptc
    {
     if constexpr( ! std::is_same_v<std::chrono::duration<int_type, T_time>, std::chrono::duration<int_type>> )
      {
-      static std::unordered_map<std::type_index, const std::basic_string<T_str>> time_map
+      static std::unordered_map<std::type_index, std::basic_string_view<T_str>> time_map
        {
         { typeid( std::nano ), StringConverter<T_str>( "ns" ) },
         { typeid( std::micro ), StringConverter<T_str>( "us" ) },
