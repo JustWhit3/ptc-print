@@ -82,387 +82,390 @@ namespace ptc
   //     Helper tools
   //====================================================
 
-  // StringConverter
-  /**
-   * @brief Function used to convert an std::string into other string types (std::wstring etc...). If the argument is an std::string it will be returned without any modification.
-   * 
-   * @tparam CharT The char type (char, wchar_t...) to which the string is converted..
-   * @param input_str The input std::string object.
-   * @return std::conditional_t<std::is_same_v<CharT, char>, const std::basic_string<CharT>&, std::basic_string<CharT>> The converted string object.
-   */
-  template <class CharT>
-  std::conditional_t<std::is_same_v<CharT, char>, const std::basic_string<CharT>&, std::basic_string<CharT>>
-  StringConverter( const std::string& input_str )
+  namespace
    {
-    if constexpr( std::is_same_v <CharT, char> ) 
+    // StringConverter
+    /**
+     * @brief Function used to convert an std::string into other string types (std::wstring etc...). If the argument is an std::string it will be returned without any modification.
+     * 
+     * @tparam CharT The char type (char, wchar_t...) to which the string is converted..
+     * @param input_str The input std::string object.
+     * @return std::conditional_t<std::is_same_v<CharT, char>, const std::basic_string<CharT>&, std::basic_string<CharT>> The converted string object.
+     */
+    template <class CharT>
+    std::conditional_t<std::is_same_v<CharT, char>, const std::basic_string<CharT>&, std::basic_string<CharT>>
+    StringConverter( const std::string& input_str )
      {
-      return input_str;
+      if constexpr( std::is_same_v <CharT, char> ) 
+       {
+        return input_str;
+       }
+      else if constexpr( std::is_same_v <CharT, wchar_t> )
+       {
+        static std::wstring_convert <std::codecvt_utf8_utf16 <wchar_t>> converter_wchar_t;
+        return converter_wchar_t.from_bytes( input_str );
+       }
+      #ifndef __APPLE__
+      #if ( __cplusplus >= 202002L )
+      else if constexpr( std::is_same_v <CharT, char8_t> )
+       {
+        return reinterpret_cast <const char8_t*>( input_str.c_str() );
+       }
+      #endif
+      else if constexpr( std::is_same_v <CharT, char16_t> )
+       {
+        static std::wstring_convert <std::codecvt_utf8_utf16 <char16_t>, char16_t> converter_16_t;
+        return converter_16_t.from_bytes( input_str );
+       } 
+      else if constexpr( std::is_same_v <CharT, char32_t> )
+       {
+        static std::wstring_convert <std::codecvt_utf8_utf16 <char32_t>, char32_t> converter_32_t;
+        return converter_32_t.from_bytes( input_str );
+       }
+      #endif
+      else 
+       {
+        return StringConverter<CharT>( "" );
+       }
      }
-    else if constexpr( std::is_same_v <CharT, wchar_t> )
+  
+    #ifndef PTC_DISABLE_STD_TYPES_PRINTING
+  
+    // is_streamable
+    /**
+     * @brief Struct used to define a specific type trait for operator << overload for container printing.
+     * 
+     * @tparam T Template type of the type trait.
+     */
+    template <class T, class T_str>
+    struct is_streamable 
      {
-      static std::wstring_convert <std::codecvt_utf8_utf16 <wchar_t>> converter_wchar_t;
-      return converter_wchar_t.from_bytes( input_str );
-     }
-    #ifndef __APPLE__
-    #if ( __cplusplus >= 202002L )
-    else if constexpr( std::is_same_v <CharT, char8_t> )
+      static std::false_type test( ... );
+        
+      template<class U>
+      static auto test( const U& u ) -> decltype( std::declval <std::basic_ostream<T_str>&>() << u, std::true_type{} );
+    
+      static constexpr bool value = decltype( test( std::declval <T>() ) )::value;
+     };
+    
+    template<class T, class T_str>
+    inline constexpr bool is_streamable_v = is_streamable<T, T_str>::value;
+  
+    // Helper function for container adaptors printing
+    /**std::string
+     * @brief Helper function for container adaptors printing.
+     * 
+     * @tparam Container The modified type of the container to be printed.
+     * @tparam T_str The char type of the stream.
+     * @param os The stream to which the container is printed to.
+     * @param container The container to be printed.
+     */
+    template <class Container, class T_str>
+    inline void print_adaptor( std::basic_ostream<T_str>& os, const Container& container )
      {
-      return reinterpret_cast <const char8_t*>( input_str.c_str() );
-     }
-    #endif
-    else if constexpr( std::is_same_v <CharT, char16_t> )
-     {
-      static std::wstring_convert <std::codecvt_utf8_utf16 <char16_t>, char16_t> converter_16_t;
-      return converter_16_t.from_bytes( input_str );
-     } 
-    else if constexpr( std::is_same_v <CharT, char32_t> )
-     {
-      static std::wstring_convert <std::codecvt_utf8_utf16 <char32_t>, char32_t> converter_32_t;
-      return converter_32_t.from_bytes( input_str );
-     }
-    #endif
-    else 
-     {
-      return StringConverter<CharT>( "" );
-     }
-   }
-
-  #ifndef PTC_DISABLE_STD_TYPES_PRINTING
-
-  // is_streamable
-  /**
-   * @brief Struct used to define a specific type trait for operator << overload for container printing.
-   * 
-   * @tparam T Template type of the type trait.
-   */
-  template <class T, class T_str>
-  struct is_streamable 
-   {
-    static std::false_type test( ... );
+      typename Container::const_iterator beg = container.begin();
+      std::basic_string<T_str> separator = StringConverter<T_str>( ""s );
       
-    template<class U>
-    static auto test( const U& u ) -> decltype( std::declval <std::basic_ostream<T_str>&>() << u, std::true_type{} );
-  
-    static constexpr bool value = decltype( test( std::declval <T>() ) )::value;
-   };
-  
-  template<class T, class T_str>
-  inline constexpr bool is_streamable_v = is_streamable<T, T_str>::value;
-
-  // Helper function for container adaptors printing
-  /**std::string
-   * @brief Helper function for container adaptors printing.
-   * 
-   * @tparam Container The modified type of the container to be printed.
-   * @tparam T_str The char type of the stream.
-   * @param os The stream to which the container is printed to.
-   * @param container The container to be printed.
-   */
-  template <class Container, class T_str>
-  inline void print_adaptor( std::basic_ostream<T_str>& os, const Container& container )
-   {
-    typename Container::const_iterator beg = container.begin();
-    std::basic_string<T_str> separator = StringConverter<T_str>( ""s );
-    
-    while( beg != container.end() )
-     {
-      os << separator << *beg++;
-      separator = StringConverter<T_str>( ", "s );
+      while( beg != container.end() )
+       {
+        os << separator << *beg++;
+        separator = StringConverter<T_str>( ", "s );
+       }
      }
-   }
-  
-  // container_mod overload for std::stack hacked printing
-  /**
-   * @brief Overload used to create a modified stack object in order to be successfully printed.
-   * 
-   * @tparam Type The type of the stack elements..
-   * @tparam Container The type of the container.
-   * @param stack The stack to be modified.
-   * @return const Container& The modified stack.
-   */
-  template <class Type, class Container>
-  const Container& container_mod( const std::stack<Type, Container>& stack )
-   {
-    struct HackedStack : private std::stack<Type, Container>
-     {
-      static const Container& container( const std::stack<Type, Container>& stack )
-       {
-        return stack.*&HackedStack::c;
-       }
-     };
-  
-    return HackedStack::container( stack );
-   }
-
-  // container_mod overload for std::priority_queue hacked printing
-  /**
-   * @brief Overload used to create a modified priority_queue object in order to be successfully printed.
-   * 
-   * @tparam Type The type of the priority_queue elements..
-   * @tparam Container The type of the container.
-   * @param priority_queue The priority_queue to be modified.
-   * @return const Container& The modified priority_queue.
-   */
-  template < class Type, class Container >
-  const Container& container_mod( const std::priority_queue<Type, Container>& priority_queue )
-   {
-    struct HackedQueue : private std::priority_queue<Type, Container>
-     {
-      static const Container& container( const std::priority_queue<Type, Container>& priority_queue )
-       {
-        return priority_queue.*&HackedQueue::c;
-       }
-     };
-
-    return HackedQueue::container( priority_queue );
-   }
-
-  //====================================================
-  //     Operator << overloads for stdlib types
-  //====================================================
-
-  #if defined( __GNUC__ ) && ( __GNUC___ <= 9 )
-
-  // Overload for std::nullptr_t
-  /**
-   * @brief Operator << overload for std::nullptr_t printing.
-   * 
-   * @tparam T_str The char type of the ostream object.
-   * @param os The type of the output stream.
-   * @return std::basic_ostream<T_str>& The stream to which the object is printed to.
-   */
-  template <class T_str>
-  inline std::basic_ostream<T_str>& operator << ( std::basic_ostream<T_str>& os, std::nullptr_t )
-   {
-    os << "nullptr";
-    return os; 
-   }
-
-  #endif
-
-  // Overload for std::complex
-  /**
-   * @brief Operator << overload for std::complex printing.
-   * 
-   * @tparam T_str The char type of the ostream object.
-   * @tparam T_cmplx The type of the real and imaginary part complex number to be printed.
-   * @param os The type of the output stream.
-   * @param number The number to be printed.
-   * @return std::basic_ostream<T_str>& The stream to which the number is printed to.
-   */
-  template <class T_str, class T_cmplx>
-  inline std::basic_ostream<T_str>& operator << ( std::basic_ostream<T_str>& os, const std::complex<T_cmplx>& number )
-   {
-    os << number.real() << '+' << number.imag() << 'j';
-
-    return os; 
-   }
-
-  // Helper overload for std::vector and std::map
-  /**
-   * @brief Helper overload to print test containers (std::vector and std::map).
-   * 
-   * @tparam T_str The char type of the ostream object.
-   * @tparam T First template type of the std::pair variable.
-   * @tparam U Second template type of the std::pair variable.
-   * @param os The stream to which the overload prints.
-   * @param p The std::pair object.
-   * @return std::basic_ostream<T_str>& The stream to which the container is printed to.
-   */
-  template <class T_str, class T, class U>
-  inline std::basic_ostream<T_str>& operator <<( std::basic_ostream<T_str>& os, const std::pair <T, U>& p ) 
-   {
-    os << '[' << p.first << ", " << p.second << ']';
-
-    return os;
-   } 
-
-  // Overload for all containers printing
-  /**
-   * @brief Overload for all containers printing. Containers which already has an operator << overload will be ignored.
-   * 
-   * @tparam T_str The char type of the ostream object.
-   * @tparam ContainerType The container type (ex std::vector, std::map etc...)
-   * @tparam ValueType The value type of the container.
-   * @tparam Args The arguments of the container.
-   * @param os The stream to which the output is printed.
-   * @param container The container to be printed.
-   * @return std::basic_ostream<T_str>& The stream to which the container is printed to.
-   */
-  template <template <typename, typename...> class ContainerType, typename ValueType, typename... Args, class T_str>
-  std::enable_if_t< ! is_streamable_v <ContainerType <ValueType, Args...>, T_str>, std::basic_ostream<T_str>&>
-  operator <<( std::basic_ostream<T_str>& os, const ContainerType<ValueType, Args...>& container ) 
-   {
-    static bool constexpr is_stack = std::is_same_v <ContainerType<ValueType, Args...>, std::stack<ValueType>>;
-    static bool constexpr is_pqueue = std::is_same_v <ContainerType<ValueType, Args...>, std::priority_queue<ValueType>>;
     
-    os << '[';
-    if constexpr ( ! is_stack && ! is_pqueue )
+    // container_mod overload for std::stack hacked printing
+    /**
+     * @brief Overload used to create a modified stack object in order to be successfully printed.
+     * 
+     * @tparam Type The type of the stack elements..
+     * @tparam Container The type of the container.
+     * @param stack The stack to be modified.
+     * @return const Container& The modified stack.
+     */
+    template <class Type, class Container>
+    const Container& container_mod( const std::stack<Type, Container>& stack )
+     {
+      struct HackedStack : private std::stack<Type, Container>
+       {
+        static const Container& container( const std::stack<Type, Container>& stack )
+         {
+          return stack.*&HackedStack::c;
+         }
+       };
+    
+      return HackedStack::container( stack );
+     }
+  
+    // container_mod overload for std::priority_queue hacked printing
+    /**
+     * @brief Overload used to create a modified priority_queue object in order to be successfully printed.
+     * 
+     * @tparam Type The type of the priority_queue elements..
+     * @tparam Container The type of the container.
+     * @param priority_queue The priority_queue to be modified.
+     * @return const Container& The modified priority_queue.
+     */
+    template < class Type, class Container >
+    const Container& container_mod( const std::priority_queue<Type, Container>& priority_queue )
+     {
+      struct HackedQueue : private std::priority_queue<Type, Container>
+       {
+        static const Container& container( const std::priority_queue<Type, Container>& priority_queue )
+         {
+          return priority_queue.*&HackedQueue::c;
+         }
+       };
+  
+      return HackedQueue::container( priority_queue );
+     }
+  
+    //====================================================
+    //     Operator << overloads for stdlib types
+    //====================================================
+  
+    #if defined( __GNUC__ ) && ( __GNUC___ <= 9 )
+  
+    // Overload for std::nullptr_t
+    /**
+     * @brief Operator << overload for std::nullptr_t printing.
+     * 
+     * @tparam T_str The char type of the ostream object.
+     * @param os The type of the output stream.
+     * @return std::basic_ostream<T_str>& The stream to which the object is printed to.
+     */
+    template <class T_str>
+    inline std::basic_ostream<T_str>& operator << ( std::basic_ostream<T_str>& os, std::nullptr_t )
+     {
+      os << "nullptr";
+      return os; 
+     }
+  
+    #endif
+  
+    // Overload for std::complex
+    /**
+     * @brief Operator << overload for std::complex printing.
+     * 
+     * @tparam T_str The char type of the ostream object.
+     * @tparam T_cmplx The type of the real and imaginary part complex number to be printed.
+     * @param os The type of the output stream.
+     * @param number The number to be printed.
+     * @return std::basic_ostream<T_str>& The stream to which the number is printed to.
+     */
+    template <class T_str, class T_cmplx>
+    inline std::basic_ostream<T_str>& operator << ( std::basic_ostream<T_str>& os, const std::complex<T_cmplx>& number )
+     {
+      os << number.real() << '+' << number.imag() << 'j';
+  
+      return os; 
+     }
+  
+    // Helper overload for std::vector and std::map
+    /**
+     * @brief Helper overload to print test containers (std::vector and std::map).
+     * 
+     * @tparam T_str The char type of the ostream object.
+     * @tparam T First template type of the std::pair variable.
+     * @tparam U Second template type of the std::pair variable.
+     * @param os The stream to which the overload prints.
+     * @param p The std::pair object.
+     * @return std::basic_ostream<T_str>& The stream to which the container is printed to.
+     */
+    template <class T_str, class T, class U>
+    inline std::basic_ostream<T_str>& operator <<( std::basic_ostream<T_str>& os, const std::pair <T, U>& p ) 
+     {
+      os << '[' << p.first << ", " << p.second << ']';
+  
+      return os;
+     } 
+  
+    // Overload for all containers printing
+    /**
+     * @brief Overload for all containers printing. Containers which already has an operator << overload will be ignored.
+     * 
+     * @tparam T_str The char type of the ostream object.
+     * @tparam ContainerType The container type (ex std::vector, std::map etc...)
+     * @tparam ValueType The value type of the container.
+     * @tparam Args The arguments of the container.
+     * @param os The stream to which the output is printed.
+     * @param container The container to be printed.
+     * @return std::basic_ostream<T_str>& The stream to which the container is printed to.
+     */
+    template <template <typename, typename...> class ContainerType, typename ValueType, typename... Args, class T_str>
+    std::enable_if_t< ! is_streamable_v <ContainerType <ValueType, Args...>, T_str>, std::basic_ostream<T_str>&>
+    operator <<( std::basic_ostream<T_str>& os, const ContainerType<ValueType, Args...>& container ) 
+     {
+      static bool constexpr is_stack = std::is_same_v <ContainerType<ValueType, Args...>, std::stack<ValueType>>;
+      static bool constexpr is_pqueue = std::is_same_v <ContainerType<ValueType, Args...>, std::priority_queue<ValueType>>;
+      
+      os << '[';
+      if constexpr ( ! is_stack && ! is_pqueue )
+       {
+        std::basic_string<T_str> separator = StringConverter<T_str>( ""s );
+        for ( const auto& elem: container )
+         {
+          os << separator;
+          os << elem;
+          separator = StringConverter<T_str>( ", "s );
+         }
+       }
+      else
+       {
+        print_adaptor( os, container_mod( container ) );
+       }
+      os << ']';
+  
+      return os;
+     }
+  
+    // Overload for std::array printing
+    /**
+     * @brief Overload for std::array printing.
+     * 
+     * @tparam T_str The char type of the ostream object.
+     * @tparam T The type of the array.
+     * @tparam T_no The number of elements of the array.
+     * @param os The stream to which the output is printed.
+     * @param container The array to be printed.
+     * @return std::basic_ostream<T_str>& The stream to which the array is printed to.
+     */
+    template <class T_str, class T, size_t T_no>
+    std::basic_ostream<T_str>& operator <<( std::basic_ostream<T_str>& os, const std::array<T, T_no>& container ) 
      {
       std::basic_string<T_str> separator = StringConverter<T_str>( ""s );
+  
+      os << '[';
       for ( const auto& elem: container )
        {
         os << separator;
         os << elem;
         separator = StringConverter<T_str>( ", "s );
        }
+      os << ']';
+  
+      return os;
      }
-    else
+  
+    // Overload for C arrays
+    /**
+     * @brief Overload for C arrays printing.
+     * 
+     * @tparam T_str The char type of the ostream object.
+     * @tparam T1 The type of the array.
+     * @tparam arrSize The size of the array.
+     * @tparam std::enable_if_t< ! std::is_same <T1,char>::value> Enable if it is not const char*.
+     * @param os The stream to which the array is printed to.
+     * @return std::basic_ostream<T_str>& The stream to which the array is printed to.
+     */
+    template <class T_str, class T1, size_t arrSize, 
+    typename = std::enable_if_t< ! std::is_same <T1,char>::value>>
+    std::basic_ostream<T_str>& operator <<( std::basic_ostream<T_str>& os, const T1( & arr )[ arrSize ] )
      {
-      print_adaptor( os, container_mod( container ) );
-     }
-    os << ']';
-
-    return os;
-   }
-
-  // Overload for std::array printing
-  /**
-   * @brief Overload for std::array printing.
-   * 
-   * @tparam T_str The char type of the ostream object.
-   * @tparam T The type of the array.
-   * @tparam T_no The number of elements of the array.
-   * @param os The stream to which the output is printed.
-   * @param container The array to be printed.
-   * @return std::basic_ostream<T_str>& The stream to which the array is printed to.
-   */
-  template <class T_str, class T, size_t T_no>
-  std::basic_ostream<T_str>& operator <<( std::basic_ostream<T_str>& os, const std::array<T, T_no>& container ) 
-   {
-    std::basic_string<T_str> separator = StringConverter<T_str>( ""s );
-
-    os << '[';
-    for ( const auto& elem: container )
-     {
-      os << separator;
-      os << elem;
-      separator = StringConverter<T_str>( ", "s );
-     }
-    os << ']';
-
-    return os;
-   }
-
-  // Overload for C arrays
-  /**
-   * @brief Overload for C arrays printing.
-   * 
-   * @tparam T_str The char type of the ostream object.
-   * @tparam T1 The type of the array.
-   * @tparam arrSize The size of the array.
-   * @tparam std::enable_if_t< ! std::is_same <T1,char>::value> Enable if it is not const char*.
-   * @param os The stream to which the array is printed to.
-   * @return std::basic_ostream<T_str>& The stream to which the array is printed to.
-   */
-  template <class T_str, class T1, size_t arrSize, 
-  typename = std::enable_if_t< ! std::is_same <T1,char>::value>>
-  std::basic_ostream<T_str>& operator <<( std::basic_ostream<T_str>& os, const T1( & arr )[ arrSize ] )
-   {
-    os << '[';
-    if ( arrSize )
-     {
-      std::basic_string<T_str> separator = StringConverter<T_str>( ""s );
-      for ( const auto& elem: arr )
+      os << '[';
+      if ( arrSize )
        {
-        os << separator;
-        os << elem;
-        separator = StringConverter<T_str>( ", "s );
+        std::basic_string<T_str> separator = StringConverter<T_str>( ""s );
+        for ( const auto& elem: arr )
+         {
+          os << separator;
+          os << elem;
+          separator = StringConverter<T_str>( ", "s );
+         }
        }
+      os << ']';
+  
+      return os;
      }
-    os << ']';
-
-    return os;
-   }
-
-  // Overload for std::chrono::duration objects
-  /**
-   * @brief Operator << overload for std::chrono::duration objects printing.
-   * 
-   * @tparam T_str The char type of the ostream object.
-   * @tparam T_time The order of magnitude of the time object.
-   * @tparam int_type The int type of the time object.
-   * @param os The stream to which the time object is printed to.
-   * @param val The time object.
-   * @return std::basic_ostream<T_str>& The stream to which the time object is printed to.
-   */
-  template <class T_str, class T_time, class int_type>
-  std::basic_ostream<T_str>& operator <<( std::basic_ostream<T_str>& os, const std::chrono::duration<int_type, T_time>& val )
-   {
-    if constexpr( ! std::is_same_v<std::chrono::duration<int_type, T_time>, std::chrono::duration<int_type>> )
+  
+    // Overload for std::chrono::duration objects
+    /**
+     * @brief Operator << overload for std::chrono::duration objects printing.
+     * 
+     * @tparam T_str The char type of the ostream object.
+     * @tparam T_time The order of magnitude of the time object.
+     * @tparam int_type The int type of the time object.
+     * @param os The stream to which the time object is printed to.
+     * @param val The time object.
+     * @return std::basic_ostream<T_str>& The stream to which the time object is printed to.
+     */
+    template <class T_str, class T_time, class int_type>
+    std::basic_ostream<T_str>& operator <<( std::basic_ostream<T_str>& os, const std::chrono::duration<int_type, T_time>& val )
      {
-      static std::unordered_map<std::type_index, std::basic_string_view<T_str>> time_map
+      if constexpr( ! std::is_same_v<std::chrono::duration<int_type, T_time>, std::chrono::duration<int_type>> )
        {
-        { typeid( std::nano ), StringConverter<T_str>( "ns" ) },
-        { typeid( std::micro ), StringConverter<T_str>( "us" ) },
-        { typeid( std::milli ), StringConverter<T_str>( "ms" ) },
-        { typeid( std::ratio<60> ), StringConverter<T_str>( "min" ) },
-        { typeid( std::ratio<3600> ), StringConverter<T_str>( "h" ) }
-       };
-
-      #if ( __cplusplus >= 202002L )
-      time_map.insert( { typeid( std::ratio<86400> ), StringConverter<T_str>( "d" ) } );
-      time_map.insert( { typeid( std::ratio<604800> ), StringConverter<T_str>( "w" ) } );
-      time_map.insert( { typeid( std::ratio<2629746> ), StringConverter<T_str>( "mos" ) } );
-      time_map.insert( { typeid( std::ratio<31556952> ), StringConverter<T_str>( "y" ) } );
-      #endif
-       
-      os << val.count() << time_map[ typeid( T_time ) ];
+        static std::unordered_map<std::type_index, std::basic_string_view<T_str>> time_map
+         {
+          { typeid( std::nano ), StringConverter<T_str>( "ns" ) },
+          { typeid( std::micro ), StringConverter<T_str>( "us" ) },
+          { typeid( std::milli ), StringConverter<T_str>( "ms" ) },
+          { typeid( std::ratio<60> ), StringConverter<T_str>( "min" ) },
+          { typeid( std::ratio<3600> ), StringConverter<T_str>( "h" ) }
+         };
+  
+        #if ( __cplusplus >= 202002L )
+        time_map.insert( { typeid( std::ratio<86400> ), StringConverter<T_str>( "d" ) } );
+        time_map.insert( { typeid( std::ratio<604800> ), StringConverter<T_str>( "w" ) } );
+        time_map.insert( { typeid( std::ratio<2629746> ), StringConverter<T_str>( "mos" ) } );
+        time_map.insert( { typeid( std::ratio<31556952> ), StringConverter<T_str>( "y" ) } );
+        #endif
+         
+        os << val.count() << time_map[ typeid( T_time ) ];
+       }
+      else if constexpr( std::is_same_v<std::chrono::duration<int_type, T_time>, std::chrono::duration<int_type>> )
+       {
+        os << val.count() << 's';
+       }
+  
+      return os;
      }
-    else if constexpr( std::is_same_v<std::chrono::duration<int_type, T_time>, std::chrono::duration<int_type>> )
+  
+    // Overload for std::optional
+    /**
+     * @brief Operator << overload for std::optional printing.
+     * 
+     * @tparam T_str The char type of the ostream object.
+     * @tparam T The type of the std::optional value.
+     * @param os The stream to which the time object is printed to.
+     * @param opt The std::optional value.
+     * @return std::basic_ostream<T_str>& The stream to which the time object is printed to.
+     */
+    template <class T_str, class T>
+    std::basic_ostream<T_str>& operator <<( std::basic_ostream<T_str>& os, std::optional<T> const& opt )
      {
-      os << val.count() << 's';
+      if ( opt ) os << opt.value();
+      else os << "nullopt"; 
+      
+      return os;
      }
-
-    return os;
-   }
-
-  // Overload for std::optional
-  /**
-   * @brief Operator << overload for std::optional printing.
-   * 
-   * @tparam T_str The char type of the ostream object.
-   * @tparam T The type of the std::optional value.
-   * @param os The stream to which the time object is printed to.
-   * @param opt The std::optional value.
-   * @return std::basic_ostream<T_str>& The stream to which the time object is printed to.
-   */
-  template <class T_str, class T>
-  std::basic_ostream<T_str>& operator <<( std::basic_ostream<T_str>& os, std::optional<T> const& opt )
-   {
-    if ( opt ) os << opt.value();
-    else os << "nullopt"; 
-    
-    return os;
-   }
-
-  #endif
-
-  //====================================================
-  //     Functions used to select printing format
-  //====================================================
-
-  // ptr
-  /**
-   * @brief Function used to print memory and address information about a generic pointer.
-   * 
-   * @tparam T_str The char type of the ostream object.
-   * @tparam T The type of the pointer.
-   * @param ptr The pointer.
-   * @return std::basic_string<T_str> The stream to which the time object is printed to.
-   */
-  template <class T_str = char, class T>
-  std::basic_string<T_str> ptr( T* ptr )
-   {
-    static std::basic_ostringstream<T_str> oss;
-    oss.str( StringConverter<T_str>( ""s ) );
-    oss.clear();
-
-    oss << "Name: " << PTC_PRINT_NAME( ptr ) << "\n";
-    oss << "Value: " << ptr << "\n";
-    oss << "Address: " << &ptr;
-
-    return oss.str();
+  
+    #endif
+  
+    //====================================================
+    //     Functions used to select printing format
+    //====================================================
+  
+    // ptr
+    /**
+     * @brief Function used to print memory and address information about a generic pointer.
+     * 
+     * @tparam T_str The char type of the ostream object.
+     * @tparam T The type of the pointer.
+     * @param ptr The pointer.
+     * @return std::basic_string<T_str> The stream to which the time object is printed to.
+     */
+    template <class T_str = char, class T>
+    std::basic_string<T_str> ptr( T* ptr )
+     {
+      static std::basic_ostringstream<T_str> oss;
+      oss.str( StringConverter<T_str>( ""s ) );
+      oss.clear();
+  
+      oss << "Name: " << PTC_PRINT_NAME( ptr ) << "\n";
+      oss << "Value: " << ptr << "\n";
+      oss << "Address: " << &ptr;
+  
+      return oss.str();
+     }
    }
 
   //====================================================
