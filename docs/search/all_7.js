@@ -1,14 +1,9 @@
 var searchData=
 [
-  ['print_10',['Print',['../structptc_1_1Print.html#a12cc1bfc50278ad688822f2fa9967cc3',1,'ptc::Print']]],
-  ['print_11',['print',['../namespaceptc.html#ac14b2c96674a6fe97ebd485b3af8e1f7',1,'ptc']]],
-  ['print_12',['Print',['../structptc_1_1Print.html',1,'ptc']]],
-  ['print_2ehpp_13',['print.hpp',['../print_8hpp.html',1,'']]],
-  ['print16_14',['print16',['../namespaceptc.html#ae8ccd9a40124d608cbd1a462f4ea218e',1,'ptc']]],
-  ['print32_15',['print32',['../namespaceptc.html#ae518f54d8f12867a0492f87a5f433a2d',1,'ptc']]],
-  ['print_5fadaptor_16',['print_adaptor',['../namespaceptc.html#af11991300b28f6e1a5251104d835318c',1,'ptc']]],
-  ['ptc_17',['ptc',['../namespaceptc.html',1,'']]],
-  ['ptc_5fprint_5fname_18',['PTC_PRINT_NAME',['../print_8hpp.html#a1ef506357b13ccaae951ce7005039e71',1,'print.hpp']]],
-  ['ptr_19',['ptr',['../namespaceptc.html#ace943d075c91bba7265425760ede4cb4',1,'ptc']]],
-  ['python_5fto_5fcpp_5fprint_5fhpp_20',['PYTHON_TO_CPP_PRINT_HPP',['../print_8hpp.html#adc36aed636abeda5c1915bd8f2b18d72',1,'print.hpp']]]
+  ['select_5fcout_14',['select_cout',['../structptc_1_1Print_1_1select__cout.html',1,'ptc::Print']]],
+  ['setend_15',['setEnd',['../structptc_1_1Print.html#a2e9da41ec9b54085f300f13703167ca1',1,'ptc::Print']]],
+  ['setflush_16',['setFlush',['../structptc_1_1Print.html#a7f3e13892c757bbe634e3896771beaa6',1,'ptc::Print']]],
+  ['setpattern_17',['setPattern',['../structptc_1_1Print.html#afc8125add122e4749e7e2a11ef576805',1,'ptc::Print']]],
+  ['setsep_18',['setSep',['../structptc_1_1Print.html#a6e806a4699367ece3b537cc4bc3153f2',1,'ptc::Print']]],
+  ['str_19',['str',['../namespaceptc.html#aa730094183bf13993032c00ee196eafba341be97d9aff90c9978347f66f945b77',1,'ptc']]]
 ];
