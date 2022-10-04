@@ -18,7 +18,11 @@ CXX := g++
 WARNINGS := -Wall -Wextra -pedantic
 CXXFLAGS := -std=c++17
 EXTRAFLAGS := $(CXXFLAGS) -MMD -MP -g
-LDFLAGS := -pthread -fsanitize=address
+ifeq ($(OS),Windows_NT)
+	LDFLAGS := -pthread
+else
+	LDFLAGS := -pthread -fsanitize=address
+endif
 
 #====================================================
 #     Compilation
