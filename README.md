@@ -1,6 +1,6 @@
 <p align="center"><img src="https://github.com/JustWhit3/ptc-print/blob/main/img/images/logo.svg" height=220></p>
 
-<h3 align="center">An header-only library for custom printing to the output stream. </h3>
+<h3 align="center">A single-header library for custom printing to the output stream. </h3>
 <p align="center">
   <img title="v1.2" alt="v1.2" src="https://img.shields.io/badge/version-v1.2-informational?style=flat-square">
   <img title="MIT License" alt="license" src="https://img.shields.io/badge/license-MIT-informational?style=flat-square">
