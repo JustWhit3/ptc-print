@@ -1,6 +1,6 @@
 <p align="center"><img src="https://github.com/JustWhit3/ptc-print/blob/main/img/images/logo.svg" height=220></p>
 
-<h3 align="center">An header-only library for custom printing to the output stream. </h3>
+<h3 align="center">A single-header library for custom printing to the output stream. </h3>
 <p align="center">
   <img title="v1.2" alt="v1.2" src="https://img.shields.io/badge/version-v1.2-informational?style=flat-square">
   <img title="MIT License" alt="license" src="https://img.shields.io/badge/license-MIT-informational?style=flat-square">
@@ -49,7 +49,7 @@
 
 `ptc::print` (*py-to-cpp print*) is a C++17/20 printing object inspired by the Python [`print`](https://realpython.com/python-print/) function, which provides you a most comfortable way to print messages and logs to the output stream.
 
-It is constructed through the [`Print`](https://justwhit3.github.io/ptc-print/structptc_1_1Print.html) functor, which is a fully *type-* and *thread-safe* class with *automatic memory management*, implemented through an [header-only](https://github.com/JustWhit3/ptc-print/blob/main/ptc/print.hpp) library, with minimal and indispensable [dependencies](#install-and-use). It supports also the usage of [ANSI escape sequences](#printing-with-ansi-escape-sequences) and is cross-platform.
+It is constructed through the [`Print`](https://justwhit3.github.io/ptc-print/structptc_1_1Print.html) functor, which is a fully *type-* and *thread-safe* class with *automatic memory management*, implemented through an [single-header](https://github.com/JustWhit3/ptc-print/blob/main/ptc/print.hpp) library, with minimal and indispensable [dependencies](#install-and-use). It supports also the usage of [ANSI escape sequences](#printing-with-ansi-escape-sequences) and is cross-platform.
 
 `ptc::print` supports the printing of all the standard types and some non-standard ones (list [here](#printing-non-standard-types)).
 
