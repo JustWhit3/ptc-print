@@ -516,6 +516,14 @@ Tests using the `PTC_ENABLE_PERFORMANCE_IMPROVEMENTS` macro are automatically pe
 ./all_tests.sh macro
 ```
 
+**EXTRA**: to check that only the needed headers are include use this script:
+
+```txt
+./IWYU.sh
+```
+
+which is based on [include-what-you-use](https://github.com/include-what-you-use/include-what-you-use).
+
 ## Comparison with other libraries
 
 To install extra libraries used for comparison you can use the [`install_deps.sh`]((https://github.com/JustWhit3/ptc-print/blob/main/studies/install_deps.sh)) script.

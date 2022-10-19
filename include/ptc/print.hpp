@@ -32,14 +32,17 @@
 
 // Extra types headers
 #ifndef PTC_DISABLE_STD_TYPES_PRINTING
+#include <stddef.h>
 #include <complex>
+#include <array>
 #include <stack>
 #include <queue>
 #include <chrono>
 #include <unordered_map>
 #include <typeindex>
-#include <typeinfo>
+#include <iterator>
 #include <optional>
+#include <ratio>
 #endif
 
 //====================================================
@@ -795,10 +798,10 @@ namespace ptc
       std::lock_guard <std::mutex> lock{ mutex_ };
       
       std::ios_base::sync_with_stdio( false );
-      select_cout<T_str>::cout.tie( NULL );
+      select_cout<T_str>::cout.tie( nullptr );
 
       #ifdef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
-      select_cin<T_str>::cin.tie( NULL );
+      select_cin<T_str>::cin.tie( nullptr );
       #endif
      }
      
