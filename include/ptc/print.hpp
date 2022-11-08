@@ -43,6 +43,7 @@
 #include <iterator>
 #include <optional>
 #include <ratio>
+#include <algorithm>
 #endif
 
 //====================================================
@@ -327,12 +328,13 @@ namespace ptc
       std::basic_string<T_str> separator = StringConverter<T_str>( ""s );
   
       os << '[';
-      for ( const auto& elem: container )
-       {
-        os << separator;
-        os << elem;
-        separator = StringConverter<T_str>( ", "s );
-       }
+      std::copy
+       (
+        std::begin( container ),
+        std::prev( container.end() ),
+        std::ostream_iterator <T> { os, ", " }
+       );
+      os << container.back();
       os << ']';
   
       return os;

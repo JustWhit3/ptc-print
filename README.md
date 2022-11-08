@@ -44,6 +44,7 @@
 - [Credits](#credits)
   - [Main maintainers](#main-maintainers)
   - [Other contributors](#other-contributors)
+- [Stargazers over time](#stargazers-over-time)
 
 ## Introduction
 
@@ -788,3 +789,8 @@ Empty for the moment.
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
+
+## Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/JustWhit3/ptc-print.svg)](https://starchart.cc/JustWhit3/ptc-print)
