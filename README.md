@@ -56,7 +56,7 @@ It is constructed through the [`Print`](https://justwhit3.github.io/ptc-print/st
 
 It is possible to choose to print using different char types (`char`, `wchar_t`...). List of supported `char` types can be found [here](#printing-non-standard-types).
 
-If you want to contribute to the repository, please read [this](https://github.com/JustWhit3/ptc-print/blob/main/CONTRIBUTING.md) file before.
+If you want to contribute to the repository, please read [this](https://github.com/JustWhit3/ptc-print/blob/main/CONTRIBUTING.md) file before. If you want to propose ideas you can open a [discussion](https://github.com/JustWhit3/ptc-print/discussions).
 
 If you plan to use this tool in one of your projects please let me know so I can link you to the [Projects which use this library](#projects-which-use-this-library) section.
 
