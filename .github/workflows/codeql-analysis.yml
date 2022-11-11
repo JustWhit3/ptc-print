@@ -37,17 +37,19 @@ jobs:
       run: |
        sudo apt install build-essential g++ doctest-dev
        cd tests
-       make
+       cmake -S . -B build
+       cmake --build build
     - name: Installing extra dependencies and compiling (MacOS)
       if: matrix.os == 'macos-latest'
       run: |
-       brew install doctest
+       brew install doctest cmake
        cd tests
-       make
+       cmake -S . -B build
+       cmake --build build
     - name: Installing extra dependencies and compiling (Windows)
       if: matrix.os == 'windows-latest'
       run: |
-       choco install unzip wget
+       choco install unzip wget cmake
        wget https://github.com/doctest/doctest/archive/refs/heads/master.zip
        unzip master.zip
        mkdir c:\programdata\chocolatey\lib\mingw\tools\install\mingw64\bin\../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/doctest

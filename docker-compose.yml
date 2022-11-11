@@ -12,7 +12,9 @@ services:
         volumes:
             - .:/proj
         container_name: build
-        command: 'bash -c "cd /proj/tests && make bin/system_tests CXX=g++"'
+        command: >
+            bash -c "cd /proj/tests
+            && g++ -std=c++17 system_tests.cpp"
 
     # gcc 8
     build_gcc_8:
@@ -21,7 +23,9 @@ services:
         volumes:
             - .:/proj
         container_name: build
-        command: 'bash -c "cd /proj/tests && make clean && make bin/system_tests CXX=g++"'
+        command: >
+            bash -c "cd /proj/tests
+            && g++ -std=c++17 system_tests.cpp"
 
     # gcc 9
     build_gcc_9:
@@ -30,7 +34,9 @@ services:
         volumes:
             - .:/proj
         container_name: build
-        command: 'bash -c "cd /proj/tests && make clean && make bin/system_tests CXX=g++"'
+        command: >
+            bash -c "cd /proj/tests
+            && g++ -std=c++17 system_tests.cpp"
 
     # gcc 10
     build_gcc_10:
@@ -39,7 +45,10 @@ services:
         volumes:
             - .:/proj
         container_name: build
-        command: 'bash -c "cd /proj/tests && make clean && make bin/system_tests CXX=g++ CXXFLAGS=-std=c++17 && make clean && make bin/system_tests CXX=g++ CXXFLAGS=-std=c++20"'
+        command: >
+            bash -c "cd /proj/tests
+            && g++ -std=c++17 system_tests.cpp
+            && g++ -std=c++20 system_tests.cpp"
 
     # gcc 11
     build_gcc_11:
@@ -48,7 +57,10 @@ services:
         volumes:
             - .:/proj
         container_name: build
-        command: 'bash -c "cd /proj/tests && make clean && make bin/system_tests CXX=g++ CXXFLAGS=-std=c++17 && make clean && make bin/system_tests CXX=g++ CXXFLAGS=-std=c++20"'
+        command: >
+            bash -c "cd /proj/tests
+            && g++ -std=c++17 system_tests.cpp
+            && g++ -std=c++20 system_tests.cpp"
 
     # gcc 12
     build_gcc_12:
@@ -57,7 +69,10 @@ services:
         volumes:
             - .:/proj
         container_name: build
-        command: 'bash -c "cd /proj/tests && make clean && make bin/system_tests CXX=g++ CXXFLAGS=-std=c++17 && make clean && make bin/system_tests CXX=g++ CXXFLAGS=-std=c++20"'
+        command: >
+            bash -c "cd /proj/tests
+            && g++ -std=c++17 system_tests.cpp
+            && g++ -std=c++20 system_tests.cpp"
 
     ##########################################
     #      CLANG
@@ -70,7 +85,9 @@ services:
         volumes:
             - .:/proj
         container_name: build
-        command: 'bash -c "cd /proj/tests && make clean && make bin/system_tests CXX=clang++"'
+        command: >
+            bash -c "cd /proj/tests
+            && clang++ -std=c++17 system_tests.cpp"
 
     # clang 6
     build_clang_6:
@@ -79,7 +96,9 @@ services:
         volumes:
             - .:/proj
         container_name: build
-        command: 'bash -c "cd /proj/tests && make clean && make bin/system_tests CXX=clang++"'
+        command: >
+            bash -c "cd /proj/tests
+            && clang++ -std=c++17 system_tests.cpp"
 
     # clang 7
     build_clang_7:
@@ -88,7 +107,9 @@ services:
         volumes:
             - .:/proj
         container_name: build
-        command: 'bash -c "cd /proj/tests && make clean && make bin/system_tests CXX=clang++"'
+        command: >
+            bash -c "cd /proj/tests
+            && clang++ -std=c++17 system_tests.cpp"
 
     # clang 8
     build_clang_8:
@@ -97,7 +118,9 @@ services:
         volumes:
             - .:/proj
         container_name: build
-        command: 'bash -c "cd /proj/tests && make clean && make bin/system_tests CXX=clang++"'
+        command: >
+            bash -c "cd /proj/tests
+            && clang++ -std=c++17 system_tests.cpp"
 
     # clang 9
     build_clang_9:
@@ -106,7 +129,10 @@ services:
         volumes:
             - .:/proj
         container_name: build
-        command: 'bash -c "cd /proj/tests && make clean && make bin/system_tests CXX=clang++ CXXFLAGS=-std=c++17 && make clean && make bin/system_tests CXX=clang++ CXXFLAGS=-std=c++2a"'
+        command: >
+            bash -c "cd /proj/tests
+            && clang++ -std=c++17 system_tests.cpp
+            && clang++ -std=c++2a system_tests.cpp"
 
     # clang 10
     build_clang_10:
@@ -115,7 +141,10 @@ services:
         volumes:
             - .:/proj
         container_name: build
-        command: 'bash -c "cd /proj/tests && make clean && make bin/system_tests CXX=clang++ CXXFLAGS=-std=c++17 && make clean && make bin/system_tests CXX=clang++ CXXFLAGS=-std=c++2a"'
+        command: >
+            bash -c "cd /proj/tests
+            && clang++ -std=c++17 system_tests.cpp
+            && clang++ -std=c++2a system_tests.cpp"
 
     # clang 11
     build_clang_11:
@@ -124,7 +153,10 @@ services:
         volumes:
             - .:/proj
         container_name: build
-        command: 'bash -c "cd /proj/tests && make clean && make bin/system_tests CXX=clang++ CXXFLAGS=-std=c++17 && make clean && make bin/system_tests CXX=clang++ CXXFLAGS=-std=c++2a"'
+        command: >
+            bash -c "cd /proj/tests
+            && clang++ -std=c++17 system_tests.cpp
+            && clang++ -std=c++2a system_tests.cpp"
 
     # clang 12
     build_clang_12:
@@ -133,7 +165,10 @@ services:
         volumes:
             - .:/proj
         container_name: build
-        command: 'bash -c "cd /proj/tests && make clean && make bin/system_tests CXX=clang++ CXXFLAGS=-std=c++17 && make clean && make bin/system_tests CXX=clang++ CXXFLAGS=-std=c++2a"'
+        command: >
+            bash -c "cd /proj/tests
+            && clang++ -std=c++17 system_tests.cpp
+            && clang++ -std=c++2a system_tests.cpp"
 
     # clang 13
     build_clang_13:
@@ -142,7 +177,10 @@ services:
         volumes:
             - .:/proj
         container_name: build
-        command: 'bash -c "cd /proj/tests && make clean && make bin/system_tests CXX=clang++ CXXFLAGS=-std=c++17 && make clean && make bin/system_tests CXX=clang++ CXXFLAGS=-std=c++2a"'
+        command: >
+            bash -c "cd /proj/tests
+            && clang++ -std=c++17 system_tests.cpp
+            && clang++ -std=c++2a system_tests.cpp"
 
     # clang 14
     build_clang_14:
@@ -151,4 +189,7 @@ services:
         volumes:
             - .:/proj
         container_name: build
-        command: 'bash -c "cd /proj/tests && make clean && make bin/system_tests CXX=clang++ CXXFLAGS=-std=c++17 && make clean && make bin/system_tests CXX=clang++ CXXFLAGS=-std=c++2a"'
+        command: >
+            bash -c "cd /proj/tests
+            && clang++ -std=c++17 system_tests.cpp
+            && clang++ -std=c++2a system_tests.cpp"

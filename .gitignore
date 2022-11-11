@@ -13,5 +13,5 @@ test/include_tests.cpp
 #     Binary files
 #====================================================
 a.out
-**/obj
+**/build
 **/bin
