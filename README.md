@@ -472,6 +472,7 @@ This operation will reduce the compilation time by 30% more or less. You can use
 
 Tests are produced using `-Wall -Wextra -pedantic` flags. To check them you need some prerequisites:
 
+- [CMake](https://cmake.org/) (at least v3.15 is required).
 - [Valgrind](https://valgrind.org/) for profiling.
 - [doctest](https://github.com/onqtam/doctest) for testing.
 - [cppcheck](https://cppcheck.sourceforge.io/) for testing.
@@ -480,7 +481,8 @@ They are installed in the second step of the installation through the `install.s
 
 ```txt
 cd tests
-make
+cmake -S . -B build
+cmake --build build
 ```
 
 To launch all tests simultaneously:
@@ -492,9 +494,9 @@ To launch all tests simultaneously:
 Or separately:
 
 ```txt
-./bin/unit_tests
-./bin/system_tests
-./bin/threading_tests
+./build/unit_tests
+./build/system_tests
+./build/threading_tests
 ./include_tests.sh
 cppcheck include/ptc/print.hpp
 ```
@@ -502,13 +504,13 @@ cppcheck include/ptc/print.hpp
 To check the automatic memory management through *Memcheck*:
 
 ```txt
-./profiling.sh memcheck ./bin/system_tests
+./profiling.sh memcheck ./build/system_tests
 ```
 
 To check thread safety through *Helgrind*:
 
 ```txt
-./profiling.sh helgrind ./bin/system_tests
+./profiling.sh helgrind ./build/system_tests
 ```
 
 Tests using the `PTC_ENABLE_PERFORMANCE_IMPROVEMENTS` macro are automatically performed launching barely the `all_tests.sh` script, or alternatively specifying:
@@ -581,6 +583,9 @@ Extra studies are performed using consistent improvements in the runtime, thanks
 To run these benchmarks you can do:
 
 ```txt
+cd studies/benchmarking/execution
+cmake -S. -B build
+cmake --build build
 ./run.sh macro
 ```
 

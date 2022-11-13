@@ -1,5 +1,5 @@
 # CMake settings
-cmake_minimum_required( VERSION 3.15...3.22 )
+cmake_minimum_required( VERSION 3.15 )
 
 # Project settings
 project( ptc-print-tests
@@ -25,7 +25,7 @@ else()
     set( SYSTEM "system_tests" )
     set( UNIT "unit_tests" )
     set( THREAD "threading_tests" )
-endif ()
+endif()
 
 add_executable( ${UNIT} unit_tests.cpp )
 add_executable( ${SYSTEM} system_tests.cpp )
@@ -41,4 +41,4 @@ endif()
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMPILE_FLAGS}")
 
 # Adding specific linker flags
-target_link_libraries( ${THREAD} pthread )
+target_link_libraries( ${THREAD} "pthread" )

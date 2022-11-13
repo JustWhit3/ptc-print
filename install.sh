@@ -21,15 +21,15 @@ fi
 # Installing prerequisite packages
 echo "Updating and upgrading the system..."
 if [[ "$UNAME" == Darwin* ]] ; then
-    brew install gcc make
+    brew install gcc cmake
 elif [[ "$UNAME" == Linux* ]] ; then
     sudo apt install build-essential g++
 else
     read -p "Which package-manager do you want to use? (pacman/chocolately) " word_pkg
     if [ "$word_pkg" == "pacman" ] || [ "$word_pkg" == "Pacman" ] ; then
-        pacman -S wget unzip make
+        pacman -S wget unzip cmake
     elif [ "$word_pkg" == "chocolately" ] || [ "$word_pkg" == "Chocolately" ] || [ "$word_pkg" == "choco" ] ; then
-        choco install wget unzip make
+        choco install wget unzip cmake
     else
         echo "Inserted package-manager $word_pkg is not supported!"
         exit
