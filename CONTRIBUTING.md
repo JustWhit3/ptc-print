@@ -17,21 +17,8 @@ To add your contribution, please follow these guidelines:
 
 1) Fork your own copy of the repository.
 2) Work on your changes / improvements in the forked repo.
-3) **Test** if your changes / improvements are correctly implemented and all the other features are not compromised. For this latter requirement, please install the developer prerequisites and compile and run all tests to be sure anything is broken:
-
-```bash
-cd tests
-./all-tests.sh
-```
-
+3) **Test** if your changes / improvements are correctly implemented and all the other features are not compromised. See [here](https://github.com/JustWhit3/ptc-print#tests):
 4) Run [execution benchmarks](https://github.com/JustWhit3/ptc-print#benchmarking) and [compilation benchmarks](https://github.com/JustWhit3/ptc-print#benchmarking-the-compilation-time) in order to be sure performance is not lost:
-
-```bash
-cd studies
-make
-./run.sh
-```
-
 5) Before submitting the code, reformat it using the [`.clang-format`](https://github.com/JustWhit3/ptc-print/blob/main/.clang-format.md) file:
 
 ```bash

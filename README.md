@@ -2,7 +2,7 @@
 
 <h3 align="center">A single-header library for custom printing to the output stream. </h3>
 <p align="center">
-  <img title="v1.2" alt="v1.2" src="https://img.shields.io/badge/version-v1.2-informational?style=flat-square">
+  <img title="v1.3" alt="v1.3" src="https://img.shields.io/badge/version-v1.3-informational?style=flat-square">
   <img title="MIT License" alt="license" src="https://img.shields.io/badge/license-MIT-informational?style=flat-square">
 	<img title="C++17/20" alt="C++17/20" src="https://img.shields.io/badge/c++-17/20-informational?style=flat-square"><br/>
 	<img title="Code size" alt="code size" src="https://img.shields.io/github/languages/code-size/JustWhit3/ptc-print?color=red">
@@ -418,16 +418,38 @@ Steps:
 
 1) Download one of the repository releases.
 2) Unzip the downloaded directory and `cd` into it.
-3) Copy the **ptc** folder in one of your projects or in a specific path or install into the system with this command:
+3.a) Copy the **ptc** folder in one of your projects or in a specific path.
+3.b) Or install into the system with these command:
 
-```txt
-./install.sh
+Set the building directory:
+
+```bash
+cmake -B build
 ```
 
-Prerequisites are minimal and are automatically installed with the `install.sh` script. They are:
+> :warning: If you are on Windows previous command becomes:
+>
+> ```bash
+> cmake -B build -D WIN_INSTALLATION_DIR=path/to/installation/dir
+> ```
+> 
+> Where `path/to/installation/dir` is the path in which you want to install the header.
 
-- C++ (like *gcc*, *clang* or *MSVC*) compiler.
-- C++17/20 standard.
+Install:
+
+```bash
+sudo cmake --build --target install
+```
+
+> :warning: `sudo` is not required on Windows.
+
+
+
+Prerequisites are minimal:
+
+- g++ (like *gcc*, *clang* or *MSVC*) compiler.
+- C++17 standard at least.
+- CMake (v 3.15 at least).
 
 4) Include the header into your project:
 
@@ -470,59 +492,65 @@ This operation will reduce the compilation time by 30% more or less. You can use
 
 ## Tests
 
-Tests are produced using `-Wall -Wextra -pedantic` flags. To check them you need some prerequisites:
+Tests are produced using `-Wall -Wextra -pedantic` flags. To run them you need some prerequisites:
 
 - [CMake](https://cmake.org/) (at least v3.15 is required).
 - [Valgrind](https://valgrind.org/) for profiling.
 - [doctest](https://github.com/onqtam/doctest) for testing.
 - [cppcheck](https://cppcheck.sourceforge.io/) for testing.
 
-They are installed in the second step of the installation through the `install.sh` script. Before running test codes you need to compile them:
+To compile unit tests code:
+
+Set the building directory:
+
+```bash
+cmake -B build
+```
+
+Compile:
 
 ```txt
-cd tests
-cmake -S . -B build
 cmake --build build
 ```
 
 To launch all tests simultaneously:
 
 ```txt
-./all_tests.sh
+./tests/all_tests.sh
 ```
 
 Or separately:
 
 ```txt
-./build/unit_tests
-./build/system_tests
-./build/threading_tests
-./include_tests.sh
+./build/tests/unit_tests
+./build/tests/system_tests
+./build/tests/threading_tests
+./tests/include_tests.sh
 cppcheck include/ptc/print.hpp
 ```
 
 To check the automatic memory management through *Memcheck*:
 
 ```txt
-./profiling.sh memcheck ./build/system_tests
+./tests/profiling.sh memcheck ./build/tests/system_tests
 ```
 
 To check thread safety through *Helgrind*:
 
 ```txt
-./profiling.sh helgrind ./build/system_tests
+./tests/profiling.sh helgrind ./build/tests/system_tests
 ```
 
 Tests using the `PTC_ENABLE_PERFORMANCE_IMPROVEMENTS` macro are automatically performed launching barely the `all_tests.sh` script, or alternatively specifying:
 
 ```txt
-./all_tests.sh macro
+./tests/all_tests.sh macro
 ```
 
 **EXTRA**: to check that only the needed headers are include use this script:
 
 ```txt
-./IWYU.sh
+./tests/IWYU.sh
 ```
 
 which is based on [include-what-you-use](https://github.com/include-what-you-use/include-what-you-use).
@@ -576,6 +604,15 @@ is repeated for *300.000* times and the total runtime is registered. This latter
 
 Without performance optimizations `ptc::print` is slightly slower than the others.
 
+To run these benchmarks you can do:
+
+```txt
+cd studies/benchmarking_execution
+cmake -S. -B build
+cmake --build build
+./run.sh
+```
+
 ### Benchmarking the runtime with performance improvements
 
 Extra studies are performed using consistent improvements in the runtime, thanks to the `PTC_ENABLE_PERFORMANCE_IMPROVEMENTS` macro usage (see [here](#install-and-use) for more information). Using this macro definition will consistently speed-up the `ptc::print` object, as you can see from the following plots.
@@ -583,9 +620,6 @@ Extra studies are performed using consistent improvements in the runtime, thanks
 To run these benchmarks you can do:
 
 ```txt
-cd studies/benchmarking/execution
-cmake -S. -B build
-cmake --build build
 ./run.sh macro
 ```
 
@@ -761,7 +795,6 @@ int main()
 ```
 
 - Improve the printing to an external file stream. Current implementation is too slow.
-- Create a [wiki](https://github.com/JustWhit3/ptc-print/wiki) with detailed examples for every feature.
 - Extend benchmarking studies with other libraries.
 
 ## Projects which use this library

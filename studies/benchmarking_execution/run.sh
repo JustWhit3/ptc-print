@@ -11,7 +11,7 @@ if [ "$1" == "macro" ] ; then
 fi
 
 # Compiling
-make
+cmake --build build
 
 # Setting-up environment
 sudo cpupower frequency-set --governor performance > /dev/null 2>&1                  # Set scaling_governor to "performance"
@@ -21,7 +21,7 @@ sync
 echo 0 | sudo tee /proc/sys/kernel/randomize_va_space > /dev/null 2>&1               # Disable address space randomization
 
 # Generating benchmarking data
-./bin/benchmarking \
+./build/benchmarking \
 --benchmark_out=data/benchmarking.json \
 --benchmark_repetitions=15 \
 --benchmark_display_aggregates_only=true \

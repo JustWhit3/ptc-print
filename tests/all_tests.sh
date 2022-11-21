@@ -12,14 +12,14 @@ run_all_tests() {
     echo "     SYSTEM TESTS"
     echo "======================================================"
     echo ""
-    ./build/system_tests
+    ./build/tests/system_tests
 
     # Memory tests
     echo ""
     echo "======================================================"
     echo "     MEMORY TESTS"
     echo "======================================================"
-    ./profiling.sh memcheck ./build/system_tests
+    ./tests/profiling.sh memcheck ./build/tests/system_tests
 
     # Threading tests
     echo ""
@@ -27,8 +27,8 @@ run_all_tests() {
     echo "     THREADING TESTS"
     echo "======================================================"
     echo ""
-    ./build/threading_tests
-    ./profiling.sh helgrind ./build/threading_tests
+    ./build/tests/threading_tests
+    ./tests/profiling.sh helgrind ./build/tests/threading_tests
 
     # Unit tests
     echo ""
@@ -36,7 +36,7 @@ run_all_tests() {
     echo "     UNIT TESTS"
     echo "======================================================"
     echo ""
-    ./build/unit_tests
+    ./build/tests/unit_tests
 
     # Include tests
     echo ""
@@ -44,7 +44,7 @@ run_all_tests() {
     echo "     INCLUDE TESTS"
     echo "======================================================"
     echo ""
-    if ./include_tests.sh ; then
+    if ./tests/include_tests.sh ; then
         echo "Passed!"
     fi
 }
@@ -55,10 +55,10 @@ if [ "$1" == "normal" ] ; then
     echo "     COMPILING"
     echo "======================================================"
     echo ""
-    CXX=g++ cmake -S . -B build
+    CXX=g++ cmake -B build
     cmake --build build
     cmake --build build --target clean
-    CXX=clang++ cmake -S . -B build
+    CXX=clang++ cmake -B build
     cmake --build build
     run_all_tests
 elif [ "$1" == "macro" ] ; then
@@ -66,27 +66,27 @@ elif [ "$1" == "macro" ] ; then
     echo "     COMPILING WITH PREPROECESSOR DIRECTIVES"
     echo "======================================================"
     echo ""
-    sed -i '4s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' system_tests.cpp
-    sed -i '5s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' threading_tests.cpp
-    sed -i '7s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' unit_tests.cpp
-    CXX=g++ cmake -S . -B build
+    sed -i '4s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' tests/system_tests.cpp
+    sed -i '5s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' tests/threading_tests.cpp
+    sed -i '7s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' tests/unit_tests.cpp
+    CXX=g++ cmake -B build
     cmake --build build
     cmake --build build --target clean
-    CXX=clang++ cmake -S . -B build
+    CXX=clang++ cmake -B build
     cmake --build build
     run_all_tests
-    sed -i '4d' system_tests.cpp
-    sed -i '5d' threading_tests.cpp
-    sed -i '7d' unit_tests.cpp
+    sed -i '4d' tests/system_tests.cpp
+    sed -i '5d' tests/threading_tests.cpp
+    sed -i '7d' tests/unit_tests.cpp
 else
     echo "======================================================"
     echo "     COMPILING"
     echo "======================================================"
     echo ""
-    CXX=g++ cmake -S . -B build
+    CXX=g++ cmake -B build
     cmake --build build
     cmake --build build --target clean
-    CXX=clang++ cmake -S . -B build
+    CXX=clang++ cmake -B build
     cmake --build build
     run_all_tests
     echo ""
@@ -95,18 +95,18 @@ else
     echo "======================================================"
     echo ""
     cmake --build build --target clean
-    sed -i '4s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' system_tests.cpp
-    sed -i '5s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' threading_tests.cpp
-    sed -i '7s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' unit_tests.cpp
-    CXX=g++ cmake -S . -B build
+    sed -i '4s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' tests/system_tests.cpp
+    sed -i '5s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' tests/threading_tests.cpp
+    sed -i '7s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' tests/unit_tests.cpp
+    CXX=g++ cmake -B build
     cmake --build build
     cmake --build build --target clean
-    CXX=clang++ cmake -S . -B build
+    CXX=clang++ cmake -B build
     cmake --build build
     run_all_tests
-    sed -i '4d' system_tests.cpp
-    sed -i '5d' threading_tests.cpp
-    sed -i '7d' unit_tests.cpp
+    sed -i '4d' tests/system_tests.cpp
+    sed -i '5d' tests/threading_tests.cpp
+    sed -i '7d' tests/unit_tests.cpp
 fi
 
 # Cppcheck
@@ -115,4 +115,4 @@ echo "======================================================"
 echo "     CPPCHECK TESTS"
 echo "======================================================"
 echo ""
-cppcheck ../include/ptc/print.hpp
+cppcheck include/ptc/print.hpp
