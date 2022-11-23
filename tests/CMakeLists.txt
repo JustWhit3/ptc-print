@@ -49,4 +49,7 @@ endif()
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMPILE_FLAGS}")
 
 # Adding specific linker flags
-target_link_libraries( ${THREAD} "pthread" )
+find_package( doctest )
+find_package( Threads )
+target_link_libraries( ${THREAD} PRIVATE Threads::Threads )
+target_link_libraries( ${UNIT} PRIVATE doctest::doctest )

@@ -32,18 +32,6 @@ INSTALL(
     DESTINATION ${INSTALLATION_DIR}
 )
 
-# Running tests
-find_package( doctest )
-if( doctest_FOUND )
-    add_subdirectory( tests )
-else()
-    message( WARNING "Doctest not found, not building tests." )
-endif()
-
-# Running benchmarks
-find_package( benchmark )
-if( benchmark_FOUND )
+# Compile tests and benchmarks
+add_subdirectory( tests )
 add_subdirectory( studies/benchmarking_execution )
-else()
-    message( WARNING "Google Benchmark not found, not building benchmarks." )
-endif()

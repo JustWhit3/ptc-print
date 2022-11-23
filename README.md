@@ -438,12 +438,10 @@ cmake -B build
 Install:
 
 ```bash
-sudo cmake --build --target install
+sudo cmake --build build --target install
 ```
 
 > :warning: `sudo` is not required on Windows.
-
-
 
 Prerequisites are minimal:
 
@@ -504,7 +502,7 @@ To compile unit tests code:
 Set the building directory:
 
 ```bash
-cmake -B build
+cmake -B build 
 ```
 
 Compile:

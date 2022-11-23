@@ -43,5 +43,6 @@ endif()
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMPILE_FLAGS}")
 
 # Adding specific linker flags
-set( LINKER_FLAGS "benchmark" "fmt" )
-target_link_libraries( ${BENCHMARKING} ${LINKER_FLAGS} )
+find_package( benchmark )
+find_package( fmt )
+target_link_libraries( ${BENCHMARKING} benchmark::benchmark fmt::fmt )
