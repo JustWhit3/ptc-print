@@ -49,13 +49,6 @@ endif()
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMPILE_FLAGS}")
 
 # Adding specific linker flags
-find_package( doctest )
-if( doctest_FOUND )
-    target_link_libraries( ${UNIT} PRIVATE doctest::doctest )
-else()
-    message( STATUS "Doctest not found, not building unit tests." )
-endif()
-
 find_package( Threads )
 target_link_libraries( ${THREAD} PRIVATE Threads::Threads )
 
