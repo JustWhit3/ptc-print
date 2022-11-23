@@ -45,4 +45,10 @@ set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMPILE_FLAGS}")
 # Adding specific linker flags
 find_package( benchmark )
 find_package( fmt )
-target_link_libraries( ${BENCHMARKING} benchmark::benchmark fmt::fmt )
+
+if( benchmark_FOUND )
+    target_link_libraries( ${BENCHMARKING} benchmark::benchmark fmt::fmt )
+else()
+    message( STATUS "Google Benchmark not found, not building benchmarks." )
+endif()
+
