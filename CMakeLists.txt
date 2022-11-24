@@ -34,4 +34,3 @@ INSTALL(
 
 # Compile tests and benchmarks
 add_subdirectory( tests )
-add_subdirectory( studies/benchmarking_execution )
