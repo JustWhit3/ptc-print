@@ -430,10 +430,10 @@ cmake -B build
 > :warning: If you are on Windows previous command becomes:
 >
 > ```bash
-> cmake -B build -D WIN_INSTALLATION_DIR=path/to/installation/dir
+> cmake -B build -D WIN_INSTALLATION_DIR=path/to/installation/dir -D WIN_CMAKE_DIR=path/to/cmake/dir
 > ```
 > 
-> Where `path/to/installation/dir` is the path in which you want to install the header.
+> Where `path/to/installation/dir` is the path in which you want to install the header and `path/to/cmake/dir` is the path used to install the cmake package information.
 
 Install:
 

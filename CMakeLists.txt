@@ -19,17 +19,26 @@ endif()
 # Choosing appropriate installation directory
 if( UNIX )
     set( INSTALLATION_DIR /usr/include )
+    set( CMAKE_DIR /usr/lib/cmake )
 elseif( APPLE )
     set( INSTALLATION_DIR /usr/local/include )
+    set( CMAKE_DIR /usr/lib/cmake )
 elseif( WIN32 )
     set( WIN_INSTALLATION_DIR "" CACHE STRING "Installation directory for Windows OSs." )
     set( INSTALLATION_DIR ${WIN_INSTALLATION_DIR} )
+    set( WIN_CMAKE_DIR "" CACHE STRING "Cmake library directory for Windows OSs." )
+    set( CMAKE_DIR ${WIN_CMAKE_DIR} )
 endif()
 
 # Installation commands
-INSTALL(
-    DIRECTORY include/ptc
-    DESTINATION ${INSTALLATION_DIR}
+install(
+    FILES include/ptc/print.hpp
+    DESTINATION ${INSTALLATION_DIR}/ptc
+)
+
+install(
+    FILES scripts/cmake/ptc-print-config.cmake
+    DESTINATION ${CMAKE_DIR}/ptc-print
 )
 
 # Compile tests and benchmarks
