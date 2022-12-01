@@ -13,7 +13,10 @@ services:
             - .:/proj
         container_name: build
         command: >
-            bash -c "cd /proj/tests
+            bash -c "
+            mkdir -p /usr/include/include/ptc
+            && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
+            && cd /proj/tests
             && g++ -std=c++17 system_tests.cpp"
 
     # gcc 8
@@ -24,7 +27,10 @@ services:
             - .:/proj
         container_name: build
         command: >
-            bash -c "cd /proj/tests
+            bash -c "
+            mkdir -p /usr/include/include/ptc
+            && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
+            && cd /proj/tests
             && g++ -std=c++17 system_tests.cpp"
 
     # gcc 9
@@ -35,7 +41,10 @@ services:
             - .:/proj
         container_name: build
         command: >
-            bash -c "cd /proj/tests
+            bash -c "
+            mkdir -p /usr/include/include/ptc
+            && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
+            && cd /proj/tests
             && g++ -std=c++17 system_tests.cpp"
 
     # gcc 10
@@ -46,8 +55,11 @@ services:
             - .:/proj
         container_name: build
         command: >
-            bash -c "cd /proj/tests
-            && g++ -std=c++17 system_tests.cpp
+            bash -c "
+            mkdir -p /usr/include/include/ptc
+            && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
+            && cd /proj/tests
+            && g++ -std=c++17 system_tests.cpp"
             && g++ -std=c++20 system_tests.cpp"
 
     # gcc 11
@@ -58,8 +70,11 @@ services:
             - .:/proj
         container_name: build
         command: >
-            bash -c "cd /proj/tests
-            && g++ -std=c++17 system_tests.cpp
+            bash -c "
+            mkdir -p /usr/include/include/ptc
+            && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
+            && cd /proj/tests
+            && g++ -std=c++17 system_tests.cpp"
             && g++ -std=c++20 system_tests.cpp"
 
     # gcc 12
@@ -70,8 +85,11 @@ services:
             - .:/proj
         container_name: build
         command: >
-            bash -c "cd /proj/tests
-            && g++ -std=c++17 system_tests.cpp
+            bash -c "
+            mkdir -p /usr/include/include/ptc
+            && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
+            && cd /proj/tests
+            && g++ -std=c++17 system_tests.cpp"
             && g++ -std=c++20 system_tests.cpp"
 
     ##########################################
@@ -86,7 +104,10 @@ services:
             - .:/proj
         container_name: build
         command: >
-            bash -c "cd /proj/tests
+            bash -c "
+            mkdir -p /usr/include/include/ptc
+            && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
+            && cd /proj/tests
             && clang++ -std=c++17 system_tests.cpp"
 
     # clang 6
@@ -97,7 +118,10 @@ services:
             - .:/proj
         container_name: build
         command: >
-            bash -c "cd /proj/tests
+            bash -c "
+            mkdir -p /usr/include/include/ptc
+            && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
+            && cd /proj/tests
             && clang++ -std=c++17 system_tests.cpp"
 
     # clang 7
@@ -108,7 +132,10 @@ services:
             - .:/proj
         container_name: build
         command: >
-            bash -c "cd /proj/tests
+            bash -c "
+            mkdir -p /usr/include/include/ptc
+            && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
+            && cd /proj/tests
             && clang++ -std=c++17 system_tests.cpp"
 
     # clang 8
@@ -119,7 +146,10 @@ services:
             - .:/proj
         container_name: build
         command: >
-            bash -c "cd /proj/tests
+            bash -c "
+            mkdir -p /usr/include/include/ptc
+            && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
+            && cd /proj/tests
             && clang++ -std=c++17 system_tests.cpp"
 
     # clang 9
@@ -130,8 +160,11 @@ services:
             - .:/proj
         container_name: build
         command: >
-            bash -c "cd /proj/tests
-            && clang++ -std=c++17 system_tests.cpp
+            bash -c "
+            mkdir -p /usr/include/include/ptc
+            && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
+            && cd /proj/tests
+            && clang++ -std=c++17 system_tests.cpp"
             && clang++ -std=c++2a system_tests.cpp"
 
     # clang 10
@@ -142,8 +175,11 @@ services:
             - .:/proj
         container_name: build
         command: >
-            bash -c "cd /proj/tests
-            && clang++ -std=c++17 system_tests.cpp
+            bash -c "
+            mkdir -p /usr/include/include/ptc
+            && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
+            && cd /proj/tests
+            && clang++ -std=c++17 system_tests.cpp"
             && clang++ -std=c++2a system_tests.cpp"
 
     # clang 11
@@ -154,8 +190,11 @@ services:
             - .:/proj
         container_name: build
         command: >
-            bash -c "cd /proj/tests
-            && clang++ -std=c++17 system_tests.cpp
+            bash -c "
+            mkdir -p /usr/include/include/ptc
+            && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
+            && cd /proj/tests
+            && clang++ -std=c++17 system_tests.cpp"
             && clang++ -std=c++2a system_tests.cpp"
 
     # clang 12
@@ -166,8 +205,11 @@ services:
             - .:/proj
         container_name: build
         command: >
-            bash -c "cd /proj/tests
-            && clang++ -std=c++17 system_tests.cpp
+            bash -c "
+            mkdir -p /usr/include/include/ptc
+            && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
+            && cd /proj/tests
+            && clang++ -std=c++17 system_tests.cpp"
             && clang++ -std=c++2a system_tests.cpp"
 
     # clang 13
@@ -178,8 +220,11 @@ services:
             - .:/proj
         container_name: build
         command: >
-            bash -c "cd /proj/tests
-            && clang++ -std=c++17 system_tests.cpp
+            bash -c "
+            mkdir -p /usr/include/include/ptc
+            && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
+            && cd /proj/tests
+            && clang++ -std=c++17 system_tests.cpp"
             && clang++ -std=c++2a system_tests.cpp"
 
     # clang 14
@@ -190,6 +235,9 @@ services:
             - .:/proj
         container_name: build
         command: >
-            bash -c "cd /proj/tests
-            && clang++ -std=c++17 system_tests.cpp
+            bash -c "
+            mkdir -p /usr/include/include/ptc
+            && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
+            && cd /proj/tests
+            && clang++ -std=c++17 system_tests.cpp"
             && clang++ -std=c++2a system_tests.cpp"
