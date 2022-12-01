@@ -3,7 +3,7 @@
 //====================================================
 
 // My headers
-#include "../../include/ptc/print.hpp"
+#include <include/ptc/print.hpp>
 
 // Headers for comparison
 #include <fmt/core.h>

@@ -16,6 +16,9 @@ if( EXISTS "${LOC_PATH}" )
                          "remove CMakeCache.txt and CMakeFiles." )
 endif()
 
+# Other settings for paths
+include_directories( ../.. )
+
 # Set C++ standard options
 set( CMAKE_CXX_STANDARD 17 )
 set( CMAKE_CXX_STANDARD_REQUIRED ON )
@@ -26,11 +29,9 @@ set( CMAKE_CXX_COMPILER g++ )
 
 # Create executables
 if( WIN32 )
-    set( BENCHMARKING benchmarking.exe )
-else()
-    set( BENCHMARKING benchmarking )
+    set( CMAKE_EXECUTABLE_SUFFIX ".exe" )
 endif()
-
+set( BENCHMARKING "benchmarking" )
 add_executable( ${BENCHMARKING} benchmarking.cpp )
 
 # Adding specific compiler flags
@@ -39,8 +40,9 @@ if( CMAKE_CXX_COMPILER_ID STREQUAL "MSVC" )
 else()
     set( COMPILE_FLAGS "-Wall -Wextra -pedantic -Wno-unused-function -Wno-unused-parameter -O3 -O1 -falign-functions=32" )
 endif()
-
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMPILE_FLAGS}")
 
 # Adding specific linker flags
+find_package( benchmark )
+find_package( fmt )
 target_link_libraries( ${BENCHMARKING} benchmark fmt )

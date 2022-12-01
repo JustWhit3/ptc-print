@@ -8,7 +8,7 @@
 //====================================================
 
 // My headers
-#include "../include/ptc/print.hpp"
+#include <include/ptc/print.hpp>
 
 // STD headers
 #include <iostream>
