@@ -25,11 +25,14 @@ set( CMAKE_CXX_STANDARD_REQUIRED ON )
 set( CMAKE_CXX_EXTENSIONS OFF )
 
 # Create executables
-set( SYSTEM "system_tests" )
-set( UNIT "unit_tests" )
-set( THREAD "threading_tests" )
 if( WIN32 )
-    set( CMAKE_EXECUTABLE_SUFFIX ".exe" )
+    set( SYSTEM "system_tests.exe" )
+    set( UNIT "unit_tests.exe" )
+    set( THREAD "threading_tests.exe" )
+else()
+    set( SYSTEM "system_tests" )
+    set( UNIT "unit_tests" )
+    set( THREAD "threading_tests" )
 endif()
 
 add_executable( ${UNIT} unit_tests.cpp )
