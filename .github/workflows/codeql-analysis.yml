@@ -37,7 +37,7 @@ jobs:
       run: |
        sudo apt install build-essential g++
        cd tests
-       CXX=/usr/bin/g++ g++cmake -S . -B build
+       CXX=/usr/bin/g++ cmake -S . -B build
        cmake --build build --target system_tests
     - name: Installing extra dependencies and compiling (MacOS)
       if: matrix.os == 'macos-latest'
