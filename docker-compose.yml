@@ -59,7 +59,7 @@ services:
             mkdir -p /usr/include/include/ptc
             && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
             && cd /proj/tests
-            && g++ -std=c++17 system_tests.cpp"
+            && g++ -std=c++17 system_tests.cpp
             && g++ -std=c++20 system_tests.cpp"
 
     # gcc 11
@@ -74,7 +74,7 @@ services:
             mkdir -p /usr/include/include/ptc
             && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
             && cd /proj/tests
-            && g++ -std=c++17 system_tests.cpp"
+            && g++ -std=c++17 system_tests.cpp
             && g++ -std=c++20 system_tests.cpp"
 
     # gcc 12
@@ -89,7 +89,7 @@ services:
             mkdir -p /usr/include/include/ptc
             && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
             && cd /proj/tests
-            && g++ -std=c++17 system_tests.cpp"
+            && g++ -std=c++17 system_tests.cpp
             && g++ -std=c++20 system_tests.cpp"
 
     ##########################################
@@ -164,7 +164,7 @@ services:
             mkdir -p /usr/include/include/ptc
             && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
             && cd /proj/tests
-            && clang++ -std=c++17 system_tests.cpp"
+            && clang++ -std=c++17 system_tests.cpp
             && clang++ -std=c++2a system_tests.cpp"
 
     # clang 10
@@ -179,7 +179,7 @@ services:
             mkdir -p /usr/include/include/ptc
             && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
             && cd /proj/tests
-            && clang++ -std=c++17 system_tests.cpp"
+            && clang++ -std=c++17 system_tests.cpp
             && clang++ -std=c++2a system_tests.cpp"
 
     # clang 11
@@ -194,7 +194,7 @@ services:
             mkdir -p /usr/include/include/ptc
             && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
             && cd /proj/tests
-            && clang++ -std=c++17 system_tests.cpp"
+            && clang++ -std=c++17 system_tests.cpp
             && clang++ -std=c++2a system_tests.cpp"
 
     # clang 12
@@ -209,7 +209,7 @@ services:
             mkdir -p /usr/include/include/ptc
             && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
             && cd /proj/tests
-            && clang++ -std=c++17 system_tests.cpp"
+            && clang++ -std=c++17 system_tests.cpp
             && clang++ -std=c++2a system_tests.cpp"
 
     # clang 13
@@ -224,7 +224,7 @@ services:
             mkdir -p /usr/include/include/ptc
             && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
             && cd /proj/tests
-            && clang++ -std=c++17 system_tests.cpp"
+            && clang++ -std=c++17 system_tests.cpp
             && clang++ -std=c++2a system_tests.cpp"
 
     # clang 14
@@ -239,5 +239,5 @@ services:
             mkdir -p /usr/include/include/ptc
             && cp -r /proj/include/ptc/print.hpp /usr/include/include/ptc
             && cd /proj/tests
-            && clang++ -std=c++17 system_tests.cpp"
+            && clang++ -std=c++17 system_tests.cpp
             && clang++ -std=c++2a system_tests.cpp"
