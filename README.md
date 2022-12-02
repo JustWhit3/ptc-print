@@ -28,6 +28,7 @@
   - [Printing using different char types](#printing-using-different-char-types)
 - [Install and use](#install-and-use)
   - [Install](#install)
+  - [Use with CMake](#use-with-cmake)
   - [Performance improvements](#performance-improvements)
     - [Runtime](#runtime)
     - [Compilation](#compilation)
@@ -430,10 +431,10 @@ cmake -B build
 > :warning: If you are on Windows previous command becomes:
 >
 > ```bash
-> cmake -B build -D WIN_INSTALLATION_DIR=path/to/installation/dir -D WIN_CMAKE_DIR=path/to/cmake/dir
+> cmake -B build -D WIN_INSTALLATION_DIR_INCLUDE=path/to/include/dir -D WIN_INSTALLATION_DIR_LIB=path/to/lib/dir
 > ```
 > 
-> Where `path/to/installation/dir` is the path in which you want to install the header and `path/to/cmake/dir` is the path used to install the cmake package information.
+> Where `path/to/include/dir` is the path in which you want to install the header and `path/to/lib/dir` is the path used to install the cmake library information.
 
 Install:
 
@@ -453,6 +454,20 @@ Prerequisites are minimal:
 
 ```C++
 #include <ptc/print.hpp>
+```
+
+### Use with CMake
+
+To get an installed version of the library:
+
+```cmake
+find_package( ptcprint )
+```
+
+then, to link it to a target:
+
+```cmake
+target_link_libraries( ${TARGET} ptcprint::ptcprint )
 ```
 
 ### Performance improvements
