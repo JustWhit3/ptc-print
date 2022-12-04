@@ -15,6 +15,7 @@ services:
         container_name: build
         command: >
             bash -c "cd /proj
+            && rm -rf build
             && cmake -B build
             && cmake --build build"
 
@@ -28,6 +29,7 @@ services:
         container_name: build
         command: >
             bash -c "cd /proj
+            && rm -rf build
             && cmake -B build
             && cmake --build build"
 
@@ -41,6 +43,7 @@ services:
         container_name: build
         command: >
             bash -c "cd /proj
+            && rm -rf build
             && cmake -B build
             && cmake --build build"
 
@@ -54,6 +57,7 @@ services:
         container_name: build
         command: >
             bash -c "cd /proj
+            && rm -rf build
             && cmake -B build -D CMAKE_CXX_STANDARD=17 -D CMAKE_CXX_STANDARD_REQUIRED=ON 
             && cmake --build build
             && rm -rf build
@@ -70,6 +74,7 @@ services:
         container_name: build
         command: >
             bash -c "cd /proj
+            && rm -rf build
             && cmake -B build -D CMAKE_CXX_STANDARD=17 -D CMAKE_CXX_STANDARD_REQUIRED=ON 
             && cmake --build build
             && rm -rf build
@@ -86,6 +91,7 @@ services:
         container_name: build
         command: >
             bash -c "cd /proj
+            && rm -rf build
             && cmake -B build -D CMAKE_CXX_STANDARD=17 -D CMAKE_CXX_STANDARD_REQUIRED=ON 
             && cmake --build build
             && rm -rf build
@@ -106,6 +112,7 @@ services:
         container_name: build
         command: >
             bash -c "cd /proj
+            && rm -rf build
             && cmake -B build -D CMAKE_CXX_compiler=clang++
             && cmake --build build"
 
@@ -119,6 +126,7 @@ services:
         container_name: build
         command: >
             bash -c "cd /proj
+            && rm -rf build
             && cmake -B build -D CMAKE_CXX_compiler=clang++
             && cmake --build build"
 
@@ -132,6 +140,7 @@ services:
         container_name: build
         command: >
             bash -c "cd /proj
+            && rm -rf build
             && cmake -B build -D CMAKE_CXX_compiler=clang++
             && cmake --build build"
 
@@ -145,6 +154,7 @@ services:
         container_name: build
         command: >
             bash -c "cd /proj
+            && rm -rf build
             && cmake -B build -D CMAKE_CXX_compiler=clang++
             && cmake --build build"
 
@@ -158,6 +168,7 @@ services:
         container_name: build
         command: >
             bash -c "cd /proj
+            && rm -rf build
             && cmake -B build -D CMAKE_CXX_compiler=clang++ -D CMAKE_CXX_STANDARD=17 -D CMAKE_CXX_STANDARD_REQUIRED=ON 
             && cmake --build build
             && rm -rf build
@@ -174,6 +185,7 @@ services:
         container_name: build
         command: >
             bash -c "cd /proj
+            && rm -rf build
             && cmake -B build -D CMAKE_CXX_compiler=clang++ -D CMAKE_CXX_STANDARD=17 -D CMAKE_CXX_STANDARD_REQUIRED=ON 
             && cmake --build build
             && rm -rf build
@@ -190,6 +202,7 @@ services:
         container_name: build
         command: >
             bash -c "cd /proj
+            && rm -rf build
             && cmake -B build -D CMAKE_CXX_compiler=clang++ -D CMAKE_CXX_STANDARD=17 -D CMAKE_CXX_STANDARD_REQUIRED=ON 
             && cmake --build build
             && rm -rf build
@@ -206,6 +219,7 @@ services:
         container_name: build
         command: >
             bash -c "cd /proj
+            && rm -rf build
             && cmake -B build -D CMAKE_CXX_compiler=clang++ -D CMAKE_CXX_STANDARD=17 -D CMAKE_CXX_STANDARD_REQUIRED=ON 
             && cmake --build build
             && rm -rf build
@@ -222,6 +236,7 @@ services:
         container_name: build
         command: >
             bash -c "cd /proj
+            && rm -rf build
             && cmake -B build -D CMAKE_CXX_compiler=clang++ -D CMAKE_CXX_STANDARD=17 -D CMAKE_CXX_STANDARD_REQUIRED=ON 
             && cmake --build build
             && rm -rf build
@@ -238,6 +253,7 @@ services:
         container_name: build
         command: >
             bash -c "cd /proj
+            && rm -rf build
             && cmake -B build -D CMAKE_CXX_compiler=clang++ -D CMAKE_CXX_STANDARD=17 -D CMAKE_CXX_STANDARD_REQUIRED=ON 
             && cmake --build build
             && rm -rf build
