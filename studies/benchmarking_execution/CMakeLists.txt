@@ -17,7 +17,7 @@ if( EXISTS "${LOC_PATH}" )
 endif()
 
 # Other settings for paths
-include_directories( ../.. )
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../.. )
 
 # Set C++ standard options
 set( CMAKE_CXX_STANDARD 17 )
