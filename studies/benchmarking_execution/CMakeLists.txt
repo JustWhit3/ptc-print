@@ -39,9 +39,6 @@ else()
 endif()
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMPILE_FLAGS}")
 
-# Compiling with the correct standard
-set_property( TARGET ${BENCHMARKING} PROPERTY CXX_STANDARD 17 )
-
 # Adding specific linker flags
 find_package( benchmark )
 find_package( fmt )

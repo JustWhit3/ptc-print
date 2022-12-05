@@ -36,23 +36,22 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       run: |
        sudo apt install build-essential g++
-       cd tests
-       cmake -S . -B build
-       cmake --build build --target system_tests
+       cmake -B build
+       cmake --build build
+
     - name: Installing extra dependencies and compiling (MacOS)
       if: matrix.os == 'macos-latest'
       run: |
-       brew install cmake
-       cd tests
-       cmake -S . -B build
-       cmake --build build --target system_tests
+       cmake -B build
+       cmake --build build
+
     - name: Installing extra dependencies and compiling (Windows)
       if: matrix.os == 'windows-latest'
       run: |
        choco install cmake
-       cd tests
-       cmake -S . -B build
-       cmake --build build --target system_tests.exe
+       cmake -B build
+       cmake --build build
+
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
 

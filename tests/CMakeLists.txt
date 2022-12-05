@@ -62,10 +62,6 @@ if( NOT doctest_FOUND )
     FetchContent_MakeAvailable( doctest )
 endif()
 
-# Compiling with the correct standard
-set_property( TARGET ${THREAD} PROPERTY CXX_STANDARD 17 )
-set_property( TARGET ${UNIT} PROPERTY CXX_STANDARD 17 )
-
 # Adding specific linker flags
 find_package( Threads )
 target_link_libraries( ${THREAD} PRIVATE Threads::Threads )
