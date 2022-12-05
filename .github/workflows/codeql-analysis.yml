@@ -38,14 +38,14 @@ jobs:
        sudo apt install build-essential g++
        cmake -B build
        cmake --build build
-       cmake --build build --target install
+       sudo cmake --build build --target install
 
     - name: Installing extra dependencies and compiling (MacOS)
       if: matrix.os == 'macos-latest'
       run: |
        cmake -B build
        cmake --build build
-       cmake --build build --target install
+       sudo cmake --build build --target install
 
     - name: Installing extra dependencies and compiling (Windows)
       if: matrix.os == 'windows-latest'
