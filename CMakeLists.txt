@@ -23,43 +23,29 @@ add_library( ptcprint::ptcprint ALIAS ptcprint )
 # Compile tests
 add_subdirectory( tests )
 
-# Installing headers
-if( UNIX )
-    set( INSTALLATION_DIR_INCLUDE /usr/include )
-elseif( APPLE )
-    set( INSTALLATION_DIR_INCLUDE /usr/local/include )
-elseif( WIN32 )
-    set( WIN_INSTALLATION_DIR_INCLUDE "" CACHE STRING "Installation directory for Windows OSs." )
-    set( INSTALLATION_DIR_INCLUDE ${WIN_INSTALLATION_DIR_INCLUDE} )
-endif()
-
-install(
-    FILES include/ptc/print.hpp
-    DESTINATION ${INSTALLATION_DIR_INCLUDE}/ptc
+# Setting installation paths
+target_include_directories( ptcprint INTERFACE
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+    $<INSTALL_INTERFACE:include>
 )
 
-# Installing libraries
-if( UNIX )
-    set( INSTALLATION_DIR_LIB /usr/lib )
-elseif( APPLE )
-    set( INSTALLATION_DIR_LIB /usr/local/lib )
-elseif( WIN32 )
-    set( WIN_INSTALLATION_DIR_LIB "" CACHE STRING "Installation directory for Windows OSs." )
-    set( INSTALLATION_DIR_LIB ${WIN_INSTALLATION_DIR_LIB} )
-endif()
+install(
+    DIRECTORY include/ptc
+    DESTINATION include
+)
 
 # Creating the package files
 install( 
     TARGETS ptcprint
     EXPORT ptcprintTargets
-    DESTINATION ${INSTALLATION_DIR_LIB}
+    DESTINATION lib
 )
 
 install(
     EXPORT ptcprintTargets
     FILE ptcprintTargets.cmake
     NAMESPACE ptcprint::
-    DESTINATION ${INSTALLATION_DIR_LIB}/cmake/ptcprint
+    DESTINATION lib/cmake/ptcprint
 )
 
 # Configure package files
@@ -68,7 +54,7 @@ include( CMakePackageConfigHelpers )
 configure_package_config_file(
     ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Config.cmake.in
     "${CMAKE_CURRENT_BINARY_DIR}/ptcprintConfig.cmake"
-    INSTALL_DESTINATION "${INSTALLATION_DIR_LIB}/cmake/ptcprint"
+    INSTALL_DESTINATION "lib/cmake/ptcprint"
     NO_SET_AND_CHECK_MACRO
     NO_CHECK_REQUIRED_COMPONENTS_MACRO
 )
@@ -82,7 +68,7 @@ write_basic_package_version_file(
 install( FILES
     ${CMAKE_CURRENT_BINARY_DIR}/ptcprintConfig.cmake
     ${CMAKE_CURRENT_BINARY_DIR}/ptcprintConfigVersion.cmake
-    DESTINATION ${INSTALLATION_DIR_LIB}/cmake/ptcprint
+    DESTINATION lib/cmake/ptcprint
 )
 
 export( EXPORT ptcprintTargets
