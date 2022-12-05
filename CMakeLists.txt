@@ -16,13 +16,12 @@ if( EXISTS "${LOC_PATH}" )
                          "remove CMakeCache.txt and CMakeFiles." )
 endif()
 
-
-# Compile tests
-add_subdirectory( tests )
-
 # Create interface library
 add_library( ptcprint INTERFACE )
 add_library( ptcprint::ptcprint ALIAS ptcprint )
+
+# Compile tests
+add_subdirectory( tests )
 
 # Installing headers
 if( UNIX )
