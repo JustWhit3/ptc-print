@@ -146,7 +146,7 @@ services:
             bash -c "cd /proj
             && rm -rf build
             && cmake -B build -D CMAKE_CXX_compiler=clang++ -D CMAKE_CXX_STANDARD=17 -D CMAKE_CXX_STANDARD_REQUIRED=ON 
-            && cmake --build build
+            && cmake --build build --target ptcprint_system_tests
             && rm -rf build
             && cmake -B build -D CMAKE_CXX_compiler=clang++ -D CMAKE_CXX_STANDARD=20 -D CMAKE_CXX_STANDARD_REQUIRED=ON 
             && cmake --build build --target ptcprint_system_tests"
@@ -162,7 +162,7 @@ services:
             bash -c "cd /proj
             && rm -rf build
             && cmake -B build -D CMAKE_CXX_compiler=clang++ -D CMAKE_CXX_STANDARD=17 -D CMAKE_CXX_STANDARD_REQUIRED=ON 
-            && cmake --build build
+            && cmake --build build --target ptcprint_system_tests
             && rm -rf build
             && cmake -B build -D CMAKE_CXX_compiler=clang++ -D CMAKE_CXX_STANDARD=20 -D CMAKE_CXX_STANDARD_REQUIRED=ON 
             && cmake --build build --target ptcprint_system_tests"
@@ -178,7 +178,7 @@ services:
             bash -c "cd /proj
             && rm -rf build
             && cmake -B build -D CMAKE_CXX_compiler=clang++ -D CMAKE_CXX_STANDARD=17 -D CMAKE_CXX_STANDARD_REQUIRED=ON 
-            && cmake --build build
+            && cmake --build build --target ptcprint_system_tests
             && rm -rf build
             && cmake -B build -D CMAKE_CXX_compiler=clang++ -D CMAKE_CXX_STANDARD=20 -D CMAKE_CXX_STANDARD_REQUIRED=ON 
             && cmake --build build --target ptcprint_system_tests"
@@ -194,7 +194,7 @@ services:
             bash -c "cd /proj
             && rm -rf build
             && cmake -B build -D CMAKE_CXX_compiler=clang++ -D CMAKE_CXX_STANDARD=17 -D CMAKE_CXX_STANDARD_REQUIRED=ON 
-            && cmake --build build
+            && cmake --build build --target ptcprint_system_tests
             && rm -rf build
             && cmake -B build -D CMAKE_CXX_compiler=clang++ -D CMAKE_CXX_STANDARD=20 -D CMAKE_CXX_STANDARD_REQUIRED=ON 
             && cmake --build build --target ptcprint_system_tests"
@@ -210,7 +210,7 @@ services:
             bash -c "cd /proj
             && rm -rf build
             && cmake -B build -D CMAKE_CXX_compiler=clang++ -D CMAKE_CXX_STANDARD=17 -D CMAKE_CXX_STANDARD_REQUIRED=ON 
-            && cmake --build build
+            && cmake --build build --target ptcprint_system_tests
             && rm -rf build
             && cmake -B build -D CMAKE_CXX_compiler=clang++ -D CMAKE_CXX_STANDARD=20 -D CMAKE_CXX_STANDARD_REQUIRED=ON 
             && cmake --build build --target ptcprint_system_tests"
@@ -226,7 +226,7 @@ services:
             bash -c "cd /proj
             && rm -rf build
             && cmake -B build -D CMAKE_CXX_compiler=clang++ -D CMAKE_CXX_STANDARD=17 -D CMAKE_CXX_STANDARD_REQUIRED=ON 
-            && cmake --build build
+            && cmake --build build --target ptcprint_system_tests
             && rm -rf build
             && cmake -B build -D CMAKE_CXX_compiler=clang++ -D CMAKE_CXX_STANDARD=20 -D CMAKE_CXX_STANDARD_REQUIRED=ON 
             && cmake --build build --target ptcprint_system_tests"
