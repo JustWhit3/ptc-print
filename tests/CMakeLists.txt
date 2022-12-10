@@ -24,17 +24,12 @@ set( CMAKE_CXX_STANDARD 17 )
 set( CMAKE_CXX_STANDARD_REQUIRED ON )
 set( CMAKE_CXX_EXTENSIONS OFF )
 
-# Create executables
-if( WIN32 )
-    set( SYSTEM "system_tests.exe" )
-    set( UNIT "unit_tests.exe" )
-    set( THREAD "threading_tests.exe" )
-else()
-    set( SYSTEM "system_tests" )
-    set( UNIT "unit_tests" )
-    set( THREAD "threading_tests" )
-endif()
+# Executables names
+set( SYSTEM "ptcprint_system_tests" )
+set( UNIT "ptcprint_unit_tests" )
+set( THREAD "ptcprint_threading_tests" )
 
+# Create executables
 add_executable( ${UNIT} unit_tests.cpp )
 add_executable( ${SYSTEM} system_tests.cpp )
 add_executable( ${THREAD} threading_tests.cpp )

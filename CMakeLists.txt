@@ -21,7 +21,12 @@ add_library( ptcprint INTERFACE )
 add_library( ptcprint::ptcprint ALIAS ptcprint )
 
 # Compile tests
-add_subdirectory( tests )
+option( PTCPRINT_TESTS "Enable / disable tests." ON )
+if( PTCPRINT_TESTS )
+    add_subdirectory( tests )
+else()
+    message( STATUS "Skipping tests." )
+endif()
 
 # Setting installation paths
 target_include_directories( ptcprint INTERFACE

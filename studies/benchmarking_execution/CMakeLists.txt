@@ -25,9 +25,6 @@ set( CMAKE_CXX_STANDARD_REQUIRED ON )
 set( CMAKE_CXX_EXTENSIONS OFF )
 
 # Create executables
-if( WIN32 )
-    set( CMAKE_EXECUTABLE_SUFFIX ".exe" )
-endif()
 set( BENCHMARKING "benchmarking" )
 add_executable( ${BENCHMARKING} benchmarking.cpp )
 

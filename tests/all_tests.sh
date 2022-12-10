@@ -12,14 +12,14 @@ run_all_tests() {
     echo "     SYSTEM TESTS"
     echo "======================================================"
     echo ""
-    ./build/tests/system_tests
+    ./build/tests/ptcprint_system_tests
 
     # Memory tests
     echo ""
     echo "======================================================"
     echo "     MEMORY TESTS"
     echo "======================================================"
-    ./tests/profiling.sh memcheck ./build/tests/system_tests
+    ./tests/profiling.sh memcheck ./build/tests/ptcprint_system_tests
 
     # Threading tests
     echo ""
@@ -28,7 +28,7 @@ run_all_tests() {
     echo "======================================================"
     echo ""
     ./build/tests/threading_tests
-    ./tests/profiling.sh helgrind ./build/tests/threading_tests
+    ./tests/profiling.sh helgrind ./build/tests/ptcprint_threading_tests
 
     # Unit tests
     echo ""
@@ -36,7 +36,7 @@ run_all_tests() {
     echo "     UNIT TESTS"
     echo "======================================================"
     echo ""
-    ./build/tests/unit_tests
+    ./build/tests/ptcprint_unit_tests
 
     # Include tests
     echo ""
@@ -55,10 +55,6 @@ if [ "$1" == "normal" ] ; then
     echo "     COMPILING"
     echo "======================================================"
     echo ""
-    CXX=g++ cmake -B build
-    cmake --build build
-    cmake --build build --target clean
-    CXX=clang++ cmake -B build
     cmake --build build
     run_all_tests
 elif [ "$1" == "macro" ] ; then
@@ -69,10 +65,6 @@ elif [ "$1" == "macro" ] ; then
     sed -i '4s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' tests/system_tests.cpp
     sed -i '5s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' tests/threading_tests.cpp
     sed -i '7s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' tests/unit_tests.cpp
-    CXX=g++ cmake -B build
-    cmake --build build
-    cmake --build build --target clean
-    CXX=clang++ cmake -B build
     cmake --build build
     run_all_tests
     sed -i '4d' tests/system_tests.cpp
@@ -83,10 +75,6 @@ else
     echo "     COMPILING"
     echo "======================================================"
     echo ""
-    CXX=g++ cmake -B build
-    cmake --build build
-    cmake --build build --target clean
-    CXX=clang++ cmake -B build
     cmake --build build
     run_all_tests
     echo ""
@@ -98,10 +86,6 @@ else
     sed -i '4s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' tests/system_tests.cpp
     sed -i '5s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' tests/threading_tests.cpp
     sed -i '7s/.*/#define PTC_ENABLE_PERFORMANCE_IMPROVEMENTS\n/' tests/unit_tests.cpp
-    CXX=g++ cmake -B build
-    cmake --build build
-    cmake --build build --target clean
-    CXX=clang++ cmake -B build
     cmake --build build
     run_all_tests
     sed -i '4d' tests/system_tests.cpp

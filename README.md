@@ -462,6 +462,12 @@ then, to link it to a target:
 target_link_libraries( ${TARGET} ptcprint::ptcprint )
 ```
 
+To avoid tests compilation:
+
+```cmake
+set( PTCPRINT_TESTS OFF )
+```
+
 ### Performance improvements
 
 #### Runtime
