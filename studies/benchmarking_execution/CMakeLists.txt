@@ -19,6 +19,9 @@ endif()
 # Other settings for paths
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../.. )
 
+# Fetching deps
+add_subdirectory( deps )
+
 # Set C++ standard options
 set( CMAKE_CXX_STANDARD 17 )
 set( CMAKE_CXX_STANDARD_REQUIRED ON )
@@ -39,4 +42,7 @@ set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMPILE_FLAGS}")
 # Adding specific linker flags
 find_package( benchmark )
 find_package( fmt )
-target_link_libraries( ${BENCHMARKING} benchmark fmt )
+find_package( pprint )
+target_link_libraries( ${BENCHMARKING} benchmark::benchmark )
+target_link_libraries( ${BENCHMARKING} fmt::fmt )
+target_link_libraries( ${BENCHMARKING} pprint::pprint )

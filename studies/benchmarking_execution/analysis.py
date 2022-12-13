@@ -65,6 +65,8 @@ def set_x_ticks_label( x_tick ):
         'std::cout'
         >>> set_x_ticks_label( "printf_stdout" )
         'printf'
+        >>> set_x_ticks_label( "pprint aaa" )
+        'pprint'
     """
     
     if "fmt_" in x_tick or "ptc_" in x_tick or "std_" in x_tick:
@@ -73,6 +75,8 @@ def set_x_ticks_label( x_tick ):
     elif "printf_" in x_tick:
         x_tick = x_tick.split( "_" )[0:1]
         x_tick = " ".join( x_tick )
+    elif "pprint" in x_tick:
+        x_tick = "pprint"
     
     return x_tick
 
@@ -128,7 +132,7 @@ def plotter( data, time_type ):
     mean, std, names = [], [], []
     names = {}
     counter = 0
-    colors = [ "red", "green", "blue", "orange", "pink", "cyan" ]
+    colors = [ "red", "green", "blue", "orange", "violet" ]
     
     # Doing plot
     for d in data[ "benchmarks" ]:
@@ -143,7 +147,7 @@ def plotter( data, time_type ):
 
     # Adding mean value inside each chart
     for i in range( counter ):
-        ax.text( -0.15 + i , 70, round( mean[ i ] ), color = "white", fontweight = "bold" )
+        ax.text( -0.2 + i , 70, round( mean[ i ] ), color = "white", fontweight = "bold" )
         
     # Plot settings
     ax.set_xlabel( "Object / function" )

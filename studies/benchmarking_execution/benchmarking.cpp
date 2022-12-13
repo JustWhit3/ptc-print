@@ -8,6 +8,7 @@
 // Headers for comparison
 #include <fmt/core.h>
 #include <fmt/os.h>
+#include <pprint.hpp>
 
 // Extra headers
 #include <benchmark/benchmark.h>
@@ -187,6 +188,13 @@ static void printf_stdout( bm::State& state )
   for ( auto _ : state ) printf( "Testing %d %s %c\n", 123, "print", '!' );
  }
 
+// pprint_print_stdout
+static void pprint_print_stdout( bm::State& state ) 
+ {
+  pprint::PrettyPrinter printer;
+  for ( auto _ : state ) printer.print( "Testing", 123, "print", '!' );
+ }
+
 //====================================================
 //      file writing
 //====================================================
@@ -245,17 +253,18 @@ static void fmt_print_file( bm::State& state )
 //BENCHMARK( ptc_print_duration );
 
 // utils
-BENCHMARK( ptc_ptr );
+//BENCHMARK( ptc_ptr );
 
 //====================================================
 //     Comparison with other libraries
 //====================================================
 
 // stdout
-//BENCHMARK( ptc_print_stdout );
-//BENCHMARK( fmt_print_stdout );
+BENCHMARK( ptc_print_stdout );
+BENCHMARK( fmt_print_stdout );
 //BENCHMARK( std_cout_stdout );
-//BENCHMARK( printf_stdout );
+BENCHMARK( printf_stdout );
+BENCHMARK( pprint_print_stdout );
 
 // file writing
 //BENCHMARK( ptc_print_file );
