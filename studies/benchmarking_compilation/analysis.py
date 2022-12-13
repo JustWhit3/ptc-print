@@ -11,7 +11,6 @@ Author: Gianluca Bianco
 import time
 import subprocess
 import argparse as ap
-from termcolor import colored as cl
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -63,7 +62,7 @@ def get_size_of( executable ):
     output = subprocess.check_output( [ "wc", "-c", "bin/{}".format( executable ) ] )
     if "fmt" in executable or "ptc" in executable:
         output = str( output )[2:-11]
-    elif "printf" in executable or "stdout" in executable:
+    elif "printf" in executable or "stdout" in executable or "pprint" in executable:
         output = str( output )[2:-14]
     output = int( output )
     
@@ -176,7 +175,8 @@ def main():
         "programs/ptc.cpp",    # ptc
         "programs/fmt.cpp",    # fmt
         "programs/printf.cpp", # printf
-        "programs/stdout.cpp"  # stdout
+        "programs/stdout.cpp", # stdout
+        "programs/pprint.cpp"  # pprint
     ]
     
     # Launching benchmarks
@@ -190,6 +190,8 @@ def main():
             data_programs[ index ] =  "fmt::print"
         elif "stdout" in program:
             data_programs[ index ] =  "std::cout"
+        elif "pprint" in program:
+            data_programs[ index ] =  "pprint"
         data_mean[ index ] =  mean
         data_std[ index ] =  std
 

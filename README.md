@@ -575,6 +575,7 @@ List of functions / objects which `ptc::print` is compared with:
 - [`std::cout`](https://en.cppreference.com/w/cpp/io/cout)
 - [`printf`](https://m.cplusplus.com/reference/cstdio/printf/)
 - [`fmt::print`](https://pkg.go.dev/fmt) version 9.0.0
+- [`pprint`](https://github.com/p-ranav/pprint).
 
 > :warning: comparisons are performed **only** on the same features of each library. For example: I am not comparing the whole `fmtlib` formatting library to mine, but simply the `fmt::print` function.
 
