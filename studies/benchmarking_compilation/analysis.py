@@ -126,7 +126,7 @@ def do_plot( data_programs, data, data_std, atype = "Time" ):
     # Adding labels
     for i, val in enumerate( data_programs ):
         if atype == "Time":
-            ax.text( i - 0.18 , 0.01, round( data[ i ], 3 ), color = "white", fontweight = "bold" )
+            ax.text( i - 0.2 , 0.04, round( data[ i ], 3 ), color = "white", fontweight = "bold" )
         elif atype == "Size":
             ax.text( i - 0.1 , 4, round( data[ i ], 3 ), color = "white", fontweight = "bold" )
     ax.set_xlabel( "Object / function" )
