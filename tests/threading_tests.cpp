@@ -21,6 +21,7 @@
 #include <stack>
 #include <chrono>
 #include <optional>
+#include <tuple>
 
 //====================================================
 //     main
@@ -94,6 +95,9 @@ int main()
 
     std::optional <int> opt = 3;
     ptc::print( "Printing an std::optional:", opt );
+
+    std::tuple<int, int, int> tuple = std::make_tuple( 3, 4, 5 );
+    ptc::print( "Printing an std::tuple:", tuple );
 
     int add = 2;
     int *pointer;

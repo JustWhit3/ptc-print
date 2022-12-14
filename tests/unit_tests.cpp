@@ -37,6 +37,7 @@
 #include <stack>
 #include <queue>
 #include <optional>
+#include <tuple>
 
 //====================================================
 //     Namespaces
@@ -463,6 +464,21 @@ TEST_CASE( "Testing the Print operator << overloads." )
 
     std::optional<int> opt_n;
     CHECK_EQ( ptc::print( ptc::mode::str, opt_n ), "nullopt\n" );
+   }
+
+  // Testing fixed-size heterogeneous tuples printing
+  SUBCASE( "Testing fixed-size heterogeneous tuples printing" )
+   {
+    std::tuple<int, int, int> tuple = std::make_tuple( 3, 4, 5 );
+    CHECK_EQ( ptc::print( ptc::mode::str, tuple ), "(3, 4, 5)\n" );
+
+    auto get_elem = []( int id ) 
+     { 
+      if ( id == 0 ) return std::make_tuple( 0.1, "test", 1 ); 
+      if ( id == 0 ) return std::make_tuple( 3.1, "test", 1 );
+      throw std::invalid_argument( "id" );
+     };
+    CHECK_EQ( ptc::print( ptc::mode::str, get_elem( 0 ) ), "(0.1, test, 1)\n" );
    }
  }
 

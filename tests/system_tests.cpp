@@ -16,6 +16,7 @@
 #include <chrono>
 #include <string>
 #include <optional>
+#include <tuple>
 
 //====================================================
 //     Namespaces
@@ -164,6 +165,10 @@ void other_types()
   std::optional <int> opt = 3;
   ptc::print( "Printing an std::optional:", opt );
   ptc::print();
+
+  // Testing std::tuple
+  std::tuple<int, int, int> tuple = std::make_tuple( 3, 4, 5 );
+  ptc::print( "Printing an std::tuple:", tuple );
 
   // Testing ptr method for pointers printing
   int add = 2;
