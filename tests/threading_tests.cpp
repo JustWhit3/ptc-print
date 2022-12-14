@@ -96,8 +96,10 @@ int main()
     std::optional <int> opt = 3;
     ptc::print( "Printing an std::optional:", opt );
 
+    #if defined( __GNUC__ ) && ( __GNUC___ == 12 )
     std::tuple<int, int, int> tuple = std::make_tuple( 3, 4, 5 );
     ptc::print( "Printing an std::tuple:", tuple );
+    #endif
 
     int add = 2;
     int *pointer;

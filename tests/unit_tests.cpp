@@ -467,6 +467,7 @@ TEST_CASE( "Testing the Print operator << overloads." )
    }
 
   // Testing fixed-size heterogeneous tuples printing
+  #if defined( __GNUC__ ) && ( __GNUC___ == 12 )
   SUBCASE( "Testing fixed-size heterogeneous tuples printing" )
    {
     std::tuple<int, int, int> tuple = std::make_tuple( 3, 4, 5 );
@@ -480,6 +481,7 @@ TEST_CASE( "Testing the Print operator << overloads." )
      };
     CHECK_EQ( ptc::print( ptc::mode::str, get_elem( 0 ) ), "(0.1, test, 1)\n" );
    }
+  #endif
  }
 
 //====================================================

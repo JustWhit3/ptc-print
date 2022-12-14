@@ -167,8 +167,10 @@ void other_types()
   ptc::print();
 
   // Testing std::tuple
+  #if defined( __GNUC__ ) && ( __GNUC___ == 12 )
   std::tuple<int, int, int> tuple = std::make_tuple( 3, 4, 5 );
   ptc::print( "Printing an std::tuple:", tuple );
+  #endif
 
   // Testing ptr method for pointers printing
   int add = 2;
