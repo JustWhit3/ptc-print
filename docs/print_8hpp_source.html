@@ -388,15 +388,15 @@ $(function() {
 <div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;    <span class="keyword">template</span>&lt;std::size_t... Is&gt;</div>
 <div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;    <span class="keyword">struct </span>gen_seq&lt;0, Is...&gt; : seq&lt;Is...&gt;{};</div>
 <div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160; </div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class </span>Ch, <span class="keyword">class </span>Tr, <span class="keyword">class </span>Tuple, std::size_t... Is&gt;</div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;    <span class="keywordtype">void</span> print_tuple( std::basic_ostream&lt;Ch,Tr&gt;&amp; os, Tuple <span class="keyword">const</span>&amp; t, seq&lt;Is...&gt; )</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class </span>T_str, <span class="keyword">class </span>Tuple, std::size_t... Is&gt;</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;    <span class="keywordtype">void</span> print_tuple( std::basic_ostream&lt;T_str&gt;&amp; os, Tuple <span class="keyword">const</span>&amp; t, seq&lt;Is...&gt; )</div>
 <div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;     {</div>
 <div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;      <span class="keyword">using</span> swallow = <span class="keywordtype">int</span>[];</div>
 <div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;      ( void )swallow{ 0, ( void( os &lt;&lt; ( Is == 0 ? <span class="stringliteral">&quot;&quot;</span> : <span class="stringliteral">&quot;, &quot;</span> ) &lt;&lt; std::get&lt;Is&gt;( t ) ), 0 )... };</div>
 <div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;     }</div>
 <div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;    </div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class </span>Ch, <span class="keyword">class </span>Tr, <span class="keyword">class</span>... Args&gt;</div>
-<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;    <span class="keyword">auto</span> operator&lt;&lt;( std::basic_ostream&lt;Ch, Tr&gt;&amp; os, std::tuple&lt;Args...&gt; <span class="keyword">const</span>&amp; t ) -&gt; std::basic_ostream&lt;Ch, Tr&gt;&amp;</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class </span>T_str, <span class="keyword">class</span>... Args&gt;</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;    <span class="keyword">auto</span> operator&lt;&lt;( std::basic_ostream&lt;T_str&gt;&amp; os, std::tuple&lt;Args...&gt; <span class="keyword">const</span>&amp; t ) -&gt; std::basic_ostream&lt;T_str&gt;&amp;</div>
 <div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;     {</div>
 <div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;      os &lt;&lt; <span class="stringliteral">&quot;(&quot;</span>;</div>
 <div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;      print_tuple( os, t, gen_seq&lt;<span class="keyword">sizeof</span>...( Args )&gt;() );</div>
