@@ -752,62 +752,9 @@ int main()
 01:30:05
 ```
 
-- Add standard C pointers printing. For example:
-
-```C++
-#include <ptc/print.hpp>
-
-int main()
- {
-  int *ptr = new int[2];
-  ptr[0] = 1;
-  ptr[1] = 2;
-  ptc::print( ptr );
- }
-```
-
-```txt
-Pointer name: "ptr"
-Value: 0x55b776e15060
-Direction: 0x7ffd370e32c8
-Printing: [1, 2]
-```
-
-Or in case someone wants only the printing:
-
-```C++
-ptc::print( ptr_printing( ptr ) );
-```
-
-```txt
-[1, 2]
-```
-
-- Enable printing of fixed-size heterogeneous tuples. For example:
-
-```C++
-#include <ptc/print.hpp>
-#include <tuple>
-
-int main()
- {
-  auto get_info = []( int index )  
-   {
-    if ( index == 0 ) return std::make_tuple( 3.8, '32', "Bologna" );
-    if ( index == 1 ) return std::make_tuple( 2.9, '12', "Milano" );
-    throw std::invalid_argument( "index" );
-   };
-
-  ptc::print( { get_info(0), get_info(1) } );
- }
-```
-
-```txt
-{ (2.9, '12', "Milano"), (3.8, '32', "Bologna") }
-```
-
 - Improve the printing to an external file stream. Current implementation is too slow.
 - Extend benchmarking studies with other libraries.
+- Add port to vcpkg.
 
 ## Projects which use this library
 

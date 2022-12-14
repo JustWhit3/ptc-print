@@ -442,15 +442,15 @@ namespace ptc
     template<std::size_t... Is>
     struct gen_seq<0, Is...> : seq<Is...>{};
 
-    template<class Ch, class Tr, class Tuple, std::size_t... Is>
-    void print_tuple( std::basic_ostream<Ch,Tr>& os, Tuple const& t, seq<Is...> )
+    template<class T_str, class Tuple, std::size_t... Is>
+    void print_tuple( std::basic_ostream<T_str>& os, Tuple const& t, seq<Is...> )
      {
       using swallow = int[];
       ( void )swallow{ 0, ( void( os << ( Is == 0 ? "" : ", " ) << std::get<Is>( t ) ), 0 )... };
      }
     
-    template<class Ch, class Tr, class... Args>
-    auto operator<<( std::basic_ostream<Ch, Tr>& os, std::tuple<Args...> const& t ) -> std::basic_ostream<Ch, Tr>&
+    template<class T_str, class... Args>
+    auto operator<<( std::basic_ostream<T_str>& os, std::tuple<Args...> const& t ) -> std::basic_ostream<T_str>&
      {
       os << "(";
       print_tuple( os, t, gen_seq<sizeof...( Args )>() );
