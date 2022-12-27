@@ -847,12 +847,12 @@ namespace ptc
   //====================================================
 
   // Print structs specializations
-  template <> template <> std::ostream &Print<char>::select_cout <char>::cout = std::cout;
-  template <> template <> std::wostream &Print<wchar_t>::select_cout <wchar_t>::cout = std::wcout;
+  template <> template <> inline std::ostream &Print<char>::select_cout <char>::cout = std::cout;
+  template <> template <> inline std::wostream &Print<wchar_t>::select_cout <wchar_t>::cout = std::wcout;
 
   #ifdef PTC_ENABLE_PERFORMANCE_IMPROVEMENTS
-  template <> template <> std::istream &Print<char>::select_cin <char>::cin = std::cin;
-  template <> template <> std::wistream &Print<wchar_t>::select_cin <wchar_t>::cin = std::wcin;
+  template <> template <> inline std::istream &Print<char>::select_cin <char>::cin = std::cin;
+  template <> template <> inline std::wistream &Print<wchar_t>::select_cin <wchar_t>::cin = std::wcin;
   #endif
 
   // Print::mutex_ definiton
