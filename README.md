@@ -29,6 +29,7 @@
 - [Install and use](#install-and-use)
   - [Install](#install)
   - [Use with CMake](#use-with-cmake)
+  - [Package managers](#package-managers)
   - [Performance improvements](#performance-improvements)
     - [Runtime](#runtime)
     - [Compilation](#compilation)
@@ -49,7 +50,7 @@
 
 ## Introduction
 
-`ptc::print` (*py-to-cpp print*) is a C++17/20 printing object inspired by the Python [`print`](https://realpython.com/python-print/) function, which provides you a most comfortable way to print messages and logs to the output stream.
+`ptc::print` (*py-to-cpp print*) is a C++17/20 printing object inspired by the Python [`print`](https://realpython.com/python-print/) function, which provides you a most comfortable way to print messages and logs to the output stream. This library is available also with `vcpkg` package manager.
 
 It is constructed through the [`Print`](https://justwhit3.github.io/ptc-print/structptc_1_1Print.html) functor, which is a fully *type-* and *thread-safe* class with *automatic memory management*, implemented through an [single-header](https://github.com/JustWhit3/ptc-print/blob/main/ptc/print.hpp) library, with minimal and indispensable [dependencies](#install-and-use). It supports also the usage of [ANSI escape sequences](#printing-with-ansi-escape-sequences) and is cross-platform.
 
@@ -466,6 +467,14 @@ To avoid tests compilation:
 
 ```cmake
 set( PTCPRINT_TESTS OFF )
+```
+
+### Package managers
+
+To install with `vcpkg` package manager run:
+
+```shell
+vcpkg install ptc-print
 ```
 
 ### Performance improvements
