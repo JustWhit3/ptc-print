@@ -762,8 +762,7 @@ int main()
 ```
 
 - Improve the printing to an external file stream. Current implementation is too slow.
-- Extend benchmarking studies with other libraries.
-- Add port to vcpkg.
+- Add support to SFML types printing.
 
 ## Projects which use this library
 
