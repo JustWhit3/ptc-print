@@ -766,7 +766,7 @@ int main()
 
 ## Projects which use this library
 
-Empty for the moment.
+- [snake-game](https://github.com/JustWhit3/snake-game)
 
 ## Credits
 

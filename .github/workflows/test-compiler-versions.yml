@@ -19,10 +19,10 @@ jobs:
   #  runs-on: ubuntu-latest
   #  steps:
   #    - uses: actions/checkout@v2
-  #    - name: Build with clang 5
-  #      run: docker-compose run --rm build_clang_5
-  #    - name: Build with clang 6
-  #      run: docker-compose run --rm build_clang_6
+      - name: Build with clang 5
+        run: docker-compose run --rm build_clang_5
+      - name: Build with clang 6
+        run: docker-compose run --rm build_clang_6
   #    - name: Build with clang 7
   #      run: docker-compose run --rm build_clang_7
   #    - name: Build with clang 8
@@ -31,11 +31,11 @@ jobs:
   #      run: docker-compose run --rm build_clang_9
   #    - name: Build with clang 10
   #      run: docker-compose run --rm build_clang_10
-  #    - name: Build with clang 11
-  #      run: docker-compose run --rm build_clang_11
-  #    - name: Build with clang 12
-  #      run: docker-compose run --rm build_clang_12
-  #    - name: Build with clang 13
-  #      run: docker-compose run --rm build_clang_13
-  #    - name: Build with clang 14
-  #      run: docker-compose run --rm build_clang_14
+      - name: Build with clang 11
+        run: docker-compose run --rm build_clang_11
+      - name: Build with clang 12
+        run: docker-compose run --rm build_clang_12
+      - name: Build with clang 13
+        run: docker-compose run --rm build_clang_13
+      - name: Build with clang 14
+        run: docker-compose run --rm build_clang_14
