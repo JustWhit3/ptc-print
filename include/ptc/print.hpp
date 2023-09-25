@@ -508,7 +508,7 @@ namespace ptc
      * @brief Default constructor of the Print class. It initializes the basic class members and enable (if required) performance improvements..
      * 
      */
-    explicit Print(): 
+    Print(): 
      end( StringConverter<T_str>( "\n"s ) ),
      sep( StringConverter<T_str>( " "s ) ),
      flush( false )
