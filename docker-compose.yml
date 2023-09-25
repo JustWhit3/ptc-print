@@ -176,7 +176,7 @@ services:
         container_name: build
         command: >
             bash -c "cd /proj
-            && apt install git
+            && apt update && apt upgrade && apt install -y git
             && rm -rf build
             && cmake -B build -D CMAKE_CXX_compiler=clang++ -D CMAKE_CXX_STANDARD=17 -D CMAKE_CXX_STANDARD_REQUIRED=ON 
             && cmake --build build --target ptcprint_system_tests
